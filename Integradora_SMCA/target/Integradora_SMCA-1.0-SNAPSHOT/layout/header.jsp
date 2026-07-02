@@ -1,16 +1,45 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Core i7
-  Date: 30/06/2026
-  Time: 08:50 p.m.
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${param.pageTitle != null ? param.pageTitle : 'Configuración de Cuenta'}</title>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/csspantalla.css">
 </head>
 <body>
 
-</body>
-</html>
+<div class="layout-container">
+
+    <aside class="sidebar">
+        <div class="profile-section text-center">
+            <div class="avatar-container mx-auto">
+                <div class="avatar-placeholder"></div>
+                <button class="edit-avatar-btn">✎</button>
+            </div>
+            <p class="welcome-text">¡Bienvenido(a)!</p>
+            <h3 class="user-name">Pedro Urieta</h3>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="${pageContext.request.contextPath}/index.jsp" class="menu-item">Buscar</a>
+            <a href="#" class="menu-item">Bitácora</a>
+            <a href="#" class="menu-item">Incidencias</a>
+            <a href="#" class="menu-item">Registrar nuevo usuario</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn">
+                <span class="logout-icon">↪️</span> Cerrar sesión
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="topbar">
+            <h1 class="m-0">${param.pageHeader != null ? param.pageHeader : 'Configuración de Cuenta'}</h1>
+        </header>
+
+        <main class="page-body">
