@@ -1,0 +1,105 @@
+/* Colores Institucionales UTEZ */
+:root {
+    --verde-utez: #00875A;
+    --verde-oscuro: #005F3E;
+    --azul-utez: #1D4273;
+    --blanco: #ffffff;
+    --gris-fondo: #f8f9fa;
+}
+
+body {
+    background-color: var(--gris-fondo);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estructura Principal wrapper */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* Sidebar (Zona Roja Izquierda) */
+.sidebar {
+    min-width: 260px;
+    max-width: 260px;
+    background-color: var(--verde-utez);
+    color: var(--blanco);
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+.sidebar .sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--verde-oscuro);
+}
+
+.sidebar .profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--blanco);
+    background-color: #ccc;
+}
+
+.sidebar ul.components {
+    padding: 20px 0;
+}
+
+.sidebar ul li a {
+    padding: 15px 20px;
+    font-size: 1.1em;
+    display: block;
+    color: var(--blanco);
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.sidebar ul li a:hover {
+    background: var(--verde-oscuro);
+}
+
+.sidebar ul li.active > a {
+    background: var(--verde-oscuro);
+    font-weight: bold;
+}
+
+/* Contenido de la Derecha (Navbar + Cuerpo) */
+.main-content {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar Superior (Zona Azul) */
+.top-navbar {
+    background-color: var(--azul-utez) !important;
+    padding: 15px 20px;
+    color: var(--blanco);
+}
+
+.top-navbar .navbar-title {
+    color: var(--blanco);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Ajustes de tarjetas del formulario */
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-utez-green {
+    background-color: var(--verde-utez);
+    color: white;
+    border: none;
+}
+
+.btn-utez-green:hover {
+    background-color: var(--verde-oscuro);
+    color: white;
+}
