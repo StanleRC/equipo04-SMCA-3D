@@ -8,6 +8,7 @@ document.getElementById('formRegistrarMaestro').addEventListener('submit', funct
     const contrasena = document.getElementById('contrasena');
     const confirmarContrasena = document.getElementById('confirmarContrasena');
     const telefono = document.getElementById('telefono');
+
     const regexSoloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     // Permite letras, números, puntos, guiones y exige formato correcto con @ y .
     const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
