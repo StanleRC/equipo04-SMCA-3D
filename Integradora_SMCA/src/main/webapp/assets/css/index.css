@@ -1,105 +1,240 @@
-/* Colores Institucionales UTEZ */
-:root {
-    --verde-utez: #00875A;
-    --verde-oscuro: #005F3E;
-    --azul-utez: #1D4273;
-    --blanco: #ffffff;
-    --gris-fondo: #f8f9fa;
-}
-
+/* ==========================================
+   1. Estructura Base y Layout General
+   ========================================== */
 body {
-    background-color: var(--gris-fondo);
+    background-color: #fafafa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Estructura Principal wrapper */
-.wrapper {
+/* Envoltorio principal para Sidebar + Contenido horizontal */
+.main-wrapper {
     display: flex;
     width: 100%;
-    align-items: stretch;
-}
-
-/* Sidebar (Zona Roja Izquierda) */
-.sidebar {
-    min-width: 260px;
-    max-width: 260px;
-    background-color: var(--verde-utez);
-    color: var(--blanco);
     min-height: 100vh;
-    transition: all 0.3s;
 }
 
-.sidebar .sidebar-header {
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid var(--verde-oscuro);
-}
-
-.sidebar .profile-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 3px solid var(--blanco);
-    background-color: #ccc;
-}
-
-.sidebar ul.components {
-    padding: 20px 0;
-}
-
-.sidebar ul li a {
-    padding: 15px 20px;
-    font-size: 1.1em;
-    display: block;
-    color: var(--blanco);
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-.sidebar ul li a:hover {
-    background: var(--verde-oscuro);
-}
-
-.sidebar ul li.active > a {
-    background: var(--verde-oscuro);
-    font-weight: bold;
-}
-
-/* Contenido de la Derecha (Navbar + Cuerpo) */
-.main-content {
+/* Contenedor del contenido dinámico al lado del menú */
+.content-body {
+    display: block; /* Deja trabajar el sistema row/col de Bootstrap */
+    flex-grow: 1;
     width: 100%;
+    padding: 40px 20px;
+    background-color: #fafafa;
+}
+
+/* Franja Superior Azul Marino (Figma) */
+.top-blue-bar {
+    background-color: #1e314b;
+    color: #ffffff;
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ==========================================
+   2. Estilos Oficiales del Sidebar (Menú Verde)
+   ========================================== */
+.sidebar {
+    background-color: #005c4b !important; /* Verde oscuro institucional exacto de la UTEZ */
+    width: 260px;
+    min-width: 260px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    border: none !important;
 }
 
-/* Navbar Superior (Zona Azul) */
-.top-navbar {
-    background-color: var(--azul-utez) !important;
-    padding: 15px 20px;
-    color: var(--blanco);
+/* Enlaces del Menú Lateral */
+.sidebar .nav-link {
+    color: #ffffff !important; /* Texto totalmente blanco de Figma */
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 20px !important;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
 }
 
-.top-navbar .navbar-title {
-    color: var(--blanco);
-    margin: 0;
-    font-size: 1.5rem;
+/* Enlace Activo (Donde está parado el usuario) */
+.sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
     font-weight: 600;
 }
 
-/* Ajustes de tarjetas del formulario */
-.card {
-    border: none;
-    border-radius: 10px;
+/* Efecto Hover en los enlaces */
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    transform: translateX(3px);
 }
 
-.btn-utez-green {
-    background-color: var(--verde-utez);
-    color: white;
+/* Texto Secundario del Sidebar */
+.sidebar .text-white-50 {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ==========================================
+   3. Componentes: Buscador e Historial
+   ========================================== */
+/* Caja del Buscador con Historial Redondeado */
+.custom-search-box {
+    border-radius: 24px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06) !important;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Inputs y Selects Estilo Píldora */
+.form-control, .form-select {
+    background-color: #f3f5f8 !important; /* Gris claro de Figma */
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px 20px !important;
+    color: #333333 !important;
+    font-size: 15px !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #ffffff !important;
+    border-color: #00876c !important; /* Verde UTEZ */
+    box-shadow: 0 0 0 3px rgba(0, 135, 108, 0.15) !important;
+}
+
+/* ==========================================
+   4. Tablas y Controles de Bitácora / Incidencias
+   ========================================== */
+/* Estilos de las tablas institucionales */
+.custom-utez-table {
+    border-color: #d1dedb !important;
+}
+
+.custom-utez-table thead th {
+    background-color: #1e314b !important; /* Azul oscuro para el header de la tabla */
+    color: #ffffff !important;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 15px;
     border: none;
 }
 
-.btn-utez-green:hover {
-    background-color: var(--verde-oscuro);
-    color: white;
+.custom-utez-table tbody td {
+    padding: 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Selectores de filtros de la bitácora */
+.filter-select {
+    background-color: #e8efed !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Botón Verde "Validar" pequeño */
+.btn-action-validate {
+    background-color: #00876c !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    font-weight: 600;
+    border: none !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-action-validate:hover {
+    background-color: #006e58 !important;
+    color: #fff !important;
+}
+
+/* ==========================================
+   5. Tarjetas Blancas (Formularios de Registro)
+   ========================================== */
+.custom-card {
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 46, 44, 0.04) !important;
+    padding: 40px !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+.custom-card h2 {
+    color: #555555;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.btn-utez-submit {
+    background-color: #00876c !important;
+    border: none !important;
+    border-radius: 30px !important;
+    color: #ffffff !important;
+    padding: 12px 35px !important;
+    font-weight: 600;
+}
+
+.btn-utez-cancel {
+    background-color: #1e314b !important;
+    border: none !important;
+    border-radius: 30px !important;
+    color: #ffffff !important;
+    padding: 12px 35px !important;
+    font-weight: 600;
+}
+
+/* ==========================================
+   Pantalla de Selección: Crear Registro
+   ========================================== */
+
+/* Tarjeta central de selección */
+.selection-card {
+    background-color: #f1f3f5 !important; /* Gris muy claro del fondo de la tarjeta en la imagen */
+    border-radius: 24px !important;
+    max-width: 850px;
+    width: 100%;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Botones Azules Tipo Píldora */
+.btn-selection {
+    background-color: #1e314b !important; /* Azul marino institucional */
+    color: #ffffff !important;
+    border-radius: 50px !important; /* Forma de píldora total */
+    padding: 12px 60px !important; /* Padding ancho como en la imagen */
+    font-weight: 500;
+    font-size: 16px;
+    border: none !important;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-selection:hover {
+    background-color: #142236 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: #fff !important;
+}
+
+/* Ajuste para que el texto de la tarjeta no se pegue */
+.selection-card h2 {
+    letter-spacing: -0.5px;
 }
