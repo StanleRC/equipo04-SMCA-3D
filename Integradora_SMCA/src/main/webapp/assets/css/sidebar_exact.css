@@ -1,22 +1,18 @@
-/* ==========================================================================
-   ESTILOS COMPLETAMENTE INDEPENDIENTES Y EXACTOS PARA EL SIDEBAR (FIGMA)
-   ========================================================================== */
 
 .figma-sidebar {
-    background-color: #0b7f6c !important; /* El verde esmeralda/teal exacto de tu mockup */
-    width: 250px;
+    background-color: #0b7f6c !important;
     min-width: 250px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-family: sans-serif;
-    padding: 0 !important; /* Quitamos paddings globales para que las líneas toquen los bordes */
+    padding: 0 !important;
     margin: 0;
     box-shadow: 4px 0 10px rgba(0,0,0,0.1);
 }
 
-/* --- Bloque de Perfil Superior --- */
+
 .sidebar-profile-section {
     padding: 30px 20px 20px 20px;
     text-align: center;
@@ -105,7 +101,17 @@
     background-color: #086656 !important; /* Oscurecimiento sutil de la celda activa */
     font-weight: 600;
 }
-
+/* Barra superior azul marino de bienvenida */
+.search-top-blue-bar {
+    background-color: #1d3b6a !important; /* Azul marino de la barra superior */
+    color: #ffffff !important;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
 /* Hover sutil */
 .sidebar-item-link:hover {
     background-color: rgba(0, 0, 0, 0.05);

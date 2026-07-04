@@ -1,16 +1,10 @@
-/* ==========================================================================
-   ESTILOS COPIADOS EXACTAMENTE DE FIGMA PARA LA CÁPSULA DE BÚSQUEDA INTEGRADA
-   ========================================================================== */
-
-/* Contenedor del área de contenido principal */
 .search-page-body {
     background-color: #ffffff;
     padding: 40px 20px;
 }
 
-/* Barra superior azul marino de bienvenida */
 .search-top-blue-bar {
-    background-color: #1d3b6a !important; /* Azul marino de la barra superior */
+    background-color: #1d3b6a !important;
     color: #ffffff !important;
     padding: 16px;
     font-size: 20px;
@@ -20,32 +14,28 @@
     letter-spacing: 0.5px;
 }
 
-/* --- Cápsula Flotante Blanca Completa (Figma Exacto) --- */
 .search-card-pill {
     background-color: #ffffff !important;
-    border-radius: 28px !important; /* Curvatura total superior e inferior */
+    border-radius: 28px !important;
     border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important; /* Sombra sutil flotante */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
     max-width: 520px;
     margin: 0 auto;
     padding: 14px 24px;
     transition: box-shadow 0.3s;
 }
 
-/* Fila superior que contiene la lupa, el input y la flecha */
 .search-form-row {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-/* Icono de Lupa a la izquierda */
 .search-icon-left {
     color: #64748b !important;
     font-size: 20px;
 }
 
-/* Campo de Texto de Entrada */
 .search-input-field {
     border: none !important;
     background: transparent !important;
@@ -61,11 +51,10 @@
     font-weight: 500;
 }
 
-/* Botón de enviar (Icono de Avión/Flecha de Envío en Figma) */
 .search-btn-submit {
     border: none !important;
     background: transparent !important;
-    color: #1e293b !important; /* Color gris oscuro/negro del icono de enviar */
+    color: #1e293b !important;
     cursor: pointer;
     padding: 0;
     display: flex;
@@ -78,18 +67,16 @@
     transform: scale(1.1);
 }
 
-/* --- Contenedor del Historial (Debajo de la barra de texto, dentro de la píldora) --- */
 .search-history-container {
     margin-top: 15px;
     padding-top: 12px;
-    border-top: 1px solid #f1f5f9; /* Línea divisoria muy tenue */
+    border-top: 1px solid #f1f5f9;
 }
 
-/* Cada elemento del historial */
 .search-history-item {
     display: flex;
     align-items: center;
-    color: #64748b !important; /* Color gris suave del texto del historial */
+    color: #64748b !important;
     font-size: 13.5px;
     font-weight: 500;
     padding: 8px 0;
@@ -101,7 +88,6 @@
     color: #1d3b6a !important;
 }
 
-/* Icono de reloj a la izquierda en el historial */
 .search-history-item i {
     font-size: 15px;
     color: #94a3b8 !important;

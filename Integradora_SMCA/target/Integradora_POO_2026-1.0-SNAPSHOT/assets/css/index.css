@@ -1,6 +1,3 @@
-/* ==========================================
-   1. Estructura Base y Layout General
-   ========================================== */
 body {
     background-color: #fafafa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,23 +5,20 @@ body {
     padding: 0;
 }
 
-/* Envoltorio principal para Sidebar + Contenido horizontal */
 .main-wrapper {
     display: flex;
     width: 100%;
     min-height: 100vh;
 }
 
-/* Contenedor del contenido dinámico al lado del menú */
 .content-body {
-    display: block; /* Deja trabajar el sistema row/col de Bootstrap */
+    display: block;
     flex-grow: 1;
     width: 100%;
     padding: 40px 20px;
     background-color: #fafafa;
 }
 
-/* Franja Superior Azul Marino (Figma) */
 .top-blue-bar {
     background-color: #1e314b;
     color: #ffffff;
@@ -35,11 +29,8 @@ body {
     text-align: center;
 }
 
-/* ==========================================
-   2. Estilos Oficiales del Sidebar (Menú Verde)
-   ========================================== */
 .sidebar {
-    background-color: #005c4b !important; /* Verde oscuro institucional exacto de la UTEZ */
+    background-color: #005c4b !important;
     width: 260px;
     min-width: 260px;
     min-height: 100vh;
@@ -49,9 +40,8 @@ body {
     border: none !important;
 }
 
-/* Enlaces del Menú Lateral */
 .sidebar .nav-link {
-    color: #ffffff !important; /* Texto totalmente blanco de Figma */
+    color: #ffffff !important;
     font-size: 15px;
     font-weight: 500;
     padding: 12px 20px !important;
@@ -62,28 +52,21 @@ body {
     text-decoration: none;
 }
 
-/* Enlace Activo (Donde está parado el usuario) */
 .sidebar .nav-link.active {
     background-color: rgba(255, 255, 255, 0.15) !important;
     font-weight: 600;
 }
 
-/* Efecto Hover en los enlaces */
 .sidebar .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
     color: #ffffff !important;
     transform: translateX(3px);
 }
 
-/* Texto Secundario del Sidebar */
 .sidebar .text-white-50 {
     color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* ==========================================
-   3. Componentes: Buscador e Historial
-   ========================================== */
-/* Caja del Buscador con Historial Redondeado */
 .custom-search-box {
     border-radius: 24px !important;
     box-shadow: 0 8px 30px rgba(0,0,0,0.06) !important;
@@ -92,9 +75,8 @@ body {
     border: 1px solid #e2e8f0 !important;
 }
 
-/* Inputs y Selects Estilo Píldora */
 .form-control, .form-select {
-    background-color: #f3f5f8 !important; /* Gris claro de Figma */
+    background-color: #f3f5f8 !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 12px !important;
     padding: 12px 20px !important;
@@ -106,20 +88,16 @@ body {
 
 .form-control:focus, .form-select:focus {
     background-color: #ffffff !important;
-    border-color: #00876c !important; /* Verde UTEZ */
+    border-color: #00876c !important;
     box-shadow: 0 0 0 3px rgba(0, 135, 108, 0.15) !important;
 }
 
-/* ==========================================
-   4. Tablas y Controles de Bitácora / Incidencias
-   ========================================== */
-/* Estilos de las tablas institucionales */
 .custom-utez-table {
     border-color: #d1dedb !important;
 }
 
 .custom-utez-table thead th {
-    background-color: #1e314b !important; /* Azul oscuro para el header de la tabla */
+    background-color: #1e314b !important;
     color: #ffffff !important;
     padding: 12px;
     font-weight: 600;
@@ -133,7 +111,6 @@ body {
     color: #333;
 }
 
-/* Selectores de filtros de la bitácora */
 .filter-select {
     background-color: #e8efed !important;
     border: none !important;
@@ -142,7 +119,6 @@ body {
     color: #495057;
 }
 
-/* Botón Verde "Validar" pequeño */
 .btn-action-validate {
     background-color: #00876c !important;
     color: #ffffff !important;
@@ -159,9 +135,6 @@ body {
     color: #fff !important;
 }
 
-/* ==========================================
-   5. Tarjetas Blancas (Formularios de Registro)
-   ========================================== */
 .custom-card {
     background-color: #ffffff !important;
     border-radius: 20px !important;
@@ -197,25 +170,19 @@ body {
     font-weight: 600;
 }
 
-/* ==========================================
-   Pantalla de Selección: Crear Registro
-   ========================================== */
-
-/* Tarjeta central de selección */
 .selection-card {
-    background-color: #f1f3f5 !important; /* Gris muy claro del fondo de la tarjeta en la imagen */
+    background-color: #f1f3f5 !important;
     border-radius: 24px !important;
     max-width: 850px;
     width: 100%;
     border: 1px solid #e2e8f0 !important;
 }
 
-/* Botones Azules Tipo Píldora */
 .btn-selection {
-    background-color: #1e314b !important; /* Azul marino institucional */
+    background-color: #1e314b !important;
     color: #ffffff !important;
-    border-radius: 50px !important; /* Forma de píldora total */
-    padding: 12px 60px !important; /* Padding ancho como en la imagen */
+    border-radius: 50px !important;
+    padding: 12px 60px !important;
     font-weight: 500;
     font-size: 16px;
     border: none !important;
@@ -234,7 +201,6 @@ body {
     color: #fff !important;
 }
 
-/* Ajuste para que el texto de la tarjeta no se pegue */
 .selection-card h2 {
     letter-spacing: -0.5px;
 }

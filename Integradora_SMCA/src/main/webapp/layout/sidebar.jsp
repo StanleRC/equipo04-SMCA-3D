@@ -9,9 +9,9 @@
                 <div class="sidebar-avatar-img">
                     <i class="bi bi-person-fill"></i>
                 </div>
-                <div class="sidebar-avatar-edit">
+                <a href="${pageContext.request.contextPath}/config_cuenta.jsp" class="sidebar-avatar-edit" style="text-decoration: none;">
                     <i class="bi bi-pencil-fill"></i>
-                </div>
+                </a>
             </div>
             <p class="text-white-50 small m-0" style="font-size: 13px;">¡Bienvenido(a)!</p>
             <h3 class="sidebar-user-text">Pedro Urieta</h3>

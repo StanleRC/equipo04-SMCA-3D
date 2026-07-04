@@ -9,7 +9,8 @@
     <jsp:include page="layout/sidebar.jsp" />
 
     <div class="flex-grow-1 d-flex flex-column" style="min-height: 100vh;">
-        <div class="classroom-top-blue-bar">
+
+        <div class="search-top-blue-bar">
             ¡Bienvenido(a)!, Ingresaste como administrador
         </div>
 
