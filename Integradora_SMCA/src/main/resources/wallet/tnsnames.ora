@@ -1,0 +1,12 @@
+bddsmca_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name=gb6d1f6baa92276_bddsmca_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+bddsmca_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name=gb6d1f6baa92276_bddsmca_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+bddsmca_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name=gb6d1f6baa92276_bddsmca_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+bddsmca_tp = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name=gb6d1f6baa92276_bddsmca_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+bddsmca_tpurgent = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.us-phoenix-1.oraclecloud.com))(connect_data=(service_name=gb6d1f6baa92276_bddsmca_tpurgent.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+
+

@@ -24,7 +24,7 @@
                         <h2 class="fw-bold mb-5" style="color: #4a5568; font-size: 28px;">¿A quién deseas registrar?</h2>
 
                         <div class="d-flex flex-wrap justify-content-center gap-4">
-                            <a href="${pageContext.request.contextPath}/registrar_maestro.jsp" class="btn btn-selection">
+                            <a href="${pageContext.request.contextPath}/register/registrar_maestro.jsp" class="btn btn-selection">
                                 Profesor
                             </a>
 
