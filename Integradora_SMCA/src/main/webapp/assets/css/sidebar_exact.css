@@ -1,137 +1,194 @@
-
-.figma-sidebar {
-    background-color: #0b7f6c !important;
-    min-width: 250px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: sans-serif;
-    padding: 0 !important;
-    margin: 0;
-    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+:root {
+    --green-bg: #0d8a72;       /* Verde base del menú */
+    --green-hover: #0a7560;    /* Verde ligeramente más oscuro al pasar el mouse */
+    --green-active: #096e5a;   /* Verde del botón seleccionado */
+    --white: #ffffff;
 }
 
+/* Contenedor principal del Sidebar */
+.figma-sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: var(--green-bg) !important; /* Forzar fondo verde */
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
 
+/* --- SECCIÓN DE PERFIL --- */
 .sidebar-profile-section {
     padding: 30px 20px 20px 20px;
     text-align: center;
-    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar elementos internos */
+}
+
+.sidebar-avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    width: 106px; /* Definir anchos estrictos para evitar óvalos */
+    height: 106px;
 }
 
 .sidebar-avatar-wrapper {
     position: relative;
     width: 100px;
     height: 100px;
-    margin: 0 auto 15px auto;
+    min-width: 100px; /* Evita que Bootstrap lo aplaste */
+    min-height: 100px;
+    border-radius: 50% !important;
+    border: 3px solid #3ca7f1 !important; /* Borde azul brillante */
+    padding: 2px;
+    box-sizing: border-box;
 }
 
 .sidebar-avatar-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #e2e8f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid #ffffff;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important; /* Mantiene la proporción de la foto redonda */
+    background-color: #ccc;
+    display: block;
 }
 
-.sidebar-avatar-img i {
-    font-size: 50px;
-    color: #cbd5e1;
-}
-
-/* Botoncito de lápiz para editar el avatar */
+/* Botón flotante del clip de edición */
 .sidebar-avatar-edit {
     position: absolute;
-    top: 5px;
+    top: 0;
     right: 0;
-    background-color: #ffffff;
     width: 26px;
     height: 26px;
-    border-radius: 50%;
-    display: flex;
+    background-color: var(--white) !important;
+    border-radius: 50% !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    cursor: pointer;
+    color: #0d8a72 !important; /* Color verde para el lápiz/clip */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-decoration: none !important;
+    transition: transform 0.2s ease;
+    z-index: 5;
 }
+
+.sidebar-avatar-edit:hover {
+    transform: scale(1.1);
+}
+
 .sidebar-avatar-edit i {
-    font-size: 12px;
-    color: #334155;
+    font-size: 14px !important;
+    color: #0d8a72 !important;
 }
 
-.sidebar-user-text {
-    color: #ffffff !important;
+.sidebar-user-welcome {
+    color: rgba(255, 255, 255, 0.8) !important; /* Evita que se vuelva invisible */
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.sidebar-user-name {
+    color: var(--white) !important; /* Evita el texto negro/gris */
     font-size: 15px;
-    font-weight: bold;
-    margin: 5px 0 0 0;
-    line-height: 1.2;
+    font-weight: 700;
+    margin-top: 2px;
 }
 
-/* --- Bloque de Navegación y Líneas Divisoras --- */
+/* --- NAVEGACIÓN Y MENÚ --- */
 .sidebar-menu-nav {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    margin-top: 15px;
+    flex-grow: 1;
 }
 
-/* Enlace base */
+/* Links normales */
 .sidebar-item-link {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-between;
-    color: #ffffff !important;
-    text-decoration: none !important;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 22px 25px !important; /* Espaciado alto exacto de Figma */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Línea divisoria tenue */
-    transition: background-color 0.2s ease;
-}
-
-/* Línea inicial superior antes del primer elemento */
-.sidebar-menu-nav :first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* --- ESTADO ACTIVO (PÁGINA SELECCIONADA) --- */
-.sidebar-item-link.active-view {
-    background-color: #086656 !important; /* Oscurecimiento sutil de la celda activa */
-    font-weight: 600;
-}
-/* Barra superior azul marino de bienvenida */
-.search-top-blue-bar {
-    background-color: #1d3b6a !important; /* Azul marino de la barra superior */
-    color: #ffffff !important;
-    padding: 16px;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    letter-spacing: 0.5px;
-}
-/* Hover sutil */
-.sidebar-item-link:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* --- Botón Cerrar Sesión Inferior --- */
-.sidebar-footer-logout {
-    padding: 25px !important;
-}
-
-.sidebar-logout-link {
-    display: inline-flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.85) !important;
+    padding: 18px 20px;
+    color: var(--white) !important; /* Forzar texto blanco en links */
     text-decoration: none !important;
     font-size: 15px;
     font-weight: 500;
-    transition: color 0.2s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease-in-out;
+    position: relative;
+}
+
+/* Animación Hover */
+.sidebar-item-link:hover {
+    background-color: var(--green-hover) !important;
+    padding-left: 25px;
+}
+
+/* --- ESTADO ACTIVO --- */
+.sidebar-item-link.active {
+    background-color: var(--green-active) !important;
+    width: 106%;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    padding-left: 22px;
+    z-index: 10;
+}
+
+/* Mostrar la flecha blanca sólo en activo */
+.sidebar-item-link i {
+    display: none;
+    font-size: 16px;
+    color: var(--white) !important;
+}
+
+.sidebar-item-link.active i {
+    display: block !important;
+    animation: fadeInRight 0.3s ease;
+}
+
+/* --- BOTÓN CERRAR SESIÓN --- */
+.sidebar-footer-logout {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logout-link {
+    display: flex !important;
+    align-items: center;
+    padding: 18px 20px;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none !important;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.sidebar-logout-link i {
+    margin-right: 12px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .sidebar-logout-link:hover {
-    color: #ffffff !important;
+    background-color: #b23b3b !important;
+    color: var(--white) !important;
+}
+
+.sidebar-logout-link:hover i {
+    color: var(--white) !important;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

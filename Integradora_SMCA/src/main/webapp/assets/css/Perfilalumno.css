@@ -1,0 +1,158 @@
+:root {
+    --header-blue: #1c406e;
+    --card-bg: #f2f2f2;
+    --text-dark: #333333;
+    --text-muted: #777777;
+    --sidebar-width: 240px;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- ESTRUCTURA PRINCIPAL (Margen para respetar el Sidebar) --- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BANNER SUPERIOR AZUL --- */
+.top-header {
+    background-color: var(--header-blue);
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* --- CUERPO DE CONTENIDO --- */
+.content-body {
+    padding: 25px 40px;
+    flex-grow: 1;
+}
+
+/* Link Pestaña Anterior */
+.back-link {
+    color: #222222;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.back-link:hover {
+    color: #0d8a72;
+}
+
+/* Logo UTEZ */
+.utez-logo-profile {
+    max-height: 75px;
+    width: auto;
+}
+
+/* --- TARJETA DE PERFIL --- */
+.profile-card {
+    background-color: var(--card-bg);
+    border-radius: 18px;
+    display: flex;
+    overflow: hidden;
+    max-width: 850px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+}
+
+/* Columna Izquierda (Avatar) */
+.profile-card-left {
+    width: 32%;
+    background-color: #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.large-avatar {
+    width: 140px;
+    height: 140px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.large-avatar i {
+    font-size: 95px;
+    color: #ffffff;
+    margin-top: 15px;
+}
+
+/* Columna Derecha (Datos Académicos) */
+.profile-card-right {
+    width: 68%;
+    padding: 30px 35px;
+}
+
+.academic-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.carrera-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--header-blue);
+    margin-bottom: 20px;
+}
+
+/* Usuario y Rol */
+.user-info-section {
+    margin-bottom: 20px;
+}
+
+.user-name-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222222;
+    margin: 0;
+}
+
+.user-role-badge {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Grilla de Textos */
+.details-grid {
+    font-size: 15px;
+}
+
+.label-text {
+    font-weight: 600;
+    color: #333333;
+    margin-right: 5px;
+}
+
+.value-text {
+    font-weight: 500;
+    color: #444444;
+}

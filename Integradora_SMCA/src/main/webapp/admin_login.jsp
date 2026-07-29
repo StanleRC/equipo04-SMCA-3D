@@ -5,29 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitácora Digital - UTEZ</title>
+    <title>Bitácora Digital (Admin) - UTEZ</title>
 
     <!-- Cargamos Bootstrap Icons directamente -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Tu archivo CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.5">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css">
 </head>
 
 <body class="login-body">
 
 <div class="login-page-container">
 
-    <!-- Sección del Logo de la UTEZ y Título -->
+    <!-- Sección del Logo de la UTEZ y Título de Administrador -->
     <header class="login-header">
         <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
-        <h1 class="system-title">Bitácora digital</h1>
+        <h1 class="system-title">Bitácora digital<br><span class="subtitle-admin">(Acceso como administrador)</span></h1>
     </header>
 
     <!-- Tarjeta del Formulario (Card) -->
     <main class="login-card">
 
-        <!-- Mensaje de error dinámico de Java Servlet -->
+        <!-- Mensaje de error de forma correcta y limpia -->
         <% if (request.getAttribute("errorMessage") != null) { %>
         <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
             <%= request.getAttribute("errorMessage") %>
@@ -42,14 +42,14 @@
         </div>
 
         <!-- Formulario de acceso -->
-        <form action="${pageContext.request.contextPath}/loginServlet" method="POST" class="login-form">
+        <form action="${pageContext.request.contextPath}/adminLoginServlet" method="POST" class="login-form">
 
-            <!-- Campo Matricula -->
+            <!-- Campo Correo -->
             <div class="form-group">
-                <label for="matricula" class="input-label">Matricula</label>
+                <label for="correo" class="input-label">Correo</label>
                 <div class="input-icon-wrapper">
                     <i class="bi bi-envelope icon-input"></i>
-                    <input type="text" id="matricula" name="matricula" placeholder="Introduce tu matricula" required>
+                    <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                 <label for="password" class="input-label">Contraseña</label>
                 <div class="input-icon-wrapper">
                     <i class="bi bi-lock icon-input"></i>
-                    <input type="password" id="password" name="password" placeholder="Introduce una contraseña" required>
+                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
                 </div>
             </div>
 
@@ -67,19 +67,19 @@
                 <button type="submit" class="btn-submit">Iniciar sesión</button>
             </div>
 
-            <!-- Enlaces de soporte dentro de la tarjeta -->
+            <!-- Enlaces de soporte adaptados a la imagen -->
             <div class="card-links-container">
                 <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
 
                 <div class="card-footer-links">
-                    <a href="${pageContext.request.contextPath}/registro.jsp" class="card-link">¿No tienes cuenta?</a>
-                    <a href="${pageContext.request.contextPath}/admin_login.jsp" class="card-link">¿Eres administrador?</a>
+                    <a href="${pageContext.request.contextPath}/registro.jsp" class="card-link">¿No tienes una cuenta?</a>
+                    <a href="${pageContext.request.contextPath}/index.jsp" class="card-link">¿Eres un estudiante?</a>
                 </div>
             </div>
         </form>
     </main>
 
-    <!-- Footer con enlace interactivo -->
+    <!-- Footer de la página con enlace interactivo -->
     <footer class="login-footer">
         <a href="javascript:void(0);" class="about-us-link" id="openModalBtn">
             <i class="bi bi-info-circle"></i>
@@ -109,7 +109,8 @@
     </div>
 </div>
 
-<!-- Carga del JS externo -->
+<!-- Script del Modal separado -->
 <script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
+
 </body>
 </html>

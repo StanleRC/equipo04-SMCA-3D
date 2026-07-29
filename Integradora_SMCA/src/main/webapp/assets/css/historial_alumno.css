@@ -1,0 +1,105 @@
+:root {
+    --header-blue: #1c406e;
+    --table-header-bg: #1c406e;
+    --border-color: #333333;
+    --sidebar-width: 240px;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- ESTRUCTURA PRINCIPAL --- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Banner Superior Azul */
+.top-header {
+    background-color: var(--header-blue);
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Cuerpo de Contenido */
+.content-body {
+    padding: 20px 35px;
+    flex-grow: 1;
+}
+
+.back-link {
+    color: #222222;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.back-link:hover {
+    color: #0d8a72;
+}
+
+.utez-logo-historial {
+    max-height: 80px;
+    width: auto;
+}
+
+/* --- TABLA PERSONALIZADA --- */
+.table-container {
+    max-width: 980px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.custom-table {
+    border: 2px solid var(--border-color) !important;
+    background-color: #ffffff;
+    margin-bottom: 0;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 1px solid var(--border-color) !important;
+    text-align: center;
+    padding: 9px 6px;
+    font-size: 13.5px;
+}
+
+/* Encabezados Azules */
+.custom-table thead th {
+    background-color: var(--table-header-bg) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+/* Fila 1 gris tenue como en Figma */
+.custom-table tbody tr:first-child td {
+    background-color: #ececec;
+}
+
+/* Filas Vacías */
+.empty-row td {
+    height: 38px;
+    background-color: #ffffff;
+}
+
+.status-text {
+    font-size: 13px;
+}

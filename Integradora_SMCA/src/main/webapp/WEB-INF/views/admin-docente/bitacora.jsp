@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="layout/header.jsp">
-    <jsp:param name="pageTitle" value="Selección de Aula - Incidencias" />
+    <jsp:param name="pageTitle" value="Selección de Aula - Bitácora" />
 </jsp:include>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cssbitacorayinsidencias_Aulas.css">
@@ -16,12 +16,12 @@
 
         <div class="classroom-page-body flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <a href="index.jsp" class="classroom-back-link">← Pestaña anterior</a>
+                <a href="../../../index.jsp" class="classroom-back-link">← Pestaña anterior</a>
                 <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="UTEZ" style="max-height: 65px;">
                 <div style="width: 100px;"></div>
             </div>
 
-            <h3 class="text-center classroom-main-title">Validación de incidencias</h3>
+            <h3 class="text-center classroom-main-title">Bitacora de incidencias</h3>
 
             <div class="building-card">
                 <h5 class="building-title">Docencia 1</h5>

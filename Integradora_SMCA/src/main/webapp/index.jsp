@@ -1,67 +1,115 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="layout/header.jsp">
-    <jsp:param name="pageTitle" value="Panel de Pruebas - Bitácora Digital" />
-</jsp:include>
+<!DOCTYPE html>
+<html lang="es">
 
-<div class="main-wrapper">
-    <jsp:include page="layout/sidebar.jsp" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora Digital - UTEZ</title>
 
-    <div class="flex-grow-1 d-flex flex-column" style="background-color: #fafafa; min-height: 100vh;">
+    <!-- Cargamos Bootstrap Icons directamente -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        <div class="top-blue-bar">
-            ¡Bienvenido(a)!, Entorno de Pruebas de Desarrollo
+    <!-- Tu archivo CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.5">
+</head>
+
+<body class="login-body">
+
+<div class="login-page-container">
+
+    <!-- Sección del Logo de la UTEZ y Título -->
+    <header class="login-header">
+        <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
+        <h1 class="system-title">Bitácora digital</h1>
+    </header>
+
+    <!-- Tarjeta del Formulario (Card) -->
+    <main class="login-card">
+
+        <!-- Mensaje de error dinámico de Java Servlet -->
+        <% if (request.getAttribute("errorMessage") != null) { %>
+        <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
+            <%= request.getAttribute("errorMessage") %>
         </div>
+        <% } %>
 
-        <div class="content-body flex-grow-1 d-flex align-items-center justify-content-center">
-            <div class="container text-center" style="max-width: 700px;">
-
-                <div class="mb-4">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="max-height: 90px;" class="img-fluid">
-                </div>
-
-                <h3 class="fw-bold mb-2" style="color: #00876c;">Menú de Ruta de Archivos</h3>
-                <p class="text-muted mb-5">Usa este panel para dar clic y verificar cómo van quedando tus nuevas pantallas JSP.</p>
-
-                <div class="card border-0 shadow-sm p-4 text-start" style="border-radius: 16px; background-color: #ffffff;">
-                    <h5 class="fw-semibold mb-3 text-secondary">Módulos Solicitados:</h5>
-
-                    <div class="list-group list-group-flush">
-                        <a href="${pageContext.request.contextPath}/buscador.jsp" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
-                            <div>
-                                <i class="bi bi-search text-success me-3 fs-5"></i>
-                                <span class="fw-medium">1. Pantalla de Buscador</span>
-                                <div class="text-muted small ps-5">`buscador.jsp` - Barra e historial de búsquedas</div>
-                            </div>
-                            <span class="badge bg-secondary rounded-pill">Probar</span>
-                        </a>
-
-                        <a href="${pageContext.request.contextPath}/bitacora.jsp" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
-                            <div>
-                                <i class="bi bi-table text-primary me-3 fs-5"></i>
-                                <span class="fw-medium">2. Tabla de Bitácora General</span>
-                                <div class="text-muted small ps-5">`bitacora.jsp` - Historial de registros con filtros</div>
-                            </div>
-                            <span class="badge bg-secondary rounded-pill">Probar</span>
-                        </a>
-
-                        <a href="${pageContext.request.contextPath}/incidencias.jsp" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
-                            <div>
-                                <i class="bi bi-check-circle-fill text-danger me-3 fs-5"></i>
-                                <span class="fw-medium">3. Validación de Incidencias</span>
-                                <div class="text-muted small ps-5">`incidencias.jsp` - Reportes por aula y botones de validar</div>
-                            </div>
-                            <span class="badge bg-secondary rounded-pill">Probar</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="mt-4 text-muted small">
-                    Ubicación del archivo actual: <code class="bg-light p-1 rounded">src/main/webapp/index.jsp</code>
-                </div>
-
+        <!-- Avatar gris superior -->
+        <div class="login-avatar-container">
+            <div class="login-avatar-circle">
+                <i class="bi bi-person-fill"></i>
             </div>
         </div>
+
+        <!-- Formulario de acceso -->
+        <form action="${pageContext.request.contextPath}/loginServlet" method="POST" class="login-form">
+
+            <!-- Campo Matricula -->
+            <div class="form-group">
+                <label for="matricula" class="input-label">Matricula</label>
+                <div class="input-icon-wrapper">
+                    <i class="bi bi-envelope icon-input"></i>
+                    <input type="text" id="matricula" name="matricula" placeholder="Introduce tu matricula" required>
+                </div>
+            </div>
+
+            <!-- Campo Contraseña -->
+            <div class="form-group">
+                <label for="password" class="input-label">Contraseña</label>
+                <div class="input-icon-wrapper">
+                    <i class="bi bi-lock icon-input"></i>
+                    <input type="password" id="password" name="password" placeholder="Introduce una contraseña" required>
+                </div>
+            </div>
+
+            <!-- Botón de Acción -->
+            <div class="button-container">
+                <button type="submit" class="btn-submit">Iniciar sesión</button>
+            </div>
+
+            <!-- Enlaces de soporte dentro de la tarjeta -->
+            <div class="card-links-container">
+                <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
+
+                <div class="card-footer-links">
+                    <a href="${pageContext.request.contextPath}/registro.jsp" class="card-link">¿No tienes cuenta?</a>
+                    <a href="${pageContext.request.contextPath}/admin_login.jsp" class="card-link">¿Eres administrador?</a>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer con enlace interactivo -->
+    <footer class="login-footer">
+        <a href="javascript:void(0);" class="about-us-link" id="openModalBtn">
+            <i class="bi bi-info-circle"></i>
+            <span>Sobre Nosotros</span>
+        </a>
+    </footer>
+
+</div> <!-- /login-page-container -->
+
+
+<!-- ========================================================= -->
+<!-- ESTRUCTURA DEL MODAL (Como hijo directo del body) -->
+<!-- ========================================================= -->
+<div id="aboutModal" class="modal-overlay">
+    <div class="modal-card">
+        <h2 class="modal-title">¿Quiénes somos?</h2>
+
+        <p class="modal-text">
+            "Somos estudiantes de la carrera de Tecnologías de la Información en la UTEZ.
+            Desarrollamos este sistema como parte de nuestro proyecto integrador para optimizar
+            la gestión, el control de accesos y el reporte de incidencias en los laboratorios de cómputo
+            de DATID, conectando de forma eficiente a alumnos, docentes y administradores a través
+            de soluciones en la nube."
+        </p>
+
+        <button type="button" class="btn-close-modal" id="closeModalBtn">Cerrar</button>
     </div>
 </div>
 
-<jsp:include page="layout/footer.jsp" />
+<!-- Carga del JS externo -->
+<script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
+</body>
+</html>

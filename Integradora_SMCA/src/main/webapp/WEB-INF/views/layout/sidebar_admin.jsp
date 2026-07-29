@@ -31,7 +31,7 @@
             </a>
 
             <a href="${pageContext.request.contextPath}/crear_registro.jsp" class="sidebar-item-link active-view">
-                <span>Registrar nuevo usuario</span>
+                <span>Crear nuevo registro</span>
                 <i class="bi bi-arrow-right fs-5 text-white"></i>
             </a>
         </nav>

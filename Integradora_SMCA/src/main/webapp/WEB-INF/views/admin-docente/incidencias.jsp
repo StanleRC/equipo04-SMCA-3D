@@ -16,7 +16,7 @@
 
         <div class="classroom-page-body flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <a href="index.jsp" class="classroom-back-link">← Pestaña anterior</a>
+                <a href="../../../index.jsp" class="classroom-back-link">← Pestaña anterior</a>
                 <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="UTEZ" style="max-height: 65px;">
                 <div style="width: 100px;"></div>
             </div>

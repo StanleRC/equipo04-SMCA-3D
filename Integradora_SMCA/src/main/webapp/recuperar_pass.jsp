@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitácora Digital - UTEZ</title>
+    <title>Recuperar Contraseña - UTEZ</title>
 
-    <!-- Cargamos Bootstrap Icons directamente -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Tu archivo CSS -->
+    <!-- Hoja de Estilos -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.5">
 </head>
 
@@ -24,15 +24,8 @@
         <h1 class="system-title">Bitácora digital</h1>
     </header>
 
-    <!-- Tarjeta del Formulario (Card) -->
+    <!-- Tarjeta del Formulario -->
     <main class="login-card">
-
-        <!-- Mensaje de error dinámico de Java Servlet -->
-        <% if (request.getAttribute("errorMessage") != null) { %>
-        <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
-            <%= request.getAttribute("errorMessage") %>
-        </div>
-        <% } %>
 
         <!-- Avatar gris superior -->
         <div class="login-avatar-container">
@@ -41,45 +34,34 @@
             </div>
         </div>
 
-        <!-- Formulario de acceso -->
-        <form action="${pageContext.request.contextPath}/loginServlet" method="POST" class="login-form">
+        <h2 style="text-align: center; color: #555555; font-size: 18px; margin-bottom: 20px; font-weight: 600;">
+            Recuperar contraseña
+        </h2>
 
-            <!-- Campo Matricula -->
+        <!-- Formulario de recuperación -->
+        <form action="${pageContext.request.contextPath}/recuperarPassServlet" method="POST" class="login-form">
+
+            <!-- Campo Correo -->
             <div class="form-group">
-                <label for="matricula" class="input-label">Matricula</label>
                 <div class="input-icon-wrapper">
                     <i class="bi bi-envelope icon-input"></i>
-                    <input type="text" id="matricula" name="matricula" placeholder="Introduce tu matricula" required>
-                </div>
-            </div>
-
-            <!-- Campo Contraseña -->
-            <div class="form-group">
-                <label for="password" class="input-label">Contraseña</label>
-                <div class="input-icon-wrapper">
-                    <i class="bi bi-lock icon-input"></i>
-                    <input type="password" id="password" name="password" placeholder="Introduce una contraseña" required>
+                    <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required>
                 </div>
             </div>
 
             <!-- Botón de Acción -->
             <div class="button-container">
-                <button type="submit" class="btn-submit">Iniciar sesión</button>
+                <button type="submit" class="btn-submit">Continuar</button>
             </div>
 
-            <!-- Enlaces de soporte dentro de la tarjeta -->
-            <div class="card-links-container">
-                <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
-
-                <div class="card-footer-links">
-                    <a href="${pageContext.request.contextPath}/registro.jsp" class="card-link">¿No tienes cuenta?</a>
-                    <a href="${pageContext.request.contextPath}/admin_login.jsp" class="card-link">¿Eres administrador?</a>
-                </div>
+            <!-- Enlace para regresar -->
+            <div class="card-links-container" style="text-align: center; margin-top: 15px;">
+                <a href="${pageContext.request.contextPath}/index.jsp" class="card-link bold-link">Regresar al login</a>
             </div>
         </form>
     </main>
 
-    <!-- Footer con enlace interactivo -->
+    <!-- Footer -->
     <footer class="login-footer">
         <a href="javascript:void(0);" class="about-us-link" id="openModalBtn">
             <i class="bi bi-info-circle"></i>
@@ -91,7 +73,7 @@
 
 
 <!-- ========================================================= -->
-<!-- ESTRUCTURA DEL MODAL (Como hijo directo del body) -->
+<!-- MODAL: Ahora vive AFUERA del contenedor, como hijo de BODY -->
 <!-- ========================================================= -->
 <div id="aboutModal" class="modal-overlay">
     <div class="modal-card">
@@ -109,7 +91,7 @@
     </div>
 </div>
 
-<!-- Carga del JS externo -->
+<!-- Archivo JS separado -->
 <script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
 </body>
 </html>
