@@ -1,7 +1,7 @@
 :root {
     --green-bg: #0d8a72;       /* Verde base del menú */
-    --green-hover: #0a7560;    /* Verde ligeramente más oscuro al pasar el mouse */
-    --green-active: #096e5a;   /* Verde del botón seleccionado */
+    --green-hover: #0a7560;    /* Verde al pasar el cursor */
+    --green-active: #086b58;   /* Verde del ítem activo */
     --white: #ffffff;
 }
 
@@ -9,11 +9,12 @@
 .figma-sidebar {
     width: 240px;
     height: 100vh;
-    background-color: var(--green-bg) !important; /* Forzar fondo verde */
+    background-color: var(--green-bg) !important;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
@@ -24,28 +25,18 @@
 .sidebar-profile-section {
     padding: 30px 20px 20px 20px;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrar elementos internos */
-}
-
-.sidebar-avatar-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-    width: 106px; /* Definir anchos estrictos para evitar óvalos */
-    height: 106px;
+    align-items: center;
 }
 
 .sidebar-avatar-wrapper {
     position: relative;
     width: 100px;
     height: 100px;
-    min-width: 100px; /* Evita que Bootstrap lo aplaste */
-    min-height: 100px;
     border-radius: 50% !important;
-    border: 3px solid #3ca7f1 !important; /* Borde azul brillante */
+    border: 3px solid #ffffff !important;
     padding: 2px;
     box-sizing: border-box;
 }
@@ -54,25 +45,32 @@
     width: 100% !important;
     height: 100% !important;
     border-radius: 50% !important;
-    object-fit: cover !important; /* Mantiene la proporción de la foto redonda */
-    background-color: #ccc;
-    display: block;
+    background-color: #cccccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-/* Botón flotante del clip de edición */
+.sidebar-avatar-img i {
+    font-size: 60px;
+    color: #888888;
+    margin-top: 10px;
+}
+
+/* Botón del lápiz para editar avatar */
 .sidebar-avatar-edit {
     position: absolute;
     top: 0;
     right: 0;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     background-color: var(--white) !important;
     border-radius: 50% !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    color: #0d8a72 !important; /* Color verde para el lápiz/clip */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     text-decoration: none !important;
     transition: transform 0.2s ease;
     z-index: 5;
@@ -84,28 +82,30 @@
 
 .sidebar-avatar-edit i {
     font-size: 14px !important;
-    color: #0d8a72 !important;
+    color: #111111 !important;
 }
 
 .sidebar-user-welcome {
-    color: rgba(255, 255, 255, 0.8) !important; /* Evita que se vuelva invisible */
-    font-size: 13px;
-    font-weight: 600;
-    margin-top: 8px;
+    color: var(--white) !important;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 0;
 }
 
 .sidebar-user-name {
-    color: var(--white) !important; /* Evita el texto negro/gris */
+    color: var(--white) !important;
     font-size: 15px;
     font-weight: 700;
     margin-top: 2px;
+    margin-bottom: 0;
 }
 
 /* --- NAVEGACIÓN Y MENÚ --- */
 .sidebar-menu-nav {
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    margin-top: 10px;
     flex-grow: 1;
 }
 
@@ -113,82 +113,55 @@
 .sidebar-item-link {
     display: flex !important;
     align-items: center;
-    justify-content: space-between;
-    padding: 18px 20px;
-    color: var(--white) !important; /* Forzar texto blanco en links */
-    text-decoration: none !important;
-    font-size: 15px;
-    font-weight: 500;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.25s ease-in-out;
+    justify-content: center;
+    text-align: center;
     position: relative;
+    padding: 22px 20px;
+    color: var(--white) !important;
+    text-decoration: none !important;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.25s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 1.2;
 }
 
-/* Animación Hover */
 .sidebar-item-link:hover {
     background-color: var(--green-hover) !important;
-    padding-left: 25px;
 }
 
-/* --- ESTADO ACTIVO --- */
 .sidebar-item-link.active {
     background-color: var(--green-active) !important;
-    width: 106%;
-    border-radius: 0 4px 4px 0;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
-    padding-left: 22px;
-    z-index: 10;
 }
 
-/* Mostrar la flecha blanca sólo en activo */
 .sidebar-item-link i {
     display: none;
-    font-size: 16px;
-    color: var(--white) !important;
-}
-
-.sidebar-item-link.active i {
-    display: block !important;
-    animation: fadeInRight 0.3s ease;
 }
 
 /* --- BOTÓN CERRAR SESIÓN --- */
 .sidebar-footer-logout {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .sidebar-logout-link {
     display: flex !important;
     align-items: center;
     padding: 18px 20px;
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--white) !important;
     text-decoration: none !important;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
     transition: background-color 0.2s;
 }
 
 .sidebar-logout-link i {
     margin-right: 12px;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 18px;
+    color: var(--white) !important;
 }
 
 .sidebar-logout-link:hover {
     background-color: #b23b3b !important;
-    color: var(--white) !important;
-}
-
-.sidebar-logout-link:hover i {
-    color: var(--white) !important;
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }

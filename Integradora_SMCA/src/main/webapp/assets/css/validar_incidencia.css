@@ -1,0 +1,165 @@
+/* --- ESTRUCTURA GENERAL Y DESPLAZAMIENTO DEL SIDEBAR --- */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.main-content {
+    margin-left: 240px; /* Ancho reservado para el sidebar verde */
+    width: calc(100% - 240px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BARRA AZUL SUPERIOR --- */
+.top-welcome-bar {
+    background-color: #1d3b6a !important;
+    color: #ffffff !important;
+    padding: 16px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
+
+/* --- CUERPO Y CENTRADO DE TARJETA --- */
+.validar-incidencia-body {
+    padding: 25px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.utez-logo {
+    max-height: 90px;
+    width: auto;
+}
+
+/* --- TARJETA GRIS REDONDEADA --- */
+.validar-card {
+    background-color: #f3f4f6 !important;
+    border-radius: 24px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    width: 100%;
+    max-width: 520px;
+    padding: 35px 40px;
+}
+
+.validar-card-title {
+    color: #4b5563;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+/* --- INPUT DE DESCRIPCIÓN --- */
+.custom-textarea {
+    border-radius: 16px !important;
+    border: 1px solid #d1d5db !important;
+    padding: 14px 16px !important;
+    font-size: 14px !important;
+    color: #374151 !important;
+    background-color: #ffffff !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+    resize: none;
+}
+
+.custom-textarea::placeholder {
+    color: #9ca3af !important;
+    font-weight: 500;
+}
+
+.custom-textarea:focus {
+    border-color: #1d3b6a !important;
+    box-shadow: 0 0 0 3px rgba(29, 59, 106, 0.15) !important;
+}
+
+/* --- CAJA DE SUBIR EVIDENCIA --- */
+.upload-evidence-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 16px;
+    padding: 25px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.upload-evidence-box:hover {
+    border-color: #0d8a72;
+    background-color: #f8fafc;
+}
+
+.upload-icon {
+    font-size: 32px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.upload-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.upload-subtitle {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.btn-action {
+    border-radius: 20px !important;
+    padding: 9px 36px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-reportar {
+    background-color: #0d8a72 !important;
+    color: #ffffff !important;
+}
+
+.btn-reportar:hover {
+    background-color: #0a6f5c !important;
+    transform: translateY(-1px);
+}
+
+.btn-cancelar {
+    background-color: #1d3b6a !important;
+    color: #ffffff !important;
+    display: inline-block;
+    line-height: 1.5;
+}
+
+.btn-cancelar:hover {
+    background-color: #142a4d !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .validar-card {
+        padding: 25px 20px;
+    }
+}

@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácora Digital - UTEZ</title>
 
-    <!-- Cargamos Bootstrap Icons directamente -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Tu archivo CSS -->
+    <!-- CSS de Login -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.5">
 </head>
 
@@ -27,7 +27,7 @@
     <!-- Tarjeta del Formulario (Card) -->
     <main class="login-card">
 
-        <!-- Mensaje de error dinámico de Java Servlet -->
+        <!-- Mensaje de error dinámico -->
         <% if (request.getAttribute("errorMessage") != null) { %>
         <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
             <%= request.getAttribute("errorMessage") %>
@@ -44,7 +44,7 @@
         <!-- Formulario de acceso -->
         <form action="${pageContext.request.contextPath}/loginServlet" method="POST" class="login-form">
 
-            <!-- Campo Matricula -->
+            <!-- Campo Matrícula -->
             <div class="form-group">
                 <label for="matricula" class="input-label">Matricula</label>
                 <div class="input-icon-wrapper">
@@ -67,13 +67,14 @@
                 <button type="submit" class="btn-submit">Iniciar sesión</button>
             </div>
 
-            <!-- Enlaces de soporte dentro de la tarjeta -->
+            <!-- Enlaces de soporte -->
             <div class="card-links-container">
                 <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
 
                 <div class="card-footer-links">
-                    <a href="${pageContext.request.contextPath}/registro.jsp" class="card-link">¿No tienes cuenta?</a>
-                    <a href="${pageContext.request.contextPath}/admin_login.jsp" class="card-link">¿Eres administrador?</a>
+                    <!-- Enlace redirigido a Registrar Alumno -->
+                    <a href="${pageContext.request.contextPath}/views/alumno/registro_directo_alumno.jsp" class="card-link">¿No tienes cuenta?</a>
+                    <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="card-link">¿Eres administrador?</a>
                 </div>
             </div>
         </form>
@@ -89,10 +90,7 @@
 
 </div> <!-- /login-page-container -->
 
-
-<!-- ========================================================= -->
-<!-- ESTRUCTURA DEL MODAL (Como hijo directo del body) -->
-<!-- ========================================================= -->
+<!-- Modal Sobre Nosotros -->
 <div id="aboutModal" class="modal-overlay">
     <div class="modal-card">
         <h2 class="modal-title">¿Quiénes somos?</h2>
@@ -109,7 +107,7 @@
     </div>
 </div>
 
-<!-- Carga del JS externo -->
+<!-- JS -->
 <script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
 </body>
 </html>
