@@ -42,7 +42,7 @@
         </div>
 
         <!-- Formulario de acceso -->
-        <form action="${pageContext.request.contextPath}/loginServlet" method="POST" class="login-form">
+        <form action="${pageContext.request.contextPath}/LoginServlet" method="POST" class="login-form">
 
             <!-- Campo Matrícula -->
             <div class="form-group">

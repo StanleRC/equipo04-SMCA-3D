@@ -25,7 +25,7 @@
     <!-- Tarjeta del Formulario -->
     <main class="register-card">
 
-        <h2 class="register-title">Registrar maestro</h2>
+        <h2 class="register-title">Registro maestro</h2>
 
         <form action="${pageContext.request.contextPath}/registrarMaestroServlet" method="POST">
             <div class="row g-3">

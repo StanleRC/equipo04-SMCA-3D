@@ -9,8 +9,5 @@
         <module name="Integradora_POO_2026" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Integradora_SMCA" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>
