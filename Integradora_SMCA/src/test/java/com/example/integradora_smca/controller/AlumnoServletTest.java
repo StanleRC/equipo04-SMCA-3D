@@ -32,7 +32,6 @@ public class AlumnoServletTest {
         servlet = new AlumnoServlet();
     }
 
-    // 1. PRUEBA DE FUNCIONAMIENTO NORMAL
     @Test
     void testDoPostDatosCorrectos() throws Exception {
         Alumno usuario = new Alumno();
@@ -51,7 +50,6 @@ public class AlumnoServletTest {
         assertEquals("juan@test.com", usuario.getCorreo());
     }
 
-    // 2. CASO LÍMITE: Intentar romper enviando campos vacíos ("")
     @Test
     void testDoPostCamposVacios() throws Exception {
         Alumno usuario = new Alumno();
@@ -66,12 +64,12 @@ public class AlumnoServletTest {
 
         servlet.doPost(request, response);
 
-        // Al no haber validaciones en el Servlet, asigna los strings vacíos
+
         assertEquals("", usuario.getNombre());
         assertEquals("", usuario.getCorreo());
     }
 
-    // 3. CASO LÍMITE: Intentar romper enviando un correo con formato inválido o texto plano
+
     @Test
     void testDoPostCorreoFormatoInvalido() throws Exception {
         Alumno usuario = new Alumno();
@@ -84,12 +82,12 @@ public class AlumnoServletTest {
 
         servlet.doPost(request, response);
 
-        // Se verifica cómo responde el código actual ante datos no válidos
+
         assertEquals("1234567890", usuario.getNombre());
         assertEquals("correo_invalido_sin_arroba", usuario.getCorreo());
     }
 
-    // 4. CASO LÍMITE: Intentar romper enviando valores nulos
+
     @Test
     void testDoPostParametrosNull() throws Exception {
         Alumno usuario = new Alumno();
