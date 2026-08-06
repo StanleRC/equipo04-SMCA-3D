@@ -1,0 +1,167 @@
+:root {
+    --green-bg: #0d8a72;       /* Verde base del menú */
+    --green-hover: #0a7560;    /* Verde al pasar el cursor */
+    --green-active: #086b58;   /* Verde del ítem activo */
+    --white: #ffffff;
+}
+
+/* Contenedor principal del Sidebar */
+.figma-sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: var(--green-bg) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* --- SECCIÓN DE PERFIL --- */
+.sidebar-profile-section {
+    padding: 30px 20px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-avatar-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50% !important;
+    border: 3px solid #ffffff !important;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.sidebar-avatar-img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    background-color: #cccccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sidebar-avatar-img i {
+    font-size: 60px;
+    color: #888888;
+    margin-top: 10px;
+}
+
+/* Botón del lápiz para editar avatar */
+.sidebar-avatar-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background-color: var(--white) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-decoration: none !important;
+    transition: transform 0.2s ease;
+    z-index: 5;
+}
+
+.sidebar-avatar-edit:hover {
+    transform: scale(1.1);
+}
+
+.sidebar-avatar-edit i {
+    font-size: 14px !important;
+    color: #111111 !important;
+}
+
+.sidebar-user-welcome {
+    color: var(--white) !important;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+.sidebar-user-name {
+    color: var(--white) !important;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+/* --- NAVEGACIÓN Y MENÚ --- */
+.sidebar-menu-nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+/* Links normales */
+.sidebar-item-link {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 22px 20px;
+    color: var(--white) !important;
+    text-decoration: none !important;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.25s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+
+.sidebar-item-link:hover {
+    background-color: var(--green-hover) !important;
+}
+
+.sidebar-item-link.active {
+    background-color: var(--green-active) !important;
+}
+
+.sidebar-item-link i {
+    display: none;
+}
+
+/* --- BOTÓN CERRAR SESIÓN --- */
+.sidebar-footer-logout {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-logout-link {
+    display: flex !important;
+    align-items: center;
+    padding: 18px 20px;
+    color: var(--white) !important;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.sidebar-logout-link i {
+    margin-right: 12px;
+    font-size: 18px;
+    color: var(--white) !important;
+}
+
+.sidebar-logout-link:hover {
+    background-color: #b23b3b !important;
+}

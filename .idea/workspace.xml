@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Integradora_POO_2026:war" />
+      <artifact name="Integradora_POO_2026:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d991a5b7-4a6a-4b6f-a3bb-3b3831e933be" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/equipo04-SMCA-3D.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/equipo04-SMCA-3D.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/Alumno.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/Alumno.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/registro_directo_maestro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/registro_directo_maestro.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/historial_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/historial_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/perfil_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/perfil_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/registro_directo_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/registro_directo_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/AlumnoServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/LoginServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/RecuperarPassServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/Alumno.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/Alumno.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/cwallet.sso" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/ewallet.p12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/ewallet.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/keystore.jks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/ojdbc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/sqlnet.ora" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/tnsnames.ora" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/truststore.jks" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="2173" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "StanleRC"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/StanleRC/equipo04-SMCA-3D.git",
+    "accountId": "7a6ea2ab-86f0-423c-a8bd-feead3a4be4b"
+  }
+}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000000000003" />
+      <entry key="S60" value="1.000000056895287" />
+      <entry key="M2" value="1.0002519241660361" />
+      <entry key="M5" value="1.0469142902257462" />
+      <entry key="M10" value="1.2951697446665114" />
+      <entry key="M15" value="1.553671736078591" />
+      <entry key="M30" value="2.052129210379092" />
+      <entry key="H1" value="2.756627046903691" />
+      <entry key="H2" value="5.324118679161951" />
+      <entry key="H4" value="10.687521774692662" />
+      <entry key="D1" value="34.78937940853582" />
+      <entry key="W1" value="80.36306203913917" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.776330370885375E-210" />
+      <entry key="S2" value="3.650740260859256E-53" />
+      <entry key="S5" value="1.0591375709932109E-21" />
+      <entry key="S10" value="3.2544393848913686E-11" />
+      <entry key="S30" value="3.192704534170926E-4" />
+      <entry key="S60" value="0.017868203708612546" />
+      <entry key="M2" value="0.1339227054888727" />
+      <entry key="M5" value="0.48340499154775024" />
+      <entry key="M10" value="0.8591724113700515" />
+      <entry key="M15" value="1.0957539793115285" />
+      <entry key="M30" value="1.4508453067261688" />
+      <entry key="H1" value="1.772016068830533" />
+      <entry key="H2" value="2.55619255219013" />
+      <entry key="H4" value="4.1693331345966875" />
+      <entry key="D1" value="11.247231523484984" />
+      <entry key="W1" value="25.020228975521604" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.6877709090698718" />
+      <entry key="MS500" value="0.9278734764712827" />
+      <entry key="S2" value="0.9814590638534793" />
+      <entry key="S5" value="0.9925419606811905" />
+      <entry key="S10" value="0.9962640015265634" />
+      <entry key="S30" value="0.9990581067015192" />
+      <entry key="S60" value="1.0168405468370139" />
+      <entry key="M2" value="1.1323395677689474" />
+      <entry key="M5" value="1.5279683436712879" />
+      <entry key="M10" value="2.1522530064043766" />
+      <entry key="M15" value="2.647633973345089" />
+      <entry key="M30" value="3.501769937226093" />
+      <entry key="H1" value="4.527863382699812" />
+      <entry key="H2" value="7.879613130750858" />
+      <entry key="H4" value="14.85617896947299" />
+      <entry key="D1" value="46.036267415333484" />
+      <entry key="W1" value="105.38318826142425" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3HCrMK0oaLzWcGhxicFFHyjkouz" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;TomEE Server.TomEE 10.1.55.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.Tomcat 10.1.55.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Core i7/Downloads/equipo04-SMCA-3D&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Core i7\Downloads\equipo04-SMCA-3D\Integradora_SMCA\src\main\resources\wallet" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Core i7\Downloads\equipo04-SMCA-3D\Integradora_SMCA\src\main\webapp" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+          <value>
+            <map>
+              <entry key="Tomcat 10.1.55" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 10.1.55" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.55" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="Integradora_POO_2026:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/Integradora_POO_2026_war_exploded" />
+          </settings>
+        </artifact>
+        <artifact name="Integradora_POO_2026:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/Integradora_POO_2026_war" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="5d762e11-67f4-4ee7-8122-ca09fb17e5de" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="59184" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+        <EnvironmentVariables>
+          <option name="NAME" value="BD_NAME" />
+          <option name="VALUE" value="integradorasmca_high" />
+          <option name="IS_PREDEFINED" value="false" />
+        </EnvironmentVariables>
+        <EnvironmentVariables>
+          <option name="NAME" value="BD_PASS" />
+          <option name="VALUE" value="ContrasenaSegura123" />
+          <option name="IS_PREDEFINED" value="false" />
+        </EnvironmentVariables>
+        <EnvironmentVariables>
+          <option name="NAME" value="BD_USER" />
+          <option name="VALUE" value="ADMIN" />
+          <option name="IS_PREDEFINED" value="false" />
+        </EnvironmentVariables>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Integradora_POO_2026:war" />
+          <artifact name="Integradora_POO_2026:war exploded" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.26222.65" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d991a5b7-4a6a-4b6f-a3bb-3b3831e933be" name="Changes" comment="" />
+      <created>1785382844687</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1785382844687</updated>
+      <workItem from="1785382848049" duration="26314000" />
+      <workItem from="1785613434608" duration="755000" />
+      <workItem from="1785625990137" duration="22411000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
