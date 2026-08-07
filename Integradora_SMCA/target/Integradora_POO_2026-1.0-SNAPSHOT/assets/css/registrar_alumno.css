@@ -6,6 +6,35 @@
     background-color: #ffffff;
 }
 
+.btn-action {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+    color: #ffffff;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Botón Cancelar */
+.btn-cancel {
+    background-color: #0d3b66;   /* azul oscuro */
+}
+.btn-cancel:hover {
+    background-color: #092a4d;
+}
+
+/* Botón Registrar */
+.btn-registrar {
+    background-color: #0d8a72;   /* verde */
+    border: none;
+}
+.btn-registrar:hover {
+    background-color: #0a7560;
+}
+
+
 .main-content {
     margin-left: 240px; /* Margen para respetar el sidebar verde de 240px */
     width: calc(100% - 240px);

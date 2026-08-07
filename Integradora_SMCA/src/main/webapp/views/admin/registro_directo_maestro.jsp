@@ -18,14 +18,14 @@
 <div class="main-container">
 
     <!-- Logo Superior Centrado -->
-    <header class="utez-header">
+    <header class="utez-header text-center mb-4">
         <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
     </header>
 
     <!-- Tarjeta del Formulario -->
     <main class="register-card">
 
-        <h2 class="register-title">Registro maestro</h2>
+        <h2 class="register-title text-center mb-4">Registro maestro</h2>
 
         <form action="${pageContext.request.contextPath}/registrarMaestroServlet" method="POST">
             <div class="row g-3">
@@ -33,39 +33,47 @@
                 <!-- Columna Izquierda -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <input type="text" class="custom-input" name="txtNombre" placeholder="Nombre(s)" required>
+                        <label for="nombre" class="form-label">Nombre(s)</label>
+                        <input type="text" id="nombre" class="form-control custom-input" name="txtNombre" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="custom-input" name="txtApellidoPaterno" placeholder="Apellido paterno" required>
+                        <label for="apellidoPaterno" class="form-label">Apellido paterno</label>
+                        <input type="text" id="apellidoPaterno" class="form-control custom-input" name="txtApellidoPaterno" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="custom-input" name="txtApellidoMaterno" placeholder="Apellido materno" required>
+                        <label for="apellidoMaterno" class="form-label">Apellido materno</label>
+                        <input type="text" id="apellidoMaterno" class="form-control custom-input" name="txtApellidoMaterno" required>
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="custom-input" name="txtCorreo" placeholder="Correo" required>
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" id="correo" class="form-control custom-input" name="txtCorreo" required>
                     </div>
                 </div>
 
                 <!-- Columna Derecha -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <input type="password" class="custom-input" name="txtPassword" placeholder="Contraseña" required>
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" id="password" class="form-control custom-input" name="txtPassword" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="custom-input" name="txtConfirmPassword" placeholder="Confirme la contraseña" required>
+                        <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                        <input type="password" id="confirmPassword" class="form-control custom-input" name="txtConfirmPassword" required>
                     </div>
                     <div class="mb-3">
-                        <input type="tel" class="custom-input" name="txtTelefono" placeholder="Ingrese el teléfono" required>
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" id="telefono" class="form-control custom-input" name="txtTelefono" required>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Botones de Acción -->
-            <div class="actions-container">
-                <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="btn-cancel">Cancelar</a>
-                <button type="submit" class="btn-registrar">Registrar</button>
+            <div class="actions-container mt-4 d-flex justify-content-between">
+                <a href="${pageContext.request.contextPath}/admin-docente_login.jsp"
+                   class="btn-action btn-cancel">Cancelar</a>
+                <button type="submit" class="btn-action btn-registrar">Registrar</button>
             </div>
+
         </form>
 
     </main>

@@ -52,10 +52,12 @@
     overflow: hidden;
 }
 
-.sidebar-avatar-img i {
-    font-size: 60px;
-    color: #888888;
-    margin-top: 10px;
+/* Imagen dentro del avatar */
+.sidebar-avatar-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* recorta la foto sin deformarla */
+    border-radius: 50%;  /* mantiene el círculo */
 }
 
 /* Botón del lápiz para editar avatar */
@@ -128,7 +130,6 @@
 .sidebar-item-link:hover {
     background-color: var(--green-hover) !important;
 }
-
 
 .sidebar-item-link i {
     display: none;

@@ -38,44 +38,49 @@
                 <h3 class="registrar-card-title text-center">Registrar maestro</h3>
 
                 <form action="RegistrarMaestroServlet" method="POST">
-
                     <div class="row g-3">
                         <!-- Columna Izquierda -->
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <input type="text" name="txtNombre" class="form-control custom-input" placeholder="Nombre(s)" required>
+                                <label for="nombre" class="form-label">Nombre(s)</label>
+                                <input type="text" id="nombre" name="txtNombre" class="form-control custom-input" required>
                             </div>
                             <div class="mb-3">
-                                <input type="text" name="txtApellidoPaterno" class="form-control custom-input" placeholder="Apellido paterno" required>
+                                <label for="apellidoPaterno" class="form-label">Apellido paterno</label>
+                                <input type="text" id="apellidoPaterno" name="txtApellidoPaterno" class="form-control custom-input" required>
                             </div>
                             <div class="mb-3">
-                                <input type="text" name="txtApellidoMaterno" class="form-control custom-input" placeholder="Apellido materno" required>
+                                <label for="apellidoMaterno" class="form-label">Apellido materno</label>
+                                <input type="text" id="apellidoMaterno" name="txtApellidoMaterno" class="form-control custom-input" required>
                             </div>
                             <div class="mb-3">
-                                <input type="email" name="txtCorreo" class="form-control custom-input" placeholder="Correo" required>
+                                <label for="correo" class="form-label">Correo electrónico</label>
+                                <input type="email" id="correo" name="txtCorreo" class="form-control custom-input" required>
                             </div>
                         </div>
 
                         <!-- Columna Derecha -->
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <input type="password" name="txtPassword" class="form-control custom-input" placeholder="Contraseña" required>
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" id="password" name="txtPassword" class="form-control custom-input" required>
                             </div>
                             <div class="mb-3">
-                                <input type="password" name="txtConfirmPassword" class="form-control custom-input" placeholder="Confirme la contraseña" required>
+                                <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                                <input type="password" id="confirmPassword" name="txtConfirmPassword" class="form-control custom-input" required>
                             </div>
                             <div class="mb-3">
-                                <input type="tel" name="txtTelefono" class="form-control custom-input" placeholder="Ingrese el teléfono" required>
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" id="telefono" name="txtTelefono" class="form-control custom-input" required>
                             </div>
                         </div>
                     </div>
 
                     <!-- Botones de Acción -->
-                    <div class="d-flex justify-content-center gap-4 mt-4">
-                        <a href="javascript:history.back()" class="btn-action btn-cancelar text-decoration-none text-center">Cancelar</a>
-                        <button type="submit" class="btn-action btn-registrar">Registrar</button>
+                    <div class="actions-container mt-4 d-flex justify-content-between">
+                        <a href="javascript:history.back()" class="btn btn-cancel">Cancelar</a>
+                        <button type="submit" class="btn btn-next">Registrar</button>
                     </div>
-
                 </form>
             </div>
         </div>

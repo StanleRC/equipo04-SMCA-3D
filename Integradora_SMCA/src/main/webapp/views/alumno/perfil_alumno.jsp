@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Perfil - Alumno</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Importe Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <!--Iconos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- CSS Personalizado del Perfil -->
@@ -18,10 +18,10 @@
 </head>
 <body>
 
-<!-- Incluimos el Sidebar del Alumno -->
+<!-- Se llama el sidebar del Alumno -->
 <jsp:include page="/views/layout/sidebar_alumno.jsp" />
 
-<!-- Área de Contenido Principal -->
+<!-- Contenido principal -->
 <div class="main-content">
 
     <!-- Banner Superior Azul -->
@@ -29,82 +29,78 @@
         <h1 class="top-title">Tu perfil</h1>
     </header>
 
-    <!-- Contenedor Interno -->
     <div class="content-body">
-
-        <!-- Enlace Volver a Pestaña Anterior -->
+        <!-- Enlace para volver a la pestaña anterior -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="javascript:history.back()" class="back-link">
                 <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
             </a>
 
-            <!-- Botón para ir a Editar Perfil -->
+            <!-- Botón para ir a editar perfil -->
             <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="btn btn-sm btn-outline-primary">
                 <i class="bi bi-pencil"></i> Editar Perfil
             </a>
         </div>
 
-        <!-- Logo UTEZ Centrado -->
+        <!-- Logo de la  UTEZ -->
         <div class="text-center mb-4">
             <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="max-height: 140px;">
         </div>
 
-        <!-- Tarjeta de Información Académica -->
-        <div class="profile-card">
+        <!-- Tarjeta de informacion  -->
+        <div class="card p-4">
+            <div class="row align-items-center">
 
-            <!-- Columna Izquierda: Avatar -->
-            <div class="profile-card-left">
-                <div class="large-avatar">
-                    <!-- Uso del operador ternario según tu requerimiento -->
-                    <img src="${not empty sessionScope.usuarioFoto ? pageContext.request.contextPath.concat(sessionScope.usuarioFoto) : 'https://via.placeholder.com/150'}"
+                <!-- Columna Izquierda (Foto de perfil) -->
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <img src="${not empty sessionScope.usuarioFoto
+                ? pageContext.request.contextPath.concat(sessionScope.usuarioFoto)
+                : pageContext.request.contextPath.concat('/assets/img/default_profile.png')}"
                          class="rounded-circle img-fluid"
                          alt="Foto Perfil"
                          style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
-            </div>
 
-            <!-- Columna Derecha: Datos Académicos y Personales -->
-            <div class="profile-card-right">
-                <h2 class="academic-title">Información académica</h2>
-                <h3 class="carrera-title">Desarrollo de Software Multiplataforma</h3>
 
-                <div class="user-info-section">
-                    <h4 class="user-name-text">
-                        ${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellidos}
-                    </h4>
-                    <span class="user-role-text">Alumno</span>
+                <!-- Columna Derecha (Datos del alumno) -->
+                <div class="col-md-8">
+                    <h2 class="academic-title">Información académica</h2>
+                    <h3 class="carrera-title">Desarrollo de Software Multiplataforma</h3>
+
+                    <div class="user-info-section">
+                        <h4 class="user-name-text">
+                            ${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellidos}
+                        </h4>
+                        <span class="user-role-text">Alumno</span>
+                    </div>
+
+                    <!-- Detalles -->
+                    <div class="row g-3 details-grid mt-2">
+                        <div class="col-6">
+                            <span class="label-text">Cuatrimestre:</span>
+                            <span class="value-text">3°</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="label-text">Grupo:</span>
+                            <span class="value-text">${sessionScope.usuarioLogueado.grupoIdGrupo}</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="value-text email-text">${sessionScope.usuarioLogueado.correo}</span>
+                        </div>
+                        <div class="col-12">
+                            <span class="label-text">Matrícula:</span>
+                            <span class="value-text">${sessionScope.usuarioLogueado.matricula}</span>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Detalles -->
-                <div class="row g-3 details-grid">
-                    <div class="col-6">
-                        <span class="label-text">Cuatrimestre:</span>
-                        <span class="value-text">3°</span>
-                    </div>
-                    <div class="col-6">
-                        <span class="label-text">Grupo:</span>
-                        <span class="value-text">${sessionScope.usuarioLogueado.grupoIdGrupo}</span>
-                    </div>
-                    <div class="col-12">
-                        <span class="value-text email-text">${sessionScope.usuarioLogueado.correo}</span>
-                    </div>
-                    <div class="col-12">
-                        <span class="label-text">Matrícula:</span>
-                        <span class="value-text">${sessionScope.usuarioLogueado.matricula}</span>
-                    </div>
-                </div>
-
             </div>
-
         </div>
 
     </div>
-
 </div>
 
-<!-- EVALUAMOS SI DEBEMOS MOSTRAR EL MODAL SOLO TRAS EL LOGIN -->
+<!-- Modal de Login Exitoso -->
 <% if (session.getAttribute("mostrarModalLogin") != null && (Boolean) session.getAttribute("mostrarModalLogin")) { %>
-<!-- Estructura del Modal Exitoso -->
 <div class="modal fade" id="modalLoginExitoso" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content custom-modal-content text-center">
@@ -122,12 +118,8 @@
         </div>
     </div>
 </div>
-
-<!-- Script que abre el Modal -->
 <script src="${pageContext.request.contextPath}/assets/js/modal_exito.js"></script>
-
 <%
-    // ELIMINAMOS EL ATRIBUTO PARA QUE NO VUELVA A APARECER AL NAVEGAR O RECARGAR
     session.removeAttribute("mostrarModalLogin");
 %>
 <% } %>
