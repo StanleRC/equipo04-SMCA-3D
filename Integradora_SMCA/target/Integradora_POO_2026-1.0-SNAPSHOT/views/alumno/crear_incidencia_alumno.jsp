@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Bitácora - Alumno</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Llamado al Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <!-- Llamado al Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- CSS Personalizado -->
+    <!-- Llamado al CSS Personalizado -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrarinsidencia_alumno.css?v=2">
 </head>
 <body>
@@ -35,7 +35,7 @@
         <h2 class="card-title-custom">Bienvenido a la bitácora digital</h2>
 
         <!-- Formulario -->
-        <form action="${pageContext.request.contextPath}/bitacora_servlet" method="POST">
+        <form action="${pageContext.request.contextPath}/views/alumno/perfil_alumno.jsp" method="POST">
 
             <!-- Fila de Inputs (Número de PC y Hora de salida) -->
             <div class="row g-3 mb-4">
@@ -82,7 +82,7 @@
 
 </div>
 
-<!-- Bootstrap 5 JS -->
+<!-- Llamado al Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
