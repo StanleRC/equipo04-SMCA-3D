@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,12 +28,12 @@
     <!-- Tarjeta del Formulario (Card) -->
     <main class="login-card">
 
-        <!-- Mensaje de error dinámico -->
-        <% if (request.getAttribute("errorMessage") != null) { %>
-        <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
-            <%= request.getAttribute("errorMessage") %>
-        </div>
-        <% } %>
+        <!-- Mensaje de error dinámico dinámico con JSTL -->
+        <c:if test="${not empty requestScope.errorMessage}">
+            <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
+                    ${requestScope.errorMessage}
+            </div>
+        </c:if>
 
         <!-- Avatar gris superior -->
         <div class="login-avatar-container">
@@ -46,10 +47,10 @@
 
             <!-- Campo Matrícula -->
             <div class="form-group">
-                <label for="matricula" class="input-label">Matricula</label>
+                <label for="matricula" class="input-label">Matrícula</label>
                 <div class="input-icon-wrapper">
-                    <i class="bi bi-envelope icon-input"></i>
-                    <input type="text" id="matricula" name="matricula" placeholder="Introduce tu matricula" required>
+                    <i class="bi bi-person-vcard icon-input"></i>
+                    <input type="text" id="matricula" name="matricula" placeholder="Introduce tu matrícula" required>
                 </div>
             </div>
 
@@ -72,7 +73,6 @@
                 <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
 
                 <div class="card-footer-links">
-                    <!-- Enlace redirigido a Registrar Alumno -->
                     <a href="${pageContext.request.contextPath}/views/alumno/registro_directo_alumno.jsp" class="card-link">¿No tienes cuenta?</a>
                     <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="card-link">¿Eres administrador?</a>
                 </div>
@@ -88,7 +88,7 @@
         </a>
     </footer>
 
-</div> <!-- /login-page-container -->
+</div>
 
 <!-- Modal Sobre Nosotros -->
 <div id="aboutModal" class="modal-overlay">
@@ -107,7 +107,7 @@
     </div>
 </div>
 
-<!-- JS -->
+<!-- JS de Sobre Nosotros -->
 <script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
 </body>
 </html>

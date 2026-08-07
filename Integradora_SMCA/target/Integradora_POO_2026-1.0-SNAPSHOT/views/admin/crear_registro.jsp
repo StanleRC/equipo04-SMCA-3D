@@ -23,10 +23,12 @@
         <div class="register-choice-body">
             <div class="container text-center register-choice-container">
 
-                <!-- Logo UTEZ Centrado -->
-                <div class="mb-4">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="register-logo-img img-fluid">
+                <div class="mb-4 text-center">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
+                         alt="Logo UTEZ"
+                         class="register-logo-img">
                 </div>
+
 
                 <!-- Tarjeta Principal de Selección -->
                 <div class="selection-card mx-auto">

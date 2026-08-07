@@ -33,7 +33,7 @@
         </a>
 
         <a href="${pageContext.request.contextPath}/views/admin/crear_registro.jsp" class="sidebar-item-link">
-            Registrar<br>nuevo usuario
+            Nuevo<br>registro
         </a>
 
         <a href="${pageContext.request.contextPath}/views/admin/perfil_admin-docente.jsp" class="sidebar-item-link">

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/validar_incidencia.css?v=1">
 
 <div class="main-wrapper">
-    <!-- Sidebar Admin -->
+    <!-- Sidebar del Admin -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
 
     <!-- Área de Contenido Principal -->

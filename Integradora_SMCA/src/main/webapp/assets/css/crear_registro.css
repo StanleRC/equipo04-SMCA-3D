@@ -27,14 +27,13 @@
 }
 
 /* --- CUERPO CENTRADO Y TARJETA --- */
-.register-choice-body {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    background-color: #ffffff;
+.register-logo-img {
+    width: 220px;
+    height: auto;
+    max-width: 100%;
+    display: block;
 }
+
 
 .register-choice-container {
     width: 100%;
@@ -43,9 +42,12 @@
 }
 
 .register-logo-img {
-    max-height: 100px;
-    width: auto;
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
+
 
 .selection-card {
     background-color: #ffffff !important;

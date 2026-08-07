@@ -37,48 +37,57 @@
         </div>
         <% } %>
 
-        <!-- CORREGIDO: Se ajustó el action a /RegistroAlumnoServlet -->
+        <!-- Formulario -->
         <form action="${pageContext.request.contextPath}/RegistroAlumnoServlet" method="POST">
             <div class="row g-3">
 
                 <!-- Columna Izquierda -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <input type="text" class="custom-input" id="nombre" name="txtNombre" placeholder="Nombre(s)" required>
+                        <label for="nombre" class="form-label">Nombre(s)</label>
+                        <input type="text" class="custom-input form-control" id="nombre" name="txtNombre" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="custom-input" id="apellidoPaterno" name="txtApellidoPaterno" placeholder="Apellido paterno" required>
+                        <label for="apellidoPaterno" class="form-label">Apellido paterno</label>
+                        <input type="text" class="custom-input form-control" id="apellidoPaterno" name="txtApellidoPaterno" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="custom-input" id="apellidoMaterno" name="txtApellidoMaterno" placeholder="Apellido materno" required>
+                        <label for="apellidoMaterno" class="form-label">Apellido materno</label>
+                        <input type="text" class="custom-input form-control" id="apellidoMaterno" name="txtApellidoMaterno" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="custom-input" id="matricula" name="txtMatricula" placeholder="Matricula" required>
+                        <label for="matricula" class="form-label">Matrícula</label>
+                        <input type="text" class="custom-input form-control" id="matricula" name="txtMatricula" required>
                     </div>
                 </div>
 
                 <!-- Columna Derecha -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <input type="password" class="custom-input" id="password" name="txtPassword" placeholder="Contraseña" required>
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="custom-input form-control" id="password" name="txtPassword" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="custom-input" id="confirmPassword" name="txtConfirmPassword" placeholder="Confirme la contraseña" required>
+                        <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                        <input type="password" class="custom-input form-control" id="confirmPassword" name="txtConfirmPassword" required>
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="custom-input" id="correo" name="txtCorreo" placeholder="Ingrese su correo" required>
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="custom-input form-control" id="correo" name="txtCorreo" required>
                     </div>
 
                     <div class="row g-2">
                         <div class="col-7">
-                            <select class="custom-select" id="carrera" name="carrera" required>
-                                <option value="" disabled selected hidden>Carrera</option>
+                            <label for="carrera" class="form-label">Carrera</label>
+                            <select class="custom-select form-select" id="carrera" name="carrera" required>
+                                <option value="" disabled selected hidden>Selecciona tu carrera</option>
                                 <option value="DSM">Desarrollo de Software</option>
                             </select>
                         </div>
                         <div class="col-5">
-                            <select class="custom-select" id="grupo" name="grupo" required>
-                                <option value="" disabled selected hidden>Grupo</option>
+                            <label for="grupo" class="form-label">Grupo</label>
+                            <select class="custom-select form-select" id="grupo" name="grupo" required>
+                                <option value="" disabled selected hidden>Selecciona tu grupo</option>
                                 <option value="DSM3D">3°D</option>
                             </select>
                         </div>
@@ -87,11 +96,11 @@
 
             </div>
 
-            <!-- Botones de Acción -->
-            <div class="actions-container mt-3">
-                <a href="${pageContext.request.contextPath}/index.jsp" class="btn-cancel">Cancelar</a>
-                <button type="submit" class="btn-next">Siguiente</button>
+            <div class="actions-container mt-3 d-flex justify-content-between">
+                <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-cancel">Cancelar</a>
+                <button type="submit" class="btn btn-next">Siguiente</button>
             </div>
+
         </form>
 
     </main>
