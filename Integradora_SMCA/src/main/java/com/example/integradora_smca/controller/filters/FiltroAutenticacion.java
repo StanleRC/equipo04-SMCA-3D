@@ -16,6 +16,17 @@ public class FiltroAutenticacion extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
+        // ESTA LÍNEA DEJA PASAR TODO TEMPORALMENTE:
+        chain.doFilter(request, response);
+
+
+        /*
+        =========================================================
+        TU CÓDIGO ORIGINAL DE SEGURIDAD (GUARDADO AQUÍ ABAJO)
+        Cuando quieras volver a activar el login obligatorio,
+        borra la línea de arriba y quítale los comentarios a esto:
+        =========================================================
+
         String requestURI = request.getRequestURI();
         HttpSession session = request.getSession(false);
 
@@ -56,5 +67,6 @@ public class FiltroAutenticacion extends HttpFilter {
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
             }
         }
+        */
     }
 }

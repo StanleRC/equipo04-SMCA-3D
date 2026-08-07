@@ -102,7 +102,7 @@
                     <!-- Enlace inferior de registro de grupo -->
                     <div class="text-center mt-3">
                         <span class="no-grupo-text">¿No encuentras tu grupo? </span>
-                        <a href="${pageContext.request.contextPath}/views/admin/admin_registro_grupo.jsp" class="registralo-link">Regístralo aquí</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/registro_grupo.jsp" class="registralo-link">Regístralo aquí</a>
                     </div>
                 </form>
             </div>
