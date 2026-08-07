@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Perfil - Alumno</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Llamado al Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <!-- Llamado al Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- CSS Personalizado del Perfil -->
+    <!-- Llamado al CSS Personalizado del Perfil -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Perfilalumno.css?v=3">
-    <!-- CSS del Modal Exitoso -->
+    <!-- Llamado al CSS del Modal Exitoso -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal_exito.css?v=3">
 </head>
 <body>
@@ -33,9 +33,14 @@
     <div class="content-body">
 
         <!-- Enlace Volver a Pestaña Anterior -->
-        <div class="mb-2">
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="javascript:history.back()" class="back-link">
                 <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
+            </a>
+
+            <!-- Botón para ir a Editar Perfil -->
+            <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-pencil"></i> Editar Perfil
             </a>
         </div>
 
@@ -44,42 +49,48 @@
             <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="max-height: 140px;">
         </div>
 
-        <!-- Tarjeta de Información Académica -->
+        <!-- Card de Información Académica -->
         <div class="profile-card">
 
             <!-- Columna Izquierda: Avatar -->
             <div class="profile-card-left">
                 <div class="large-avatar">
-                    <i class="bi bi-person-fill"></i>
+                    <!-- Uso del operador ternario según tu requerimiento -->
+                    <img src="${not empty sessionScope.usuarioFoto ? pageContext.request.contextPath.concat(sessionScope.usuarioFoto) : 'https://via.placeholder.com/150'}"
+                         class="rounded-circle img-fluid"
+                         alt="Foto Perfil"
+                         style="width: 150px; height: 150px; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Columna Derecha: Datos Académicos y Personales -->
             <div class="profile-card-right">
-                <h2 class="academic-title">Información academica</h2>
-                <h3 class="carrera-title">Desarrollo de software multiplataforma</h3>
+                <h2 class="academic-title">Información académica</h2>
+                <h3 class="carrera-title">Desarrollo de Software Multiplataforma</h3>
 
                 <div class="user-info-section">
-                    <h4 class="user-name-text">${sessionScope.usuario.nombre != null ? sessionScope.usuario.nombre : 'Julian Perez Perez'}</h4>
+                    <h4 class="user-name-text">
+                        ${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellidos}
+                    </h4>
                     <span class="user-role-text">Alumno</span>
                 </div>
 
-                <!-- Detalles -->
+                <!-- Detalles requeridos-->
                 <div class="row g-3 details-grid">
                     <div class="col-6">
                         <span class="label-text">Cuatrimestre:</span>
-                        <span class="value-text">3</span>
+                        <span class="value-text">3°</span>
                     </div>
                     <div class="col-6">
                         <span class="label-text">Grupo:</span>
-                        <span class="value-text">D</span>
+                        <span class="value-text">${sessionScope.usuarioLogueado.grupoIdGrupo}</span>
                     </div>
                     <div class="col-12">
-                        <span class="value-text email-text">20253ds104@utez.edu.mx</span>
+                        <span class="value-text email-text">${sessionScope.usuarioLogueado.correo}</span>
                     </div>
                     <div class="col-12">
-                        <span class="label-text">Matricula:</span>
-                        <span class="value-text">20253ds104</span>
+                        <span class="label-text">Matrícula:</span>
+                        <span class="value-text">${sessionScope.usuarioLogueado.matricula}</span>
                     </div>
                 </div>
 
@@ -121,7 +132,7 @@
 %>
 <% } %>
 
-<!-- Bootstrap 5 JS -->
+<!-- Llamado al Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

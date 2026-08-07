@@ -30,7 +30,15 @@
 
         <h2 class="register-title">Registro alumno</h2>
 
-        <form action="${pageContext.request.contextPath}/registrarAlumnoServlet" method="POST">
+        <!-- Mensaje de error dinámico -->
+        <% if (request.getAttribute("errorMessage") != null) { %>
+        <div class="alert alert-danger text-center p-2 mb-3" style="font-size: 13px;">
+            <%= request.getAttribute("errorMessage") %>
+        </div>
+        <% } %>
+
+        <!-- CORREGIDO: Se ajustó el action a /RegistroAlumnoServlet -->
+        <form action="${pageContext.request.contextPath}/RegistroAlumnoServlet" method="POST">
             <div class="row g-3">
 
                 <!-- Columna Izquierda -->
@@ -65,17 +73,13 @@
                         <div class="col-7">
                             <select class="custom-select" id="carrera" name="carrera" required>
                                 <option value="" disabled selected hidden>Carrera</option>
-                                <option value="DS">Desarrollo de Software</option>
-                                <option value="DA">Diseño y Animación</option>
-                                <option value="DM">Diseño de Modas</option>
+                                <option value="DSM">Desarrollo de Software</option>
                             </select>
                         </div>
                         <div class="col-5">
                             <select class="custom-select" id="grupo" name="grupo" required>
                                 <option value="" disabled selected hidden>Grupo</option>
-                                <option value="3A">3°A</option>
-                                <option value="3B">3°B</option>
-                                <option value="3C">3°C</option>
+                                <option value="DSM3D">3°D</option>
                             </select>
                         </div>
                     </div>
@@ -84,7 +88,7 @@
             </div>
 
             <!-- Botones de Acción -->
-            <div class="actions-container">
+            <div class="actions-container mt-3">
                 <a href="${pageContext.request.contextPath}/index.jsp" class="btn-cancel">Cancelar</a>
                 <button type="submit" class="btn-next">Siguiente</button>
             </div>

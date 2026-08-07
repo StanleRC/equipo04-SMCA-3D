@@ -3,13 +3,13 @@
 <!-- Cargar el CSS compartido antes del Header -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cssbitacora_insidencias_Aulas.css?v=12">
 
-<!-- Header con Título -->
+<!-- Header para el Título -->
 <jsp:include page="/views/layout/header.jsp">
     <jsp:param name="pageTitle" value="Agregar Salón - UTEZ" />
 </jsp:include>
 
 <div class="main-wrapper">
-    <!-- Sidebar Admin / Docente -->
+    <!-- Sidebar para administradores -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
 
     <!-- Contenido Principal -->
@@ -23,7 +23,7 @@
         <!-- Cuerpo de la Vista -->
         <div class="salones-body">
 
-            <!-- Cabecera de 3 columnas (Regresar a la izquierda, Logo centrado, Columna vacía a la derecha) -->
+            <!-- Cabezera -->
             <div class="salones-header-row">
                 <div>
                     <a href="javascript:history.back()" class="btn-back">
@@ -35,21 +35,21 @@
                     <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
                 </div>
 
-                <!-- Bloque vacío para mantener el equilibrio y centrar el logo perfectamente -->
+                <!-- Bloque vacío para mantener el equilibrio y centrar el logo -->
                 <div></div>
             </div>
 
-            <!-- Tarjeta Contenedora Principal (Gris) -->
+            <!-- Tarjeta Contenedora Principal-->
             <div class="salones-card">
 
                 <!-- SECCIÓN 1: CECADEC -->
                 <div class="building-section">
                     <h3 class="building-title">CECADEC</h3>
                     <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC10" class="btn-salon">CC 10</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC11" class="btn-salon">CC 11</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC12" class="btn-salon">CC 12</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC13" class="btn-salon">CC 13</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CC10" class="btn-salon">CC 10</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CC11" class="btn-salon">CC 11</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CC12" class="btn-salon">CC 12</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CC13" class="btn-salon">CC 13</a>
                     </div>
                 </div>
 
@@ -57,13 +57,13 @@
                 <div class="building-section">
                     <h3 class="building-title">Docencia 4</h3>
                     <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA1" class="btn-salon">CA 1</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA2" class="btn-salon">CA 2</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA3" class="btn-salon">CA 3</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA4" class="btn-salon">CA 4</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA6" class="btn-salon">CA 6</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA6_2" class="btn-salon">CA 6</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA11" class="btn-salon">CA 11</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA1" class="btn-salon">CA 1</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA2" class="btn-salon">CA 2</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA3" class="btn-salon">CA 3</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA4" class="btn-salon">CA 4</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA6" class="btn-salon">CA 6</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA6_2" class="btn-salon">CA 6</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_de_bitacora.jsp?lab=CA11" class="btn-salon">CA 11</a>
                     </div>
                 </div>
 
@@ -76,16 +76,15 @@
                     </div>
                 </div>
 
-                <!-- Enlace Inferior Derecho -->
                 <div class="card-footer-link">
                     <a href="${pageContext.request.contextPath}/views/admin/agregar_salon.jsp" class="link-add-room">
                         ¿Desea agregar otro salón?
                     </a>
                 </div>
 
-            </div> <!-- /salones-card -->
+            </div> <!-- /card de los salones-->
 
-        </div> <!-- /salones-body -->
+        </div> <!-- /body de los salones -->
 
     </main>
 </div>

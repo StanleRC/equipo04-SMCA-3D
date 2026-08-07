@@ -3,13 +3,13 @@
 <!-- Cargar el CSS compartido antes del Header -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cssbitacora_insidencias_Aulas.css?v=12">
 
-<!-- Header con Título -->
+<!-- Header para el Título -->
 <jsp:include page="/views/layout/header.jsp">
     <jsp:param name="pageTitle" value="Validar Incidencias - UTEZ" />
 </jsp:include>
 
 <div class="main-wrapper">
-    <!-- Sidebar Admin / Docente -->
+    <!-- Sidebar para administradores -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
 
     <!-- Contenido Principal -->
@@ -46,10 +46,10 @@
                 <div class="building-section">
                     <h3 class="building-title">CECADEC</h3>
                     <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC10" class="btn-salon">CC 10</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC11" class="btn-salon">CC 11</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC12" class="btn-salon">CC 12</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC13" class="btn-salon">CC 13</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_incidencias_validar.jsp" class="btn-salon">CC 10</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_incidencias_validar.jsp" class="btn-salon">CC 11</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_incidencias_validar.jsp?lab=CC12" class="btn-salon">CC 12</a>
+                        <a href="${pageContext.request.contextPath}/views/admin/tabla_incidencias_validar.jsp?lab=CC13" class="btn-salon">CC 13</a>
                     </div>
                 </div>
 
@@ -76,9 +76,9 @@
                     </div>
                 </div>
 
-            </div> <!-- /salones-card -->
+            </div> <!-- /card de los salones-->
 
-        </div> <!-- /salones-body -->
+        </div> <!-- /body de los salones -->
 
     </main>
 </div>

@@ -10,7 +10,7 @@
                 <div class="sidebar-avatar-img">
                     <i class="bi bi-person-fill"></i>
                 </div>
-                <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil.jsp" class="sidebar-avatar-edit" title="Editar perfil">
+                <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="sidebar-avatar-edit" title="Editar perfil">
                     <i class="bi bi-pencil-fill"></i>
                 </a>
             </div>

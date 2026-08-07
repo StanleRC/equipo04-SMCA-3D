@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Perfil - Alumno</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Llamado al Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <!-- Llamado al Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- CSS Personalizado del Perfil -->
+    <!-- Llamado al CSS Personalizado del Perfil -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Perfilalumno.css?v=3">
-    <!-- CSS del Modal Exitoso -->
+    <!-- Llamado al CSS del Modal Exitoso -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal_exito.css?v=3">
 </head>
 <body>
@@ -49,7 +49,7 @@
             <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="max-height: 140px;">
         </div>
 
-        <!-- Tarjeta de Información Académica -->
+        <!-- Card de Información Académica -->
         <div class="profile-card">
 
             <!-- Columna Izquierda: Avatar -->
@@ -75,7 +75,7 @@
                     <span class="user-role-text">Alumno</span>
                 </div>
 
-                <!-- Detalles -->
+                <!-- Detalles requeridos-->
                 <div class="row g-3 details-grid">
                     <div class="col-6">
                         <span class="label-text">Cuatrimestre:</span>
@@ -132,7 +132,7 @@
 %>
 <% } %>
 
-<!-- Bootstrap 5 JS -->
+<!-- Llamado al Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
