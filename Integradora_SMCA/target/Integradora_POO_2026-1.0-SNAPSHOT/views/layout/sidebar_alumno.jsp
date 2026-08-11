@@ -8,14 +8,23 @@
         <div class="sidebar-profile-section">
             <div class="sidebar-avatar-wrapper">
                 <div class="sidebar-avatar-img">
-                    <i class="bi bi-person-fill"></i>
+                    <img src="${not empty sessionScope.usuarioFoto
+                     ? pageContext.request.contextPath.concat(sessionScope.usuarioFoto)
+                     : pageContext.request.contextPath.concat('/assets/img/default_profile.png')}"
+                         alt="Foto Perfil">
                 </div>
-                <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil.jsp" class="sidebar-avatar-edit" title="Editar perfil">
+                <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil.jsp"
+                   class="sidebar-avatar-edit" title="Editar perfil">
                     <i class="bi bi-pencil-fill"></i>
                 </a>
             </div>
+
             <div class="sidebar-user-welcome">¡Bienvenido(a)!</div>
-            <h3 class="sidebar-user-name">Julian Perez Perez</h3>
+            <div class="user-info-section">
+                <h4 class="user-name-text">
+                    ${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellidos}
+                </h4>
+            </div>
         </div>
 
         <!-- Menú de Navegación del Alumno -->

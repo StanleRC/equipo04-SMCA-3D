@@ -1,4 +1,51 @@
 /* --- ESTRUCTURA GENERAL Y ALINEACIÓN CON SIDEBAR --- */
+
+/* Botón Cancelar */
+.btn-cancel {
+    background-color: #0d3b66;   /* azul oscuro */
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-cancel:hover {
+    background-color: #092a4d;
+    color: #ffffff;
+}
+
+/* Botón Registrar */
+.btn-next {
+    background-color: #0d8a72;   /* verde */
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-next:hover {
+    background-color: #0a7560;
+    color: #ffffff;
+}
+
+.header-section {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+.btn-back {
+    color: #0d3b66;
+    font-weight: 600;
+    text-decoration: none;
+}
+.btn-back:hover {
+    text-decoration: underline;
+}
+
+
 .main-wrapper {
     display: flex;
     width: 100%;
