@@ -35,7 +35,7 @@
         <h2 class="card-title-custom">Bienvenido a la bitácora digital</h2>
 
         <!-- Formulario -->
-        <form action="${pageContext.request.contextPath}/bitacora_servlet" method="POST">
+        <form action="${pageContext.request.contextPath}/views/alumno/perfil_alumno.jsp" method="POST">
 
             <!-- Fila de Inputs (Número de PC y Hora de salida) -->
             <div class="row g-3 mb-4">

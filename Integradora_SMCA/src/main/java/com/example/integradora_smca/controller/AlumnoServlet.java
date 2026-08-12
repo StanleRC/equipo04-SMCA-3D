@@ -14,7 +14,7 @@ import com.example.integradora_smca.model.dao.AlumnoDao;
 import java.io.File;
 import java.io.IOException;
 
-@WebServlet(name = "AlumnoServlet", value = "/actualizar_perfil_servlet")
+@WebServlet(name = "alumnoServlet", value = "/actualizar_perfil_servlet")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,      // 1 MB
         maxFileSize = 1024 * 1024 * 5,        // 5 MB
