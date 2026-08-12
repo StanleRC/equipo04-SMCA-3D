@@ -25,7 +25,7 @@
 
                 <!-- Logo UTEZ Centrado -->
                 <div class="text-center mb-4">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="profile-logo-img img-fluid">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="width: 200px; height: auto;">
                 </div>
 
                 <!-- Tarjeta Principal de Configuración -->

@@ -25,7 +25,7 @@
 
                 <!-- Logo UTEZ Centrado -->
                 <div class="text-center mb-4">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="logo-search-img">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="width: 200px; height: auto;">
                 </div>
 
                 <!-- Tarjeta / Píldora del Buscador -->

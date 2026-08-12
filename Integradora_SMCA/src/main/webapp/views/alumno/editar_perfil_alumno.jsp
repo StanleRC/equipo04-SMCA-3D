@@ -23,11 +23,7 @@
 
     <div class="content-body">
 
-        <div class="mb-3">
-            <a href="javascript:history.back()" class="back-link">
-                <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
-            </a>
-        </div>
+
 
         <div class="text-center mb-4">
             <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="max-height: 140px;">

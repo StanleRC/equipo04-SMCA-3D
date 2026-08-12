@@ -26,7 +26,7 @@
                 <div class="mb-4 text-center">
                     <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
                          alt="Logo UTEZ"
-                         class="register-logo-img">
+                         style="width: 200px; height: auto; display: block; margin: 0 auto;">
                 </div>
 
 

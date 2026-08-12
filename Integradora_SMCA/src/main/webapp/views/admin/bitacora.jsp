@@ -23,20 +23,16 @@
         <!-- Cuerpo de la Vista -->
         <div class="salones-body">
 
-            <!-- Cabezera -->
-            <div class="salones-header-row">
-                <div>
+            <!-- Fila Superior: Botón Atrás separado del margen + Logo UTEZ Centrado -->
+            <div class="position-relative mb-4" style="min-height: 80px;">
+                <div class="position-absolute start-0 top-50 translate-middle-y ms-4">
                     <a href="javascript:history.back()" class="btn-back">
-                        ← Pestaña anterior
+                        <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
                     </a>
                 </div>
-
-                <div>
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
+                <div class="text-center">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="width: 200px; height: auto;">
                 </div>
-
-                <!-- Bloque vacío para mantener el equilibrio y centrar el logo -->
-                <div></div>
             </div>
 
             <!-- Tarjeta Contenedora Principal-->
