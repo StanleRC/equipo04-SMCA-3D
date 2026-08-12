@@ -11,31 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d991a5b7-4a6a-4b6f-a3bb-3b3831e933be" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/equipo04-SMCA-3D.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/equipo04-SMCA-3D.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/Alumno.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/Alumno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/registro_directo_maestro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/registro_directo_maestro.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/historial_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/historial_alumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/perfil_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/perfil_alumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/registro_directo_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/registro_directo_alumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/AlumnoServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/LoginServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/RecuperarPassServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/Alumno.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/Alumno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/cwallet.sso" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/ewallet.p12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/ewallet.pem" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/keystore.jks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/ojdbc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/sqlnet.ora" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/tnsnames.ora" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/wallet/truststore.jks" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
