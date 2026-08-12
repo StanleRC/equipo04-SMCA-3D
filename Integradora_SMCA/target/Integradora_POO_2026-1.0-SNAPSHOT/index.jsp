@@ -16,7 +16,7 @@
 </head>
 
 <body class="login-body">
-
+a
 <div class="login-page-container">
 
     <!-- Sección del Logo de la UTEZ y Título -->
@@ -59,7 +59,7 @@
                 <label for="password" class="input-label">Contraseña</label>
                 <div class="input-icon-wrapper">
                     <i class="bi bi-lock icon-input"></i>
-                    <input type="password" id="password" name="password" placeholder="Introduce una contraseña" required>
+                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
                 </div>
             </div>
 

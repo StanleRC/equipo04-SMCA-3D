@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: marif
-Build-Jdk: Microsoft OpenJDK 21.0.10
+Built-By: CA3-MAYO
+Build-Jdk: Oracle OpenJDK 26.0.2
 
