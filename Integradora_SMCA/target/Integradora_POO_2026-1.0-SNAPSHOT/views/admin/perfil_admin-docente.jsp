@@ -22,13 +22,16 @@
         <!-- Cuerpo del Contenido -->
         <div class="content-body">
 
-            <!-- Enlace de Regreso y Logo Centrado -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <a href="javascript:history.back()" class="back-link">
-                    ← Pestaña anterior
-                </a>
-                <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
-                <div style="width: 120px;"></div> <!-- Compensador de espacio para centrado exacto -->
+            <!-- Fila Superior: Botón Atrás separado del margen + Logo UTEZ Centrado -->
+            <div class="position-relative mb-4" style="min-height: 80px;">
+                <div class="position-absolute start-0 top-50 translate-middle-y ms-4">
+                    <a href="javascript:history.back()" class="back-link">
+                        <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="width: 200px; height: auto;">
+                </div>
             </div>
 
             <!-- Tarjeta Principal de Información Docente -->
@@ -53,7 +56,7 @@
                     </div>
 
                     <div class="info-group">
-                        <p class="user-email font-monospace">${sessionScope.usuario.correo != null ? sessionScope.usuario.correo : 'PedroUrieta@utez.edu.mx'}</p>
+                        <p class="user-email">${sessionScope.usuario.correo != null ? sessionScope.usuario.correo : 'PedroUrieta@utez.edu.mx'}</p>
                         <span class="info-sublabel">Correo</span>
                     </div>
                 </div>

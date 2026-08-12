@@ -15,6 +15,29 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/Perfilalumno.css?v=3">
     <!-- CSS del Modal Exitoso -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal_exito.css?v=3">
+
+    <style>
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            padding: 0 !important;
+        }
+
+        .profile-divider {
+            border-right: 1px solid #b0b0b0;
+        }
+
+        @media (max-width: 767.98px) {
+            .profile-divider {
+                border-right: none;
+                border-bottom: 1px solid #b0b0b0;
+                padding-bottom: 2rem !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -30,17 +53,6 @@
     </header>
 
     <div class="content-body">
-        <!-- Enlace para volver a la pestaña anterior -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="javascript:history.back()" class="back-link">
-                <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
-            </a>
-
-            <!-- Botón para ir a editar perfil -->
-            <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="btn btn-sm btn-outline-primary">
-                <i class="bi bi-pencil"></i> Editar Perfil
-            </a>
-        </div>
 
         <!-- Logo de la  UTEZ -->
         <div class="text-center mb-4">
@@ -48,11 +60,11 @@
         </div>
 
         <!-- Tarjeta de informacion  -->
-        <div class="card p-4">
-            <div class="row align-items-center">
+        <div class="card">
+            <div class="row align-items-stretch g-0">
 
                 <!-- Columna Izquierda (Foto de perfil) -->
-                <div class="col-md-4 text-center mb-3 mb-md-0">
+                <div class="col-md-4 text-center d-flex align-items-center justify-content-center p-4 profile-divider">
                     <img src="${not empty sessionScope.usuarioFoto
                 ? pageContext.request.contextPath.concat(sessionScope.usuarioFoto)
                 : pageContext.request.contextPath.concat('/assets/img/default_profile.png')}"
@@ -63,7 +75,7 @@
 
 
                 <!-- Columna Derecha (Datos del alumno) -->
-                <div class="col-md-8">
+                <div class="col-md-8 p-4 ps-md-5">
                     <h2 class="academic-title">Información académica</h2>
                     <h3 class="carrera-title">Desarrollo de Software Multiplataforma</h3>
 

@@ -14,6 +14,28 @@
 
     <!-- CSS del registro -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registro_directo_alumno.css?v=1.1">
+
+    <style>
+        .custom-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 8px; /* O el radio que tenga en Figma */
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23495057%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Sombra ligera estilo Figma */
+        }
+        .custom-select:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25), 0 1px 2px rgba(0,0,0,0.05);
+        }
+    </style>
 </head>
 
 <body>
@@ -77,16 +99,16 @@
                     </div>
 
                     <div class="row g-2">
-                        <div class="col-7">
+                        <div class="col-6">
                             <label for="carrera" class="form-label">Carrera</label>
-                            <select class="custom-select form-select" id="carrera" name="carrera" required>
+                            <select class="custom-select form-control" id="carrera" name="carrera" required>
                                 <option value="" disabled selected hidden>Selecciona tu carrera</option>
                                 <option value="DSM">Desarrollo de Software</option>
                             </select>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                             <label for="grupo" class="form-label">Grupo</label>
-                            <select class="custom-select form-select" id="grupo" name="grupo" required>
+                            <select class="custom-select form-control" id="grupo" name="grupo" required>
                                 <option value="" disabled selected hidden>Selecciona tu grupo</option>
                                 <option value="DSM3D">3°D</option>
                             </select>

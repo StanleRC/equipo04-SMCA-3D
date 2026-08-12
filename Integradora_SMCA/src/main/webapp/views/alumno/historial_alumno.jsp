@@ -87,10 +87,6 @@
                             </tr>
                         </c:otherwise>
                     </c:choose>
-
-                    <!-- Filas de relleno de la maquetación -->
-                    <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                     </tbody>
                 </table>
             </div>

@@ -13,7 +13,7 @@
                      : pageContext.request.contextPath.concat('/assets/img/default_profile.png')}"
                          alt="Foto Perfil">
                 </div>
-                <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil.jsp"
+                <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp"
                    class="sidebar-avatar-edit" title="Editar perfil">
                     <i class="bi bi-pencil-fill"></i>
                 </a>
@@ -32,11 +32,6 @@
             <!-- Usa la clase 'active' para destacar la vista actual -->
             <a href="${pageContext.request.contextPath}/views/alumno/perfil_alumno.jsp" class="sidebar-item-link">
                 <span>Tu perfil</span>
-                <i class="bi bi-arrow-right"></i>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="sidebar-item-link">
-                <span>Editar Perfil</span>
                 <i class="bi bi-arrow-right"></i>
             </a>
 
