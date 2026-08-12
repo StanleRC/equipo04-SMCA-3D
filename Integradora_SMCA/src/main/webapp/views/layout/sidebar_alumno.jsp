@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!-- CSS del Sidebar -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebar_alumno.css?v=2">
+
+<!-- CDN de SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Recursos globales de alertas -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
+<script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
 
 <aside class="figma-sidebar">
     <div class="d-flex flex-column w-100">
@@ -29,7 +38,6 @@
 
         <!-- Menú de Navegación del Alumno -->
         <nav class="sidebar-menu-nav">
-            <!-- Usa la clase 'active' para destacar la vista actual -->
             <a href="${pageContext.request.contextPath}/views/alumno/perfil_alumno.jsp" class="sidebar-item-link">
                 <span>Tu perfil</span>
                 <i class="bi bi-arrow-right"></i>
@@ -42,9 +50,11 @@
         </nav>
     </div>
 
-    <!-- Botón Cerrar Sesión -->
+
     <div class="sidebar-footer-logout">
-        <a href="${pageContext.request.contextPath}/index.jsp" class="sidebar-logout-link">
+        <a href="javascript:void(0);"
+           onclick="confirmarCierreSesion(event, '${pageContext.request.contextPath}/index.jsp')"
+           class="sidebar-logout-link">
             <i class="bi bi-box-arrow-left"></i> Cerrar sesión
         </a>
     </div>

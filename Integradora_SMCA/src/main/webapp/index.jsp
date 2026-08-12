@@ -16,7 +16,7 @@
 </head>
 
 <body class="login-body">
-a
+
 <div class="login-page-container">
 
     <!-- Sección del Logo de la UTEZ y Título -->
