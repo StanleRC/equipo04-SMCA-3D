@@ -1,6 +1,3 @@
-/* ============================================================
-   RESET GLOBAL & VARIABLES UTEZ
-   ============================================================ */
 :root {
     --utez-verde-principal: #008b73;  /* Verde UTEZ Institucional */
     --utez-verde-oscuro:    #005f4e;  /* Verde oscuro para hover y encabezados */
@@ -37,13 +34,13 @@ body, html {
 }
 
 .main-content {
-    margin-left: 280px; /* Ancho del sidebar */
-    width: calc(100% - 280px);
+    flex: 1; /* Se adapta dinámicamente pegándose al sidebar verde */
+    width: 0; /* Evita que los hijos desborden el contenedor flexible */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     padding: 0 !important; /* Quita el espacio superior para pegar la barra azul */
-    transition: margin-left 0.3s ease;
+    margin-left: 0 !important; /* Eliminamos el espacio fijo de 280px */
 }
 
 /* --- BARRA AZUL SUPERIOR (PEGADA DE BORDE A BORDE) --- */

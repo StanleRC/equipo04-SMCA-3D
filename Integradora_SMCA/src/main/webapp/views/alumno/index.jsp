@@ -13,6 +13,24 @@
 
     <!-- CSS Personalizado con Colores UTEZ -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/utez-theme.css?v=3">
+
+    <!-- FIX: Forzar que el header pegue arriba y a los lados de main-content -->
+    <style>
+        .main-content {
+            padding-top: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .top-welcome-bar {
+            width: 100% !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            display: block !important;
+        }
+        .registro-grupo-body {
+            padding: 2rem !important; /* Mantiene el espacio interior solo para el contenido */
+        }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -21,10 +39,10 @@
     <!-- Menú lateral verde existente -->
     <jsp:include page="/views/layout/sidebar_alumno.jsp" />
 
-    <!-- Área principal de trabajo con el margen correcto para el sidebar -->
+    <!-- Área principal de trabajo -->
     <div class="main-content">
 
-        <!-- Barra de Bienvenida Superior estilo UTEZ -->
+        <!-- Barra de Bienvenida Superior pegada arriba -->
         <header class="top-welcome-bar">
             Sistema de Bitácora Digital - DATID UTEZ
         </header>
@@ -49,9 +67,7 @@
 
 </div> <!-- /.main-wrapper -->
 
-<!-- ============================================================ -->
-<!-- WIDGET FLOTANTE DE BIENVENIDA (ESQUINA INFERIOR DERECHA)     -->
-<!-- ============================================================ -->
+<!-- WIDGET FLOTANTE DE BIENVENIDA -->
 <div id="widgetBienvenida" class="widget-bienvenida">
 
     <div class="widget-header">
@@ -69,7 +85,7 @@
             <span id="relojServidor">Cargando hora...</span>
         </div>
 
-        <!-- Botones con estilos UTEZ -->
+        <!-- Botones -->
         <div class="d-grid gap-2 mt-3">
             <a href="${pageContext.request.contextPath}/views/alumno/crear_incidencia_alumno.jsp" class="btn btn-action btn-cancelar py-2 px-3 fw-semibold w-100" style="background-color: #dc2626 !important;">
                 <i class="bi bi-exclamation-triangle-fill me-1"></i> Registrar incidencia
@@ -81,8 +97,6 @@
 
 <!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Script para el reloj y mostrar la ventana emergente -->
 <script src="${pageContext.request.contextPath}/assets/js/modal_bienvenida_alumno.js"></script>
 
 </body>
