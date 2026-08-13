@@ -50,3 +50,30 @@ function confirmarValidacionIncidencia(event, formElement) {
         }
     });
 }
+// Resgistro exitoso
+function confirmarRegistroMaestro(event, formElement) {
+    if (event) event.preventDefault();
+
+    // Validar que los campos HTML5 (required) estén llenos
+    if (formElement && !formElement.checkValidity()) {
+        formElement.reportValidity();
+        return;
+    }
+
+    Swal.fire({
+        title: '¡Registro realizado de manera exitosa!',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        customClass: {
+            popup: 'figma-modal',
+            title: 'figma-title',
+            confirmButton: 'figma-btn-confirm'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (formElement) {
+                formElement.submit();
+            }
+        }
+    });
+}
