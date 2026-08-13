@@ -1,3 +1,4 @@
+// 1. Alerta para Cerrar Sesión
 function confirmarCierreSesion(event, urlRedireccion) {
     if (event) event.preventDefault();
 
@@ -19,8 +20,33 @@ function confirmarCierreSesion(event, urlRedireccion) {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            // Si urlRedireccion viene vacía, manda por defecto al inicio
             window.location.href = urlRedireccion || 'index.jsp';
+        }
+    });
+}
+
+// 2. Alerta para Validar Incidencia
+function confirmarValidacionIncidencia(event, formElement) {
+    if (event) event.preventDefault();
+
+    Swal.fire({
+        title: '¿La incidencia es verídica?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, validar',
+        cancelButtonText: 'No',
+        reverseButtons: false,
+        customClass: {
+            popup: 'figma-modal',
+            title: 'figma-title',
+            confirmButton: 'figma-btn-confirm',
+            cancelButton: 'figma-btn-cancel'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (formElement) {
+                formElement.submit();
+            }
         }
     });
 }

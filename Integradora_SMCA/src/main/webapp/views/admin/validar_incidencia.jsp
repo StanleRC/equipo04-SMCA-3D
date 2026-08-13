@@ -7,6 +7,11 @@
 <!-- CSS Formulario Validar Incidencia -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/validar_incidencia.css?v=1">
 
+<!-- CDN SweetAlert2 y Recursos Globales de Alertas -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
+<script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
+
 <div class="main-wrapper">
     <!-- Sidebar del Admin -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
@@ -29,7 +34,7 @@
             <div class="validar-card">
                 <h3 class="validar-card-title text-center">Validar incidencia</h3>
 
-                <form action="ValidarIncidenciaServlet" method="POST" enctype="multipart/form-data">
+                <form id="formValidarIncidencia" action="ValidarIncidenciaServlet" method="POST" enctype="multipart/form-data">
 
                     <!-- Campo de Texto para la Descripción -->
                     <div class="mb-4">
@@ -52,7 +57,11 @@
 
                     <!-- Botones de Acción -->
                     <div class="d-flex justify-content-center gap-3 mt-4">
-                        <button type="submit" class="btn-action btn-reportar">Reportar</button>
+                        <button type="button"
+                                class="btn-action btn-reportar"
+                                onclick="confirmarValidacionIncidencia(event, document.getElementById('formValidarIncidencia'))">
+                            Reportar
+                        </button>
                         <a href="javascript:history.back()" class="btn-action btn-cancelar text-decoration-none text-center">Cancelar</a>
                     </div>
 
