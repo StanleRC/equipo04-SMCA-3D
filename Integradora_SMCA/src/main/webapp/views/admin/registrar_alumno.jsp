@@ -7,6 +7,11 @@
 <!-- CSS Registrar Alumno -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrar_alumno.css?v=1">
 
+<!-- CDN SweetAlert2 y Recursos Globales de Alertas -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
+<script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
+
 <div class="main-wrapper">
     <!-- Sidebar Admin -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
@@ -35,7 +40,7 @@
             <div class="registrar-card">
                 <h3 class="registrar-card-title text-center">Registrar alumno</h3>
 
-                <form action="RegistrarAlumnoServlet" method="POST">
+                <form id="formRegistrarAlumno" action="RegistrarAlumnoServlet" method="POST">
                     <div class="row g-3">
                         <!-- Columna Izquierda -->
                         <div class="col-md-6">
@@ -96,7 +101,12 @@
                     <!-- Botones de Acción -->
                     <div class="actions-container mt-4 d-flex justify-content-between">
                         <a href="javascript:history.back()" class="btn-action btn-cancel">Cancelar</a>
-                        <button type="submit" class="btn-action btn-registrar">Registrar</button>
+
+                        <button type="button"
+                                class="btn-action btn-registrar"
+                                onclick="confirmarRegistroMaestro(event, document.getElementById('formRegistrarAlumno'))">
+                            Registrar
+                        </button>
                     </div>
 
                     <!-- Enlace inferior de registro de grupo -->
