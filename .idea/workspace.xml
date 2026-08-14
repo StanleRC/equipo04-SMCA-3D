@@ -10,37 +10,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3518f42c-c0a0-449c-9af1-f2b349f17b0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/img/logologis.png" afterDir="false" />
+    <list default="true" id="d991a5b7-4a6a-4b6f-a3bb-3b3831e933be" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/ValidarIncidenciasServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/model/dao/IncidenciaDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/incidencias_utez.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistroAlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistroAlumnoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/utils/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/utils/EmailSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/admin-docente_login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/admin-docente_login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/registro_directo_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/registro_directo_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/incidencias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/incidencias.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/tabla_incidencias_validar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/tabla_incidencias_validar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/crear_incidencia_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/crear_incidencia_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/admin-docente_login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/admin-docente_login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/incidencias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/incidencias.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/tabla_incidencias_validar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/tabla_incidencias_validar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/crear_incidencia_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/crear_incidencia_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="2173" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="rm_fernanda" />
+        <entry key="$PROJECT_DIR$" value="rm_stanle" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;StanleRC&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/StanleRC/equipo04-SMCA-3D.git&quot;,
+    &quot;accountId&quot;: &quot;7a6ea2ab-86f0-423c-a8bd-feead3a4be4b&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -52,42 +84,105 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000000000003" />
+      <entry key="S60" value="1.000000056895287" />
+      <entry key="M2" value="1.0002519241660361" />
+      <entry key="M5" value="1.0469142902257462" />
+      <entry key="M10" value="1.2951697446665114" />
+      <entry key="M15" value="1.553671736078591" />
+      <entry key="M30" value="2.052129210379092" />
+      <entry key="H1" value="2.756627046903691" />
+      <entry key="H2" value="5.324118679161951" />
+      <entry key="H4" value="10.687521774692662" />
+      <entry key="D1" value="34.78937940853582" />
+      <entry key="W1" value="80.36306203913917" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.776330370885375E-210" />
+      <entry key="S2" value="3.650740260859256E-53" />
+      <entry key="S5" value="1.0591375709932109E-21" />
+      <entry key="S10" value="3.2544393848913686E-11" />
+      <entry key="S30" value="3.192704534170926E-4" />
+      <entry key="S60" value="0.017868203708612546" />
+      <entry key="M2" value="0.1339227054888727" />
+      <entry key="M5" value="0.48340499154775024" />
+      <entry key="M10" value="0.8591724113700515" />
+      <entry key="M15" value="1.0957539793115285" />
+      <entry key="M30" value="1.4508453067261688" />
+      <entry key="H1" value="1.772016068830533" />
+      <entry key="H2" value="2.55619255219013" />
+      <entry key="H4" value="4.1693331345966875" />
+      <entry key="D1" value="11.247231523484984" />
+      <entry key="W1" value="25.020228975521604" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.6877709090698718" />
+      <entry key="MS500" value="0.9278734764712827" />
+      <entry key="S2" value="0.9814590638534793" />
+      <entry key="S5" value="0.9925419606811905" />
+      <entry key="S10" value="0.9962640015265634" />
+      <entry key="S30" value="0.9990581067015192" />
+      <entry key="S60" value="1.0168405468370139" />
+      <entry key="M2" value="1.1323395677689474" />
+      <entry key="M5" value="1.5279683436712879" />
+      <entry key="M10" value="2.1522530064043766" />
+      <entry key="M15" value="2.647633973345089" />
+      <entry key="M30" value="3.501769937226093" />
+      <entry key="H1" value="4.527863382699812" />
+      <entry key="H2" value="7.879613130750858" />
+      <entry key="H4" value="14.85617896947299" />
+      <entry key="D1" value="46.036267415333484" />
+      <entry key="W1" value="105.38318826142425" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="3HsDoNey9terKpmMuPdioGNyWeB" />
+  <component name="ProjectId" id="3HCrMK0oaLzWcGhxicFFHyjkouz" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TomEE Server.TomEE 10.1.55.executor": "Run",
     "Tomcat Server.Tomcat 10.1.55.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "rm__fernanda",
+    "git-widget-placeholder": "rm__manuel",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/marif/OneDrive/Documentos/Desktop/Integradora/Integradora/equipo04-SMCA-3D",
-    "list.type.of.created.stylesheet": "CSS",
+    "last_opened_file_path": "C:/Users/Core i7/Downloads/equipo04-SMCA-3D",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Core i7\Downloads\equipo04-SMCA-3D\Integradora_SMCA\src\main\resources\wallet" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\marif\OneDrive\Documentos\Desktop\Integradora\Integradora\equipo04-SMCA-3D\Integradora_SMCA\src\main\webapp\assets\img" />
-      <recent name="C:\Users\marif\OneDrive\Documentos\Desktop\Integradora\Integradora\equipo04-SMCA-3D\Integradora_SMCA\src\main\resources" />
+      <recent name="C:\Users\Core i7\Downloads\equipo04-SMCA-3D\Integradora_SMCA\src\main\webapp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -104,6 +199,15 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <configuration name="Tomcat 10.1.55" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.55" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -119,7 +223,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="1c2e1f80-5fe9-4c48-a29d-71101127d980" />
+        <option name="BASE_DIRECTORY_NAME" value="5d762e11-67f4-4ee7-8122-ca09fb17e5de" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -127,7 +231,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="55662" />
+        <option name="DEBUG_PORT" value="59184" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -189,17 +293,17 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
         <EnvironmentVariables>
-          <option name="NAME" value="DB.NAME" />
+          <option name="NAME" value="BD_NAME" />
           <option name="VALUE" value="integradorasmca_high" />
           <option name="IS_PREDEFINED" value="false" />
         </EnvironmentVariables>
         <EnvironmentVariables>
-          <option name="NAME" value="DB.PASS" />
+          <option name="NAME" value="BD_PASS" />
           <option name="VALUE" value="ContrasenaSegura123" />
           <option name="IS_PREDEFINED" value="false" />
         </EnvironmentVariables>
         <EnvironmentVariables>
-          <option name="NAME" value="DB.USER" />
+          <option name="NAME" value="BD_USER" />
           <option name="VALUE" value="ADMIN" />
           <option name="IS_PREDEFINED" value="false" />
         </EnvironmentVariables>
@@ -216,20 +320,21 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.26222.65" />
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3518f42c-c0a0-449c-9af1-f2b349f17b0f" name="Changes" comment="" />
-      <created>1786648059283</created>
+      <changelist id="d991a5b7-4a6a-4b6f-a3bb-3b3831e933be" name="Changes" comment="" />
+      <created>1785382844687</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1786648059283</updated>
-      <workItem from="1786648061084" duration="1055000" />
-      <workItem from="1786658280597" duration="28661000" />
+      <updated>1785382844687</updated>
+      <workItem from="1785382848049" duration="26314000" />
+      <workItem from="1785613434608" duration="755000" />
+      <workItem from="1785625990137" duration="22411000" />
     </task>
     <servers />
   </component>
