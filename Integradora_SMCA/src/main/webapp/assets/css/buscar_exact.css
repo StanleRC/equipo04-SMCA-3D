@@ -43,8 +43,10 @@
 }
 
 .logo-search-img {
-    max-height: 100px;
-    width: auto;
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* --- TARJETA DE BÚSQUEDA (PÍLDORA) --- */

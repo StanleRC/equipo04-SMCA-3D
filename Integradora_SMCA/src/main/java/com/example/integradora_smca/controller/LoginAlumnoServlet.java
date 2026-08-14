@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/loginServlet")
-public class LoginServlet extends HttpServlet {
+public class LoginAlumnoServlet extends HttpServlet {
 
     private AlumnoDao alumnoDao;
 

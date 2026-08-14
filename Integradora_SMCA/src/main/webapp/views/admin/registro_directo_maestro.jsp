@@ -11,11 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS del registro -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrar_directo_maestro.css?v=1.0">
-
-    <!-- SweetAlert2 CDN y Recursos Globales de Alertas -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
-    <script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
 </head>
 
 <body>
@@ -32,7 +27,7 @@
 
         <h2 class="register-title text-center mb-4">Registro maestro</h2>
 
-        <form id="formRegistroMaestro" action="${pageContext.request.contextPath}/registrarMaestroServlet" method="POST">
+        <form action="${pageContext.request.contextPath}/RegistroDocenteServlet" method="POST">
             <div class="row g-3">
 
                 <!-- Columna Izquierda -->
@@ -76,12 +71,7 @@
             <div class="actions-container mt-4 d-flex justify-content-between">
                 <a href="${pageContext.request.contextPath}/admin-docente_login.jsp"
                    class="btn-action btn-cancel">Cancelar</a>
-
-                <button type="button"
-                        class="btn-action btn-registrar"
-                        onclick="confirmarRegistroMaestro(event, document.getElementById('formRegistroMaestro'))">
-                    Registrar
-                </button>
+                <button type="submit" class="btn-action btn-registrar">Registrar</button>
             </div>
 
         </form>
