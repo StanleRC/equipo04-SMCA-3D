@@ -11,16 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3518f42c-c0a0-449c-9af1-f2b349f17b0f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/img/logologis.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/AlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/AlumnoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/js/alertas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/js/alertas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/js/modal_bienvenida_alumno.js" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/js/modal_bienvenida_alumno.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/crear_incidencia_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/crear_incidencia_alumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/editar_perfil_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/editar_perfil_alumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/historial_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/historial_alumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/perfil_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/perfil_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistroAlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistroAlumnoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/utils/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/utils/EmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/admin-docente_login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/admin-docente_login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/registro_directo_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/registro_directo_alumno.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +34,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="rm_fernanda" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
@@ -83,6 +86,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marif\OneDrive\Documentos\Desktop\Integradora\Integradora\equipo04-SMCA-3D\Integradora_SMCA\src\main\webapp\assets\img" />
       <recent name="C:\Users\marif\OneDrive\Documentos\Desktop\Integradora\Integradora\equipo04-SMCA-3D\Integradora_SMCA\src\main\resources" />
     </key>
   </component>
@@ -225,7 +229,7 @@
       <option name="presentableId" value="Default" />
       <updated>1786648059283</updated>
       <workItem from="1786648061084" duration="1055000" />
-      <workItem from="1786658280597" duration="20722000" />
+      <workItem from="1786658280597" duration="28661000" />
     </task>
     <servers />
   </component>
