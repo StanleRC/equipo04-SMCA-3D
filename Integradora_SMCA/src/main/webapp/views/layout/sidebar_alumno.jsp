@@ -102,7 +102,7 @@
         <a href="javascript:void(0);"
            onclick="confirmarCierreSesion(
                    event,
-                   '${pageContext.request.contextPath}/index.jsp'
+                   '${pageContext.request.contextPath}/logoutServlet'
                    )"
            class="sidebar-logout-link">
 
