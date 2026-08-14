@@ -45,7 +45,7 @@
         </div>
 
         <!-- Formulario de acceso -->
-        <form action="${pageContext.request.contextPath}/adminLoginServlet" method="POST" class="login-form">
+        <form action="${pageContext.request.contextPath}/loginDocenteServlet" method="POST" class="login-form">
 
             <!-- Campo Correo -->
             <div class="form-group">
