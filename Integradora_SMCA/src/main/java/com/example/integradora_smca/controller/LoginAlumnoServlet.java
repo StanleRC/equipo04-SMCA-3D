@@ -58,7 +58,7 @@ public class LoginAlumnoServlet extends HttpServlet {
             session.setAttribute("rol", "Alumno");
 
             // Redirige al escritorio de la vista alumno pasando la bandera ?login=exito
-            response.sendRedirect(request.getContextPath() + "/views/alumno/index.jsp?login=exito");
+            response.sendRedirect(request.getContextPath() + "/views/alumno/perfil_alumno.jsp");
         } else {
             request.setAttribute("errorMessage", "Matrícula o contraseña incorrectas.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

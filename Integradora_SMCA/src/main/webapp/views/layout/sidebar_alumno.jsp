@@ -49,8 +49,9 @@
 
     <!-- Botón Cerrar Sesión -->
     <div class="sidebar-footer-logout">
-        <a href="${pageContext.request.contextPath}/index.jsp" class="sidebar-logout-link">
+        <a href="${pageContext.request.contextPath}/logoutServlet" class="sidebar-logout-link">
             <i class="bi bi-box-arrow-left"></i> Cerrar sesión
         </a>
     </div>
+
 </aside>
