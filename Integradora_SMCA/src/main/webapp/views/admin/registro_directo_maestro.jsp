@@ -27,7 +27,7 @@
 
         <h2 class="register-title text-center mb-4">Registro maestro</h2>
 
-        <form action="${pageContext.request.contextPath}/registrarMaestroServlet" method="POST">
+        <form action="${pageContext.request.contextPath}/RegistroDocenteServlet" method="POST">
             <div class="row g-3">
 
                 <!-- Columna Izquierda -->
