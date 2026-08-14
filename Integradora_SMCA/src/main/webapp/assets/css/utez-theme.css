@@ -104,8 +104,16 @@ body, html {
     max-height: 80px;
     width: auto;
     object-fit: contain;
-}
 
+    outline: none !important;
+    border: none !important;
+    user-select: none; /* Evita que la imagen se marque en azul como texto */
+}
+.logo-container img {
+    max-height: 120px !important; /* Ajusta el alto a tu gusto (100px, 120px o 140px) */
+    width: auto !important;
+    margin: 0 auto 20px auto;
+}
 .page-subtitle {
     font-size: 22px;
     font-weight: 700;

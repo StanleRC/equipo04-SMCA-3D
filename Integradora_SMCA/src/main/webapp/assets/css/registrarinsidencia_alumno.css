@@ -27,17 +27,22 @@ body {
 
 /* --- LOGO UTEZ --- */
 .logo-container {
-    margin-bottom: 35px;
-    border: 3px solid #0088ff; /* Enmarcado azul como en la imagen */
-    padding: 10px 25px;
-    background-color: #ffffff;
+    margin-bottom: 60px !important; /* Espacio para que el avatar respire sin tapar el logo */
+    padding: 0 !important;
+    border: none !important; /* Eliminado el borde azul */
+    background-color: transparent !important;
     display: inline-block;
 }
 
 .utez-logo {
-    max-height: 80px;
+    max-height: 130px !important; /* <--- Subimos de 80px a 130px para que se vea más grande */
     width: auto;
     display: block;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 /* --- TARJETA PRINCIPAL --- */

@@ -77,3 +77,41 @@ function confirmarRegistroMaestro(event, formElement) {
         }
     });
 }
+
+// 1. Alerta de ÉXITO
+function mostrarAlertaExito(mensaje, callback) {
+    Swal.fire({
+        title: mensaje || '¡Cambios realizados de manera exitosa!',
+        icon: 'success',
+        iconColor: '#28a745',          // Verde del check
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0b8a72',  // Verde UTEZ
+        customClass: {
+            popup: 'modal-alerta-custom',
+            confirmButton: 'btn-confirmar-custom'
+        },
+        buttonsStyling: true,
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed && typeof callback === 'function') {
+            callback();
+        }
+    });
+}
+
+// 2. Alerta de ERROR (Por si algo falla)
+function mostrarAlertaError(mensaje) {
+    Swal.fire({
+        title: '¡Ocurrió un error!',
+        text: mensaje || 'No se pudieron guardar los cambios. Inténtalo de nuevo.',
+        icon: 'error',
+        iconColor: '#dc3545',          // Rojo de error
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#0b8a72',  // Mantener el botón institucional
+        customClass: {
+            popup: 'modal-alerta-custom',
+            confirmButton: 'btn-confirmar-custom'
+        },
+        buttonsStyling: true
+    });
+}

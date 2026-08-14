@@ -11,16 +11,16 @@
     <!-- Llamado al Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- Llamado al CSS Personalizado -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrarinsidencia_alumno.css?v=2">
+    <!-- Llamado al CSS Personalizado (con ?v=3 para limpiar caché) -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrarinsidencia_alumno.css?v=3">
 </head>
 <body>
 
 <div class="main-container">
 
-    <!-- Logo UTEZ Superior -->
+    <!-- Logo UTEZ Superior (Usa las clases correctas .logo-container y .utez-logo) -->
     <div class="logo-container">
-        <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo" style="max-height: 110px;">
+        <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
     </div>
 
     <!-- Tarjeta Principal de Registro -->
@@ -86,4 +86,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

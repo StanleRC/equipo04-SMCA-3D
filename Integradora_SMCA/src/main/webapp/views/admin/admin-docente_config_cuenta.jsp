@@ -7,6 +7,13 @@
 <!-- CSS de Configuración de Cuenta -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/config_perfil.css?v=3">
 
+<!-- CDN de SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Recursos de alertas personalizadas -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
+<script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
+
 <div class="main-wrapper">
     <!-- Sidebar -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
@@ -35,7 +42,7 @@
                         Gestiona tu información personal, avatar institucional y credenciales de acceso.
                     </p>
 
-                    <form action="ActualizarPerfilServlet" method="POST" enctype="multipart/form-data">
+                    <form id="formConfigCuenta" action="ActualizarPerfilServlet" method="POST" enctype="multipart/form-data">
                         <div class="row align-items-center">
 
                             <!-- Columna Izquierda: Cargar Foto -->
@@ -57,17 +64,17 @@
 
                                 <div class="form-group mb-3">
                                     <label class="profile-form-label">Nombre</label>
-                                    <input type="text" name="txtNombre" class="form-control profile-form-input" placeholder="Nombre(s)" autocomplete="off">
+                                    <input type="text" id="txtNombre" name="txtNombre" class="form-control profile-form-input" placeholder="Nombre(s)" autocomplete="off">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label class="profile-form-label">Correo Institucional</label>
-                                    <input type="email" name="txtCorreo" class="form-control profile-form-input" placeholder="Correo" autocomplete="off">
+                                    <input type="email" id="txtCorreo" name="txtCorreo" class="form-control profile-form-input" placeholder="Correo" autocomplete="off">
                                 </div>
 
                                 <div class="form-group mb-4">
                                     <label class="profile-form-label">Teléfono de Contacto</label>
-                                    <input type="text" name="txtTelefono" class="form-control profile-form-input" placeholder="Telefono" autocomplete="off">
+                                    <input type="text" id="txtTelefono" name="txtTelefono" class="form-control profile-form-input" placeholder="Telefono" autocomplete="off">
                                 </div>
 
                                 <div class="text-end mt-4">
@@ -84,6 +91,43 @@
         </div>
     </main>
 </div>
+
+<!-- Script de interceptación del formulario para disparar las alertas -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('formConfigCuenta');
+
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                // Detenemos el envío automático del formulario
+                event.preventDefault();
+
+                const nombre = document.getElementById('txtNombre').value.trim();
+                const correo = document.getElementById('txtCorreo').value.trim();
+                const telefono = document.getElementById('txtTelefono').value.trim();
+
+                // 1. VALIDACIÓN: Si algún campo importante está vacío -> MOSTRAR ALERTA DE ERROR
+                if (nombre === '' || correo === '' || telefono === '') {
+                    if (typeof mostrarAlertaError === 'function') {
+                        mostrarAlertaError('Por favor, completa todos los campos del formulario.');
+                    } else {
+                        alert('Por favor, completa todos los campos.');
+                    }
+                    return; // Detiene la ejecución
+                }
+
+                // 2. ÉXITO: Si todos los campos están llenos -> MOSTRAR ALERTA DE ÉXITO Y ENVIAR
+                if (typeof mostrarAlertaExito === 'function') {
+                    mostrarAlertaExito('¡Cambios realizados de manera exitosa!', function() {
+                        form.submit(); // Envía los datos a ActualizarPerfilServlet al dar clic en Aceptar
+                    });
+                } else {
+                    form.submit();
+                }
+            });
+        }
+    });
+</script>
 
 <!-- Footer -->
 <jsp:include page="/views/layout/footer.jsp" />
