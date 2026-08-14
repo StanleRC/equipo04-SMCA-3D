@@ -37,7 +37,7 @@
             <div class="registrar-card">
                 <h3 class="registrar-card-title text-center">Registrar maestro</h3>
 
-                <form action="RegistrarMaestroServlet" method="POST">
+                <form action="/RegistroDocenteServlet" method="POST">
                     <div class="row g-3">
                         <!-- Columna Izquierda -->
                         <div class="col-md-6">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="tel" id="telefono" name="txtTelefono" class="form-control custom-input" required>
+                                <input type="tel" id="telefono" name="txtTelefono" class="form-control custom-input">
                             </div>
                         </div>
                     </div>
