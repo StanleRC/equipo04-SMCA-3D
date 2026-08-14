@@ -58,7 +58,6 @@ public class AlumnoServlet extends HttpServlet {
 
             alumnoDao.update(usuario);
 
-            // Actualizamos objeto en la sesión
             session.setAttribute("usuario", usuario);
         }
 
