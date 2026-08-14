@@ -13,17 +13,17 @@ import java.util.List;
 public class DocenteDao {
 
     public boolean create(Docente entidad) {
-        String sql = "INSERT INTO docente (id_docente, nombre, apellidos, correo, hash_password, rol_id_rol, foto_perfil) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO docente (nombre, apellidos, correo, hash_password, rol_id_rol, foto_perfil) VALUES (?, ?, ?, ?, ?, ?)";
+
         try (Connection con = SQLConnector.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, entidad.getIdDocente());
-            ps.setString(2, entidad.getNombre());
-            ps.setString(3, entidad.getApellidos());
-            ps.setString(4, entidad.getCorreo());
-            ps.setString(5, entidad.getHashPassword());
-            ps.setInt(6, entidad.getRolIdRol());
-            ps.setString(7, entidad.getFotoPerfil());
+            ps.setString(1, entidad.getNombre());
+            ps.setString(2, entidad.getApellidos());
+            ps.setString(3, entidad.getCorreo());
+            ps.setString(4, entidad.getHashPassword());
+            ps.setInt(5, entidad.getRolIdRol());
+            ps.setString(6, entidad.getFotoPerfil());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -42,7 +42,6 @@ public class DocenteDao {
 
             while (rs.next()) {
                 Docente d = new Docente();
-                d.setIdDocente(rs.getString("id_docente"));
                 d.setNombre(rs.getString("nombre"));
                 d.setApellidos(rs.getString("apellidos"));
                 d.setCorreo(rs.getString("correo"));
@@ -66,7 +65,6 @@ public class DocenteDao {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Docente d = new Docente();
-                    d.setIdDocente(rs.getString("id_docente"));
                     d.setNombre(rs.getString("nombre"));
                     d.setApellidos(rs.getString("apellidos"));
                     d.setCorreo(rs.getString("correo"));
@@ -91,7 +89,6 @@ public class DocenteDao {
             ps.setString(2, entidad.getApellidos());
             ps.setString(3, entidad.getCorreo());
             ps.setString(4, entidad.getFotoPerfil());
-            ps.setString(5, entidad.getIdDocente());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -125,7 +122,7 @@ public class DocenteDao {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Docente d = new Docente();
-                    d.setIdDocente(rs.getString("id_docente"));
+
                     d.setNombre(rs.getString("nombre"));
                     d.setApellidos(rs.getString("apellidos"));
                     d.setCorreo(rs.getString("correo"));
@@ -151,12 +148,17 @@ public class DocenteDao {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Docente d = new Docente();
-                    d.setIdDocente(rs.getString("id_docente"));
+
+                    // Si id_docente es autoincremental NUMBER
+                    d.setIdDocente(rs.getInt("id_docente"));
+
                     d.setNombre(rs.getString("nombre"));
                     d.setApellidos(rs.getString("apellidos"));
                     d.setCorreo(rs.getString("correo"));
+                    d.setHashPassword(rs.getString("hash_password"));
                     d.setRolIdRol(rs.getInt("rol_id_rol"));
                     d.setFotoPerfil(rs.getString("foto_perfil"));
+
                     return d;
                 }
             }

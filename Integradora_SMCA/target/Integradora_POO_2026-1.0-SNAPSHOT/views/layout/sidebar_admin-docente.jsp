@@ -47,7 +47,7 @@
 
     <!-- Pie de página: Cerrar Sesión -->
     <div class="sidebar-footer-logout">
-        <a href="${pageContext.request.contextPath}/logout" class="sidebar-logout-link">
+        <a href="${pageContext.request.contextPath}/logoutServlet" class="sidebar-logout-link">
             <i class="bi bi-box-arrow-right"></i> Cerrar sesión
         </a>
     </div>

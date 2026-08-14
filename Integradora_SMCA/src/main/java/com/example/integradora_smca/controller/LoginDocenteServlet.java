@@ -34,35 +34,35 @@ public class LoginDocenteServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        // 1. Obtener parámetros del formulario
+        //Obtener parámetros del formulario
         String correo = request.getParameter("correo");
         String password = request.getParameter("password");
 
-        // 2. Validar campos vacíos
+        // Validar campos vacíos
         if (correo == null || correo.trim().isEmpty() || password == null || password.trim().isEmpty()) {
             request.setAttribute("errorMessage", "Por favor, completa todos los campos.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
             return;
         }
 
-        // 3. Validar que el correo sea institucional
+        //Validar que el correo sea institucional
         if (!correo.endsWith("@utez.edu.mx")) {
             request.setAttribute("errorMessage", "El correo debe ser institucional (@utez.edu.mx).");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
             return;
         }
 
-        // 4. Consultar la base de datos con el DAO
+        //Consultar la base de datos con el DAO
         Docente docente = docenteDao.loginByCorreo(correo.trim(), password);
 
-        // 5. Verificar credenciales
+        //Verificar credenciales
         if (docente != null) {
             HttpSession session = request.getSession();
             session.setAttribute("usuarioLogueado", docente);
             session.setAttribute("rol", "Docente");
 
-            // Redirigir a la vista principal del docente
-            response.sendRedirect(request.getContextPath() + "/views/docente/panel_docente.jsp");
+            // Redirección a una pagina diferente
+            response.sendRedirect(request.getContextPath() + "/views/admin/perfil_admin-docente.jsp");
         } else {
             request.setAttribute("errorMessage", "Correo o contraseña incorrectos.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

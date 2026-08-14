@@ -32,29 +32,26 @@ public class RegistroDocenteServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        // 1. Obtención de parámetros
-        String nombre = request.getParameter("Nombre");
-        String apellidoPaterno = request.getParameter("ApellidoPaterno");
-        String apellidoMaterno = request.getParameter("ApellidoMaterno");
-        String idDocente = request.getParameter("txtIdDocente"); // clave primaria
+        //Obtención de parámetros
+        String nombre = request.getParameter("txtNombre");
+        String apellidoPaterno = request.getParameter("txtApellidoPaterno");
+        String apellidoMaterno = request.getParameter("txtApellidoMaterno");
         String password = request.getParameter("txtPassword");
         String confirmPassword = request.getParameter("txtConfirmPassword");
         String correo = request.getParameter("txtCorreo");
         //String telefono = request.getParameter("txtTelefono"); // opcional en tu formulario
 
-        // 2. Validación de coincidencia de contraseñas
+        //Validación de coincidencia de contraseñas
         if (!password.equals(confirmPassword)) {
             request.setAttribute("errorMessage", "Las contraseñas no coinciden.");
             request.getRequestDispatcher("/views/docente/registro_directo_docente.jsp").forward(request, response);
             return;
         }
 
-        // 3. Concatenación de apellidos
         String apellidosCompletos = apellidoPaterno.trim() + " " + apellidoMaterno.trim();
 
-        // 4. Instancia del modelo Docente
+        // Instancia del modelo Docente
         Docente nuevoDocente = new Docente();
-        nuevoDocente.setIdDocente(idDocente.trim());
         nuevoDocente.setNombre(nombre.trim());
         nuevoDocente.setApellidos(apellidosCompletos);
         nuevoDocente.setCorreo(correo.trim());
@@ -62,13 +59,13 @@ public class RegistroDocenteServlet extends HttpServlet {
         nuevoDocente.setRolIdRol(2); // Rol Docente según tu script
         nuevoDocente.setFotoPerfil(null); // inicia nulo
 
-        // 5. Inserción mediante DAO
+        //Inserción mediante DAO
         boolean esGuardado = docenteDao.create(nuevoDocente);
 
         if (esGuardado) {
             response.sendRedirect(request.getContextPath() + "/index.jsp?registro=exito");
         } else {
-            request.setAttribute("errorMessage", "Error al registrar. Verifica el ID o correo duplicado.");
+            request.setAttribute("errorMessage", "Error al registrar. Verifica correo duplicado.");
             request.getRequestDispatcher("/views/docente/registro_directo_docente.jsp").forward(request, response);
         }
     }

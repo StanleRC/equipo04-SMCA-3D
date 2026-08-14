@@ -2,7 +2,7 @@ package com.example.integradora_smca.model;
 
 public class Docente {
 
-    private String idDocente;
+    private Integer idDocente;
     private String nombre;
     private String apellidos;
     private String correo;
@@ -10,12 +10,10 @@ public class Docente {
     private int rolIdRol;
     private String fotoPerfil;
 
-    // Constructor vacío
     public Docente() {
     }
 
-    // Constructor completo
-    public Docente(String idDocente, String nombre, String apellidos, String correo, String hashPassword, int rolIdRol, String fotoPerfil) {
+    public Docente(Integer idDocente, String nombre, String apellidos, String correo, String hashPassword, int rolIdRol, String fotoPerfil) {
         this.idDocente = idDocente;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -25,13 +23,11 @@ public class Docente {
         this.fotoPerfil = fotoPerfil;
     }
 
-    // Getters y Setters
-
-    public String getIdDocente() {
+    public Integer getIdDocente() {
         return idDocente;
     }
 
-    public void setIdDocente(String idDocente) {
+    public void setIdDocente(Integer idDocente) {
         this.idDocente = idDocente;
     }
 
