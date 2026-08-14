@@ -46,8 +46,8 @@
 
 .classroom-logo,
 .utez-logo {
-    max-height: 90px;
-    width: auto;
+    width: 200px;
+    height: auto;
     display: block;
     margin: 0 auto;
 }
