@@ -20,10 +20,34 @@ public class RegistroAlumnoServlet extends HttpServlet {
 
     private AlumnoDao alumnoDao;
 
+    // Patrón de matrícula: 5 dígitos + 2 letras + 3 dígitos
+    private static final String REGEX_MATRICULA = "^\\d{5}[a-z]{2}\\d{3}$";
+    // Patrón para alumnos: 5 dígitos + 2 letras + 3 dígitos + @utez.edu.mx
+    private static final String REGEX_ALUMNO = "^\\d{5}[a-z]{2}\\d{3}@utez\\.edu\\.mx$";
+
     @Override
     public void init() throws ServletException {
         alumnoDao = new AlumnoDao();
     }
+
+    // Validaciones
+    private boolean validarCorreoAlumno(String correo) {
+        return correo != null && correo.matches(REGEX_ALUMNO);
+    }
+    private boolean validarMatricula(String matricula) {
+        return matricula != null && matricula.matches(REGEX_MATRICULA);
+    }
+    private boolean validarPassword(String password) {
+        return password != null && password.length() >= 8 && password.length() <= 16;
+    }
+
+
+    private boolean matriculaCoincideConCorreo(String matricula, String correo) {
+        if (correo == null) return false;
+        String parteLocal = correo.split("@")[0]; // lo que va antes de @
+        return parteLocal.equalsIgnoreCase(matricula);
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,10 +77,36 @@ public class RegistroAlumnoServlet extends HttpServlet {
             String correo = request.getParameter("txtCorreo");
             String grupoId = request.getParameter("grupo");
 
+            // Validación de matrícula
+            if (!validarMatricula(matricula)) {
+                out.print("{\"status\":\"error\", \"message\":\"La matrícula no cumple con el formato válido.\"}");
+                return;
+            }
+
+            // Validación de correo alumno
+            if (!validarCorreoAlumno(correo)) {
+                out.print("{\"status\":\"error\", \"message\":\"El correo no corresponde a un alumno válido.\"}");
+                return;
+            }
+
+            // Validación de coincidencia entre matrícula y correo
+            if (!matriculaCoincideConCorreo(matricula, correo)) {
+                out.print("{\"status\":\"error\", \"message\":\"La matrícula no coincide con el correo institucional.\"}");
+                return;
+            }
+
+
+            // Validación de contraseña (longitud)
+            if (!validarPassword(password)) {
+                out.print("{\"status\":\"error\", \"message\":\"La contraseña debe tener entre 8 y 16 caracteres.\"}");
+                return;
+            }
+
             if (password == null || !password.equals(confirmPassword)) {
                 out.print("{\"status\":\"error\", \"message\":\"Las contraseñas no coinciden.\"}");
                 return;
             }
+
 
             Alumno nuevoAlumno = new Alumno();
             nuevoAlumno.setMatricula(matricula != null ? matricula.trim() : "");
