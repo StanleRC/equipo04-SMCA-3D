@@ -58,7 +58,7 @@ public class LoginAlumnoServlet extends HttpServlet {
             session.setAttribute("usuario", alumno);
             session.setAttribute("rol", "Alumno");
 
-            // Redirige al PerfilAlumnoServlet para que cargue todos los datos actualizados
+
             response.sendRedirect(request.getContextPath() + "/PerfilAlumnoServlet");
         } else {
             request.setAttribute("errorMessage", "Matrícula o contraseña incorrectas.");
