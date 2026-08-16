@@ -20,9 +20,21 @@ public class RegistroDocenteServlet extends HttpServlet {
 
     private DocenteDao docenteDao;
 
+    private static final String REGEX_DOCENTE = "(?i)^[a-z]+(\\.[a-z]+)?@utez\\.edu\\.mx$";
+
     @Override
     public void init() throws ServletException {
         docenteDao = new DocenteDao();
+    }
+
+    // Validar correo docente
+    private boolean validarCorreoDocente(String correo) {
+        return correo != null && correo.matches(REGEX_DOCENTE);
+    }
+
+    // Validar contraseña
+    private boolean validarPassword(String password) {
+        return password != null && password.length() >= 8 && password.length() <= 16;
     }
 
     @Override
@@ -56,11 +68,27 @@ public class RegistroDocenteServlet extends HttpServlet {
             String confirmPassword = request.getParameter("txtConfirmPassword");
             String correo = request.getParameter("txtCorreo");
 
-            if (correo == null || correo.trim().isEmpty()) {
-                out.print("{\"status\":\"error\", \"message\":\"El correo es obligatorio.\"}");
+            // Normalizar correo a minúsculas
+            if (correo != null) correo = correo.trim().toLowerCase();
+
+            // Validación de correo docente
+            if (!validarCorreoDocente(correo)) {
+                out.print("{\"status\":\"error\", \"message\":\"El correo no corresponde a un docente válido.\"}");
                 return;
             }
 
+            if (docenteDao.existeDocente(correo)) {
+                out.print("{\"status\":\"error\", \"message\":\"El correo ya está registrado para otro docente.\"}");
+                return;
+            }
+
+            // Validación de contraseña (longitud)
+            if (!validarPassword(password)) {
+                out.print("{\"status\":\"error\", \"message\":\"La contraseña debe tener entre 8 y 16 caracteres.\"}");
+                return;
+            }
+
+            // Validación de coincidencia de contraseñas
             if (password == null || !password.equals(confirmPassword)) {
                 out.print("{\"status\":\"error\", \"message\":\"Las contraseñas no coinciden.\"}");
                 return;
@@ -70,14 +98,16 @@ public class RegistroDocenteServlet extends HttpServlet {
             nuevoDocente.setNombre(nombre != null ? nombre.trim() : "");
             nuevoDocente.setApellidoPaterno(apellidoPaterno != null ? apellidoPaterno.trim() : "");
             nuevoDocente.setApellidoMaterno(apellidoMaterno != null ? apellidoMaterno.trim() : "");
-            nuevoDocente.setCorreo(correo.trim());
+            nuevoDocente.setCorreo(correo);
             nuevoDocente.setHashPassword(password);
             nuevoDocente.setRolIdRol(2); // Rol docente por defecto
             nuevoDocente.setFotoPerfil("default.png");
 
+            // Generar código de 6 dígitos
             String codigoGenerado = String.format("%06d", new Random().nextInt(999999));
 
-            boolean correoEnviado = EmailSender.enviarCodigoVerificacion(correo.trim(), codigoGenerado);
+            // Enviar correo mediante EmailSender
+            boolean correoEnviado = EmailSender.enviarCodigoVerificacion(correo, codigoGenerado);
 
             if (correoEnviado) {
                 HttpSession session = request.getSession();

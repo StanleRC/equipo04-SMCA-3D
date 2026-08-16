@@ -40,14 +40,11 @@ public class RegistroAlumnoServlet extends HttpServlet {
     private boolean validarPassword(String password) {
         return password != null && password.length() >= 8 && password.length() <= 16;
     }
-
-
     private boolean matriculaCoincideConCorreo(String matricula, String correo) {
         if (correo == null) return false;
         String parteLocal = correo.split("@")[0]; // lo que va antes de @
         return parteLocal.equalsIgnoreCase(matricula);
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -77,6 +74,10 @@ public class RegistroAlumnoServlet extends HttpServlet {
             String correo = request.getParameter("txtCorreo");
             String grupoId = request.getParameter("grupo");
 
+            // Normalizar matrícula y correo a minúsculas
+            if (matricula != null) matricula = matricula.trim().toLowerCase();
+            if (correo != null) correo = correo.trim().toLowerCase();
+
             // Validación de matrícula
             if (!validarMatricula(matricula)) {
                 out.print("{\"status\":\"error\", \"message\":\"La matrícula no cumple con el formato válido.\"}");
@@ -95,6 +96,11 @@ public class RegistroAlumnoServlet extends HttpServlet {
                 return;
             }
 
+            // Validación de que no existe un registro previo
+            if (alumnoDao.existeAlumno(matricula, correo)) {
+                out.print("{\"status\":\"error\", \"message\":\"La matrícula o el correo ya están registrados.\"}");
+                return;
+            }
 
             // Validación de contraseña (longitud)
             if (!validarPassword(password)) {
@@ -107,13 +113,12 @@ public class RegistroAlumnoServlet extends HttpServlet {
                 return;
             }
 
-
             Alumno nuevoAlumno = new Alumno();
-            nuevoAlumno.setMatricula(matricula != null ? matricula.trim() : "");
+            nuevoAlumno.setMatricula(matricula);
             nuevoAlumno.setNombre(nombre != null ? nombre.trim() : "");
             nuevoAlumno.setApellidoPaterno(apellidoPaterno != null ? apellidoPaterno.trim() : "");
             nuevoAlumno.setApellidoMaterno(apellidoMaterno != null ? apellidoMaterno.trim() : "");
-            nuevoAlumno.setCorreo(correo != null ? correo.trim() : "");
+            nuevoAlumno.setCorreo(correo);
 
             // Se pasa la contraseña plana. El AlumnoDao.create() se encargará de encriptarla 1 SOLA VEZ.
             nuevoAlumno.setHashPassword(password);
@@ -126,7 +131,7 @@ public class RegistroAlumnoServlet extends HttpServlet {
             String codigoGenerado = String.format("%06d", new Random().nextInt(999999));
 
             // Enviar correo mediante EmailSender
-            boolean correoEnviado = EmailSender.enviarCodigoVerificacion(correo.trim(), codigoGenerado);
+            boolean correoEnviado = EmailSender.enviarCodigoVerificacion(correo, codigoGenerado);
 
             if (correoEnviado) {
                 HttpSession session = request.getSession();
