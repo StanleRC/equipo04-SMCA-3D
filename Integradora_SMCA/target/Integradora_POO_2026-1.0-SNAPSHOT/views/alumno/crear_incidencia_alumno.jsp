@@ -30,14 +30,16 @@
 
             <div class="row g-3 mb-4">
                 <div class="col-6">
+                    <label class="form-label">Número de PC</label>
                     <input type="text"
                            name="numeroPc"
                            class="form-control custom-input"
-                           placeholder="Numero de PC"
+                           placeholder="Ingresa el número de la PC"
                            required>
                 </div>
 
                 <div class="col-6">
+                    <label class="form-label">Selecciona el Aula</label>
                     <select name="laboratorio" class="form-control custom-input" required>
                         <option value="">Selecciona aula</option>
                         <option value="CC10">CC 10</option>
@@ -58,7 +60,8 @@
             </div>
 
             <div class="row g-3 mb-4">
-                <div class="col-12">
+                <div class="col-6">
+                    <label class="form-label">Nivel de Prioridad</label>
                     <select name="prioridad" class="form-control custom-input" required>
                         <option value="">Selecciona prioridad</option>
                         <option value="Baja">Baja</option>
@@ -66,11 +69,21 @@
                         <option value="Alta">Alta</option>
                     </select>
                 </div>
+
+                <div class="col-6">
+                    <label class="form-label">Hora de Salida</label>
+                    <input type="time"
+                           name="horaSalida"
+                           class="form-control custom-input"
+                           placeholder="Ingresa tu hora de salida"
+                           required>
+                </div>
             </div>
 
             <h3 class="card-subtitle-custom">¿El equipo presenta alguna falla?</h3>
 
             <div class="mb-4">
+                <label class="form-label">Descripción de la Incidencia</label>
                 <textarea name="incidencia"
                           class="form-control custom-textarea"
                           rows="4"

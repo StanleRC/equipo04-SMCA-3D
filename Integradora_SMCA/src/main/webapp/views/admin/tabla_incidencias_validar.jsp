@@ -59,10 +59,13 @@
                     <table class="custom-incidencias-table">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Bitácora</th>
+                            <th>Alumno</th>
+                            <th>Matricula</th>
                             <th>PC</th>
                             <th>Laboratorio</th>
                             <th>Prioridad</th>
+                            <th>Hora Salida</th>
                             <th>Descripción</th>
                             <th>Fecha</th>
                             <th>Acción</th>
@@ -71,13 +74,15 @@
                         <tbody>
                         <c:if test="${empty incidencias}">
                             <tr class="empty-row">
-                                <td colspan="7">No hay incidencias registradas.</td>
+                                <td colspan="10">No hay incidencias registradas.</td>
                             </tr>
                         </c:if>
 
                         <c:forEach var="inc" items="${incidencias}">
                             <tr>
-                                <td>${inc.id_reporte}</td>
+                                <td>${inc.id_bitacora}</td>
+                                <td>${inc.nombre_alumno} ${inc.apellido_paterno} ${inc.apellido_materno}</td>
+                                <td>${inc.alumno_matricula}</td>
                                 <td>${inc.numero_pc}</td>
                                 <td>${inc.nombre_lab}</td>
                                 <td>
@@ -87,6 +92,7 @@
                                             ${inc.prioridad}
                                     </span>
                                 </td>
+                                <td>${inc.hora_salida}</td>
                                 <td>${inc.descripcion_falla}</td>
                                 <td>
                                     <fmt:formatDate value="${inc.fecha_reporte}" pattern="dd/MM/yyyy HH:mm" />

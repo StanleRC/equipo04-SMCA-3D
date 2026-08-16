@@ -12,16 +12,17 @@ import java.util.Map;
 
 public class IncidenciaDao {
 
-    public Integer buscarIdComputadoraPorNumero(String numeroPc) {
-        String sql = "SELECT id_computadora FROM computadora WHERE numero_pc = ?";
+    public Integer buscarBitacoraActiva(String alumnoMatricula) {
+        String sql = "SELECT id_bitacora FROM bitacora WHERE alumno_matricula = ? AND hora_final IS NULL ORDER BY fecha DESC FETCH FIRST 1 ROW ONLY";
+
         try (Connection con = SQLConnector.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, numeroPc.trim());
+            ps.setString(1, alumnoMatricula.trim());
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("id_computadora");
+                    return rs.getInt("id_bitacora");
                 }
             }
 
@@ -31,43 +32,22 @@ public class IncidenciaDao {
         return null;
     }
 
-    public Integer buscarIdComputadoraPorNumeroYLaboratorio(String numeroPc, String laboratorio) {
-        if (laboratorio == null || laboratorio.trim().isEmpty()) {
-            return buscarIdComputadoraPorNumero(numeroPc);
-        }
-
-        String sql = "SELECT c.id_computadora " +
-                "FROM computadora c " +
-                "INNER JOIN laboratorio l ON c.laboratorio_id_laboratorio = l.id_laboratorio " +
-                "WHERE c.numero_pc = ? AND l.id_laboratorio = ?";
-
-        try (Connection con = SQLConnector.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setString(1, numeroPc.trim());
-            ps.setString(2, laboratorio.trim());
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id_computadora");
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public boolean guardarIncidencia(String descripcion, String prioridad, int computadoraId) {
-        String sql = "INSERT INTO reporte_falla (descripcion_falla, prioridad, computadora_id_computadora) VALUES (?, ?, ?)";
+    public boolean guardarIncidencia(String descripcion, String prioridad, String numeroPc, String laboratorio,
+                                     String horaSalida, String alumnoMatricula, Integer idBitacora) {
+        String sql = "INSERT INTO reporte_falla (descripcion_falla, prioridad, numero_pc, id_laboratorio, " +
+                "hora_salida, alumno_matricula, id_bitacora) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = SQLConnector.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, descripcion.trim());
             ps.setString(2, prioridad);
-            ps.setInt(3, computadoraId);
+            ps.setString(3, numeroPc.trim());
+            ps.setString(4, laboratorio.trim());
+            ps.setString(5, horaSalida);
+            ps.setString(6, alumnoMatricula.trim());
+            ps.setObject(7, idBitacora);
 
             return ps.executeUpdate() > 0;
 
@@ -81,17 +61,18 @@ public class IncidenciaDao {
         List<Map<String, Object>> lista = new ArrayList<>();
 
         String sql = "SELECT rf.id_reporte, rf.descripcion_falla, rf.prioridad, rf.fecha_reporte, " +
-                "c.numero_pc, l.id_laboratorio, l.nombre_lab " +
+                "rf.hora_salida, rf.numero_pc, rf.alumno_matricula, rf.id_bitacora, " +
+                "rf.id_laboratorio, l.nombre_lab, a.nombre, a.apellido_paterno, a.apellido_materno " +
                 "FROM reporte_falla rf " +
-                "INNER JOIN computadora c ON rf.computadora_id_computadora = c.id_computadora " +
-                "INNER JOIN laboratorio l ON c.laboratorio_id_laboratorio = l.id_laboratorio ";
+                "INNER JOIN laboratorio l ON rf.id_laboratorio = l.id_laboratorio " +
+                "INNER JOIN alumno a ON rf.alumno_matricula = a.matricula ";
 
         boolean filtrarPorLaboratorio = laboratorio != null
                 && !laboratorio.trim().isEmpty()
                 && !"Todos".equalsIgnoreCase(laboratorio.trim());
 
         if (filtrarPorLaboratorio) {
-            sql += "WHERE l.id_laboratorio = ? ";
+            sql += "WHERE rf.id_laboratorio = ? ";
         }
 
         sql += "ORDER BY rf.fecha_reporte DESC";
@@ -110,7 +91,13 @@ public class IncidenciaDao {
                     fila.put("descripcion_falla", rs.getString("descripcion_falla"));
                     fila.put("prioridad", rs.getString("prioridad"));
                     fila.put("fecha_reporte", rs.getTimestamp("fecha_reporte"));
+                    fila.put("hora_salida", rs.getString("hora_salida"));
                     fila.put("numero_pc", rs.getString("numero_pc"));
+                    fila.put("alumno_matricula", rs.getString("alumno_matricula"));
+                    fila.put("nombre_alumno", rs.getString("nombre"));
+                    fila.put("apellido_paterno", rs.getString("apellido_paterno"));
+                    fila.put("apellido_materno", rs.getString("apellido_materno"));
+                    fila.put("id_bitacora", rs.getObject("id_bitacora"));
                     fila.put("id_laboratorio", rs.getString("id_laboratorio"));
                     fila.put("nombre_lab", rs.getString("nombre_lab"));
                     lista.add(fila);

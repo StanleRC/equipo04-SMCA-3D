@@ -2,7 +2,6 @@ package com.example.integradora_smca.controller;
 
 import com.example.integradora_smca.model.Alumno;
 import com.example.integradora_smca.model.dao.AlumnoDao;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -57,6 +56,7 @@ public class LoginAlumnoServlet extends HttpServlet {
             session.setAttribute("usuarioLogueado", alumno);
             session.setAttribute("usuario", alumno);
             session.setAttribute("rol", "Alumno");
+            session.setAttribute("alumno_matricula", alumno.getMatricula());
 
             // Redirige al PerfilAlumnoServlet para que cargue todos los datos actualizados
             response.sendRedirect(request.getContextPath() + "/PerfilAlumnoServlet");

@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -20,10 +21,19 @@ public class RegistrarIncidenciaServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
+        HttpSession session = request.getSession();
+        String alumnoMatricula = (String) session.getAttribute("alumno_matricula");
+
+        if (alumnoMatricula == null || alumnoMatricula.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=sesion");
+            return;
+        }
+
         String numeroPc = request.getParameter("numeroPc");
         String laboratorio = request.getParameter("laboratorio");
         String descripcion = request.getParameter("incidencia");
         String prioridad = request.getParameter("prioridad");
+        String horaSalida = request.getParameter("horaSalida");
 
         if (numeroPc == null || numeroPc.trim().isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=pc");
@@ -35,6 +45,11 @@ public class RegistrarIncidenciaServlet extends HttpServlet {
             return;
         }
 
+        if (horaSalida == null || horaSalida.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=hora");
+            return;
+        }
+
         if (descripcion == null || descripcion.trim().isEmpty()) {
             descripcion = "Sin descripción";
         }
@@ -43,14 +58,10 @@ public class RegistrarIncidenciaServlet extends HttpServlet {
             prioridad = "Media";
         }
 
-        Integer computadoraId = incidenciaDao.buscarIdComputadoraPorNumeroYLaboratorio(numeroPc, laboratorio);
+        Integer idBitacora = incidenciaDao.buscarBitacoraActiva(alumnoMatricula);
 
-        if (computadoraId == null) {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=pc_no_encontrada");
-            return;
-        }
-
-        boolean ok = incidenciaDao.guardarIncidencia(descripcion, prioridad, computadoraId);
+        boolean ok = incidenciaDao.guardarIncidencia(descripcion, prioridad, numeroPc, laboratorio,
+                horaSalida, alumnoMatricula, idBitacora);
 
         if (ok) {
             response.sendRedirect(request.getContextPath() + "/views/alumno/index.jsp?success=incidencia_guardada");
