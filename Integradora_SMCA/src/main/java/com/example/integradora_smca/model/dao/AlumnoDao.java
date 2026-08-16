@@ -28,7 +28,7 @@ public class AlumnoDao {
             con = SQLConnector.getConnection();
             con.setAutoCommit(false);
 
-            // Se encripta la contraseña y SE GUARDA EN LA BASE DE DATOS
+            // Se encripta la contraseña usando SHA-2 (SecurityUtils)
             String passwordHash = SecurityUtils.hashPassword(entidad.getHashPassword());
 
             psPass = con.prepareStatement(sqlContrasena, new String[]{"ID_CONTRASENA"});
@@ -96,8 +96,16 @@ public class AlumnoDao {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    System.out.println("--> LOGIN EXITOSO: Matrícula [" + matricula.trim() + "]");
-                    return mapResultSetToAlumno(rs);
+                    String passBD = rs.getString("hash_password");
+                    String inputHash = SecurityUtils.hashPassword(contrasena.trim());
+
+                    // Validación estricta de contraseña encriptada
+                    if (passBD != null && passBD.equalsIgnoreCase(inputHash)) {
+                        System.out.println("--> LOGIN EXITOSO: Matrícula [" + matricula.trim() + "]");
+                        return mapResultSetToAlumno(rs);
+                    } else {
+                        System.out.println("--> LOGIN FALLIDO: Contraseña incorrecta.");
+                    }
                 } else {
                     System.out.println("--> LOGIN FALLIDO: Matrícula no encontrada.");
                 }
