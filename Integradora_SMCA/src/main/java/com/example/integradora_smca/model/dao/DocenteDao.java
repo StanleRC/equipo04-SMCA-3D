@@ -19,7 +19,30 @@ public class DocenteDao {
         return con;
     }
 
+    // 🔎 Nuevo método para comprobar existencia previa por correo
+    public boolean existeDocente(String correo) {
+        String sql = "SELECT COUNT(*) FROM docente WHERE LOWER(TRIM(correo)) = LOWER(TRIM(?))";
+        try (Connection con = obtenerConexionValida();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, correo.trim().toLowerCase());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean create(Docente entidad) {
+        // Validacion de correo ya registrado
+        if (existeDocente(entidad.getCorreo())) {
+            System.err.println("--> ERROR: El correo ya está registrado para otro docente.");
+            return false;
+        }
+
         String sqlPass = "INSERT INTO contrasena (hash_password) VALUES (?)";
         String sqlDocente = "INSERT INTO docente (id_docente, nombre, apellido_paterno, apellido_materno, correo, id_contrasena, rol_id_rol, foto_perfil) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -33,17 +56,13 @@ public class DocenteDao {
                 return false;
             }
 
-            // Evitar re-hashear si ya viene en SHA-256 (64 chars hex)
+            // Evitar re-hashear si ya viene en SHA-256
             String passToSave;
             if (passOriginal.length() == 64 && passOriginal.matches("^[a-fA-F0-9]+$")) {
                 passToSave = passOriginal.toLowerCase();
             } else {
                 passToSave = SecurityUtils.hashPassword(passOriginal);
             }
-
-            // IMPRIMIR EN CONSOLA PARA VERIFICAR EL REGISTRO
-            System.out.println(">>> DOCENTE REGISTRANDO: " + entidad.getCorreo());
-            System.out.println(">>> HASH A GUARDAR EN BD (" + passToSave.length() + " chars): " + passToSave);
 
             // 1. Insertar en la tabla CONTRASENA
             try (PreparedStatement psPass = con.prepareStatement(sqlPass, new String[]{"ID_CONTRASENA"})) {
@@ -72,7 +91,7 @@ public class DocenteDao {
                 return false;
             }
 
-            // 2. Generar SIEMPRE un ID_DOCENTE consecutivo automático (1, 2, 3...)
+            // 2. Generar un ID_DOCENTE consecutivo automático
             int idDocenteFinal = 1;
             try (PreparedStatement psMax = con.prepareStatement("SELECT NVL(MAX(id_docente), 0) + 1 FROM docente");
                  ResultSet rsMax = psMax.executeQuery()) {
@@ -87,7 +106,7 @@ public class DocenteDao {
                 psDocente.setString(2, entidad.getNombre());
                 psDocente.setString(3, entidad.getApellidoPaterno());
                 psDocente.setString(4, entidad.getApellidoMaterno());
-                psDocente.setString(5, entidad.getCorreo());
+                psDocente.setString(5, entidad.getCorreo().trim().toLowerCase());
                 psDocente.setInt(6, idContrasenaGenerado);
                 psDocente.setInt(7, entidad.getRolIdRol() > 0 ? entidad.getRolIdRol() : 2);
                 psDocente.setString(8, entidad.getFotoPerfil() != null ? entidad.getFotoPerfil() : "default.png");
@@ -106,7 +125,7 @@ public class DocenteDao {
         }
     }
 
-    public Docente loginByCorreo(String correo, String contrasena) {
+public Docente loginByCorreo(String correo, String contrasena) {
         String sql = "SELECT d.id_docente, d.nombre, d.apellido_paterno, d.apellido_materno, d.correo, d.rol_id_rol, d.foto_perfil, c.hash_password " +
                 "FROM docente d " +
                 "INNER JOIN contrasena c ON d.id_contrasena = c.id_contrasena " +
