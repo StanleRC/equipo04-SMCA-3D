@@ -23,12 +23,6 @@
 
     <div class="content-body">
 
-        <div class="mb-3">
-            <a href="javascript:history.back()" class="back-link">
-                <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
-            </a>
-        </div>
-
         <div class="text-center mb-4">
             <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="max-height: 140px;">
             <p class="subtitle-text">Gestiona tu información personal, avatar institucional y credenciales de acceso.</p>
@@ -50,6 +44,13 @@
                             <c:when test="${not empty sessionScope.usuarioLogueado.fotoPerfil}">
                                 <img id="previewFoto"
                                      src="${pageContext.request.contextPath}/assets/img/perfiles/${sessionScope.usuarioLogueado.fotoPerfil}"
+                                     alt="Avatar Alumno"
+                                     class="rounded-circle img-fluid"
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+                            </c:when>
+                            <c:when test="${not empty sessionScope.alumno.fotoPerfil}">
+                                <img id="previewFoto"
+                                     src="${pageContext.request.contextPath}/assets/img/perfiles/${sessionScope.alumno.fotoPerfil}"
                                      alt="Avatar Alumno"
                                      class="rounded-circle img-fluid"
                                      style="width: 150px; height: 150px; object-fit: cover;">
@@ -82,22 +83,27 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label-custom">Nombre(s)</label>
-                            <input type="text" name="nombre" class="form-control edit-input" placeholder="Nombre(s)" value="${sessionScope.usuarioLogueado.nombre}" required>
+                            <input type="text" name="nombre" class="form-control edit-input" placeholder="Nombre(s)" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.nombre : sessionScope.alumno.nombre}" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label-custom">Apellidos</label>
-                            <input type="text" name="apellidos" class="form-control edit-input" placeholder="Apellidos" value="${sessionScope.usuarioLogueado.apellidos}" required>
+                            <label class="form-label-custom">Apellido Paterno</label>
+                            <input type="text" name="apellidoPaterno" class="form-control edit-input" placeholder="Apellido Paterno" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.apellidoPaterno : sessionScope.alumno.apellidoPaterno}" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label-custom">Apellido Materno</label>
+                            <input type="text" name="apellidoMaterno" class="form-control edit-input" placeholder="Apellido Materno" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.apellidoMaterno : sessionScope.alumno.apellidoMaterno}" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label-custom">CORREO INSTITUCIONAL</label>
-                            <input type="email" name="correo" class="form-control edit-input" placeholder="Correo" value="${sessionScope.usuarioLogueado.correo}" required>
+                            <input type="email" name="correo" class="form-control edit-input" placeholder="Correo" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.correo : sessionScope.alumno.correo}" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label-custom">Grupo</label>
-                            <input type="text" name="grupo" class="form-control edit-input" placeholder="Grupo" value="${sessionScope.usuarioLogueado.grupoIdGrupo}" readonly>
+                            <input type="text" name="grupo" class="form-control edit-input" placeholder="Grupo" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.grupoIdGrupo : sessionScope.alumno.grupoIdGrupo}" readonly>
                         </div>
 
                         <div class="col-md-6">
@@ -105,9 +111,9 @@
                             <input type="text" name="cuatrimestre" class="form-control edit-input" value="3°" readonly>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <label class="form-label-custom">Carrera</label>
-                            <input type="text" name="carrera" class="form-control edit-input" value="Desarrollo de Software" readonly>
+                            <input type="text" name="carrera" class="form-control edit-input" value="Desarrollo de Software Multiplataforma" readonly>
                         </div>
                     </div>
 
@@ -144,5 +150,11 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    window.APP_CONFIG = {
+        usuarioNombre: "${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.nombre : sessionScope.alumno.nombre}",
+        contextPath: "${pageContext.request.contextPath}"
+    };
+</script>
 </body>
 </html>

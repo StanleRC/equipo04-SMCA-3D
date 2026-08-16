@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- CSS de Login -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.5">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.6">
 </head>
 
 <body class="login-body">
@@ -28,17 +28,17 @@
     <!-- Tarjeta del Formulario (Card) -->
     <main class="login-card">
 
-        <!-- Mensaje de error dinámico dinámico con JSTL -->
+        <!-- Mensaje de error dinámico con JSTL -->
         <c:if test="${not empty requestScope.errorMessage}">
-            <div style="color: #ff4d4d; text-align: center; font-size: 13px; font-weight: 600; margin-bottom: 15px;">
+            <div class="error-message-text">
                     ${requestScope.errorMessage}
             </div>
         </c:if>
 
-        <!-- Avatar gris superior -->
+        <!-- Avatar / Logo central superior -->
         <div class="login-avatar-container">
             <div class="login-avatar-circle">
-                <i class="bi bi-person-fill"></i>
+                <img src="${pageContext.request.contextPath}/assets/img/logologis.png" alt="Logo Bitácora" class="avatar-img">
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                 <label for="password" class="input-label">Contraseña</label>
                 <div class="input-icon-wrapper">
                     <i class="bi bi-lock icon-input"></i>
-                    <input type="password" id="password" name="password" placeholder="Introduce una contraseña" required>
+                    <input type="password" id="password" name="password" placeholder="Introduce tu contraseña" required>
                 </div>
             </div>
 
@@ -68,14 +68,15 @@
                 <button type="submit" class="btn-submit">Iniciar sesión</button>
             </div>
 
-            <!-- Enlaces de soporte -->
+            <!-- Enlace "¿Olvidaste tu contraseña?" -->
             <div class="card-links-container">
                 <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
+            </div>
 
-                <div class="card-footer-links">
-                    <a href="${pageContext.request.contextPath}/views/alumno/registro_directo_alumno.jsp" class="card-link">¿No tienes cuenta?</a>
-                    <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="card-link">¿Eres administrador?</a>
-                </div>
+            <!-- Enlaces inferiores en extremos -->
+            <div class="card-footer-links">
+                <a href="${pageContext.request.contextPath}/views/alumno/registro_directo_alumno.jsp" class="card-link">¿No tienes cuenta?</a>
+                <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="card-link">¿Eres administrador?</a>
             </div>
         </form>
     </main>

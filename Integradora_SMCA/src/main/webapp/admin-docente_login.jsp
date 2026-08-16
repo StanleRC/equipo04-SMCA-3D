@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitácora Digital (Admin/Docente) - UTEZ</title>
+    <title>Bitácora Digital (Docente) - UTEZ</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,33 +14,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Tu archivo CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.2">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.6">
 </head>
 
 <body class="login-body">
 
 <div class="login-page-container">
 
-    <!-- Sección del Logo de la UTEZ y Título de Administrador -->
+    <!-- Sección del Logo de la UTEZ y Título de Docente -->
     <header class="login-header">
         <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
-        <h1 class="system-title">Bitácora digital<br><span class="subtitle-admin">(Acceso como administrador)</span></h1>
+        <h1 class="system-title">Bitácora digital<br><span class="subtitle-admin">(Acceso Docente)</span></h1>
     </header>
 
     <!-- Tarjeta del Formulario (Card) -->
     <main class="login-card">
 
-        <!-- Mensaje de error -->
+        <!-- Mensajes de Alerta (Error o Éxito) -->
         <% if (request.getAttribute("errorMessage") != null) { %>
-        <div class="error-message-text">
+        <div class="alert alert-danger text-center p-2 mb-3" style="font-size: 13px;">
             <%= request.getAttribute("errorMessage") %>
         </div>
         <% } %>
 
-        <!-- Avatar gris superior -->
+        <% if (request.getAttribute("mensajeExito") != null) { %>
+        <div class="alert alert-success text-center p-2 mb-3" style="font-size: 13px;">
+            <%= request.getAttribute("mensajeExito") %>
+        </div>
+        <% } %>
+
+        <!-- Avatar / Logo central superior -->
         <div class="login-avatar-container">
             <div class="login-avatar-circle">
-                <i class="bi bi-person-fill"></i>
+                <img src="${pageContext.request.contextPath}/assets/img/logologis.png" alt="Logo Bitácora" class="avatar-img">
             </div>
         </div>
 
@@ -49,7 +55,7 @@
 
             <!-- Campo Correo -->
             <div class="form-group">
-                <label for="correo" class="input-label">Correo</label>
+                <label for="correo" class="input-label">Correo institucional</label>
                 <div class="input-icon-wrapper">
                     <i class="bi bi-envelope icon-input"></i>
                     <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required>
@@ -70,14 +76,15 @@
                 <button type="submit" class="btn-submit">Iniciar sesión</button>
             </div>
 
-            <!-- Enlaces de soporte -->
+            <!-- Enlace "¿Olvidaste tu contraseña?" -->
             <div class="card-links-container">
                 <a href="${pageContext.request.contextPath}/recuperar_pass.jsp" class="card-link bold-link">¿Olvidaste tu contraseña?</a>
+            </div>
 
-                <div class="card-footer-links">
-                    <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#modalRegistroInfo">¿No tienes una cuenta?</a>
-                    <a href="${pageContext.request.contextPath}/index.jsp" class="card-link">¿Eres un estudiante?</a>
-                </div>
+            <!-- Enlaces inferiores en extremos -->
+            <div class="card-footer-links">
+                <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#modalRegistroInfo">¿No tienes una cuenta?</a>
+                <a href="${pageContext.request.contextPath}/index.jsp" class="card-link">¿Eres estudiante?</a>
             </div>
         </form>
     </main>
@@ -113,7 +120,7 @@
 </div>
 
 <!-- ========================================================= -->
-<!-- MODAL EMERGENTE DE INFORMACIÓN DE REGISTRO ACTUALIZADO -->
+<!-- MODAL EMERGENTE DE REGISTRO PARA DOCENTES -->
 <!-- ========================================================= -->
 <div class="modal fade" id="modalRegistroInfo" tabindex="-1" aria-labelledby="modalRegistroInfoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -122,7 +129,7 @@
             <!-- Encabezado del Modal -->
             <div class="modal-header info-modal-header bg-success text-white">
                 <h5 class="modal-title info-modal-title text-white" id="modalRegistroInfoLabel">
-                    <i class="bi bi-info-circle-fill me-2 text-white"></i>Información de Acceso al Sistema
+                    <i class="bi bi-person-badge-fill me-2 text-white"></i>Registro de Personal Docente
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
@@ -130,36 +137,23 @@
             <!-- Cuerpo del Modal -->
             <div class="modal-body info-modal-body">
 
-                <p class="info-modal-desc">
-                    Selecciona tu perfil para continuar con la solicitud de acceso:
+                <p class="info-modal-desc text-muted small">
+                    Si eres profesor y aún no cuentas con un usuario en el sistema, puedes realizar tu solicitud de alta directa.
                 </p>
 
-                <!-- Tarjeta Personal docente (Enlace directo a Registro de Maestro) -->
-                <div class="info-role-card p-3 mb-3 border rounded shadow-sm d-flex align-items-center">
+                <!-- Tarjeta Personal docente -->
+                <div class="info-role-card p-3 mb-2 border rounded shadow-sm d-flex align-items-center">
                     <div class="info-role-icon me-3 fs-3 text-success">
-                        <i class="bi bi-person-badge-fill"></i>
+                        <i class="bi bi-journal-check"></i>
                     </div>
                     <div>
-                        <h6 class="info-role-title fw-bold mb-1">Personal Docente / Profesorado</h6>
+                        <h6 class="info-role-title fw-bold mb-1">Registro de Maestro</h6>
                         <p class="info-role-text mb-2 text-muted small">
-                            ¿Eres maestro? Completa tu solicitud de registro en la plataforma.
+                            Completa el formulario de registro para habilitar tu acceso al control de laboratorios.
                         </p>
-                        <a href="${pageContext.request.contextPath}/views/admin/registro_directo_maestro.jsp" class="btn btn-sm btn-outline-success fw-bold">
-                            Registrarse como Maestro
+                        <a href="${pageContext.request.contextPath}/views/admin/registro_directo_maestro.jsp" class="btn btn-sm btn-success fw-bold">
+                            Ir al Registro de Maestro
                         </a>
-                    </div>
-                </div>
-
-                <!-- Tarjeta Administradores (Mensaje Restringido únicamente para Administrador) -->
-                <div class="info-role-card p-3 border rounded shadow-sm d-flex align-items-center">
-                    <div class="info-role-icon me-3 fs-3 text-success">
-                        <i class="bi bi-shield-lock-fill"></i>
-                    </div>
-                    <div>
-                        <h6 class="info-role-title fw-bold mb-1">Administradores de Sistema</h6>
-                        <p class="info-role-text mb-0 text-muted small">
-                            El registro está restringido. Póngase en contacto directo con el área de Desarrollo / Propietario del Software para la asignación de credenciales.
-                        </p>
                     </div>
                 </div>
 
@@ -167,8 +161,8 @@
 
             <!-- Pie del Modal -->
             <div class="modal-footer info-modal-footer">
-                <button type="button" class="btn btn-success w-100 fw-bold" data-bs-dismiss="modal">
-                    Entendido
+                <button type="button" class="btn btn-secondary w-100 fw-bold" data-bs-dismiss="modal">
+                    Cerrar
                 </button>
             </div>
 

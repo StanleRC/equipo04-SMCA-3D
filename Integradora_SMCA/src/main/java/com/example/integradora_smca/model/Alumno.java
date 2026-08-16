@@ -4,7 +4,8 @@ public class Alumno {
 
     private String matricula;
     private String nombre;
-    private String apellidos;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String correo;
     private String hashPassword;
     private String grupoIdGrupo;
@@ -16,10 +17,11 @@ public class Alumno {
     }
 
     // Constructor completo
-    public Alumno(String matricula, String nombre, String apellidos, String correo, String hashPassword, String grupoIdGrupo, int rolIdRol, String fotoPerfil) {
+    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String hashPassword, String grupoIdGrupo, int rolIdRol, String fotoPerfil) {
         this.matricula = matricula;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.hashPassword = hashPassword;
         this.grupoIdGrupo = grupoIdGrupo;
@@ -45,12 +47,20 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getCorreo() {

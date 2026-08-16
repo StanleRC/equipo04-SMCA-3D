@@ -87,10 +87,6 @@
                             </tr>
                         </c:otherwise>
                     </c:choose>
-
-                    <!-- Filas de relleno de la maquetación -->
-                    <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr class="empty-row"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -102,5 +98,15 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Definición de variables JSP antes de cargar el archivo JS -->
+<script>
+    window.APP_CONFIG = {
+        usuarioNombre: "${sessionScope.usuarioLogueado.nombre}",
+        contextPath: "${pageContext.request.contextPath}"
+    };
+</script>
+
+<!-- Importar el archivo JS (con ?v=2 para obligar al navegador a recargar el JS actualizado) -->
+<script src="${pageContext.request.contextPath}/assets/js/modal_bienvenida_alumno.js?v=2"></script>
 </body>
 </html>

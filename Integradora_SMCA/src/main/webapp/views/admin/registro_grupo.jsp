@@ -7,6 +7,11 @@
 <!-- CSS Registro de Grupo -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registro_grupo.css?v=1">
 
+<!-- CDN SweetAlert2 y Recursos Globales de Alertas -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
+<script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
+
 <div class="main-wrapper">
     <!-- Sidebar Admin -->
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
@@ -38,7 +43,7 @@
             <div class="registro-card">
                 <h3 class="registro-card-title text-center">Ingresa los datos<br>del grupo</h3>
 
-                <form action="RegistrarGrupoServlet" method="POST">
+                <form id="formRegistroGrupo" action="RegistrarGrupoServlet" method="POST">
 
                     <!-- Campo Carrera (Select desplegable con flecha) -->
                     <div class="form-group mb-3">
@@ -73,7 +78,12 @@
                     <!-- Botones de Acción -->
                     <div class="d-flex justify-content-center gap-4 mt-4">
                         <a href="javascript:history.back()" class="btn-action btn-cancelar text-decoration-none text-center">Cancelar</a>
-                        <button type="submit" class="btn-action btn-registrar">Registrar</button>
+
+                        <button type="button"
+                                class="btn-action btn-registrar"
+                                onclick="confirmarRegistroMaestro(event, document.getElementById('formRegistroGrupo'))">
+                            Registrar
+                        </button>
                     </div>
 
                 </form>

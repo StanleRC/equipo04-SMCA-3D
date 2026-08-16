@@ -4,7 +4,8 @@ public class Docente {
 
     private Integer idDocente;
     private String nombre;
-    private String apellidos;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String correo;
     private String hashPassword;
     private int rolIdRol;
@@ -13,10 +14,11 @@ public class Docente {
     public Docente() {
     }
 
-    public Docente(Integer idDocente, String nombre, String apellidos, String correo, String hashPassword, int rolIdRol, String fotoPerfil) {
+    public Docente(Integer idDocente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String hashPassword, int rolIdRol, String fotoPerfil) {
         this.idDocente = idDocente;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.hashPassword = hashPassword;
         this.rolIdRol = rolIdRol;
@@ -39,12 +41,20 @@ public class Docente {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getCorreo() {
@@ -79,4 +89,3 @@ public class Docente {
         this.fotoPerfil = fotoPerfil;
     }
 }
-
