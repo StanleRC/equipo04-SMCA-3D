@@ -52,13 +52,14 @@ public class LoginAlumnoServlet extends HttpServlet {
                 oldSession.invalidate();
             }
 
-            // Crea sesión limpia
+            // Crea sesión limpia con las claves necesarias
             HttpSession session = request.getSession(true);
             session.setAttribute("usuarioLogueado", alumno);
+            session.setAttribute("usuario", alumno);
             session.setAttribute("rol", "Alumno");
 
-            // Redirige al escritorio de la vista alumno pasando la bandera ?login=exito
-            response.sendRedirect(request.getContextPath() + "/views/alumno/perfil_alumno.jsp");
+            // Redirige al PerfilAlumnoServlet para que cargue todos los datos actualizados
+            response.sendRedirect(request.getContextPath() + "/PerfilAlumnoServlet");
         } else {
             request.setAttribute("errorMessage", "Matrícula o contraseña incorrectas.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

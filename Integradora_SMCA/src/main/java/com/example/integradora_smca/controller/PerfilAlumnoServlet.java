@@ -27,7 +27,14 @@ public class PerfilAlumnoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        Alumno usuarioLogueado = (session != null) ? (Alumno) session.getAttribute("usuarioLogueado") : null;
+        Alumno usuarioLogueado = null;
+
+        if (session != null) {
+            usuarioLogueado = (Alumno) session.getAttribute("usuarioLogueado");
+            if (usuarioLogueado == null) {
+                usuarioLogueado = (Alumno) session.getAttribute("usuario");
+            }
+        }
 
         // Validar que exista una sesión activa
         if (usuarioLogueado == null) {
@@ -39,10 +46,9 @@ public class PerfilAlumnoServlet extends HttpServlet {
         Alumno alumnoActualizado = alumnoDao.getById(usuarioLogueado.getMatricula());
 
         if (alumnoActualizado != null) {
-            // Actualizamos el objeto en la sesión
+            // Se actualizan TODAS las variables posibles en sesión para mantener sincronización total
             session.setAttribute("usuarioLogueado", alumnoActualizado);
-
-            // Guardamos la ruta de la foto en session Scope con la clave "usuarioFoto"
+            session.setAttribute("usuario", alumnoActualizado);
             session.setAttribute("usuarioFoto", alumnoActualizado.getFotoPerfil());
 
             request.getRequestDispatcher("/views/alumno/perfil_alumno.jsp").forward(request, response);

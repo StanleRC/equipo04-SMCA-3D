@@ -15,6 +15,7 @@ import java.io.IOException;
 public class RegistroDocenteServlet extends HttpServlet {
 
     private DocenteDao docenteDao;
+    private static final String VISTA_REGISTRO = "/views/admin/registro_directo_maestro.jsp";
 
     @Override
     public void init() throws ServletException {
@@ -24,7 +25,7 @@ public class RegistroDocenteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/views/docente/registro_directo_docente.jsp").forward(request, response);
+        request.getRequestDispatcher(VISTA_REGISTRO).forward(request, response);
     }
 
     @Override
@@ -32,41 +33,56 @@ public class RegistroDocenteServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        //Obtención de parámetros
         String nombre = request.getParameter("txtNombre");
         String apellidoPaterno = request.getParameter("txtApellidoPaterno");
         String apellidoMaterno = request.getParameter("txtApellidoMaterno");
         String password = request.getParameter("txtPassword");
         String confirmPassword = request.getParameter("txtConfirmPassword");
         String correo = request.getParameter("txtCorreo");
-        //String telefono = request.getParameter("txtTelefono"); // opcional en tu formulario
+        String idDocenteStr = request.getParameter("txtIdDocente");
 
-        //Validación de coincidencia de contraseñas
-        if (!password.equals(confirmPassword)) {
-            request.setAttribute("errorMessage", "Las contraseñas no coinciden.");
-            request.getRequestDispatcher("/views/docente/registro_directo_docente.jsp").forward(request, response);
+        if (correo == null || correo.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Por favor completa todos los campos requeridos.");
+            request.getRequestDispatcher(VISTA_REGISTRO).forward(request, response);
             return;
         }
 
-        String apellidosCompletos = apellidoPaterno.trim() + " " + apellidoMaterno.trim();
+        if (!password.equals(confirmPassword)) {
+            request.setAttribute("errorMessage", "Las contraseñas no coinciden.");
+            request.getRequestDispatcher(VISTA_REGISTRO).forward(request, response);
+            return;
+        }
 
-        // Instancia del modelo Docente
+        int idParsed = 0;
+        if (idDocenteStr != null && !idDocenteStr.trim().isEmpty()) {
+            try {
+                idParsed = Integer.parseInt(idDocenteStr.trim());
+            } catch (NumberFormatException e) {
+                idParsed = (int) (System.currentTimeMillis() % 1000000);
+            }
+        } else {
+            idParsed = (int) (System.currentTimeMillis() % 1000000);
+        }
+
         Docente nuevoDocente = new Docente();
-        nuevoDocente.setNombre(nombre.trim());
-        nuevoDocente.setApellidos(apellidosCompletos);
+        nuevoDocente.setIdDocente(idParsed);
+        nuevoDocente.setNombre(nombre != null ? nombre.trim() : "");
+        nuevoDocente.setApellidoPaterno(apellidoPaterno != null ? apellidoPaterno.trim() : "");
+        nuevoDocente.setApellidoMaterno(apellidoMaterno != null ? apellidoMaterno.trim() : "");
         nuevoDocente.setCorreo(correo.trim());
-        nuevoDocente.setHashPassword(password);
-        nuevoDocente.setRolIdRol(2); // Rol Docente según tu script
-        nuevoDocente.setFotoPerfil(null); // inicia nulo
+        // Se envía en texto plano; el DAO aplica el hash SHA-256 una sola vez
+        nuevoDocente.setHashPassword(password.trim());
+        nuevoDocente.setRolIdRol(2);
+        nuevoDocente.setFotoPerfil("default.png");
 
-        //Inserción mediante DAO
         boolean esGuardado = docenteDao.create(nuevoDocente);
 
         if (esGuardado) {
-            response.sendRedirect(request.getContextPath() + "/index.jsp?registro=exito");
+            request.setAttribute("mensajeExito", "¡Registro exitoso! Ya puedes iniciar sesión.");
+            request.getRequestDispatcher("/admin-docente_login.jsp").forward(request, response);
         } else {
-            request.setAttribute("errorMessage", "Error al registrar. Verifica correo duplicado.");
-            request.getRequestDispatcher("/views/docente/registro_directo_docente.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "Error al registrar en la base de datos.");
+            request.getRequestDispatcher(VISTA_REGISTRO).forward(request, response);
         }
     }
 }

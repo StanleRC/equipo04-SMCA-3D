@@ -11,7 +11,8 @@ public class AlumnoTest {
 
         alumno.setMatricula("2026001");
         alumno.setNombre("Ana");
-        alumno.setApellidos("García");
+        alumno.setApellidoPaterno("García");
+        alumno.setApellidoMaterno("López");
         alumno.setCorreo("ana@utez.edu.mx");
         alumno.setHashPassword("pass123");
         alumno.setGrupoIdGrupo("1B");
@@ -20,7 +21,8 @@ public class AlumnoTest {
 
         assertEquals("2026001", alumno.getMatricula());
         assertEquals("Ana", alumno.getNombre());
-        assertEquals("García", alumno.getApellidos());
+        assertEquals("García", alumno.getApellidoPaterno());
+        assertEquals("López", alumno.getApellidoMaterno());
         assertEquals("ana@utez.edu.mx", alumno.getCorreo());
         assertEquals("pass123", alumno.getHashPassword());
         assertEquals("1B", alumno.getGrupoIdGrupo());
@@ -34,6 +36,7 @@ public class AlumnoTest {
                 "2026002",
                 "Luis",
                 "Martínez",
+                "Pérez",
                 "luis@utez.edu.mx",
                 "hash456",
                 "2A",
@@ -43,7 +46,8 @@ public class AlumnoTest {
 
         assertEquals("2026002", alumno.getMatricula());
         assertEquals("Luis", alumno.getNombre());
-        assertEquals("Martínez", alumno.getApellidos());
+        assertEquals("Martínez", alumno.getApellidoPaterno());
+        assertEquals("Pérez", alumno.getApellidoMaterno());
         assertEquals("luis@utez.edu.mx", alumno.getCorreo());
         assertEquals("hash456", alumno.getHashPassword());
         assertEquals("2A", alumno.getGrupoIdGrupo());

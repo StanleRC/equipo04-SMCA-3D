@@ -58,15 +58,16 @@ public class RegistroAlumnoServlet extends HttpServlet {
                 return;
             }
 
-            String apellidosCompletos = (apellidoPaterno != null ? apellidoPaterno.trim() : "") + " " +
-                    (apellidoMaterno != null ? apellidoMaterno.trim() : "");
-
             Alumno nuevoAlumno = new Alumno();
             nuevoAlumno.setMatricula(matricula != null ? matricula.trim() : "");
             nuevoAlumno.setNombre(nombre != null ? nombre.trim() : "");
-            nuevoAlumno.setApellidos(apellidosCompletos.trim());
+            nuevoAlumno.setApellidoPaterno(apellidoPaterno != null ? apellidoPaterno.trim() : "");
+            nuevoAlumno.setApellidoMaterno(apellidoMaterno != null ? apellidoMaterno.trim() : "");
             nuevoAlumno.setCorreo(correo != null ? correo.trim() : "");
+
+            // Se pasa la contraseña plana. El AlumnoDao.create() se encargará de encriptarla 1 SOLA VEZ.
             nuevoAlumno.setHashPassword(password);
+
             nuevoAlumno.setGrupoIdGrupo(grupoId);
             nuevoAlumno.setRolIdRol(3); // Rol por defecto (Alumno)
             nuevoAlumno.setFotoPerfil(null);

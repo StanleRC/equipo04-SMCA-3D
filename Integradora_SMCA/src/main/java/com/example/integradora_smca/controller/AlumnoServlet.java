@@ -34,6 +34,8 @@ public class AlumnoServlet extends HttpServlet {
 
         if (usuario != null) {
             String nombre = request.getParameter("nombre");
+            String apellidoPaterno = request.getParameter("apellidoPaterno");
+            String apellidoMaterno = request.getParameter("apellidoMaterno");
             String correo = request.getParameter("correo");
 
             // Subida de imagen
@@ -53,6 +55,8 @@ public class AlumnoServlet extends HttpServlet {
             }
 
             usuario.setNombre(nombre);
+            usuario.setApellidoPaterno(apellidoPaterno);
+            usuario.setApellidoMaterno(apellidoMaterno);
             usuario.setCorreo(correo);
             usuario.setFotoPerfil(fotoRuta);
 

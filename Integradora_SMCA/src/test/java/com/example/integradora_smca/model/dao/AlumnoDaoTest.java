@@ -42,6 +42,7 @@ public class AlumnoDaoTest {
 
         // Configuración por defecto para las consultas SQL
         when(connectionMock.prepareStatement(anyString())).thenReturn(preparedStatementMock);
+        when(connectionMock.prepareStatement(anyString(), any(String[].class))).thenReturn(preparedStatementMock);
         when(preparedStatementMock.executeQuery()).thenReturn(resultSetMock);
     }
 
@@ -57,19 +58,24 @@ public class AlumnoDaoTest {
         Alumno alumno = new Alumno();
         alumno.setMatricula("2026001");
         alumno.setNombre("Carlos");
-        alumno.setApellidos("Pérez");
+        alumno.setApellidoPaterno("Pérez");
+        alumno.setApellidoMaterno("Gómez");
         alumno.setCorreo("carlos@utez.edu.mx");
         alumno.setHashPassword("secret123");
         alumno.setGrupoIdGrupo("1A");
         alumno.setRolIdRol(1);
         alumno.setFotoPerfil("perfil.png");
 
+        ResultSet rsKeysMock = mock(ResultSet.class);
+        when(rsKeysMock.next()).thenReturn(true);
+        when(rsKeysMock.getLong(1)).thenReturn(100L);
+        when(preparedStatementMock.getGeneratedKeys()).thenReturn(rsKeysMock);
         when(preparedStatementMock.executeUpdate()).thenReturn(1);
 
         boolean resultado = alumnoDao.create(alumno);
 
         assertTrue(resultado);
-        verify(preparedStatementMock, times(1)).executeUpdate();
+        verify(preparedStatementMock, times(2)).executeUpdate();
     }
 
     // 2. Prueba de consulta de todos los alumnos (getAll)
@@ -78,7 +84,8 @@ public class AlumnoDaoTest {
         when(resultSetMock.next()).thenReturn(true, false);
         when(resultSetMock.getString("matricula")).thenReturn("2026001");
         when(resultSetMock.getString("nombre")).thenReturn("Carlos");
-        when(resultSetMock.getString("apellidos")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_paterno")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_materno")).thenReturn("Gómez");
         when(resultSetMock.getString("correo")).thenReturn("carlos@utez.edu.mx");
         when(resultSetMock.getString("hash_password")).thenReturn("secret123");
         when(resultSetMock.getString("grupo_id_grupo")).thenReturn("1A");
@@ -98,7 +105,8 @@ public class AlumnoDaoTest {
         when(resultSetMock.next()).thenReturn(true);
         when(resultSetMock.getString("matricula")).thenReturn("2026001");
         when(resultSetMock.getString("nombre")).thenReturn("Carlos");
-        when(resultSetMock.getString("apellidos")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_paterno")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_materno")).thenReturn("Gómez");
         when(resultSetMock.getString("correo")).thenReturn("carlos@utez.edu.mx");
         when(resultSetMock.getString("hash_password")).thenReturn("secret123");
         when(resultSetMock.getString("grupo_id_grupo")).thenReturn("1A");
@@ -118,7 +126,8 @@ public class AlumnoDaoTest {
         when(resultSetMock.next()).thenReturn(true);
         when(resultSetMock.getString("matricula")).thenReturn("2026001");
         when(resultSetMock.getString("nombre")).thenReturn("Carlos");
-        when(resultSetMock.getString("apellidos")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_paterno")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_materno")).thenReturn("Gómez");
         when(resultSetMock.getString("correo")).thenReturn("carlos@utez.edu.mx");
         when(resultSetMock.getString("grupo_id_grupo")).thenReturn("1A");
         when(resultSetMock.getInt("rol_id_rol")).thenReturn(1);
@@ -129,7 +138,6 @@ public class AlumnoDaoTest {
         assertNotNull(alumno);
         assertEquals("2026001", alumno.getMatricula());
         verify(preparedStatementMock, times(1)).setString(1, "2026001");
-        verify(preparedStatementMock, times(1)).setString(2, "secret123");
     }
 
     // 5. Prueba de actualización exitosa (update)
@@ -137,7 +145,8 @@ public class AlumnoDaoTest {
     void testUpdateExitoso() throws SQLException {
         Alumno alumno = new Alumno();
         alumno.setNombre("Carlos");
-        alumno.setApellidos("Pérez Updated");
+        alumno.setApellidoPaterno("Pérez");
+        alumno.setApellidoMaterno("Updated");
         alumno.setCorreo("carlos_upd@utez.edu.mx");
         alumno.setFotoPerfil("perfil2.png");
         alumno.setMatricula("2026001");
@@ -167,7 +176,8 @@ public class AlumnoDaoTest {
         when(resultSetMock.next()).thenReturn(true);
         when(resultSetMock.getString("matricula")).thenReturn("2026001");
         when(resultSetMock.getString("nombre")).thenReturn("Carlos");
-        when(resultSetMock.getString("apellidos")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_paterno")).thenReturn("Pérez");
+        when(resultSetMock.getString("apellido_materno")).thenReturn("Gómez");
         when(resultSetMock.getString("correo")).thenReturn("carlos@utez.edu.mx");
         when(resultSetMock.getString("foto_perfil")).thenReturn("perfil.png");
         when(resultSetMock.getString("id_grupo")).thenReturn("1A");
@@ -185,17 +195,15 @@ public class AlumnoDaoTest {
         when(resultSetMock.next()).thenReturn(true, false);
         when(resultSetMock.getString("grado")).thenReturn("1");
         when(resultSetMock.getString("numero_grupo")).thenReturn("A");
-        when(resultSetMock.getString("numero_pc")).thenReturn("PC-05");
         when(resultSetMock.getString("matricula")).thenReturn("2026001");
-        when(resultSetMock.getString("nombre_completo")).thenReturn("Carlos Pérez");
+        when(resultSetMock.getString("nombre_completo")).thenReturn("Carlos Pérez Gómez");
         when(resultSetMock.getString("fecha_formateada")).thenReturn("06/08/2026");
-        when(resultSetMock.getString("incidencia")).thenReturn("Ninguna");
-        when(resultSetMock.getString("estado")).thenReturn("Activo");
+        when(resultSetMock.getString("estado_asistencia")).thenReturn("Presente");
 
         List<HistorialAlumnoDto> historial = alumnoDao.getHistorialByMatricula("2026001");
 
         assertNotNull(historial);
         assertEquals(1, historial.size());
-        assertEquals("PC-05", historial.get(0).getNumeroPc());
+        assertEquals("2026001", historial.get(0).getMatricula());
     }
 }

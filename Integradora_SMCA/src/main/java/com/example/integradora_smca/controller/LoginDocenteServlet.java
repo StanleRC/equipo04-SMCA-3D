@@ -16,6 +16,7 @@ import java.io.IOException;
 public class LoginDocenteServlet extends HttpServlet {
 
     private DocenteDao docenteDao;
+    private static final String VISTA_LOGIN_DOCENTE = "/admin-docente_login.jsp";
 
     @Override
     public void init() throws ServletException {
@@ -25,7 +26,7 @@ public class LoginDocenteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        request.getRequestDispatcher(VISTA_LOGIN_DOCENTE).forward(request, response);
     }
 
     @Override
@@ -34,38 +35,54 @@ public class LoginDocenteServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        //Obtener parámetros del formulario
-        String correo = request.getParameter("correo");
+        String usuarioOrCorreo = request.getParameter("correo");
+        if (usuarioOrCorreo == null || usuarioOrCorreo.trim().isEmpty()) {
+            usuarioOrCorreo = request.getParameter("txtCorreo");
+        }
+        if (usuarioOrCorreo == null || usuarioOrCorreo.trim().isEmpty()) {
+            usuarioOrCorreo = request.getParameter("usuario");
+        }
+
         String password = request.getParameter("password");
+        if (password == null || password.trim().isEmpty()) {
+            password = request.getParameter("txtPassword");
+        }
 
-        // Validar campos vacíos
-        if (correo == null || correo.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+        if (usuarioOrCorreo == null || usuarioOrCorreo.trim().isEmpty() || password == null || password.trim().isEmpty()) {
             request.setAttribute("errorMessage", "Por favor, completa todos los campos.");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher(VISTA_LOGIN_DOCENTE).forward(request, response);
             return;
         }
 
-        //Validar que el correo sea institucional
-        if (!correo.endsWith("@utez.edu.mx")) {
-            request.setAttribute("errorMessage", "El correo debe ser institucional (@utez.edu.mx).");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-            return;
+        Docente docente = docenteDao.loginByCorreo(usuarioOrCorreo.trim(), password);
+
+        if (docente == null) {
+            docente = docenteDao.login(usuarioOrCorreo.trim(), password);
         }
 
-        //Consultar la base de datos con el DAO
-        Docente docente = docenteDao.loginByCorreo(correo.trim(), password);
-
-        //Verificar credenciales
         if (docente != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("usuarioLogueado", docente);
-            session.setAttribute("rol", "Docente");
+            HttpSession oldSession = request.getSession(false);
+            if (oldSession != null) {
+                oldSession.invalidate();
+            }
 
-            // Redirección a una pagina diferente
+            HttpSession session = request.getSession(true);
+
+            // Construcción opcional de nombre completo para atributos generales de vista
+            String nombreCompleto = docente.getNombre() + " " + docente.getApellidoPaterno() + " " + docente.getApellidoMaterno();
+
+            session.setAttribute("docenteLogueado", docente);
+            session.setAttribute("usuarioLogueado", docente);
+            session.setAttribute("docente", docente);
+            session.setAttribute("usuario", docente);
+            session.setAttribute("nombreUsuario", nombreCompleto.trim());
+            session.setAttribute("usuarioFoto", docente.getFotoPerfil());
+            session.setAttribute("rol", docente.getRolIdRol() == 1 ? "Admin" : "Docente");
+
             response.sendRedirect(request.getContextPath() + "/views/admin/perfil_admin-docente.jsp");
         } else {
-            request.setAttribute("errorMessage", "Correo o contraseña incorrectos.");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "Correo/Matrícula o contraseña incorrectos.");
+            request.getRequestDispatcher(VISTA_LOGIN_DOCENTE).forward(request, response);
         }
     }
 }
