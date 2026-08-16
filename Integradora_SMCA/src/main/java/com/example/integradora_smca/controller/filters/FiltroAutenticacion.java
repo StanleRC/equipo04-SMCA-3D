@@ -56,7 +56,7 @@ public class FiltroAutenticacion extends HttpFilter {
             chain.doFilter(request, response);
         } else {
             // Si intenta entrar a una vista privada sin sesión, redirige al login
-            response.sendRedirect(request.getContextPath() + "/admin-docente_login.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
         }
     }
 }

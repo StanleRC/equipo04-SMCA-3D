@@ -1,155 +1,110 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Estilo base para ambos botones */
-.btn-action {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
-    color: #ffffff;
-    display: inline-block;
-    text-align: center;
-}
-
-/* Botón Cancelar */
-.btn-cancel {
-    background-color: #0d3b66;   /* azul oscuro */
-}
-.btn-cancel:hover {
-    background-color: #092a4d;
-}
-
-/* Botón Registrar */
-.btn-registrar {
-    background-color: #0d8a72;   /* verde */
-    border: none;
-}
-.btn-registrar:hover {
-    background-color: #0a7560;
-}
-
-
+/* Estilos Globales y Contenedor Principal */
 body {
-    background-color: #ffffff;
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    padding: 20px 0;
 }
 
 .main-container {
     width: 100%;
     max-width: 850px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 0 15px;
 }
 
+/* Header y Logo */
 .utez-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.utez-logo {
+    max-width: 180px;
+    height: auto;
+}
+
+/* Tarjeta Principal */
+.register-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 35px 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.register-title {
+    color: #555555;
+    font-size: 24px;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 25px;
 }
 
-.utez-logo {
-    max-width: 260px;
-    height: auto;
-}
-
-.register-card {
-    background-color: #f2f2f2;
-    border-radius: 20px;
-    border: 1px solid #dcdcdc;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    padding: 40px 45px;
-}
-
-.register-title {
-    text-align: center;
-    color: #666666;
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 35px;
+/* Campos de entrada (Inputs) */
+.form-label {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .custom-input {
-    width: 100%;
-    height: 48px;
-    border-radius: 12px;
-    border: 1px solid #d0d0d0;
-    padding: 0 16px;
+    border: 1px solid #dcdfe6;
+    border-radius: 10px;
+    padding: 10px 14px;
     font-size: 14px;
-    color: #495057;
-    background-color: #ffffff;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.custom-input::placeholder {
-    color: #a0a0a0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .custom-input:focus {
-    border-color: #008a6e;
-    box-shadow: 0 0 0 0.2rem rgba(0, 138, 110, 0.25);
+    border-color: #002b49;
+    box-shadow: 0 0 0 0.2rem rgba(0, 43, 73, 0.15);
 }
 
+/* Estilos Unificados para los Botones */
 .actions-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 35px;
+    margin-top: 25px;
 }
 
-.btn-cancel {
-    background-color: #213555;
-    color: #ffffff !important;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 45px;
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 28px;
     font-size: 14px;
     font-weight: 600;
+    border-radius: 25px;
     text-decoration: none;
-    display: inline-block;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Botón Cancelar (Azul Oscuro UTEZ) */
+.btn-cancel {
+    background-color: #1f344d;
+    color: #ffffff !important;
 }
 
 .btn-cancel:hover {
-    background-color: #16243b;
+    background-color: #142335;
+    color: #ffffff !important;
 }
 
-.btn-registrar {
-    background-color: #008a6e;
-    color: #ffffff;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 45px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+/* Botón Siguiente / Registrar (Verde UTEZ) */
+.btn-registrar, .btn-next {
+    background-color: #00ab84; /* Verde institucional UTEZ */
+    color: #ffffff !important;
 }
 
-.btn-registrar:hover {
-    background-color: #006f58;
+.btn-registrar:hover, .btn-next:hover {
+    background-color: #008f6e;
+    color: #ffffff !important;
 }
 
-@media (max-width: 576px) {
-    .register-card {
-        padding: 25px 20px;
-    }
-    .actions-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .btn-cancel, .btn-registrar {
-        width: 100%;
-        text-align: center;
-    }
+.btn-action:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }

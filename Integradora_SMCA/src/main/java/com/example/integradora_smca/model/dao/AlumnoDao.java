@@ -14,7 +14,29 @@ import java.util.List;
 
 public class AlumnoDao {
 
+    public boolean existeAlumno(String matricula, String correo) {
+        String sql = "SELECT COUNT(*) FROM alumno WHERE UPPER(TRIM(matricula)) = UPPER(TRIM(?)) OR LOWER(TRIM(correo)) = LOWER(TRIM(?))";
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, matricula.trim());
+            ps.setString(2, correo.trim());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean create(Alumno entidad) {
+        if (existeAlumno(entidad.getMatricula(), entidad.getCorreo())) {
+            System.err.println("--> ERROR: Matrícula o correo ya registrados.");
+            return false;
+        }
+
         String sqlContrasena = "INSERT INTO contrasena (hash_password) VALUES (?)";
         String sqlAlumno = "INSERT INTO alumno (matricula, nombre, apellido_paterno, apellido_materno, correo, id_contrasena, grupo_id_grupo, rol_id_rol, foto_perfil) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -80,7 +102,7 @@ public class AlumnoDao {
         }
     }
 
-    public Alumno login(String matricula, String contrasena) {
+public Alumno login(String matricula, String contrasena) {
         if (matricula == null || contrasena == null) return null;
 
         String sql = "SELECT a.matricula, a.nombre, a.apellido_paterno, a.apellido_materno, a.correo, a.grupo_id_grupo, " +
