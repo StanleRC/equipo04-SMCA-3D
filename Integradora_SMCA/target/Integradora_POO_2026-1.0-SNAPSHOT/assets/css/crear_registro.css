@@ -1,0 +1,84 @@
+/* --- ESTRUCTURA GENERAL Y DESPLAZAMIENTO DEL SIDEBAR --- */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.main-content {
+    margin-left: 240px; /* Margen para no tapar contenido con el sidebar de 240px */
+    width: calc(100% - 240px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BARRA AZUL SUPERIOR --- */
+.search-top-blue-bar {
+    background-color: #1d3b6a !important;
+    color: #ffffff !important;
+    padding: 18px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
+
+/* --- CUERPO CENTRADO Y TARJETA --- */
+.register-logo-img {
+    width: 220px;
+    height: auto;
+    max-width: 100%;
+    display: block;
+}
+
+
+.register-choice-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: -30px;
+}
+
+.register-logo-img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.selection-card {
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    padding: 40px 30px;
+    width: 100%;
+}
+
+/* --- BOTONES DE OPCIÓN (Profesor, Grupo, Alumno) --- */
+.btn-selection {
+    background-color: #1e314b !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 12px 35px !important;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-selection:hover {
+    background-color: #142236 !important;
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.18);
+}
