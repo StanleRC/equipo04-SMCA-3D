@@ -46,18 +46,20 @@ public class LoginAlumnoServlet extends HttpServlet {
         Alumno alumno = alumnoDao.login(matricula.trim(), password);
 
         if (alumno != null) {
-            // Invalida sesión anterior por seguridad si existía
+            // Invalida sesión anterior por seguridad
             HttpSession oldSession = request.getSession(false);
             if (oldSession != null) {
                 oldSession.invalidate();
             }
 
-            // Crea sesión limpia con las claves necesarias
+            // Crea sesión limpia
             HttpSession session = request.getSession(true);
             session.setAttribute("usuarioLogueado", alumno);
             session.setAttribute("usuario", alumno);
             session.setAttribute("rol", "Alumno");
 
+            // ¡CORRECCIÓN CLAVE! Guardamos la matrícula como String en la sesión
+            session.setAttribute("matricula", alumno.getMatricula());
 
             response.sendRedirect(request.getContextPath() + "/PerfilAlumnoServlet");
         } else {

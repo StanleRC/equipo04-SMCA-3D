@@ -33,10 +33,10 @@
 
             <div class="salones-card">
 
+                <!-- CECADEC -->
                 <div class="building-section">
                     <h3 class="building-title">CECADEC</h3>
                     <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=Todos" class="btn-salon">Todos</a>
                         <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC10" class="btn-salon">CC 10</a>
                         <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC11" class="btn-salon">CC 11</a>
                         <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC12" class="btn-salon">CC 12</a>
@@ -44,6 +44,7 @@
                     </div>
                 </div>
 
+                <!-- Docencia 4 -->
                 <div class="building-section">
                     <h3 class="building-title">Docencia 4</h3>
                     <div class="buttons-grid">
@@ -57,6 +58,7 @@
                     </div>
                 </div>
 
+                <!-- CEDIM -->
                 <div class="building-section">
                     <h3 class="building-title">CEDIM</h3>
                     <div class="buttons-grid">

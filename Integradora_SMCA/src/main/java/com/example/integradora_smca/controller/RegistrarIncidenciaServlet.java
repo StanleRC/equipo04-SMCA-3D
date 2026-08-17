@@ -6,56 +6,57 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/RegistrarIncidenciaServlet")
+@WebServlet(name = "RegistrarIncidenciaServlet", value = "/RegistrarIncidenciaServlet")
 public class RegistrarIncidenciaServlet extends HttpServlet {
 
     private final IncidenciaDao incidenciaDao = new IncidenciaDao();
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/views/alumno/crear_incidencia_alumno.jsp").forward(request, response);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
+        // Captura de datos usando los nombres exactos del formulario HTML/JSP
         String numeroPc = request.getParameter("numeroPc");
-        String laboratorio = request.getParameter("laboratorio");
-        String descripcion = request.getParameter("incidencia");
+        String idLaboratorio = request.getParameter("laboratorio");
         String prioridad = request.getParameter("prioridad");
+        String descripcionFalla = request.getParameter("descripcion_falla"); // Corregido a descripcion_falla
+        String horaFin = request.getParameter("horaFin");
 
-        if (numeroPc == null || numeroPc.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=pc");
+        // Normalizar cadenas vacías a null para Oracle
+        if (numeroPc != null && numeroPc.trim().isEmpty()) numeroPc = null;
+        if (horaFin != null && horaFin.trim().isEmpty()) horaFin = null;
+
+        // Obtener sesión activa
+        HttpSession session = request.getSession(false);
+        String matriculaAlumno = (session != null) ? (String) session.getAttribute("matricula") : null;
+
+        // Validación de sesión activa
+        if (matriculaAlumno == null || matriculaAlumno.trim().isEmpty()) {
+            System.err.println("=== ERROR EN SERVLET: No hay matricula en la sesion ===");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
             return;
         }
 
-        if (laboratorio == null || laboratorio.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=laboratorio");
-            return;
-        }
+        // Guarda Bitácora (obligatorio) y Reporte de Falla (opcional si descripcionFalla viene con texto)
+        boolean guardado = incidenciaDao.guardarIncidenciaAlumno(
+                descripcionFalla, prioridad, numeroPc, idLaboratorio, matriculaAlumno, horaFin
+        );
 
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            descripcion = "Sin descripción";
-        }
-
-        if (prioridad == null || prioridad.trim().isEmpty()) {
-            prioridad = "Media";
-        }
-
-        Integer computadoraId = incidenciaDao.buscarIdComputadoraPorNumeroYLaboratorio(numeroPc, laboratorio);
-
-        if (computadoraId == null) {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=pc_no_encontrada");
-            return;
-        }
-
-        boolean ok = incidenciaDao.guardarIncidencia(descripcion, prioridad, computadoraId);
-
-        if (ok) {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/index.jsp?success=incidencia_guardada");
+        if (guardado) {
+            response.sendRedirect(request.getContextPath() + "/views/alumno/confirmacion.jsp");
         } else {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/crear_incidencia_alumno.jsp?error=guardar");
+            System.err.println("ERROR EN SERVLET: El DAO devolvio false");
+            request.setAttribute("error", "No se pudo registrar en la base de datos.");
+            request.getRequestDispatcher("/views/alumno/crear_incidencia_alumno.jsp").forward(request, response);
         }
     }
 }
