@@ -104,9 +104,6 @@
         usuarioNombre: "${sessionScope.usuarioLogueado.nombre}",
         contextPath: "${pageContext.request.contextPath}"
     };
-</script>
 
-<!-- Importar el archivo JS (con ?v=2 para obligar al navegador a recargar el JS actualizado) -->
-<script src="${pageContext.request.contextPath}/assets/js/modal_bienvenida_alumno.js?v=2"></script>
 </body>
 </html>

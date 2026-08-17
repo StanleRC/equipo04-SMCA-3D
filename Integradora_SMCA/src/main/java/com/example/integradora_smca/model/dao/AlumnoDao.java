@@ -298,4 +298,67 @@ public Alumno login(String matricula, String contrasena) {
 
         return a;
     }
+
+    // ==========================================
+    // MÉTODOS PARA RECUPERACIÓN DE CONTRASEÑA
+    // ==========================================
+
+    /**
+     * Verifica si existe un alumno registrado con el correo ingresado.
+     */
+    public boolean existeCorreo(String correo) {
+        if (correo == null || correo.trim().isEmpty()) return false;
+
+        String sql = "SELECT COUNT(*) FROM alumno WHERE LOWER(TRIM(correo)) = LOWER(TRIM(?))";
+
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, correo.trim());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("--> ERROR EN EXISTE CORREO: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Actualiza la contraseña en la tabla 'contrasena' enlazada al alumno por su correo.
+     */
+    public boolean actualizarPasswordPorCorreo(String correo, String nuevaPassword) {
+        if (correo == null || nuevaPassword == null) return false;
+
+        String sql = "UPDATE contrasena SET hash_password = ? " +
+                "WHERE id_contrasena = (" +
+                "   SELECT id_contrasena FROM alumno WHERE LOWER(TRIM(correo)) = LOWER(TRIM(?))" +
+                ")";
+
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            // Encriptación de la nueva contraseña con SecurityUtils
+            String passwordHash = SecurityUtils.hashPassword(nuevaPassword.trim());
+
+            ps.setString(1, passwordHash);
+            ps.setString(2, correo.trim());
+
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("--> CONTRASEÑA ACTUALIZADA EXITOSAMENTE PARA: [" + correo.trim() + "]");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("--> ERROR AL ACTUALIZAR CONTRASEÑA: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

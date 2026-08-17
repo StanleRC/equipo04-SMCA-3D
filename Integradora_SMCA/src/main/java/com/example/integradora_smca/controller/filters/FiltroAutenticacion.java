@@ -29,13 +29,16 @@ public class FiltroAutenticacion extends HttpFilter {
         );
 
         // RUTAS PÚBLICAS Y PERMISOS DE ENTRADA
-        boolean publicPage = requestURI.endsWith("/index.jsp")
+        boolean publicPage = requestURI.endsWith("/")
+                || requestURI.endsWith("/index.jsp")
                 || requestURI.endsWith("/admin-docente_login.jsp")
                 || requestURI.endsWith("/recuperar_pass.jsp")
+                || requestURI.endsWith("/cambiar_password.jsp")
                 || requestURI.contains("/loginServlet")
                 || requestURI.contains("/loginDocenteServlet")
                 || requestURI.contains("/RegistroAlumnoServlet")
                 || requestURI.contains("/RegistroDocenteServlet")
+                || requestURI.contains("/recuperarPassServlet")
                 || requestURI.contains("/RecuperarPassServlet")
                 || requestURI.contains("/logoutServlet")
                 || requestURI.endsWith("/views/alumno/registro_directo_alumno.jsp")

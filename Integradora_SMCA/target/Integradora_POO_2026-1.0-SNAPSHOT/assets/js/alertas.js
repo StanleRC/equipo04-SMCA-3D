@@ -1,4 +1,4 @@
-// 1. Alerta para Cerrar Sesión
+ // 1. Alerta para Cerrar Sesión
 function confirmarCierreSesion(event, urlRedireccion) {
     if (event) event.preventDefault();
 
@@ -20,7 +20,7 @@ function confirmarCierreSesion(event, urlRedireccion) {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = urlRedireccion || 'index.jsp';
+            window.location.href = urlRedireccion || '/logoutServlet';
         }
     });
 }
