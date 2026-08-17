@@ -1,4 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String labSeleccionado = request.getParameter("lab");
+    if (labSeleccionado == null) {
+        labSeleccionado = "";
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,9 +32,17 @@
 
         <h2 class="card-title-custom">Bienvenido a la bitácora digital</h2>
 
+        <% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-danger text-center mb-3">
+            <%= request.getAttribute("error") %>
+        </div>
+        <% } %>
+
+        <!-- Procesa el formulario hacia RegistrarIncidenciaServlet -->
         <form action="${pageContext.request.contextPath}/RegistrarIncidenciaServlet" method="POST">
 
-            <div class="row g-3 mb-4">
+            <!-- Fila 1: Número de PC y Selección de Aula -->
+            <div class="row g-3 mb-3">
                 <div class="col-6">
                     <input type="text"
                            name="numeroPc"
@@ -38,40 +52,59 @@
                 </div>
 
                 <div class="col-6">
-                    <select name="laboratorio" class="form-control custom-input" required>
-                        <option value="">Selecciona aula</option>
-                        <option value="CC10">CC 10</option>
-                        <option value="CC11">CC 11</option>
-                        <option value="CC12">CC 12</option>
-                        <option value="CC13">CC 13</option>
-                        <option value="CA1">CA 1</option>
-                        <option value="CA2">CA 2</option>
-                        <option value="CA3">CA 3</option>
-                        <option value="CA4">CA 4</option>
-                        <option value="CA5">CA 5</option>
-                        <option value="CA6">CA 6</option>
-                        <option value="CA11">CA 11</option>
-                        <option value="CC1">CC 1</option>
-                        <option value="CC2">CC 2</option>
+                    <select name="laboratorio" class="form-select custom-input" required>
+                        <option value="" disabled selected>Selecciona aula</option>
+
+                        <optgroup label="CECADEC">
+                            <option value="1">CC 10</option>
+                            <option value="2">CC 11</option>
+                            <option value="3">CC 12</option>
+                            <option value="4">CC 13</option>
+                        </optgroup>
+
+                        <optgroup label="Docencia 4">
+                            <option value="5">CA 1</option>
+                            <option value="6">CA 2</option>
+                            <option value="7">CA 3</option>
+                            <option value="8">CA 4</option>
+                            <option value="9">CA 5</option>
+                            <option value="10">CA 6</option>
+                            <option value="11">CA 11</option>
+                        </optgroup>
+
+                        <optgroup label="CEDIM">
+                            <option value="12">CC 1</option>
+                            <option value="13">CC 2</option>
+                        </optgroup>
                     </select>
                 </div>
             </div>
 
+            <!-- Fila 2: Prioridad (Sin required) y Hora de Salida -->
             <div class="row g-3 mb-4">
-                <div class="col-12">
-                    <select name="prioridad" class="form-control custom-input" required>
-                        <option value="">Selecciona prioridad</option>
+                <div class="col-6">
+                    <select name="prioridad" class="form-select custom-input">
+                        <option value="Media" selected>Prioridad (por defecto Media)</option>
                         <option value="Baja">Baja</option>
-                        <option value="Media" selected>Media</option>
+                        <option value="Media">Media</option>
                         <option value="Alta">Alta</option>
                     </select>
                 </div>
+
+                <div class="col-6">
+                    <input type="time"
+                           name="horaFin"
+                           class="form-control custom-input"
+                           title="Hora de salida"
+                           required>
+                </div>
             </div>
 
-            <h3 class="card-subtitle-custom">¿El equipo presenta alguna falla?</h3>
+            <h3 class="card-subtitle-custom">¿El equipo presenta alguna falla? (Opcional)</h3>
 
+            <!-- Descripción de la Incidencia ( name="descripcion_falla" ) -->
             <div class="mb-4">
-                <textarea name="incidencia"
+                <textarea name="descripcion_falla"
                           class="form-control custom-textarea"
                           rows="4"
                           placeholder="Describe la incidencia..."></textarea>
@@ -83,7 +116,7 @@
         </form>
     </div>
 
-    <a href="${pageContext.request.contextPath}/sobrenosotros.jsp" class="sobre-nosotros-link">
+    <a href="${pageContext.request.contextPath}/views/sobrenosotros.jsp" class="sobre-nosotros-link">
         <i class="bi bi-info-circle"></i>
         <span><u>Sobre Nosotros</u></span>
     </a>

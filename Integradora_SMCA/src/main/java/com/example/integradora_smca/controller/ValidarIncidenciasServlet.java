@@ -1,19 +1,24 @@
 package com.example.integradora_smca.controller;
 
 import com.example.integradora_smca.model.dao.IncidenciaDao;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-@WebServlet("/ValidarIncidenciasServlet")
+@WebServlet(name = "ValidarIncidenciasServlet", value = "/ValidarIncidenciasServlet")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2,  // 2 MB
+        maxFileSize = 1024 * 1024 * 10,       // 10 MB
+        maxRequestSize = 1024 * 1024 * 50     // 50 MB
+)
 public class ValidarIncidenciasServlet extends HttpServlet {
 
     private final IncidenciaDao incidenciaDao = new IncidenciaDao();
@@ -22,60 +27,73 @@ public class ValidarIncidenciasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String laboratorio = request.getParameter("lab");
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            return;
+        }
 
-        if (laboratorio == null || laboratorio.trim().isEmpty() || "Todos".equalsIgnoreCase(laboratorio.trim())) {
-            request.setAttribute("laboratorioSeleccionado", "Todos");
-            request.setAttribute("edificioSeleccionado", "Todos");
-            request.setAttribute("aulaSeleccionada", "");
-            request.setAttribute("incidencias", incidenciaDao.listarIncidencias(null));
+        String labParam = request.getParameter("lab");
+
+        if (labParam == null || labParam.trim().isEmpty()) {
+            labParam = "CC2";
         } else {
-            String lab = laboratorio.trim().toUpperCase(Locale.ROOT);
-            request.setAttribute("laboratorioSeleccionado", lab);
-            request.setAttribute("edificioSeleccionado", obtenerEdificio(lab));
-            request.setAttribute("aulaSeleccionada", formatearAula(lab));
-            request.setAttribute("incidencias", incidenciaDao.listarIncidencias(lab));
+            labParam = labParam.trim();
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/views/admin/tabla_incidencias_validar.jsp");
-        rd.forward(request, response);
+        List<Map<String, Object>> listaIncidencias;
+
+        if (!"Todos".equalsIgnoreCase(labParam)) {
+            listaIncidencias = incidenciaDao.listarIncidenciasPorLaboratorio(labParam);
+        } else {
+            listaIncidencias = incidenciaDao.listarIncidencias();
+        }
+
+        request.setAttribute("listaIncidencias", listaIncidencias);
+        request.setAttribute("labActual", labParam);
+
+        request.getRequestDispatcher("/views/admin/validar_incidencia.jsp").forward(request, response);
     }
 
-    private String obtenerEdificio(String laboratorio) {
-        if (laboratorio == null || laboratorio.isBlank()) {
-            return "Todos";
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            return;
         }
 
-        if (laboratorio.startsWith("CC")) {
-            if ("CC1".equalsIgnoreCase(laboratorio) || "CC2".equalsIgnoreCase(laboratorio)) {
-                return "CEDIM";
+        String labParam = request.getParameter("lab");
+        String redirectLab = (labParam != null && !labParam.trim().isEmpty()) ? "&lab=" + labParam.trim() : "";
+
+        String idReporteStr = request.getParameter("idReporte");
+        if (idReporteStr == null || idReporteStr.trim().isEmpty()) {
+            idReporteStr = request.getParameter("idIncidencia");
+        }
+
+        String accion = request.getParameter("accion");
+
+        if (idReporteStr == null || idReporteStr.trim().isEmpty() || accion == null) {
+            response.sendRedirect(request.getContextPath() + "/ValidarIncidenciasServlet?msj=error" + redirectLab);
+            return;
+        }
+
+        try {
+            int idReporte = Integer.parseInt(idReporteStr.trim());
+            boolean exito = incidenciaDao.procesarRevisionAdmin(idReporte, accion);
+
+            if (exito) {
+                response.sendRedirect(request.getContextPath() + "/ValidarIncidenciasServlet?msj=ok" + redirectLab);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/ValidarIncidenciasServlet?msj=error" + redirectLab);
             }
-            return "CECADEC";
+
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/ValidarIncidenciasServlet?msj=error" + redirectLab);
         }
-
-        if (laboratorio.startsWith("CA")) {
-            return "Docencia 4";
-        }
-
-        if (laboratorio.startsWith("LAB")) {
-            return "Laboratorio";
-        }
-
-        return "Laboratorio";
-    }
-
-    private String formatearAula(String laboratorio) {
-        if (laboratorio == null || laboratorio.isBlank()) {
-            return "";
-        }
-
-        String prefijo = laboratorio.replaceAll("[0-9]", "");
-        String numero = laboratorio.replaceAll("[^0-9]", "");
-
-        if (numero.isEmpty()) {
-            return laboratorio;
-        }
-
-        return prefijo + " " + numero;
     }
 }

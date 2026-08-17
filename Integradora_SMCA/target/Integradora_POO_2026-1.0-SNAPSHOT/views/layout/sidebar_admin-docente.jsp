@@ -17,9 +17,9 @@
 
 <aside class="figma-sidebar">
 
-    <!-- ==========================================
+    <!--
          CONTENIDO DEL SIDEBAR
-         ========================================== -->
+        -->
     <div class="sidebar-content">
 
         <!-- PERFIL ADMIN / DOCENTE -->
@@ -98,19 +98,13 @@
                class="sidebar-item-link">
                 Tu perfil
             </a>
-
-            <a href="${pageContext.request.contextPath}/views/admin/perfil_admin-docente.jsp"
-               class="sidebar-item-link">
-                Editar
+            <a>
             </a>
-
         </nav>
 
     </div>
 
-    <!-- ==========================================
-         CERRAR SESIÓN
-         ========================================== -->
+    <!-- CERRAR SESIÓN -->
     <div class="sidebar-footer-logout">
 
         <a href="javascript:void(0);"

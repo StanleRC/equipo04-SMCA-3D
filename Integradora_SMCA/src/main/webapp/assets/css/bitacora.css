@@ -1,0 +1,87 @@
+
+.salones-body {
+    padding: 20px 40px;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 100px);
+}
+
+.top-welcome-bar {
+    background-color: #0d2847;
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Tarjeta Principal Centrada */
+.salones-card {
+    background: #e9ecef;
+    border-radius: 20px;
+    padding: 35px;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Secciones de los edificios centradas */
+.building-section {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.building-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0d2847;
+    margin-bottom: 15px;
+}
+
+/* Flexbox centrado para los botones como en la imagen original */
+.buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Botones con forma de píldora ovalada azul oscuro */
+.btn-salon {
+    display: inline-block;
+    background-color: #1d3557;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 28px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-salon:hover {
+    background-color: #0d2847;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Enlaces y botones secundarios */
+.btn-back {
+    color: #000000;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.card-footer-link {
+    text-align: right;
+    margin-top: 25px;
+}
+
+.link-add-room {
+    color: #0d2847;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: underline;
+}

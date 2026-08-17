@@ -11,7 +11,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3518f42c-c0a0-449c-9af1-f2b349f17b0f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/model/Incidencia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/bitacora.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/confirmacion.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/LoginAlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/LoginAlumnoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/ValidarIncidenciasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/ValidarIncidenciasServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/model/dao/IncidenciaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/model/dao/IncidenciaDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/validar_incidencia.css" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/assets/css/validar_incidencia.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/bitacora.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/bitacora.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/incidencias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/incidencias.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/validar_incidencia.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/admin/validar_incidencia.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/crear_incidencia_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/alumno/crear_incidencia_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/layout/sidebar_admin-docente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/main/webapp/views/layout/sidebar_admin-docente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/RegistroAlumnoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/RegistroAlumnoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/RegistroDocenteServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/RegistroDocenteServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/ValidarIncidenciasServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/ValidarIncidenciasServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/filters/FiltroAutenticacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/controller/filters/FiltroAutenticacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/DocenteDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/DocenteDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/IncidenciaDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/WEB-INF/classes/com/example/integradora_smca/model/dao/IncidenciaDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/assets/css/validar_incidencia.css" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/assets/css/validar_incidencia.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/bitacora.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/bitacora.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/incidencias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/incidencias.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/validar_incidencia.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/admin/validar_incidencia.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/crear_incidencia_alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/alumno/crear_incidencia_alumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/layout/sidebar_admin-docente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/Integradora_POO_2026-1.0-SNAPSHOT/views/layout/sidebar_admin-docente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/LoginAlumnoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/RegistrarIncidenciaServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/RegistroAlumnoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/RegistroAlumnoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/RegistroDocenteServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/RegistroDocenteServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/ValidarIncidenciasServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/ValidarIncidenciasServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/FiltroAutenticacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/controller/filters/FiltroAutenticacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/AlumnoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/DocenteDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/DocenteDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/IncidenciaDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/classes/com/example/integradora_smca/model/dao/IncidenciaDao.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +59,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="Jsp File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -53,33 +92,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 10.1.55.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;rm__fernanda&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/marif/OneDrive/Documentos/Desktop/Integradora/Integradora/equipo04-SMCA-3D&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Tomcat Server.Tomcat 10.1.55.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "rm__fernanda",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/marif/OneDrive/Documentos/Desktop/Integradora/Integradora/equipo04-SMCA-3D",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "service.view.auto.scroll.to.source": "true",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\marif\OneDrive\Documentos\Desktop\Integradora\Integradora\equipo04-SMCA-3D\Integradora_SMCA\src\main\resources" />
@@ -230,6 +270,7 @@
       <workItem from="1786648061084" duration="1055000" />
       <workItem from="1786658280597" duration="52721000" />
       <workItem from="1786818641233" duration="30635000" />
+      <workItem from="1786946999548" duration="4988000" />
     </task>
     <servers />
   </component>
@@ -252,7 +293,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Integradora_SMCA/src/main/java/com/example/integradora_smca/controller/RegistroAlumnoServlet.java</url>
-          <line>27</line>
+          <line>48</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
