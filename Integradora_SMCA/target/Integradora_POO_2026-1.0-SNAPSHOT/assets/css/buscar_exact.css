@@ -1,0 +1,134 @@
+/* --- LAYOUT PRINCIPAL Y DESPLAZAMIENTO DEL SIDEBAR --- */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.main-content {
+    margin-left: 240px; /* Desplaza el contenido para que el sidebar no lo tape */
+    width: calc(100% - 240px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BARRA AZUL SUPERIOR --- */
+.search-top-blue-bar {
+    background-color: #1d3b6a !important;
+    color: #ffffff !important;
+    padding: 18px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
+
+/* --- CUERPO CENTRADO DEL BUSCADOR --- */
+.search-page-body {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 550px;
+    margin-top: -40px; /* Eleva ligeramente el contenido al centro de la pantalla */
+}
+
+.logo-search-img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* --- TARJETA DE BÚSQUEDA (PÍLDORA) --- */
+.search-card-pill {
+    background-color: #ffffff !important;
+    border-radius: 28px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    width: 100%;
+    padding: 16px 24px;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-card-pill:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+.search-form-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-icon-left {
+    color: #64748b !important;
+    font-size: 20px;
+}
+
+.search-input-field {
+    border: none !important;
+    background: transparent !important;
+    font-size: 16px !important;
+    color: #334155 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-weight: 500;
+}
+
+.search-input-field::placeholder {
+    color: #94a3b8 !important;
+    font-weight: 500;
+}
+
+.search-btn-submit {
+    border: none !important;
+    background: transparent !important;
+    color: #1e293b !important;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease;
+}
+
+.search-btn-submit:hover {
+    transform: scale(1.15);
+}
+
+/* --- HISTORIAL DE BÚSQUEDAS --- */
+.search-history-container {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.search-history-item {
+    display: flex;
+    align-items: center;
+    color: #64748b !important;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.search-history-item:hover {
+    color: #1d3b6a !important;
+}
+
+.search-history-item i {
+    font-size: 15px;
+    color: #94a3b8 !important;
+}
