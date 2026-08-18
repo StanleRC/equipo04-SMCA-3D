@@ -83,7 +83,7 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="custom-input form-control" id="password" name="txtPassword" required>
+                        <input type="password" class="custom-input form-control" id="password" name="txtPassword" minlength="8" maxlength="16" required>
                     </div>
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
@@ -128,9 +128,6 @@
 
 </div>
 
-<!-- ========================================================= -->
-<!-- MODAL DE VERIFICACIÓN DE CÓDIGO -->
-<!-- ========================================================= -->
 <div class="modal fade" id="modalCodigo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalCodigoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

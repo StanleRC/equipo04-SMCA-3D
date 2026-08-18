@@ -24,7 +24,7 @@
         <h1 class="system-title">Bitácora digital</h1>
     </header>
 
-    <!-- Tarjeta del Formulario -->
+
     <main class="login-card">
 
         <!-- Avatar gris superior -->
@@ -49,19 +49,19 @@
                 </div>
             </div>
 
-            <!-- Botón de Acción -->
+
             <div class="button-container">
                 <button type="submit" class="btn-submit">Continuar</button>
             </div>
 
-            <!-- Enlace para regresar -->
+
             <div class="card-links-container" style="text-align: center; margin-top: 15px;">
                 <a href="${pageContext.request.contextPath}/index.jsp" class="card-link bold-link">Regresar al login</a>
             </div>
         </form>
     </main>
 
-    <!-- Footer -->
+
     <footer class="login-footer">
         <a href="javascript:void(0);" class="about-us-link" id="openModalBtn">
             <i class="bi bi-info-circle"></i>
@@ -69,12 +69,8 @@
         </a>
     </footer>
 
-</div> <!-- /login-page-container -->
+</div>
 
-
-<!-- ========================================================= -->
-<!-- MODAL: Ahora vive AFUERA del contenedor, como hijo de BODY -->
-<!-- ========================================================= -->
 <div id="aboutModal" class="modal-overlay">
     <div class="modal-card">
         <h2 class="modal-title">¿Quiénes somos?</h2>
@@ -91,7 +87,7 @@
     </div>
 </div>
 
-<!-- Archivo JS separado -->
+
 <script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
 </body>
 </html>

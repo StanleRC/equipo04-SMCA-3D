@@ -20,11 +20,28 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null) {
-            // Invalidar la sesión para cerrar sesión
+            // Limpiar explícitamente todas las variables de sesión antes de invalidar
+            session.removeAttribute("usuarioLogueado");
+            session.removeAttribute("docenteLogueado");
+            session.removeAttribute("usuario");
+            session.removeAttribute("alumno");
+            session.removeAttribute("docente");
+            session.removeAttribute("alumnoTemporal");
+            session.removeAttribute("docenteTemporal");
+
+            // Invalidar la sesión completamente
             session.invalidate();
+
+            // Registrar logout en consola para auditoría
+            System.out.println("[LOGOUT] Sesión invalidada exitosamente");
         }
 
-        // Redirigir al index.jsp o página de login
+        // Establecer headers para evitar caché de navegador en páginas protegidas
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
+
+        // Redirigir al index.jsp (página de login)
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 

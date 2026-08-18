@@ -23,7 +23,9 @@ public class FiltroAutenticacion extends HttpFilter {
         boolean loggedIn = session != null && (
                 session.getAttribute("usuarioLogueado") != null ||
                         session.getAttribute("docenteLogueado") != null ||
-                        session.getAttribute("usuario") != null
+                        session.getAttribute("usuario") != null ||
+                        session.getAttribute("alumno") != null ||
+                        session.getAttribute("docente") != null
         );
 
         // RUTAS PÚBLICAS Y PERMISOS DE ENTRADA
@@ -35,6 +37,7 @@ public class FiltroAutenticacion extends HttpFilter {
                 || requestURI.contains("/RegistroAlumnoServlet")
                 || requestURI.contains("/RegistroDocenteServlet")
                 || requestURI.contains("/RecuperarPassServlet")
+                || requestURI.contains("/logoutServlet")
                 || requestURI.endsWith("/views/alumno/registro_directo_alumno.jsp")
                 || requestURI.endsWith("/views/admin/registro_directo_maestro.jsp")
                 || requestURI.contains("/registrarMaestroServlet");
@@ -52,11 +55,22 @@ public class FiltroAutenticacion extends HttpFilter {
                 || requestURI.endsWith(".ttf")
                 || requestURI.endsWith(".ico");
 
+        // RUTAS PRIVADAS (solo acceso con sesión)
+        boolean privateView = requestURI.contains("/views/admin/")
+                || requestURI.contains("/views/alumno/");
+
         if (loggedIn || publicPage || resourceRequest) {
+            // Agregar headers de seguridad para páginas protegidas
+            if (loggedIn && (privateView || requestURI.contains("/views/"))) {
+                response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, private");
+                response.setHeader("Pragma", "no-cache");
+                response.setHeader("Expires", "0");
+            }
             chain.doFilter(request, response);
         } else {
             // Si intenta entrar a una vista privada sin sesión, redirige al login
-            response.sendRedirect(request.getContextPath() + "/admin-docente_login.jsp");
+            System.out.println("[FILTRO] Acceso denegado a: " + requestURI + " - Sin sesión válida");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
         }
     }
 }
