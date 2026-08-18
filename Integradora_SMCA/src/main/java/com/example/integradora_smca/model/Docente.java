@@ -1,6 +1,6 @@
 package com.example.integradora_smca.model;
 
-public class Docente {
+public class Docente implements UsuarioPersonal {
 
     private Integer idDocente;
     private String nombre;
@@ -10,6 +10,11 @@ public class Docente {
     private String hashPassword;
     private int rolIdRol;
     private String fotoPerfil;
+
+    @Override
+    public String getIdentificador() {
+        return String.valueOf(idDocente);
+    }
 
     public Docente() {
     }

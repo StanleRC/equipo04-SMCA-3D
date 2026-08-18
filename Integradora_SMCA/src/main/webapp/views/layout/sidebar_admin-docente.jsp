@@ -23,7 +23,7 @@
     Mismo número que usa FiltroSoloAdmin.ROL_ADMIN. Si cambias uno, cambia el otro.
     Esto solo decide qué se DIBUJA; quien impide el acceso real es el filtro.
 --%>
-<c:set var="esAdmin" value="${perfil.rolIdRol eq 1}" />
+<c:set var="esAdmin" value="${sessionScope.esAdmin}" />
 
 <aside class="figma-sidebar">
 

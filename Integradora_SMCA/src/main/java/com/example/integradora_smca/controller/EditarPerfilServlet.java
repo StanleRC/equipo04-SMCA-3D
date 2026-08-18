@@ -1,7 +1,9 @@
 package com.example.integradora_smca.controller;
 
+import com.example.integradora_smca.model.Administrador;
 import com.example.integradora_smca.model.Alumno;
 import com.example.integradora_smca.model.Docente;
+import com.example.integradora_smca.model.dao.AdministradorDao;
 import com.example.integradora_smca.model.dao.AlumnoDao;
 import com.example.integradora_smca.model.dao.DocenteDao;
 
@@ -33,19 +35,21 @@ public class EditarPerfilServlet extends HttpServlet {
 
     private AlumnoDao alumnoDao;
     private DocenteDao docenteDao;
+    private AdministradorDao administradorDao;
 
     @Override
     public void init() throws ServletException {
         alumnoDao = new AlumnoDao();
         docenteDao = new DocenteDao();
+        administradorDao = new AdministradorDao();
     }
 
     /**
      * Carpeta donde viven las fotos.
      *
-     * IMPORTANTE: no se usa getRealPath(), que apunta dentro de target/. IntelliJ borra
-     * esa carpeta en cada Run, y por eso las fotos desaparecían aunque el nombre siguiera
-     * guardado en la base de datos. Esta ruta está fuera del proyecto, así que persiste.
+     * No se usa getRealPath(), que apunta dentro de target/. IntelliJ borra esa
+     * carpeta en cada Run, y por eso las fotos desaparecían aunque el nombre
+     * siguiera guardado en la base. Esta ruta está fuera del proyecto.
      */
     static Path carpetaFotos() throws IOException {
         String base = System.getProperty("catalina.base");
@@ -61,14 +65,13 @@ public class EditarPerfilServlet extends HttpServlet {
     static String extensionValida(String nombreArchivo) {
         if (nombreArchivo == null) return null;
 
-        // Algunos navegadores mandan la ruta completa, no solo el nombre.
         String limpio = nombreArchivo.replace('\\', '/');
         int barra = limpio.lastIndexOf('/');
         if (barra >= 0) limpio = limpio.substring(barra + 1);
 
         int punto = limpio.lastIndexOf('.');
-        // Esta comprobación faltaba: sin ella, un archivo sin punto reventaba con
-        // StringIndexOutOfBoundsException en fileName.substring(...).
+        // Sin esta comprobación, un archivo sin punto reventaba con
+        // StringIndexOutOfBoundsException en substring().
         if (punto < 0 || punto == limpio.length() - 1) return null;
 
         String ext = limpio.substring(punto + 1).toLowerCase(Locale.ROOT);
@@ -86,6 +89,7 @@ public class EditarPerfilServlet extends HttpServlet {
         if (session != null) {
             usuarioObj = session.getAttribute("usuarioLogueado");
             if (usuarioObj == null) usuarioObj = session.getAttribute("docente");
+            if (usuarioObj == null) usuarioObj = session.getAttribute("administrador");
             if (usuarioObj == null) usuarioObj = session.getAttribute("alumno");
         }
 
@@ -99,46 +103,64 @@ public class EditarPerfilServlet extends HttpServlet {
         String apellidoMaterno = limpiar(request.getParameter("apellidoMaterno"));
         String correo = limpiar(request.getParameter("correo")).toLowerCase();
 
-        // 1. Guardar la foto nueva, si el usuario subió una
         String nombreFoto = guardarFoto(request);
 
-        // 2. Escribir en la base de datos Y actualizar la sesión
         String vistaDestino;
         boolean guardado;
 
+        /*
+         * Antes este bloque era "if (Docente) ... else (Alumno)". Con la tabla
+         * ADMINISTRADOR en juego, un admin no era Docente y caía al else,
+         * provocando ClassCastException al hacer (Alumno) usuarioObj.
+         * Ahora cada tipo tiene su rama y el else final protege de sorpresas.
+         */
         if (usuarioObj instanceof Docente) {
             Docente docente = (Docente) usuarioObj;
             docente.setNombre(nombre);
             docente.setApellidoPaterno(apellidoPaterno);
             docente.setApellidoMaterno(apellidoMaterno);
             docente.setCorreo(correo);
-            if (nombreFoto != null) {
-                docente.setFotoPerfil(nombreFoto);
-            }
+            if (nombreFoto != null) docente.setFotoPerfil(nombreFoto);
 
-            // Esto es lo que faltaba: sin esta línea nada llegaba a la base de datos.
             guardado = docenteDao.actualizarPerfil(docente);
 
             session.setAttribute("usuarioLogueado", docente);
             session.setAttribute("docente", docente);
             vistaDestino = "/views/admin/perfil_admin-docente.jsp";
 
-        } else {
+        } else if (usuarioObj instanceof Administrador) {
+            Administrador admin = (Administrador) usuarioObj;
+            admin.setNombre(nombre);
+            admin.setApellidoPaterno(apellidoPaterno);
+            admin.setApellidoMaterno(apellidoMaterno);
+            admin.setCorreo(correo);
+            if (nombreFoto != null) admin.setFotoPerfil(nombreFoto);
+
+            guardado = administradorDao.actualizarPerfil(admin);
+
+            session.setAttribute("usuarioLogueado", admin);
+            session.setAttribute("administrador", admin);
+            session.setAttribute("docente", admin); // el sidebar histórico lee este
+            vistaDestino = "/views/admin/perfil_admin-docente.jsp";
+
+        } else if (usuarioObj instanceof Alumno) {
             Alumno alumno = (Alumno) usuarioObj;
             alumno.setNombre(nombre);
             alumno.setApellidoPaterno(apellidoPaterno);
             alumno.setApellidoMaterno(apellidoMaterno);
             alumno.setCorreo(correo);
-            if (nombreFoto != null) {
-                alumno.setFotoPerfil(nombreFoto);
-            }
+            if (nombreFoto != null) alumno.setFotoPerfil(nombreFoto);
 
-            // update() ya actualiza nombre, apellidos, correo y foto_perfil por matrícula.
             guardado = alumnoDao.update(alumno);
 
             session.setAttribute("usuarioLogueado", alumno);
             session.setAttribute("alumno", alumno);
             vistaDestino = "/views/alumno/editar_perfil_alumno.jsp";
+
+        } else {
+            log("[EditarPerfil] Tipo de usuario inesperado en sesión: " + usuarioObj.getClass());
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            return;
         }
 
         if (!guardado) {

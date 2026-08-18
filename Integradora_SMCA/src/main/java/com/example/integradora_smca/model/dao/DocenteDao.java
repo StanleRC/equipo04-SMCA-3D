@@ -137,30 +137,58 @@ public class DocenteDao {
     }
 
     public Docente loginByCorreo(String correo, String contrasena) {
-        String sql = "SELECT d.id_docente, d.nombre, d.apellido_paterno, d.apellido_materno, d.correo, d.rol_id_rol, d.foto_perfil, c.hash_password " +
+
+        /*
+         * OPTIMIZACIÓN SQL:
+         * Quitamos el LOWER(TRIM(d.correo)) de la base de datos.
+         * Como ya limpiamos la variable en Java, hacer esto directamente en el WHERE
+         * permite que la base de datos use sus índices (haciendo la consulta mucho más rápida).
+         */
+        String sql = "SELECT " +
+                "d.id_docente, d.nombre, d.apellido_paterno, d.apellido_materno, " +
+                "d.correo, d.rol_id_rol, d.foto_perfil, c.hash_password " +
                 "FROM docente d " +
                 "INNER JOIN contrasena c ON d.id_contrasena = c.id_contrasena " +
-                "WHERE LOWER(TRIM(d.correo)) = LOWER(TRIM(?))";
+                "WHERE d.correo = ?";
 
+        // Limpieza de inputs
         String correoLimpio = correo != null ? correo.trim().toLowerCase() : "";
         String passInputLimpia = contrasena != null ? contrasena.trim() : "";
 
-        try (Connection con = obtenerConexionValida();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        try (
+                Connection con = obtenerConexionValida();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
 
             ps.setString(1, correoLimpio);
 
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next() && validarPassword(passInputLimpia, rs.getString("hash_password"))) {
-                    return mapearDocente(rs);
+
+                // 1. Verificamos si la consulta arrojó resultados
+                if (rs.next()) {
+                    String hashBD = rs.getString("hash_password");
+
+                    // 2. Verificamos si la contraseña coincide
+                    if (validarPassword(passInputLimpia, hashBD)) {
+                        System.out.println(">>> [EXITO] Login exitoso para el docente: " + correoLimpio);
+                        return mapearDocente(rs);
+                    } else {
+                        // FALLO 1: El correo existe, pero la contraseña no hace match.
+                        System.out.println(">>> [FALLO] Contraseña incorrecta para: " + correoLimpio);
+                        System.out.println("    -> Hash guardado en BD: " + hashBD);
+                    }
+                } else {
+                    // FALLO 2: El correo NO existe, o el INNER JOIN falló (No tiene contraseña ligada).
+                    System.out.println(">>> [FALLO] Usuario no encontrado o sin contraseña vinculada: " + correoLimpio);
                 }
-                // Mismo mensaje para "no existe" y "contraseña mal": no se filtra qué correos existen.
-                System.out.println(">>> LOGIN DOCENTE FALLIDO para: [" + correoLimpio + "]");
             }
+
         } catch (SQLException e) {
+            System.err.println(">>> [ERROR SQL] Fallo en loginByCorreo:");
             e.printStackTrace();
         }
-        return null;
+
+        return null; // Si algo falla, retorna null para que el Servlet muestre el mensaje de error.
     }
 
     public Docente login(String idOrCorreo, String contrasena) {
