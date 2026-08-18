@@ -1,108 +1,217 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validar Incidencias - UTEZ</title>
-
-    <!-- Bootstrap 5 CSS y Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-
-    <!-- Hoja de Estilos Personalizada -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/validar_incidencia.css?v=6">
-
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <jsp:include page="/views/layout/header.jsp">
-    <jsp:param name="pageTitle" value="Validar Incidencias - UTEZ" />
+    <jsp:param name="pageTitle" value="Validar incidencias - UTEZ" />
 </jsp:include>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cssbitacora_insidencias_Aulas.css?v=12">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    .tabla-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid #1c3862;
+    }
+
+    .tabla-datos {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 950px;
+    }
+
+    .tabla-datos th {
+        height: 52px;
+        padding: 8px;
+        background-color: #1c3862;
+        color: #fff;
+        border: 1px solid #31517d;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .tabla-datos td {
+        height: 44px;
+        padding: 8px;
+        border: 1px solid #c8c8c8;
+        font-size: 14px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .tabla-datos td.al-inicio {
+        text-align: left;
+        padding-left: 12px;
+    }
+
+    .tabla-datos tbody tr:hover { background-color: #f4f6fa; }
+
+    .acciones-fila {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+    }
+
+    .btn-validar,
+    .btn-descartar {
+        border: none;
+        border-radius: 6px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-validar   { background-color: #0d8a72; }
+    .btn-validar:hover { background-color: #0a7560; }
+
+    .btn-descartar { background-color: #9aa3ad; }
+    .btn-descartar:hover { background-color: #7d858f; }
+
+    .badge-estado {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .badge-validado   { background: #dcf3e6; color: #1e7e4a; }
+    .badge-descartado { background: #f1f1f1; color: #6b6b6b; }
+
+    .encabezado-tabla {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .titulo-lab {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1c3862;
+        margin: 0;
+    }
+
+    .contador-filas { font-size: 13px; color: #666; }
+
+    .sin-datos { padding: 34px 12px !important; color: #777; }
+</style>
+
 <div class="main-wrapper">
-    <!-- Sidebar -->
+
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
 
-    <!-- Área de Contenido Principal -->
     <main class="main-content">
 
-        <!-- Banner Superior Azul -->
-        <div class="validar-top-blue-bar">
+        <div class="top-welcome-bar">
             ¡Bienvenido(a)!, Ingresaste como administrador
         </div>
 
-        <div class="validar-page-body">
+        <div class="salones-body">
 
-            <!-- Encabezado: Enlace de regreso, Logo centrado y Etiqueta del Laboratorio -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <a href="${pageContext.request.contextPath}/views/admin/incidencias.jsp" class="back-link">
-                    &larr; Pesta&ntilde;a anterior
+            <div class="mb-2">
+                <a href="javascript:history.back()" class="btn-back">
+                    &larr; <u>Pestaña anterior</u>
                 </a>
-
-                <!-- SECCIÓN CENTRAL: LOGO + ETIQUETA DINÁMICA -->
-                <div class="text-center">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo m-0">
-                    <div class="mt-2">
-                        <span class="badge px-3 py-2 fs-6 shadow-sm"
-                              style="background-color: #1a365d; color: #ffffff; border-radius: 8px;">
-                            Docencia / Laboratorio: ${not empty labActual ? labActual : 'CC2'}
-                        </span>
-                    </div>
-                </div>
-
-                <div style="width: 120px;"></div>
             </div>
 
-            <!-- Tabla de Incidencias -->
-            <div class="table-container table-responsive">
-                <table class="table custom-table align-middle">
+            <div class="text-center mb-3">
+                <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
+                     alt="Logo UTEZ" style="max-height: 130px;">
+            </div>
+
+            <div class="encabezado-tabla">
+                <h2 class="titulo-lab">
+                    Ingresaste a <c:out value="${labActual}" />
+                </h2>
+                <span class="contador-filas">
+                    ${listaIncidencias.size()} incidencia<c:if test="${listaIncidencias.size() ne 1}">s</c:if>
+                </span>
+            </div>
+
+            <div class="tabla-wrapper">
+                <table class="tabla-datos">
                     <thead>
                     <tr>
-                        <th>Grado</th>
-                        <th>Grupo</th>
-                        <th>PC</th>
-                        <th>Matr&iacute;cula</th>
-                        <th>Nombre</th>
-                        <th>Fecha</th>
-                        <th>Incidencia</th>
-                        <th>Validar</th>
+                        <th style="width: 8%;">Grado</th>
+                        <th style="width: 8%;">Grupo</th>
+                        <th style="width: 6%;">PC</th>
+                        <th style="width: 14%;">Matrícula</th>
+                        <th style="width: 20%;">Nombre</th>
+                        <th style="width: 11%;">Fecha</th>
+                        <th style="width: 18%;">Incidencia</th>
+                        <th style="width: 15%;">Validar</th>
                     </tr>
                     </thead>
+
                     <tbody>
-                    <%-- Obtiene la lista enviada por el Servlet --%>
-                    <c:set var="itemsTabla" value="${not empty listaIncidencias ? listaIncidencias : incidencias}" />
+                    <c:choose>
+                        <c:when test="${not empty listaIncidencias}">
+                            <c:forEach var="inc" items="${listaIncidencias}">
+                                <tr>
+                                    <td><strong>${inc.grado}</strong></td>
+                                    <td><strong>${inc.grupo}</strong></td>
+                                    <td>${inc.numeroPc}</td>
+                                    <td>${inc.matricula}</td>
+                                    <td class="al-inicio">${inc.nombreCompleto}</td>
+                                    <td>${inc.fecha}</td>
+                                    <td class="al-inicio">${inc.incidencia}</td>
 
-                    <c:forEach var="inc" items="${itemsTabla}">
-                        <tr>
-                            <td>${not empty inc.grado ? inc.grado : 'N/A'}</td>
-                            <td>${not empty inc.grupo ? inc.grupo : 'N/A'}</td>
-                            <td>${not empty inc.numero_pc ? inc.numero_pc : inc.pc}</td>
-                            <td>${not empty inc.matricula ? inc.matricula : 'N/A'}</td>
-                            <td>${not empty inc.nombre_alumno ? inc.nombre_alumno : inc.nombre}</td>
-                            <td>${not empty inc.fecha_reporte ? inc.fecha_reporte : inc.fecha}</td>
-                            <td>${not empty inc.descripcion_falla ? inc.descripcion_falla : inc.incidencia}</td>
-                            <td>
-                                <button type="button"
-                                        class="btn-validar-tabla"
-                                        onclick="abrirModalPregunta('${not empty inc.id_reporte ? inc.id_reporte : inc.idReporte}')">
-                                    Validar
-                                </button>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                                    <td>
+                                        <c:choose>
+                                            <%--
+                                                Un reporte ya revisado no se vuelve a tocar:
+                                                el DAO solo actualiza filas en 'Pendiente'.
+                                            --%>
+                                            <c:when test="${inc.estado eq 'Validado'}">
+                                                <span class="badge-estado badge-validado">Validado</span>
+                                            </c:when>
 
-                    <c:if test="${empty itemsTabla}">
-                        <tr>
-                            <td colspan="8" class="text-muted py-4 text-center">
-                                No hay incidencias registradas para revisar en este laboratorio.
-                            </td>
-                        </tr>
-                    </c:if>
+                                            <c:when test="${inc.estado eq 'Descartado'}">
+                                                <span class="badge-estado badge-descartado">Descartado</span>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <form method="post"
+                                                      action="${pageContext.request.contextPath}/ValidarIncidenciasServlet"
+                                                      class="form-revision">
+
+                                                    <input type="hidden" name="idReporte" value="${inc.idReporte}">
+                                                    <input type="hidden" name="lab" value="${labActual}">
+                                                    <input type="hidden" name="accion" value="">
+
+                                                    <div class="acciones-fila">
+                                                        <button type="button" class="btn-validar"
+                                                                data-accion="validar">Validar</button>
+                                                        <button type="button" class="btn-descartar"
+                                                                data-accion="descartar">Descartar</button>
+                                                    </div>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+
+                        <c:otherwise>
+                            <tr>
+                                <td colspan="8" class="sin-datos">
+                                    No hay incidencias reportadas en
+                                    <c:out value="${labActual}" />.
+                                </td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
                     </tbody>
                 </table>
             </div>
@@ -112,103 +221,64 @@
     </main>
 </div>
 
-<!-- MODAL 1: ¿LA INCIDENCIA ES VERÍDICA? -->
-<div class="modal fade" id="modalPregunta" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center p-4">
-            <div class="mb-3">
-                <span class="icon-circle-question">?</span>
-            </div>
-            <h3 class="fw-bold text-secondary mb-4">&iquest;La incidencia es ver&iacute;dica?</h3>
-            <div class="d-flex justify-content-center gap-3">
-                <button type="button" class="btn-modal-save" onclick="mostrarFormularioDetalle()">
-                    S&iacute;, validar
-                </button>
-                <form id="formDescartar" action="${pageContext.request.contextPath}/ValidarIncidenciasServlet" method="POST">
-                    <input type="hidden" name="idReporte" id="idReporteDescartar">
-                    <input type="hidden" name="accion" value="descartar">
-                    <input type="hidden" name="lab" value="${labActual}">
-                    <button type="submit" class="btn-modal-cancel">
-                        No
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL 2: FORMULARIO DETALLE Y EVIDENCIA -->
-<div class="modal fade" id="modalFormulario" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content p-4 text-center">
-            <h4 class="fw-bold text-secondary mb-3">Validar incidencia</h4>
-
-            <form action="${pageContext.request.contextPath}/ValidarIncidenciasServlet" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="idReporte" id="idReporteValidar">
-                <input type="hidden" name="accion" value="validar">
-                <input type="hidden" name="lab" value="${labActual}">
-
-                <div class="mb-3">
-                    <textarea name="txtDescripcion" class="form-control rounded-3" rows="4" placeholder="Ingresa una breve descripción..."></textarea>
-                </div>
-
-                <div class="mb-4 upload-box">
-                    <i class="bi bi-upload fs-2"></i>
-                    <p class="m-0 fw-bold">Subir evidencia</p>
-                    <small class="text-secondary">(opcional)</small>
-                    <input type="file" name="fileEvidencia" class="form-control mt-2" accept="image/*">
-                </div>
-
-                <div class="d-flex justify-content-center gap-3">
-                    <button type="submit" class="btn-modal-save">
-                        Reportar
-                    </button>
-                    <button type="button" class="btn-modal-cancel" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<%-- Resultado que devuelve ValidarIncidenciasServlet en ?msj= --%>
+<span id="flashMsj" hidden><c:out value="${param.msj}" /></span>
 
 <script>
-    let modalPreguntaBS = null;
-    let modalFormularioBS = null;
+    (function () {
+        // Cada botón escribe su acción en el campo oculto antes de enviar.
+        document.querySelectorAll('.form-revision button[data-accion]').forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                var form = boton.closest('form');
+                var esValidar = boton.dataset.accion === 'validar';
 
-    function abrirModalPregunta(idReporte) {
-        document.getElementById('idReporteDescartar').value = idReporte;
-        document.getElementById('idReporteValidar').value = idReporte;
+                var confirmar = function () {
+                    form.querySelector('input[name="accion"]').value = boton.dataset.accion;
+                    form.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+                    form.submit();
+                };
 
-        modalPreguntaBS = new bootstrap.Modal(document.getElementById('modalPregunta'));
-        modalPreguntaBS.show();
-    }
+                if (typeof Swal === 'undefined') {
+                    confirmar();
+                    return;
+                }
 
-    function mostrarFormularioDetalle() {
-        if (modalPreguntaBS) modalPreguntaBS.hide();
-        modalFormularioBS = new bootstrap.Modal(document.getElementById('modalFormulario'));
-        modalFormularioBS.show();
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('msj') === 'ok') {
-            Swal.fire({
-                title: '¡Incidencia procesada con éxito!',
-                icon: 'success',
-                confirmButtonText: 'Aceptar',
-                confirmButtonColor: '#00875a',
-                customClass: { popup: 'rounded-4' }
-            }).then(() => {
-                const lab = '${labActual}';
-                window.location.href = '${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=' + encodeURIComponent(lab);
+                Swal.fire({
+                    icon: 'question',
+                    title: esValidar ? '¿Validar la incidencia?' : '¿Descartar la incidencia?',
+                    text: 'Esta decisión no se puede revertir desde la pantalla.',
+                    showCancelButton: true,
+                    confirmButtonText: esValidar ? 'Sí, validar' : 'Sí, descartar',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonColor: esValidar ? '#0d8a72' : '#9aa3ad'
+                }).then(function (res) {
+                    if (res.isConfirmed) confirmar();
+                });
             });
+        });
+
+        var msj = document.getElementById('flashMsj').textContent.trim();
+
+        if (msj && typeof Swal !== 'undefined') {
+            if (msj === 'ok') {
+                Swal.fire({
+                    icon: 'success', title: 'Incidencia revisada',
+                    timer: 1800, showConfirmButton: false
+                });
+            } else if (msj === 'error') {
+                Swal.fire({
+                    icon: 'error', title: 'No se pudo procesar',
+                    text: 'Puede que otra persona ya la haya revisado.'
+                });
+            }
         }
-    });
+
+        // Se limpia la URL para que recargar no repita la alerta.
+        if (msj && window.history.replaceState) {
+            window.history.replaceState({}, document.title,
+                window.location.pathname + window.location.search.replace(/[?&]msj=[^&]*/, '').replace(/^&/, '?'));
+        }
+    })();
 </script>
 
 <jsp:include page="/views/layout/footer.jsp" />
-</body>
-</html>

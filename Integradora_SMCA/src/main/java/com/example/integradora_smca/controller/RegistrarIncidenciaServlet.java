@@ -1,6 +1,8 @@
 package com.example.integradora_smca.controller;
 
+import com.example.integradora_smca.model.Alumno;
 import com.example.integradora_smca.model.dao.IncidenciaDao;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,48 +17,107 @@ public class RegistrarIncidenciaServlet extends HttpServlet {
 
     private final IncidenciaDao incidenciaDao = new IncidenciaDao();
 
+    private static final String VISTA_FORMULARIO = "/views/alumno/crear_incidencia_alumno.jsp";
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/alumno/crear_incidencia_alumno.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher(VISTA_FORMULARIO).forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
 
-        // Captura de datos usando los nombres exactos del formulario HTML/JSP
-        String numeroPc = request.getParameter("numeroPc");
-        String idLaboratorio = request.getParameter("laboratorio");
-        String prioridad = request.getParameter("prioridad");
-        String descripcionFalla = request.getParameter("descripcion_falla"); // Corregido a descripcion_falla
-        String horaFin = request.getParameter("horaFin");
+        // Datos del formulario. Los nombres deben coincidir con los del JSP.
+        String numeroPc = limpiar(request.getParameter("numeroPc"));
+        String laboratorio = limpiar(request.getParameter("laboratorio"));
+        String prioridad = limpiar(request.getParameter("prioridad"));
+        String descripcionFalla = limpiar(request.getParameter("descripcion_falla"));
+        String horaFin = limpiar(request.getParameter("horaFin"));
 
-        // Normalizar cadenas vacías a null para Oracle
-        if (numeroPc != null && numeroPc.trim().isEmpty()) numeroPc = null;
-        if (horaFin != null && horaFin.trim().isEmpty()) horaFin = null;
-
-        // Obtener sesión activa
+        /*
+         * La matrícula NO está en session.getAttribute("matricula").
+         *
+         * Ese atributo no lo crea nadie en el proyecto: el login guarda el objeto
+         * Alumno completo bajo "alumno" y "usuarioLogueado". Al leer "matricula"
+         * el resultado siempre era null, así que el servlet rebotaba al index sin
+         * decir por qué y ninguna incidencia llegaba a guardarse.
+         */
         HttpSession session = request.getSession(false);
-        String matriculaAlumno = (session != null) ? (String) session.getAttribute("matricula") : null;
 
-        // Validación de sesión activa
+        Object usuario = (session != null) ? session.getAttribute("usuarioLogueado") : null;
+        if (usuario == null && session != null) {
+            usuario = session.getAttribute("alumno");
+        }
+
+        String matriculaAlumno = (usuario instanceof Alumno)
+                ? ((Alumno) usuario).getMatricula()
+                : null;
+
         if (matriculaAlumno == null || matriculaAlumno.trim().isEmpty()) {
-            System.err.println("=== ERROR EN SERVLET: No hay matricula en la sesion ===");
+            log("[RegistrarIncidencia] Sesión sin alumno válido.");
             response.sendRedirect(request.getContextPath() + "/index.jsp");
             return;
         }
 
-        // Guarda Bitácora (obligatorio) y Reporte de Falla (opcional si descripcionFalla viene con texto)
+        // Validaciones antes de tocar la base de datos.
+        String error = validar(numeroPc, laboratorio, horaFin);
+        if (error != null) {
+            regresarConError(request, response, error);
+            return;
+        }
+
         boolean guardado = incidenciaDao.guardarIncidenciaAlumno(
-                descripcionFalla, prioridad, numeroPc, idLaboratorio, matriculaAlumno, horaFin
-        );
+                descripcionFalla, prioridad, numeroPc, laboratorio, matriculaAlumno, horaFin);
 
         if (guardado) {
-            response.sendRedirect(request.getContextPath() + "/views/alumno/confirmacion.jsp");
-        } else {
-            System.err.println("ERROR EN SERVLET: El DAO devolvio false");
-            request.setAttribute("error", "No se pudo registrar en la base de datos.");
-            request.getRequestDispatcher("/views/alumno/crear_incidencia_alumno.jsp").forward(request, response);
+            // Redirect y no forward: así, si el alumno recarga, no se duplica el registro.
+            response.sendRedirect(request.getContextPath()
+                    + "/views/alumno/confirmacion.jsp?registro=ok");
+            return;
         }
+
+        log("[RegistrarIncidencia] El DAO devolvió false para la matrícula " + matriculaAlumno);
+        regresarConError(request, response,
+                "No se pudo registrar. Verifica que el aula seleccionada exista.");
+    }
+
+    /** Devuelve null si todo está bien, o el mensaje que verá el alumno. */
+    private String validar(String numeroPc, String laboratorio, String horaFin) {
+
+        if (numeroPc == null || numeroPc.isEmpty()) {
+            return "Escribe el número de PC.";
+        }
+
+        if (numeroPc.length() > 10) {
+            return "El número de PC es demasiado largo.";
+        }
+
+        if (laboratorio == null || laboratorio.isEmpty()) {
+            return "Selecciona el aula.";
+        }
+
+        // El input type="time" manda HH:MM; cualquier otra cosa vendría de un cliente manipulado.
+        if (horaFin != null && !horaFin.matches("^([01]\\d|2[0-3]):[0-5]\\d$")) {
+            return "La hora de salida no tiene un formato válido.";
+        }
+
+        return null;
+    }
+
+    private void regresarConError(HttpServletRequest request, HttpServletResponse response,
+                                  String mensaje) throws ServletException, IOException {
+        request.setAttribute("error", mensaje);
+        request.getRequestDispatcher(VISTA_FORMULARIO).forward(request, response);
+    }
+
+    /** Recorta y convierte las cadenas vacías en null, que es lo que espera Oracle. */
+    private String limpiar(String valor) {
+        if (valor == null) return null;
+        String limpio = valor.trim();
+        return limpio.isEmpty() ? null : limpio;
     }
 }

@@ -71,7 +71,7 @@
 .sidebar-profile-section {
     width: 100%;
 
-    padding: 30px 20px 20px 20px;
+    padding: 30px 20px 22px 20px;
 
     text-align: center;
 
@@ -102,11 +102,20 @@
     padding: 2px;
 
     box-sizing: border-box;
+
+    /* El aro nunca debe encogerse aunque el nombre sea largo. */
+    flex-shrink: 0;
 }
 
 
-/* Contenedor */
+/*
+   Contenedor de la foto.
 
+   Ocupa el 100% del hueco interno del aro, nunca una medida fija.
+   El sidebar de admin traía width:100px y height:100px en línea dentro de un
+   aro cuyo espacio real es 90px, por eso la foto se montaba sobre el borde
+   blanco. Si vuelves a poner medidas en línea en el JSP, el problema regresa.
+*/
 .sidebar-avatar-img {
     width: 100% !important;
     height: 100% !important;
@@ -123,21 +132,19 @@
 }
 
 
-/* Avatar del administrador */
-
 .sidebar-avatar-img i {
-    font-size: 60px;
+    font-size: 56px;
     color: #888888;
 }
 
-
-/* Foto del alumno */
 
 .sidebar-avatar-img img {
     width: 100%;
     height: 100%;
 
     object-fit: cover;
+
+    border-radius: 50%;
 
     display: block;
 }
@@ -150,8 +157,9 @@
 .sidebar-avatar-edit {
     position: absolute;
 
-    top: 0;
-    right: 0;
+    /* Pegado al borde del círculo, no a la esquina del cuadro que lo contiene. */
+    top: -2px;
+    right: -2px;
 
     width: 30px;
     height: 30px;
@@ -178,6 +186,11 @@
     transform: scale(1.1);
 }
 
+.sidebar-avatar-edit:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
 .sidebar-avatar-edit i {
     font-size: 14px !important;
     color: #111111 !important;
@@ -191,11 +204,13 @@
 .sidebar-user-welcome {
     color: var(--white) !important;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    font-weight: 700;
+    font-weight: 600;
 
-    margin-top: 12px;
+    opacity: .85;
+
+    margin-top: 14px;
     margin-bottom: 0;
 }
 
@@ -211,12 +226,48 @@
 
     font-weight: 700;
 
-    margin-top: 2px;
+    line-height: 1.3;
+
+    margin-top: 3px;
     margin-bottom: 0;
 
     max-width: 200px;
 
     overflow-wrap: break-word;
+}
+
+
+/* =====================================================
+   ROL DEL USUARIO
+   ===================================================== */
+
+.sidebar-user-role {
+    display: inline-block;
+
+    margin-top: 9px;
+
+    padding: 4px 12px;
+
+    background-color: rgba(255, 255, 255, 0.18);
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+
+    border-radius: 999px;
+
+    color: var(--white) !important;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    /* Mayúsculas y espaciado para que se lea como etiqueta, no como otro nombre. */
+    text-transform: uppercase;
+
+    letter-spacing: .09em;
+
+    line-height: 1;
+
+    white-space: nowrap;
 }
 
 
@@ -273,24 +324,78 @@
 }
 
 
-/* Iconos de las opciones */
-
 .sidebar-item-link i {
     font-size: 16px;
 }
 
-
-/* Hover */
 
 .sidebar-item-link:hover {
     background-color: var(--green-hover) !important;
 }
 
 
-/* Página activa */
-
 .sidebar-item-link.active {
     background-color: var(--green-active) !important;
+}
+
+
+/* =====================================================
+   WIDGET DE HORA E INCIDENCIA (solo alumno)
+   ===================================================== */
+
+/* Estos estilos estaban escritos en línea dentro del JSP del alumno. */
+
+.sidebar-widget-zona {
+    padding: 0 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+.sidebar-reloj {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    background-color: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+
+    padding: 8px 10px;
+    border-radius: 8px;
+
+    font-size: 0.85rem;
+
+    margin-bottom: 10px;
+}
+
+
+.sidebar-btn-incidencia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+
+    background-color: #dc3545;
+    color: var(--white) !important;
+
+    padding: 10px;
+    border-radius: 8px;
+
+    text-decoration: none !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    transition: background-color 0.3s;
+}
+
+
+.sidebar-btn-incidencia:hover {
+    background-color: #b02a37;
 }
 
 
@@ -360,11 +465,31 @@
     }
 
     .sidebar-avatar-img i {
-        font-size: 50px;
+        font-size: 46px;
+    }
+
+    .sidebar-user-role {
+        font-size: 10px;
+        padding: 3px 10px;
     }
 
     .sidebar-item-link {
         font-size: 16px;
         padding: 18px 15px;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .sidebar-avatar-edit,
+    .sidebar-item-link,
+    .sidebar-logout-link,
+    .sidebar-btn-incidencia {
+        transition: none;
+    }
+
+    .sidebar-avatar-edit:hover {
+        transform: none;
     }
 }

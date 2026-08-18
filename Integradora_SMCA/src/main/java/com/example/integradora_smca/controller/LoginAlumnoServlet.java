@@ -61,7 +61,7 @@ public class LoginAlumnoServlet extends HttpServlet {
             // ¡CORRECCIÓN CLAVE! Guardamos la matrícula como String en la sesión
             session.setAttribute("matricula", alumno.getMatricula());
 
-            response.sendRedirect(request.getContextPath() + "/PerfilAlumnoServlet");
+            response.sendRedirect(request.getContextPath() + "/views/alumno/historial_alumno.jsp");
         } else {
             request.setAttribute("errorMessage", "Matrícula o contraseña incorrectas.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

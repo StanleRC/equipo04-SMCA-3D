@@ -5,12 +5,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Contraseña - UTEZ</title>
+    <title>Recuperar contraseña - UTEZ</title>
 
-    <!-- Bootstrap 5 CSS e Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/index.css?v=1.5">
+
+    <style>
+        /* Estilos acotados a esta pantalla: no tocan index.css */
+        .paso-indicador {
+            display: block;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #8a8a8a;
+            margin-bottom: 6px;
+        }
+
+        .titulo-pantalla {
+            text-align: center;
+            color: #444;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .subtitulo-pantalla {
+            text-align: center;
+            color: #7a7a7a;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        .campo-codigo {
+            font-family: "SFMono-Regular", "Consolas", "Menlo", monospace;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: .55em;
+            text-indent: .55em; /* compensa el espaciado extra a la derecha */
+            padding: 12px 0;
+        }
+
+        .campo-codigo::placeholder {
+            color: #d0d0d0;
+            font-weight: 400;
+        }
+
+        .pie-codigo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #8a8a8a;
+            margin-top: 10px;
+        }
+
+        .btn-reenviar {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: #0d6efd;
+            cursor: pointer;
+        }
+
+        .btn-reenviar:disabled {
+            color: #b0b0b0;
+            cursor: default;
+        }
+
+        .vence-en.por-vencer {
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        .correo-destino {
+            font-weight: 600;
+            color: #444;
+            word-break: break-all;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+        }
+    </style>
 </head>
 
 <body class="login-body">
@@ -27,31 +109,33 @@
         <div class="login-avatar-container">
             <div class="login-avatar-circle">
                 <img src="${pageContext.request.contextPath}/assets/img/logologis.png"
-                     alt="Logo"
+                     alt=""
                      style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
             </div>
         </div>
 
-        <h2 style="text-align: center; color: #555555; font-size: 18px; margin-bottom: 20px; font-weight: 600;">
-            Recuperar contraseña
-        </h2>
+        <span class="paso-indicador">Paso 1 de 3</span>
+        <h2 class="titulo-pantalla">Recuperar contraseña</h2>
+        <p class="subtitulo-pantalla">
+            Escribe tu correo institucional y te enviamos un código para verificar que eres tú.
+        </p>
 
-        <!-- Alerta de Error -->
-        <div id="alertBox" class="alert alert-danger text-center p-2 mb-3 d-none" style="font-size: 13px;"></div>
+        <div id="alertBox" class="alert text-center p-2 mb-3 d-none" style="font-size: 13px;" role="alert"></div>
 
-        <!-- Formulario Paso 1 -->
-        <form id="formRecuperar">
+        <form id="formRecuperar" novalidate>
             <div class="form-group mb-3">
                 <div class="input-icon-wrapper">
                     <i class="bi bi-envelope icon-input"></i>
-                    <input type="email" id="correo" name="correo" class="form-control" placeholder="Introduce tu correo institucional" required>
+                    <input type="email" id="correo" name="correo" class="form-control"
+                           placeholder="Introduce tu correo institucional"
+                           autocomplete="email" autofocus required>
                 </div>
             </div>
 
             <div class="button-container mt-3">
                 <button type="submit" id="btnEnviarCodigo" class="btn btn-primary w-100">
                     <span id="spinnerBtn" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    Continuar
+                    Enviar código
                 </button>
             </div>
 
@@ -63,33 +147,42 @@
 
 </div>
 
-<!-- Modal para Validar Código de 6 dígitos -->
-<div class="modal fade" id="modalCodigoRecuperacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+<!-- Verificación del código -->
+<div class="modal fade" id="modalCodigoRecuperacion" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="tituloModalCodigo" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">
-                    <i class="bi bi-shield-lock me-2"></i>Código de Verificación
+                <h5 class="modal-title" id="tituloModalCodigo">
+                    <i class="bi bi-shield-lock me-2"></i>Paso 2 de 3: verificar código
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
+
             <div class="modal-body">
-                <p class="text-center text-muted small">
-                    Hemos enviado un código de 6 dígitos a tu correo electrónico. Ingrésalo para continuar:
+                <p class="text-center text-muted small mb-3">
+                    Enviamos un código de 6 dígitos a
+                    <span class="correo-destino" id="correoDestino"></span>.
+                    Revisa también la carpeta de spam.
                 </p>
 
-                <div id="modalAlertBox" class="alert alert-danger text-center p-2 d-none" style="font-size: 13px;"></div>
+                <div id="modalAlertBox" class="alert text-center p-2 d-none" style="font-size: 13px;" role="alert"></div>
 
-                <div class="mb-3">
-                    <label for="inputCodigo" class="form-label fw-bold text-center w-100">Código de 6 dígitos</label>
-                    <input type="text" class="form-control text-center fw-bold fs-4" id="inputCodigo" maxlength="6" placeholder="000000" style="letter-spacing: 5px;">
+                <label for="inputCodigo" class="form-label fw-bold text-center w-100 small">Código de 6 dígitos</label>
+                <input type="text" class="form-control campo-codigo" id="inputCodigo"
+                       inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+
+                <div class="pie-codigo">
+                    <span class="vence-en" id="venceEn">Vence en 10:00</span>
+                    <button type="button" class="btn-reenviar" id="btnReenviar" disabled>Reenviar código</button>
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" id="btnValidarCodigo" class="btn btn-primary fw-bold">
                     <span id="spinnerModal" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    Validar Código
+                    Verificar
                 </button>
             </div>
         </div>
@@ -98,98 +191,219 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const contextPath = "${pageContext.request.contextPath}";
-    const modalCodigoBs = new bootstrap.Modal(document.getElementById('modalCodigoRecuperacion'));
+    var contextPath = "${pageContext.request.contextPath}";
+    var VIGENCIA_SEGUNDOS = 600;   // debe coincidir con VIGENCIA_CODIGO_MS del servlet
+    var ESPERA_REENVIO_SEG = 60;   // debe coincidir con COOLDOWN_ENVIO_MS del servlet
 
-    // 1. Enviar Solicitud de Código
-    document.getElementById('formRecuperar').addEventListener('submit', function (e) {
-        e.preventDefault();
+    var modalCodigo = new bootstrap.Modal(document.getElementById('modalCodigoRecuperacion'));
 
-        const alertBox = document.getElementById('alertBox');
-        const btnEnviar = document.getElementById('btnEnviarCodigo');
-        const spinnerBtn = document.getElementById('spinnerBtn');
-        const correo = document.getElementById('correo').value;
+    var formRecuperar = document.getElementById('formRecuperar');
+    var inputCorreo = document.getElementById('correo');
+    var alertBox = document.getElementById('alertBox');
+    var btnEnviar = document.getElementById('btnEnviarCodigo');
+    var spinnerBtn = document.getElementById('spinnerBtn');
 
-        alertBox.classList.add('d-none');
-        btnEnviar.disabled = true;
-        spinnerBtn.classList.remove('d-none');
+    var modalAlertBox = document.getElementById('modalAlertBox');
+    var inputCodigo = document.getElementById('inputCodigo');
+    var btnValidar = document.getElementById('btnValidarCodigo');
+    var spinnerModal = document.getElementById('spinnerModal');
+    var btnReenviar = document.getElementById('btnReenviar');
+    var venceEn = document.getElementById('venceEn');
+    var correoDestino = document.getElementById('correoDestino');
 
-        const params = new URLSearchParams();
-        params.append('accion', 'enviarCodigo');
-        params.append('correo', correo);
+    var temporizadorVigencia = null;
+    var temporizadorReenvio = null;
 
-        fetch(contextPath + '/recuperarPassServlet', {
+    function mostrarAviso(caja, mensaje, tipo) {
+        caja.textContent = mensaje;
+        caja.classList.remove('d-none', 'alert-danger', 'alert-success');
+        caja.classList.add(tipo === 'ok' ? 'alert-success' : 'alert-danger');
+    }
+
+    function ocultarAviso(caja) {
+        caja.classList.add('d-none');
+    }
+
+    function cargando(boton, spinner, activo) {
+        boton.disabled = activo;
+        spinner.classList.toggle('d-none', !activo);
+    }
+
+    function formatearTiempo(segundos) {
+        var m = Math.floor(segundos / 60);
+        var s = segundos % 60;
+        return m + ':' + (s < 10 ? '0' + s : s);
+    }
+
+    /** Envía la petición al servlet y devuelve el JSON ya parseado. */
+    function pedirAlServidor(params) {
+        return fetch(contextPath + '/recuperarPassServlet', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
             body: params.toString()
-        })
-            .then(res => res.json())
-            .then(data => {
-                btnEnviar.disabled = false;
-                spinnerBtn.classList.add('d-none');
+        }).then(function (res) {
+            return res.json();
+        });
+    }
 
-                if (data.status === 'ok') {
-                    document.getElementById('inputCodigo').value = '';
-                    document.getElementById('modalAlertBox').classList.add('d-none');
-                    modalCodigoBs.show();
-                } else {
-                    alertBox.textContent = data.message;
-                    alertBox.classList.remove('d-none');
-                }
-            })
-            .catch(() => {
-                btnEnviar.disabled = false;
-                spinnerBtn.classList.add('d-none');
-                alertBox.textContent = 'Error al procesar la solicitud.';
-                alertBox.classList.remove('d-none');
-            });
-    });
+    function iniciarCuentaRegresiva() {
+        clearInterval(temporizadorVigencia);
+        var restante = VIGENCIA_SEGUNDOS;
 
-    // 2. Validar Código Ingresado
-    document.getElementById('btnValidarCodigo').addEventListener('click', function () {
-        const codigo = document.getElementById('inputCodigo').value.trim();
-        const modalAlertBox = document.getElementById('modalAlertBox');
-        const btnValidar = document.getElementById('btnValidarCodigo');
-        const spinnerModal = document.getElementById('spinnerModal');
+        function pintar() {
+            venceEn.textContent = restante > 0
+                ? 'Vence en ' + formatearTiempo(restante)
+                : 'El código venció';
+            venceEn.classList.toggle('por-vencer', restante <= 60);
+        }
 
-        if (codigo.length !== 6) {
-            modalAlertBox.textContent = 'Ingresa un código válido de 6 dígitos.';
-            modalAlertBox.classList.remove('d-none');
+        pintar();
+        temporizadorVigencia = setInterval(function () {
+            restante--;
+            pintar();
+            if (restante <= 0) clearInterval(temporizadorVigencia);
+        }, 1000);
+    }
+
+    function iniciarEsperaReenvio() {
+        clearInterval(temporizadorReenvio);
+        var restante = ESPERA_REENVIO_SEG;
+
+        btnReenviar.disabled = true;
+        btnReenviar.textContent = 'Reenviar en ' + restante + 's';
+
+        temporizadorReenvio = setInterval(function () {
+            restante--;
+            if (restante <= 0) {
+                clearInterval(temporizadorReenvio);
+                btnReenviar.disabled = false;
+                btnReenviar.textContent = 'Reenviar código';
+            } else {
+                btnReenviar.textContent = 'Reenviar en ' + restante + 's';
+            }
+        }, 1000);
+    }
+
+    // ---------- Paso 1: solicitar el código ----------
+    function solicitarCodigo(esReenvio) {
+        var correo = inputCorreo.value.trim();
+
+        if (!correo) {
+            mostrarAviso(alertBox, 'Escribe tu correo electrónico.', 'error');
+            inputCorreo.focus();
             return;
         }
 
-        modalAlertBox.classList.add('d-none');
-        btnValidar.disabled = true;
-        spinnerModal.classList.remove('d-none');
+        var caja = esReenvio ? modalAlertBox : alertBox;
+        var boton = esReenvio ? btnReenviar : btnEnviar;
 
-        const params = new URLSearchParams();
+        ocultarAviso(caja);
+        if (esReenvio) {
+            boton.disabled = true;
+        } else {
+            cargando(btnEnviar, spinnerBtn, true);
+        }
+
+        var params = new URLSearchParams();
+        params.append('accion', 'enviarCodigo');
+        params.append('correo', correo);
+
+        pedirAlServidor(params)
+            .then(function (data) {
+                if (!esReenvio) cargando(btnEnviar, spinnerBtn, false);
+
+                if (data.status === 'ok') {
+                    correoDestino.textContent = correo;
+                    inputCodigo.value = '';
+                    ocultarAviso(modalAlertBox);
+                    iniciarCuentaRegresiva();
+                    iniciarEsperaReenvio();
+
+                    if (esReenvio) {
+                        mostrarAviso(modalAlertBox, 'Te enviamos un código nuevo.', 'ok');
+                    } else {
+                        modalCodigo.show();
+                    }
+                    setTimeout(function () { inputCodigo.focus(); }, 300);
+                } else {
+                    mostrarAviso(caja, data.message, 'error');
+                    if (esReenvio) boton.disabled = false;
+                }
+            })
+            .catch(function () {
+                if (!esReenvio) cargando(btnEnviar, spinnerBtn, false);
+                if (esReenvio) boton.disabled = false;
+                mostrarAviso(caja, 'No pudimos conectar con el servidor. Revisa tu conexión.', 'error');
+            });
+    }
+
+    formRecuperar.addEventListener('submit', function (e) {
+        e.preventDefault();
+        solicitarCodigo(false);
+    });
+
+    btnReenviar.addEventListener('click', function () {
+        solicitarCodigo(true);
+    });
+
+    // ---------- Paso 2: verificar el código ----------
+    // Solo dígitos, sin importar si el usuario escribe o pega.
+    inputCodigo.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 6);
+        if (this.value.length === 6) ocultarAviso(modalAlertBox);
+    });
+
+    inputCodigo.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            btnValidar.click();
+        }
+    });
+
+    btnValidar.addEventListener('click', function () {
+        var codigo = inputCodigo.value.trim();
+
+        if (codigo.length !== 6) {
+            mostrarAviso(modalAlertBox, 'El código tiene 6 dígitos.', 'error');
+            inputCodigo.focus();
+            return;
+        }
+
+        ocultarAviso(modalAlertBox);
+        cargando(btnValidar, spinnerModal, true);
+
+        var params = new URLSearchParams();
         params.append('accion', 'validarCodigo');
         params.append('txtCodigo', codigo);
 
-        fetch(contextPath + '/recuperarPassServlet', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-            body: params.toString()
-        })
-            .then(res => res.json())
-            .then(data => {
-                btnValidar.disabled = false;
-                spinnerModal.classList.add('d-none');
-
+        pedirAlServidor(params)
+            .then(function (data) {
                 if (data.status === 'ok') {
-                    // Redirigir a la vista de reestablecer contraseña
+                    clearInterval(temporizadorVigencia);
+                    clearInterval(temporizadorReenvio);
+                    mostrarAviso(modalAlertBox, 'Código verificado. Un momento...', 'ok');
                     window.location.href = contextPath + '/views/cambiar_password.jsp';
-                } else {
-                    modalAlertBox.textContent = data.message;
-                    modalAlertBox.classList.remove('d-none');
+                    return;
                 }
+                cargando(btnValidar, spinnerModal, false);
+                mostrarAviso(modalAlertBox, data.message, 'error');
+                inputCodigo.value = '';
+                inputCodigo.focus();
             })
-            .catch(() => {
-                btnValidar.disabled = false;
-                spinnerModal.classList.add('d-none');
-                modalAlertBox.textContent = 'Error al verificar el código.';
-                modalAlertBox.classList.remove('d-none');
+            .catch(function () {
+                cargando(btnValidar, spinnerModal, false);
+                mostrarAviso(modalAlertBox, 'No pudimos conectar con el servidor. Revisa tu conexión.', 'error');
             });
+    });
+
+    // Al cerrar el modal se detienen los contadores para no dejarlos corriendo.
+    document.getElementById('modalCodigoRecuperacion').addEventListener('hidden.bs.modal', function () {
+        clearInterval(temporizadorVigencia);
+        clearInterval(temporizadorReenvio);
     });
 </script>
 </body>
