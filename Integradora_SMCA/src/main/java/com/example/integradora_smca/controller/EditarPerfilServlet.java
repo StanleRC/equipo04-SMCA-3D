@@ -2,64 +2,109 @@ package com.example.integradora_smca.controller;
 
 import com.example.integradora_smca.model.Alumno;
 import com.example.integradora_smca.model.Docente;
+import com.example.integradora_smca.model.dao.AlumnoDao;
+import com.example.integradora_smca.model.dao.DocenteDao;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Locale;
 
 @WebServlet("/EditarPerfilServlet")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-        maxFileSize = 1024 * 1024 * 10,      // 10 MB
-        maxRequestSize = 1024 * 1024 * 15    // 15 MB
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 10
 )
 public class EditarPerfilServlet extends HttpServlet {
+
+    private AlumnoDao alumnoDao;
+    private DocenteDao docenteDao;
+
+    @Override
+    public void init() throws ServletException {
+        alumnoDao = new AlumnoDao();
+        docenteDao = new DocenteDao();
+    }
+
+    /**
+     * Carpeta donde viven las fotos.
+     *
+     * IMPORTANTE: no se usa getRealPath(), que apunta dentro de target/. IntelliJ borra
+     * esa carpeta en cada Run, y por eso las fotos desaparecían aunque el nombre siguiera
+     * guardado en la base de datos. Esta ruta está fuera del proyecto, así que persiste.
+     */
+    static Path carpetaFotos() throws IOException {
+        String base = System.getProperty("catalina.base");
+        if (base == null || base.trim().isEmpty()) {
+            base = System.getProperty("user.home") + File.separator + "bitacora";
+        }
+        Path dir = Paths.get(base, "uploads", "perfiles").toAbsolutePath().normalize();
+        Files.createDirectories(dir);
+        return dir;
+    }
+
+    /** Devuelve la extensión solo si es una imagen aceptada; null en cualquier otro caso. */
+    static String extensionValida(String nombreArchivo) {
+        if (nombreArchivo == null) return null;
+
+        // Algunos navegadores mandan la ruta completa, no solo el nombre.
+        String limpio = nombreArchivo.replace('\\', '/');
+        int barra = limpio.lastIndexOf('/');
+        if (barra >= 0) limpio = limpio.substring(barra + 1);
+
+        int punto = limpio.lastIndexOf('.');
+        // Esta comprobación faltaba: sin ella, un archivo sin punto reventaba con
+        // StringIndexOutOfBoundsException en fileName.substring(...).
+        if (punto < 0 || punto == limpio.length() - 1) return null;
+
+        String ext = limpio.substring(punto + 1).toLowerCase(Locale.ROOT);
+        return (ext.equals("png") || ext.equals("jpg") || ext.equals("jpeg")) ? ext : null;
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 
-        // 1. Obtener los parámetros del formulario
-        String nombre = request.getParameter("nombre");
-        String apellidoPaterno = request.getParameter("apellidoPaterno");
-        String apellidoMaterno = request.getParameter("apellidoMaterno");
-        String correo = request.getParameter("correo");
-
-        // 2. Procesar la foto subida (si existe)
-        Part filePart = request.getPart("fotoPerfil");
-        String nombreFoto = null;
-
-        if (filePart != null && filePart.getSize() > 0) {
-            String fileName = filePart.getSubmittedFileName();
-            String extension = fileName.substring(fileName.lastIndexOf("."));
-            nombreFoto = "profile_" + System.currentTimeMillis() + extension;
-
-            // Ruta donde se guardan las fotos en el servidor
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "perfiles";
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            filePart.write(uploadPath + File.separator + nombreFoto);
+        Object usuarioObj = null;
+        if (session != null) {
+            usuarioObj = session.getAttribute("usuarioLogueado");
+            if (usuarioObj == null) usuarioObj = session.getAttribute("docente");
+            if (usuarioObj == null) usuarioObj = session.getAttribute("alumno");
         }
 
-        // 3. Determinar la sesión y la vista de destino
-        Object usuarioObj = session.getAttribute("usuarioLogueado");
         if (usuarioObj == null) {
-            usuarioObj = session.getAttribute("docente");
-        }
-        if (usuarioObj == null) {
-            usuarioObj = session.getAttribute("alumno");
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            return;
         }
 
-        String vistaDestino = "/views/admin/perfil_admin-docente.jsp"; // Valor por defecto
+        String nombre = limpiar(request.getParameter("nombre"));
+        String apellidoPaterno = limpiar(request.getParameter("apellidoPaterno"));
+        String apellidoMaterno = limpiar(request.getParameter("apellidoMaterno"));
+        String correo = limpiar(request.getParameter("correo")).toLowerCase();
+
+        // 1. Guardar la foto nueva, si el usuario subió una
+        String nombreFoto = guardarFoto(request);
+
+        // 2. Escribir en la base de datos Y actualizar la sesión
+        String vistaDestino;
+        boolean guardado;
 
         if (usuarioObj instanceof Docente) {
             Docente docente = (Docente) usuarioObj;
@@ -67,43 +112,78 @@ public class EditarPerfilServlet extends HttpServlet {
             docente.setApellidoPaterno(apellidoPaterno);
             docente.setApellidoMaterno(apellidoMaterno);
             docente.setCorreo(correo);
-
             if (nombreFoto != null) {
                 docente.setFotoPerfil(nombreFoto);
             }
 
-            // TODO: Llama aquí a tu DAO de Docente
-            // docenteDao.actualizar(docente);
+            // Esto es lo que faltaba: sin esta línea nada llegaba a la base de datos.
+            guardado = docenteDao.actualizarPerfil(docente);
 
-            // Actualizar la sesión
             session.setAttribute("usuarioLogueado", docente);
             session.setAttribute("docente", docente);
-
             vistaDestino = "/views/admin/perfil_admin-docente.jsp";
 
-        } else if (usuarioObj instanceof Alumno) {
+        } else {
             Alumno alumno = (Alumno) usuarioObj;
             alumno.setNombre(nombre);
             alumno.setApellidoPaterno(apellidoPaterno);
             alumno.setApellidoMaterno(apellidoMaterno);
             alumno.setCorreo(correo);
-
             if (nombreFoto != null) {
                 alumno.setFotoPerfil(nombreFoto);
             }
 
-            // TODO: Llama aquí a tu DAO de Alumno
-            // alumnoDao.actualizar(alumno);
+            // update() ya actualiza nombre, apellidos, correo y foto_perfil por matrícula.
+            guardado = alumnoDao.update(alumno);
 
-            // Actualizar la sesión
             session.setAttribute("usuarioLogueado", alumno);
             session.setAttribute("alumno", alumno);
-
-            // Redirección hacia la vista del alumno
             vistaDestino = "/views/alumno/editar_perfil_alumno.jsp";
         }
 
-        // 4. Redireccionar dinámicamente según la vista que corresponda
-        response.sendRedirect(request.getContextPath() + vistaDestino);
+        if (!guardado) {
+            // Suele pasar si el correo ya pertenece a otra persona (restricción UNIQUE).
+            log("[EditarPerfil] La base de datos rechazó los cambios de: " + correo);
+        }
+
+        response.sendRedirect(request.getContextPath() + vistaDestino
+                + (guardado ? "?guardado=1" : "?guardado=0"));
+    }
+
+    /** Devuelve el nombre del archivo guardado, o null si no se subió foto o no es válida. */
+    private String guardarFoto(HttpServletRequest request) throws IOException, ServletException {
+
+        Part filePart;
+        try {
+            filePart = request.getPart("fotoPerfil");
+        } catch (IllegalStateException e) {
+            log("[EditarPerfil] La imagen supera el tamaño permitido.");
+            return null;
+        }
+
+        if (filePart == null || filePart.getSize() == 0) {
+            return null; // no subió nada: se conserva la foto actual
+        }
+
+        String extension = extensionValida(filePart.getSubmittedFileName());
+        if (extension == null) {
+            log("[EditarPerfil] Archivo rechazado, no es PNG ni JPG.");
+            return null;
+        }
+
+        // El nombre lo genera el servidor. Reutilizar el del usuario permitiría
+        // rutas como "../../algo.png" y escribir fuera de la carpeta prevista.
+        String nombreFoto = "perfil_" + System.currentTimeMillis() + "." + extension;
+        Path destino = carpetaFotos().resolve(nombreFoto);
+
+        try (InputStream in = filePart.getInputStream()) {
+            Files.copy(in, destino, StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        return nombreFoto;
+    }
+
+    private String limpiar(String valor) {
+        return valor == null ? "" : valor.trim();
     }
 }

@@ -63,7 +63,7 @@
                                 <label for="fotoInput" style="color: #0284c7; font-weight: 600; cursor: pointer; text-decoration: underline; font-size: 14px;">Subir nueva foto</label>
                                 <input type="file" id="fotoInput" name="fotoPerfil" accept="image/png, image/jpeg" class="d-none" onchange="previewImage(event)">
 
-                                <p style="font-size: 12px; color: #64748b; margin-top: 8px; line-height: 1.4;">
+                                <p id="notaArchivo" style="font-size: 12px; color: #64748b; margin-top: 8px; line-height: 1.4;">
                                     Formatos válidos: PNG, JPG.<br>Tamaño máximo recomendado: 2 MB.
                                 </p>
                             </div>
@@ -100,7 +100,7 @@
                                        style="padding: 10px 22px; background-color: #6c757d; color: #ffffff !important; text-decoration: none !important; border-radius: 8px; font-weight: 600; font-size: 14px; display: inline-block;">
                                         Cancelar
                                     </a>
-                                    <button type="submit"
+                                    <button type="submit" id="btnGuardar"
                                             style="padding: 10px 22px; background-color: #00875a; color: #ffffff !important; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; display: inline-block;">
                                         Guardar cambios
                                     </button>
@@ -117,34 +117,57 @@
     </main>
 </div>
 
+<!-- Resultado que devuelve EditarPerfilServlet en la URL (?guardado=1 o ?guardado=0) -->
+<span id="flashGuardado" hidden><c:out value="${param.guardado}" /></span>
+
 <!-- Scripts de Previsualización y Alerta -->
 <script>
     function previewImage(event) {
-        const reader = new FileReader();
+        const archivo = event.target.files[0];
         const img = document.getElementById('previewFoto');
+        const nota = document.getElementById('notaArchivo');
 
-        reader.onload = function() {
+        if (!archivo) return;
+
+        // Validar antes de enviar: el servlet rechaza cualquier otra cosa.
+        const tiposValidos = ['image/png', 'image/jpeg'];
+        if (tiposValidos.indexOf(archivo.type) === -1) {
+            event.target.value = '';
+            nota.textContent = 'Ese archivo no es PNG ni JPG.';
+            nota.style.color = '#c0392b';
+            return;
+        }
+
+        if (archivo.size > 2 * 1024 * 1024) {
+            event.target.value = '';
+            nota.textContent = 'La imagen pesa más de 2 MB.';
+            nota.style.color = '#c0392b';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function () {
             img.src = reader.result;
         };
+        reader.readAsDataURL(archivo);
 
-        if (event.target.files[0]) {
-            reader.readAsDataURL(event.target.files[0]);
-        }
+        nota.textContent = 'Imagen lista: ' + archivo.name;
+        nota.style.color = '#1e7e4a';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('formConfigCuenta');
+        const btnGuardar = document.getElementById('btnGuardar');
 
         if (form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
+            form.addEventListener('submit', function (event) {
                 const nombre = document.getElementById('txtNombre').value.trim();
                 const apellidoPaterno = document.getElementById('txtApellidoPaterno').value.trim();
                 const apellidoMaterno = document.getElementById('txtApellidoMaterno').value.trim();
                 const correo = document.getElementById('txtCorreo').value.trim();
 
                 if (nombre === '' || apellidoPaterno === '' || apellidoMaterno === '' || correo === '') {
+                    event.preventDefault();
                     if (typeof mostrarAlertaError === 'function') {
                         mostrarAlertaError('Por favor, completa todos los campos del formulario.');
                     } else {
@@ -153,14 +176,38 @@
                     return;
                 }
 
-                if (typeof mostrarAlertaExito === 'function') {
-                    mostrarAlertaExito('¡Cambios realizados de manera exitosa!', function() {
-                        form.submit();
-                    });
-                } else {
-                    form.submit();
-                }
+                // Ya NO se muestra el mensaje de éxito aquí. Antes salía "¡Cambios realizados
+                // de manera exitosa!" antes de enviar nada, así que aparecía incluso cuando la
+                // base de datos rechazaba el cambio. Ahora el formulario se envía normal y la
+                // confirmación llega del servidor en el bloque de abajo.
+                btnGuardar.disabled = true;
+                btnGuardar.textContent = 'Guardando...';
             });
+        }
+
+        // Resultado real del servlet
+        const guardado = document.getElementById('flashGuardado').textContent.trim();
+
+        if (guardado === '1') {
+            if (typeof mostrarAlertaExito === 'function') {
+                mostrarAlertaExito('¡Cambios realizados de manera exitosa!');
+            } else if (typeof Swal !== 'undefined') {
+                Swal.fire({ icon: 'success', title: 'Listo', text: '¡Cambios realizados de manera exitosa!', timer: 2200, showConfirmButton: false });
+            }
+        } else if (guardado === '0') {
+            const mensaje = 'No se pudieron guardar los cambios. Revisa que el correo no esté en uso.';
+            if (typeof mostrarAlertaError === 'function') {
+                mostrarAlertaError(mensaje);
+            } else if (typeof Swal !== 'undefined') {
+                Swal.fire({ icon: 'error', title: 'Algo salió mal', text: mensaje });
+            } else {
+                alert(mensaje);
+            }
+        }
+
+        // Limpiar la URL para que al recargar no vuelva a salir la alerta.
+        if (guardado && window.history.replaceState) {
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
     });
 </script>

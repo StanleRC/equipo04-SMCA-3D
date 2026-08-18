@@ -1,89 +1,209 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!-- Vinculo al CSS de bitacora -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bitacora.css?v=1">
-
-<!-- Header para el Título -->
 <jsp:include page="/views/layout/header.jsp">
-    <jsp:param name="pageTitle" value="Bitácora de Salones - UTEZ" />
+    <jsp:param name="pageTitle" value="Bitácora de incidencias - UTEZ" />
 </jsp:include>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cssbitacora_insidencias_Aulas.css?v=12">
+
+<style>
+    .tabla-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid #1c3862;
+    }
+
+    .tabla-datos {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 900px;
+    }
+
+    .tabla-datos th {
+        height: 52px;
+        padding: 8px;
+        background-color: #1c3862;
+        color: #fff;
+        border: 1px solid #31517d;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .tabla-datos td {
+        height: 41px;
+        padding: 8px;
+        border: 1px solid #c8c8c8;
+        font-size: 14px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .tabla-datos td.al-inicio {
+        text-align: left;
+        padding-left: 12px;
+    }
+
+    .tabla-datos tbody tr:hover { background-color: #f4f6fa; }
+
+    .badge-estado {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .badge-validado   { background: #dcf3e6; color: #1e7e4a; }
+    .badge-pendiente  { background: #fdf0d5; color: #8a6100; }
+    .badge-descartado { background: #f1f1f1; color: #6b6b6b; }
+    .badge-sinreporte { background: #eef1f6; color: #5a6b85; }
+
+    .encabezado-tabla {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .titulo-lab {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1c3862;
+        margin: 0;
+    }
+
+    .contador-filas {
+        font-size: 13px;
+        color: #666;
+    }
+
+    .sin-datos {
+        padding: 34px 12px !important;
+        color: #777;
+    }
+</style>
+
 <div class="main-wrapper">
-    <!-- Sidebar para administradores -->
+
     <jsp:include page="/views/layout/sidebar_admin-docente.jsp" />
 
-    <!-- Contenido Principal -->
     <main class="main-content">
 
-        <!-- Barra Azul Superior -->
         <div class="top-welcome-bar">
             ¡Bienvenido(a)!, Ingresaste como administrador
         </div>
 
-        <!-- Cuerpo de la Vista -->
         <div class="salones-body">
 
-            <!-- Fila Superior: Botón Atrás + Logo UTEZ Centrado -->
-            <div class="position-relative mb-4" style="min-height: 80px;">
-                <div class="position-absolute start-0 top-50 translate-middle-y ms-4">
-                    <a href="javascript:history.back()" class="btn-back">
-                        <i class="bi bi-arrow-left"></i> <u>Pestaña anterior</u>
-                    </a>
-                </div>
-                <div class="text-center">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" style="width: 200px; height: auto;">
-                </div>
+            <div class="mb-2">
+                <a href="javascript:history.back()" class="btn-back">
+                    &larr; <u>Pestaña anterior</u>
+                </a>
             </div>
 
-            <!-- Tarjeta Contenedora Principal de Salones -->
-            <div class="salones-card mb-4">
+            <div class="text-center mb-3">
+                <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
+                     alt="Logo UTEZ" style="max-height: 130px;">
+            </div>
 
-                <!-- SECCIÓN 1: CECADEC -->
-                <div class="building-section">
-                    <h3 class="building-title">CECADEC</h3>
-                    <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC10" class="btn-salon">CC 10</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC11" class="btn-salon">CC 11</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC12" class="btn-salon">CC 12</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC13" class="btn-salon">CC 13</a>
-                    </div>
-                </div>
+            <div class="encabezado-tabla">
+                <h2 class="titulo-lab">
+                    Bitácora de incidencias
+                    <c:if test="${not empty labActual and labActual ne 'Todos'}">
+                        &mdash; <c:out value="${labActual}" />
+                    </c:if>
+                </h2>
 
-                <!-- SECCIÓN 2: Docencia 4 -->
-                <div class="building-section">
-                    <h3 class="building-title">Docencia 4</h3>
-                    <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA1" class="btn-salon">CA 1</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA2" class="btn-salon">CA 2</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA3" class="btn-salon">CA 3</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA4" class="btn-salon">CA 4</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA6" class="btn-salon">CA 6</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CA11" class="btn-salon">CA 11</a>
-                    </div>
-                </div>
+                <span class="contador-filas">
+                    ${listaBitacora.size()} registro<c:if test="${listaBitacora.size() ne 1}">s</c:if>
+                </span>
+            </div>
 
-                <!-- SECCIÓN 3: CEDIM -->
-                <div class="building-section">
-                    <h3 class="building-title">CEDIM</h3>
-                    <div class="buttons-grid">
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC1" class="btn-salon">CC 1</a>
-                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=CC2" class="btn-salon">CC 2</a>
-                    </div>
-                </div>
+            <div class="tabla-wrapper">
+                <table class="tabla-datos" id="tablaBitacora">
+                    <thead>
+                    <tr>
+                        <th style="width: 9%;">Salón</th>
+                        <th style="width: 6%;">PC</th>
+                        <th style="width: 14%;">Matrícula</th>
+                        <th style="width: 24%;">Nombre</th>
+                        <th style="width: 12%;">Fecha</th>
+                        <th style="width: 10%;">Hora inicial</th>
+                        <th style="width: 10%;">Hora final</th>
+                        <th style="width: 15%;">Estado</th>
+                    </tr>
+                    </thead>
 
-                <div class="card-footer-link">
-                    <a href="${pageContext.request.contextPath}/views/admin/agregar_salon.jsp" class="link-add-room">
-                        ¿Desea agregar otro salón?
-                    </a>
-                </div>
+                    <tbody>
+                    <c:choose>
+                        <c:when test="${not empty listaBitacora}">
+                            <c:forEach var="fila" items="${listaBitacora}">
+                                <tr>
+                                    <td><strong>${fila.salon}</strong></td>
+                                    <td>${fila.numeroPc}</td>
+                                    <td>${fila.matricula}</td>
+                                    <td class="al-inicio">${fila.nombreCompleto}</td>
+                                    <td>${fila.fecha}</td>
+                                    <td>${fila.horaInicio}</td>
 
-            </div> <!-- /card de los salones -->
+                                        <%-- hora_final admite NULL: la sesión sigue abierta. --%>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${not empty fila.horaFinal}">${fila.horaFinal}</c:when>
+                                            <c:otherwise><span class="text-muted">En curso</span></c:otherwise>
+                                        </c:choose>
+                                    </td>
 
-        </div> <!-- /salones-body -->
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${fila.estado eq 'Validado'}">
+                                                <span class="badge-estado badge-validado">Validado</span>
+                                            </c:when>
+                                            <c:when test="${fila.estado eq 'Pendiente'}">
+                                                <span class="badge-estado badge-pendiente">Pendiente</span>
+                                            </c:when>
+                                            <c:when test="${fila.estado eq 'Descartado'}">
+                                                <span class="badge-estado badge-descartado">Descartado</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="badge-estado badge-sinreporte">Sin reporte</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+
+                        <c:otherwise>
+                            <%-- Antes se pintaban filas vacías, que parecían un error de carga. --%>
+                            <tr>
+                                <td colspan="8" class="sin-datos">
+                                    <c:choose>
+                                        <c:when test="${not empty labActual and labActual ne 'Todos'}">
+                                            Todavía no hay registros de uso en
+                                            <c:out value="${labActual}" />.
+                                        </c:when>
+                                        <c:otherwise>
+                                            Todavía no hay registros en la bitácora.
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
 
     </main>
 </div>
 
-<!-- Footer -->
 <jsp:include page="/views/layout/footer.jsp" />

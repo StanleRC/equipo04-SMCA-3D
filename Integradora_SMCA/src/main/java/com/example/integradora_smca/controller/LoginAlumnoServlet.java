@@ -89,7 +89,7 @@ public class LoginAlumnoServlet extends HttpServlet {
             session.setAttribute("horaInicio", horaEntrada.trim());
             session.setAttribute("horaFinal", horaSalida.trim()); // Se guarda en sesión si lo ocupas después
 
-            response.sendRedirect(request.getContextPath() + "/PerfilAlumnoServlet");
+            response.sendRedirect(request.getContextPath() + "/views/alumno/historial_alumno.jsp");
         } else {
             request.setAttribute("errorMessage", "Matrícula o contraseña incorrectas.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

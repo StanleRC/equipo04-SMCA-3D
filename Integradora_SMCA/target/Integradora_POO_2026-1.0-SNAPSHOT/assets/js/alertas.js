@@ -1,4 +1,4 @@
-// 1. Alerta para Cerrar Sesión
+ // 1. Alerta para Cerrar Sesión
 function confirmarCierreSesion(event, urlRedireccion) {
     if (event) event.preventDefault();
 
