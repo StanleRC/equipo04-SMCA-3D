@@ -1,8 +1,15 @@
 package com.example.integradora_smca.model;
 
-public class Docente implements UsuarioPersonal {
+/**
+ * Fila de la tabla ADMINISTRADOR.
+ *
+ * Nota sobre el id: en la base es VARCHAR2(30), así que aquí se guarda como String.
+ * (En Docente el modelo usa int aunque la columna también sea VARCHAR2; Oracle lo
+ * convierte solo, pero es una conversión implícita que conviene no repetir.)
+ */
+public class Administrador implements UsuarioPersonal {
 
-    private Integer idDocente;
+    private String idAdministrador;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -11,33 +18,24 @@ public class Docente implements UsuarioPersonal {
     private int rolIdRol;
     private String fotoPerfil;
 
+    public Administrador() {
+    }
+
+    /** Exigido por UsuarioPersonal: la llave primaria como texto. */
     @Override
     public String getIdentificador() {
-        return String.valueOf(idDocente);
+        return idAdministrador;
     }
 
-    public Docente() {
+    public String getIdAdministrador() {
+        return idAdministrador;
     }
 
-    public Docente(Integer idDocente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String hashPassword, int rolIdRol, String fotoPerfil) {
-        this.idDocente = idDocente;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.hashPassword = hashPassword;
-        this.rolIdRol = rolIdRol;
-        this.fotoPerfil = fotoPerfil;
+    public void setIdAdministrador(String idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 
-    public Integer getIdDocente() {
-        return idDocente;
-    }
-
-    public void setIdDocente(Integer idDocente) {
-        this.idDocente = idDocente;
-    }
-
+    @Override
     public String getNombre() {
         return nombre;
     }
@@ -46,6 +44,7 @@ public class Docente implements UsuarioPersonal {
         this.nombre = nombre;
     }
 
+    @Override
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
@@ -54,6 +53,7 @@ public class Docente implements UsuarioPersonal {
         this.apellidoPaterno = apellidoPaterno;
     }
 
+    @Override
     public String getApellidoMaterno() {
         return apellidoMaterno;
     }
@@ -62,6 +62,7 @@ public class Docente implements UsuarioPersonal {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    @Override
     public String getCorreo() {
         return correo;
     }
@@ -78,6 +79,7 @@ public class Docente implements UsuarioPersonal {
         this.hashPassword = hashPassword;
     }
 
+    @Override
     public int getRolIdRol() {
         return rolIdRol;
     }
@@ -86,6 +88,7 @@ public class Docente implements UsuarioPersonal {
         this.rolIdRol = rolIdRol;
     }
 
+    @Override
     public String getFotoPerfil() {
         return fotoPerfil;
     }
