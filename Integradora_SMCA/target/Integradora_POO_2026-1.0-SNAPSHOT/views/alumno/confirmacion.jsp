@@ -31,12 +31,8 @@
         </p>
 
         <div class="d-grid gap-2 col-8 mx-auto">
-            <a href="${pageContext.request.contextPath}/RegistrarIncidenciaServlet" class="btn btn-siguiente py-2 fs-6">
-                <i class="bi bi-plus-lg me-2"></i>Nuevo Registro
-            </a>
-
-            <a href="${pageContext.request.contextPath}/LoginAlumnoServlet" class="btn btn-outline-secondary py-2 mt-2">
-                <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+            <a href="${pageContext.request.contextPath}/views/alumno/perfil_alumno.jsp" class="btn btn-siguiente py-2 fs-6">
+                <i class="bi bi-plus-lg me-2"></i>Finalizar
             </a>
         </div>
 

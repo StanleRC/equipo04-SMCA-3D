@@ -82,6 +82,7 @@ public class LoginAlumnoServlet extends HttpServlet {
             session.setAttribute("usuarioLogueado", alumno);
             session.setAttribute("usuario", alumno);
             session.setAttribute("rol", "Alumno");
+
             session.setAttribute("alumno_matricula", alumno.getMatricula());
             session.setAttribute("numeroPc", numeroPc.trim());
             session.setAttribute("aula", aula.trim());
