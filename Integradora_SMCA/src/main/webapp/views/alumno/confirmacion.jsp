@@ -31,7 +31,7 @@
         </p>
 
         <div class="d-grid gap-2 col-8 mx-auto">
-            <a href="${pageContext.request.contextPath}/views/alumno/perfil_alumno.jsp" class="btn btn-siguiente py-2 fs-6">
+            <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="btn btn-siguiente py-2 fs-6">
                 <i class="bi bi-plus-lg me-2"></i>Finalizar
             </a>
         </div>
