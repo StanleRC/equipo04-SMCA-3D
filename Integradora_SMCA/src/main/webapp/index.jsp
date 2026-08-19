@@ -145,8 +145,25 @@
     </footer>
 
 </div>
+<div id="aboutModal" class="modal-overlay">
+    <div class="modal-card">
+        <h2 class="modal-title">¿Quiénes somos?</h2>
+
+        <p class="modal-text">
+            "Somos estudiantes de la carrera de Tecnologías de la Información en la UTEZ.
+            Desarrollamos este sistema como parte de nuestro proyecto integrador para optimizar
+            la gestión, el control de accesos y el reporte de incidencias en los laboratorios de cómputo
+            de DATID, conectando de forma eficiente a alumnos, docentes y administradores a través
+            de soluciones en la nube."
+        </p>
+
+        <button type="button" class="btn-close-modal" id="closeModalBtn">Cerrar</button>
+    </div>
+</div>
 
 <script src="${pageContext.request.contextPath}/assets/js/sobrenosotros.js"></script>
+
+
 <script>
     // Obtener la hora actual al cargar la página
     document.addEventListener('DOMContentLoaded', function () {

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,6 +12,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrarinsidencia_alumno.css?v=3">
 </head>
 <body>
+
+<jsp:include page="/views/layout/sidebar_alumno.jsp" />
+<c:set var="alu" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
 
 <div class="main-container">
 
@@ -39,23 +43,25 @@
             <div class="mb-3">
                 <label for="prioridad" class="form-label">Prioridad</label>
                 <select name="prioridad" id="prioridad" class="form-select custom-input">
-                    <option value="Media" selected>Media (por defecto)</option>
-                    <option value="Baja">Baja</option>
+                    <option value="Baja" selected>Baja</option>
+                    <option value="Media">Media</option>
                     <option value="Alta">Alta</option>
                 </select>
             </div>
 
             <!-- Descripción de la Incidencia -->
-            <h3 class="card-subtitle-custom">¿El equipo presenta alguna falla? (Opcional)</h3>
+            <h3 class="card-subtitle-custom">¿Qué fallas presenta el equipo?</h3>
             <div class="mb-4">
                 <textarea name="descripcion_falla"
-                          class="form-control custom-textarea"
-                          rows="4"
-                          placeholder="Describe la incidencia..."></textarea>
+                class="form-control custom-textarea"
+                rows="4"
+                placeholder="Describe la incidencia..."
+                required></textarea>
             </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-siguiente">Registrar</button>
+            <div class="actions-container mt-4 d-flex justify-content-between">
+                <a href="../alumno/editar_perfil_alumno.jsp" class="btn-secundario">Cancelar</a>
+                <button type="submit" class="btn-principal">Registrar</button>
             </div>
         </form>
     </div>

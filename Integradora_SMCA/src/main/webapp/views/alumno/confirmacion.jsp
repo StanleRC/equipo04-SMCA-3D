@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrarinsidencia_alumno.css?v=2">
 </head>
+
+<jsp:include page="/views/layout/sidebar_alumno.jsp" />
+<c:set var="alu" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
+
 <body>
 
 <div class="main-container">
@@ -32,7 +36,7 @@
 
         <div class="d-grid gap-2 col-8 mx-auto">
             <a href="${pageContext.request.contextPath}/views/alumno/editar_perfil_alumno.jsp" class="btn btn-siguiente py-2 fs-6">
-                <i class="bi bi-plus-lg me-2"></i>Finalizar
+                Regresar
             </a>
         </div>
 

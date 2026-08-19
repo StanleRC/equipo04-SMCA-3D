@@ -88,6 +88,45 @@
             color: #444;
             word-break: break-all;
         }
+        /* Botón principal (verde estilo Guardar cambios) */
+        .btn-principal {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+            color: #ffffff;
+            background-color: #0d8a72; /* verde */
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-principal:hover {
+            background-color: #0a7560; /* verde más oscuro */
+        }
+
+        /* Botón secundario (azul estilo Cancelar) */
+        .btn-secundario {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
+            color: #ffffff;
+            background-color: #0d3b66; /* azul oscuro */
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-secundario:hover {
+            background-color: #092a4d; /* azul más oscuro */
+        }
+
+
 
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; }
@@ -133,7 +172,7 @@
             </div>
 
             <div class="button-container mt-3">
-                <button type="submit" id="btnEnviarCodigo" class="btn btn-primary w-100">
+                <button type="submit" id="btnEnviarCodigo" class="btn-principal">
                     <span id="spinnerBtn" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                     Enviar código
                 </button>
