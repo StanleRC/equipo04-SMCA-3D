@@ -14,59 +14,66 @@
 
 <div class="main-container">
 
-    <div class="logo-container">
-        <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo" style="max-height: 110px;">
-    </div>
+    <jsp:include page="/views/layout/sidebar_alumno.jsp" />
+    <c:set var="alu" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
 
-    <div class="card-register">
+    <div class="main-container">
 
-        <div class="avatar-header">
-            <i class="bi bi-person-fill"></i>
+        <div class="logo-container">
+            <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo" style="max-height: 110px;">
         </div>
 
-        <h2 class="card-title-custom">Registro de Incidencia</h2>
+        <div class="card-register">
 
-        <% if (request.getAttribute("error") != null) { %>
-        <div class="alert alert-danger text-center mb-3">
-            <%= request.getAttribute("error") %>
-        </div>
-        <% } %>
-
-        <!-- Procesa el formulario hacia RegistrarIncidenciaServlet -->
-        <form action="${pageContext.request.contextPath}/RegistrarIncidenciaServlet" method="POST">
-
-            <!-- Prioridad -->
-            <div class="mb-3">
-                <label for="prioridad" class="form-label">Prioridad</label>
-                <select name="prioridad" id="prioridad" class="form-select custom-input">
-                    <option value="Media" selected>Media (por defecto)</option>
-                    <option value="Baja">Baja</option>
-                    <option value="Alta">Alta</option>
-                </select>
+            <div class="avatar-header">
+                <i class="bi bi-person-fill"></i>
             </div>
 
-            <!-- Descripción de la Incidencia -->
-            <h3 class="card-subtitle-custom">¿El equipo presenta alguna falla? (Opcional)</h3>
-            <div class="mb-4">
+            <h2 class="card-title-custom">Registro de Incidencia</h2>
+
+            <% if (request.getAttribute("error") != null) { %>
+            <div class="alert alert-danger text-center mb-3">
+                <%= request.getAttribute("error") %>
+            </div>
+            <% } %>
+
+            <!-- Procesa el formulario hacia RegistrarIncidenciaServlet -->
+            <form action="${pageContext.request.contextPath}/RegistrarIncidenciaServlet" method="POST">
+
+                <!-- Prioridad -->
+                <div class="mb-3">
+                    <label for="prioridad" class="form-label">Prioridad</label>
+                    <select name="prioridad" id="prioridad" class="form-select custom-input">
+                        <option value="Baja" selected>Baja</option>
+                        <option value="Media">Media</option>
+                        <option value="Alta">Alta</option>
+                    </select>
+                </div>
+
+                <!-- Descripción de la Incidencia -->
+                <h3 class="card-subtitle-custom">¿Qué fallas presenta el equipo?</h3>
+                <div class="mb-4">
                 <textarea name="descripcion_falla"
                           class="form-control custom-textarea"
                           rows="4"
-                          placeholder="Describe la incidencia..."></textarea>
-            </div>
+                          placeholder="Describe la incidencia..."
+                          required></textarea>
+                </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-siguiente">Registrar</button>
-            </div>
-        </form>
+                <div class="actions-container mt-4 d-flex justify-content-between">
+                    <a href="../alumno/editar_perfil_alumno.jsp" class="btn-secundario">Cancelar</a>
+                    <button type="submit" class="btn-principal">Registrar</button>
+                </div>
+            </form>
+        </div>
+
+        <a href="${pageContext.request.contextPath}/views/sobrenosotros.jsp" class="sobre-nosotros-link">
+            <i class="bi bi-info-circle"></i>
+            <span><u>Sobre Nosotros</u></span>
+        </a>
+
     </div>
 
-    <a href="${pageContext.request.contextPath}/views/sobrenosotros.jsp" class="sobre-nosotros-link">
-        <i class="bi bi-info-circle"></i>
-        <span><u>Sobre Nosotros</u></span>
-    </a>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
