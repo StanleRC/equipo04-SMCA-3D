@@ -229,4 +229,96 @@ public class IncidenciaDao {
 
         return lista;
     }
+
+    /** Un solo reporte con todos sus datos. Se usa para armar el correo. */
+    public Map<String, Object> obtenerReportePorId(int idReporte) {
+
+        String sql = "SELECT r.id_reporte, g.grado, g.numero_grupo, r.numero_pc, a.matricula, " +
+                "(a.nombre || ' ' || a.apellido_paterno || ' ' || a.apellido_materno) AS nombre_completo, " +
+                "TO_CHAR(r.fecha_reporte, 'DD/MM/YYYY') AS fecha, " +
+                // descripcion_falla es CLOB: TO_CHAR revienta si pasa de 4000 caracteres.
+                "DBMS_LOB.SUBSTR(r.descripcion_falla, 500, 1) AS descripcion, " +
+                "r.prioridad, r.estado_reporte, r.foto_evidencia, l.aula, l.edificio " +
+                "FROM reporte_falla r " +
+                "INNER JOIN alumno a      ON UPPER(TRIM(a.matricula)) = UPPER(TRIM(r.alumno_matricula)) " +
+                "INNER JOIN grupo g       ON g.id_grupo = a.grupo_id_grupo " +
+                "INNER JOIN laboratorio l ON l.id_laboratorio = r.id_laboratorio " +
+                "WHERE r.id_reporte = ?";
+
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idReporte);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Map<String, Object> fila = new HashMap<>();
+                    fila.put("idReporte", rs.getInt("id_reporte"));
+                    fila.put("grado", rs.getString("grado"));
+                    fila.put("grupo", rs.getString("numero_grupo"));
+                    fila.put("numeroPc", rs.getString("numero_pc"));
+                    fila.put("matricula", rs.getString("matricula"));
+                    fila.put("nombreCompleto", rs.getString("nombre_completo"));
+                    fila.put("fecha", rs.getString("fecha"));
+                    fila.put("incidencia", rs.getString("descripcion"));
+                    fila.put("prioridad", rs.getString("prioridad"));
+                    fila.put("estado", rs.getString("estado_reporte"));
+                    fila.put("fotoEvidencia", rs.getString("foto_evidencia"));
+                    fila.put("salon", rs.getString("aula"));
+                    fila.put("edificio", rs.getString("edificio"));
+                    return fila;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(">>> [IncidenciaDao] Error al leer el reporte " + idReporte);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /** Guarda el nombre del archivo de evidencia en la fila del reporte. */
+    public boolean guardarFotoEvidencia(int idReporte, String nombreArchivo) {
+        if (nombreArchivo == null || nombreArchivo.trim().isEmpty()) return false;
+
+        String sql = "UPDATE reporte_falla SET foto_evidencia = ? WHERE id_reporte = ?";
+
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombreArchivo.trim());
+            ps.setInt(2, idReporte);
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println(">>> [IncidenciaDao] Error al guardar la evidencia: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /** Laboratorios existentes, para llenar las pantallas sin quemarlos en el HTML. */
+    public List<Map<String, Object>> listarLaboratorios() {
+        List<Map<String, Object>> lista = new ArrayList<>();
+
+        String sql = "SELECT id_laboratorio, aula, edificio, nombre_lab " +
+                "FROM laboratorio ORDER BY edificio, aula";
+
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Map<String, Object> fila = new HashMap<>();
+                fila.put("idLaboratorio", rs.getInt("id_laboratorio"));
+                fila.put("aula", rs.getString("aula"));
+                fila.put("edificio", rs.getString("edificio"));
+                fila.put("nombreLab", rs.getString("nombre_lab"));
+                lista.add(fila);
+            }
+        } catch (SQLException e) {
+            System.err.println(">>> [IncidenciaDao] Error al listar laboratorios: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

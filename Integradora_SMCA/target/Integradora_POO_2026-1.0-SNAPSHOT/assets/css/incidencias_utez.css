@@ -193,3 +193,13 @@ body {
     color: #2b2b2b;
     background: #f9fafb;
 }
+/* El sidebar es position:fixed y mide 240px, así que no ocupa lugar
+   en el flujo. Sin este margen, la tabla se desliza debajo de él. */
+.main-content {
+    margin-left: 240px;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .main-content { margin-left: 220px; }
+}

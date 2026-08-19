@@ -23,9 +23,9 @@
     <!-- Área de Contenido Principal -->
     <main class="main-content">
 
-        <!-- Barra Azul Superior -->
+        <!-- Por esto otro: -->
         <div class="profile-top-blue-bar">
-            Configuración de Cuenta (Docente)
+            Configuración de Cuenta (<c:choose><c:when test="${sessionScope.esAdmin}">Administrador</c:when><c:otherwise>Docente</c:otherwise></c:choose>)
         </div>
 
         <!-- Cuerpo Centrado del Formulario -->
@@ -71,9 +71,14 @@
                             <!-- Columna Derecha: Campos del Formulario -->
                             <div class="col-md-7 profile-form-section">
                                 <div class="user-role-badge mb-3">
-                                    Rol de usuario: <span class="text-muted font-weight-normal">Docente</span>
+                                    Rol de usuario:
+                                    <span class="text-muted font-weight-normal">
+            <c:choose>
+                <c:when test="${sessionScope.esAdmin}">Administrador</c:when>
+                <c:otherwise>Docente</c:otherwise>
+            </c:choose>
+        </span>
                                 </div>
-
                                 <div class="form-group mb-3">
                                     <label class="profile-form-label">Nombre(s)</label>
                                     <input type="text" id="txtNombre" name="nombre" class="form-control profile-form-input" placeholder="Nombre(s)" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado.nombre : sessionScope.docente.nombre}" autocomplete="off" required>
