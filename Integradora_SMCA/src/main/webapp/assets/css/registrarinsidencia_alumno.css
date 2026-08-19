@@ -1,0 +1,228 @@
+:root {
+    --green-btn: #0d8a72;
+    --green-btn-hover: #0a7560;
+    --card-bg: #f2f2f2;
+    --border-color: #cccccc;
+    --avatar-bg: #5a5a5a;
+    --text-dark: #555555;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px 20px;
+}
+
+/* --- LOGO UTEZ --- */
+.logo-container {
+    margin-bottom: 60px !important; /* Espacio para que el avatar respire sin tapar el logo */
+    padding: 0 !important;
+    border: none !important; /* Eliminado el borde azul */
+    background-color: transparent !important;
+    display: inline-block;
+}
+
+.utez-logo {
+    max-height: 130px !important; /* <--- Subimos de 80px a 130px para que se vea más grande */
+    width: auto;
+    display: block;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* --- TARJETA PRINCIPAL --- */
+.card-register {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 480px;
+    padding: 50px 35px 30px 35px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* --- AVATAR CIRCULAR SUPERPUESTO --- */
+.avatar-header {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 110px;
+    background-color: var(--avatar-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.avatar-header i {
+    font-size: 70px;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+/* --- TÍTULOS --- */
+.card-title-custom {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.card-subtitle-custom {
+    text-align: center;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+/* --- INPUTS Y TEXTAREA --- */
+.custom-input {
+    border-radius: 12px;
+    border: 1px solid #b3b3b3;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.custom-input::placeholder,
+.custom-textarea::placeholder {
+    color: #888888;
+}
+
+.custom-input:focus,
+.custom-textarea:focus {
+    border-color: var(--green-btn);
+    box-shadow: 0 0 0 0.2rem rgba(13, 138, 114, 0.25);
+}
+
+.short-arrow-icon {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+.custom-textarea {
+    border-radius: 15px;
+    border: 1px solid #b3b3b3;
+    padding: 12px 15px;
+    font-size: 14px;
+    resize: none;
+}
+
+/* --- BOTÓN SIGUIENTE --- */
+.btn-siguiente {
+    background-color: var(--green-btn);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 20px;
+    padding: 8px 35px;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-siguiente:hover {
+    background-color: var(--green-btn-hover);
+    color: #ffffff;
+}
+
+/* --- SOBRE NOSOTROS (ESQUINA INFERIOR IZQUIERDA) --- */
+.sobre-nosotros-link {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555555;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.sobre-nosotros-link i {
+    font-size: 22px;
+}
+
+.sobre-nosotros-link:hover {
+    color: #111111;
+}
+
+/* Botón principal (verde estilo Guardar cambios) */
+.btn-principal {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0d8a72;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+.btn-principal:hover {
+    background-color: #0a7560;
+}
+
+.btn-secundario {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0d3b66;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-secundario:hover {
+    background-color: #092a4d;
+    text-decoration: none;
+}
+
+.btn-secundario:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Banner Azul Superior */
+.top-header {
+    background-color: var(--header-blue);
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
