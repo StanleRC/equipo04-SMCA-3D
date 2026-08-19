@@ -2,6 +2,7 @@ package com.example.integradora_smca.controller;
 
 import com.example.integradora_smca.model.UsuarioPersonal;
 import com.example.integradora_smca.model.dao.IncidenciaDao;
+import com.example.integradora_smca.utils.NotificadorIncidencias;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -11,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import com.example.integradora_smca.utils.NotificadorIncidencias;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +33,9 @@ import java.util.Map;
 public class ValidarIncidenciasServlet extends HttpServlet {
 
     private final IncidenciaDao incidenciaDao = new IncidenciaDao();
+
+    /** Tope del comentario, igual al maxlength del textarea en el JSP. */
+    private static final int MAX_COMENTARIO = 400;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,6 +66,7 @@ public class ValidarIncidenciasServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // Sin esto, los acentos y las ñ del comentario llegan rotos al correo.
         request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession(false);
@@ -74,6 +79,19 @@ public class ValidarIncidenciasServlet extends HttpServlet {
         String redirectLab = (labParam != null && !labParam.trim().isEmpty())
                 ? "&lab=" + labParam.trim() : "";
 
+        /*
+         * Validar es tarea del docente. El administrador solo observa.
+         *
+         * Esta comprobación es la que de verdad protege: el JSP oculta los
+         * botones, pero un formulario se puede enviar a mano desde la consola
+         * del navegador o con cualquier herramienta externa.
+         */
+        if (esAdministrador(session)) {
+            log("[ValidarIncidencias] Un administrador intentó revisar una incidencia.");
+            redirigir(request, response, "sin_permiso", redirectLab);
+            return;
+        }
+
         String idReporteStr = request.getParameter("idReporte");
         if (idReporteStr == null || idReporteStr.trim().isEmpty()) {
             idReporteStr = request.getParameter("idIncidencia");
@@ -85,6 +103,9 @@ public class ValidarIncidenciasServlet extends HttpServlet {
             redirigir(request, response, "error", redirectLab);
             return;
         }
+
+        // La breve descripción que escribió el docente en el modal.
+        String comentario = limpiarComentario(request.getParameter("comentario"));
 
         int idReporte;
         try {
@@ -125,9 +146,42 @@ public class ValidarIncidenciasServlet extends HttpServlet {
          * si el SMTP está caído, la incidencia ya quedó revisada de todos modos.
          */
         boolean correoEnviado = NotificadorIncidencias.avisarIncidenciaRevisada(
-                reporte, nombreDeQuienValida(session), decision, evidencia);
+                reporte, nombreDeQuienValida(session), decision, evidencia, comentario);
 
         redirigir(request, response, correoEnviado ? "ok" : "ok_sin_correo", redirectLab);
+    }
+
+    /** Mismo criterio que usa el sidebar: un solo lugar decide qué es ser admin. */
+    private boolean esAdministrador(HttpSession session) {
+
+        Object marca = session.getAttribute("esAdmin");
+        if (marca instanceof Boolean) {
+            return (Boolean) marca;
+        }
+
+        // Respaldo, por si la sesión viene de un login que no guardó ese atributo.
+        Object usuario = session.getAttribute("usuarioLogueado");
+        if (usuario == null) usuario = session.getAttribute("docente");
+        if (usuario == null) usuario = session.getAttribute("administrador");
+
+        return (usuario instanceof UsuarioPersonal)
+                && ((UsuarioPersonal) usuario).isAdministrador();
+    }
+
+    /**
+     * Recorta el comentario y devuelve null si venía vacío.
+     * El maxlength del textarea es solo del navegador: quien mande el formulario
+     * con una herramienta externa podría enviar un texto enorme.
+     */
+    private String limpiarComentario(String valor) {
+        if (valor == null) return null;
+
+        String limpio = valor.trim();
+        if (limpio.isEmpty()) return null;
+
+        return limpio.length() > MAX_COMENTARIO
+                ? limpio.substring(0, MAX_COMENTARIO)
+                : limpio;
     }
 
     /** Carpeta de evidencias, fuera de target/ para que sobreviva a los redeploy. */

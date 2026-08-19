@@ -1,7 +1,5 @@
 package com.example.integradora_smca.utils;
 
-import jakarta.activation.DataHandler;
-import jakarta.activation.FileDataSource;
 import jakarta.mail.Message;
 import jakarta.mail.Multipart;
 import jakarta.mail.PasswordAuthentication;
@@ -17,42 +15,45 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Avisa por correo al administrador cuando un docente valida una incidencia.
+ * Avisa por correo al administrador cuando un docente revisa una incidencia.
  *
- * IMPORTANTE: las cuatro constantes de abajo deben tener los MISMOS valores que
- * ya usa tu EmailSender. Cópialos de ahí tal cual. Si tu EmailSender los lee de
- * un archivo de propiedades, haz lo mismo aquí en vez de escribirlos a mano:
- * una contraseña dentro del código termina publicada en el repositorio.
+ * IMPORTANTE: las constantes de abajo deben tener los MISMOS valores que ya usa
+ * tu EmailSender. Cópialos de ahí tal cual. Si tu EmailSender los lee de un
+ * archivo de propiedades, haz lo mismo aquí: una contraseña dentro del código
+ * termina publicada en el repositorio.
  */
 public final class NotificadorIncidencias {
 
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
-    private static final String CORREO_REMITENTE = "tubitacoradigital@gmail.com";
+    private static final String CORREO_REMITENTE = "tubitacoradijital@gmail.com";
 
     /** Contraseña de aplicación de Gmail, NO la contraseña normal de la cuenta. */
-    private static final String PASSWORD_APP = "PEGA_AQUI_LA_MISMA_DE_EMAILSENDER";
+    private static final String PASSWORD_APP = "zhzvqioxhvnsekcw";
 
     /** Destinatario provisional mientras se define la cuenta oficial. */
-    private static final String CORREO_ADMIN = "20253ds101@utez.edu.mx";
+    private static final String CORREO_ADMIN = "20253ds035@utez.edu.mx";
 
     private NotificadorIncidencias() {
     }
 
     /**
-     * Envía el aviso. Nunca lanza excepción: si el correo falla, la validación de
+     * Envía el aviso. Nunca lanza excepción: si el correo falla, la revisión de
      * la incidencia ya quedó guardada en la base y no debe perderse por eso.
      *
      * @param reporte     datos del reporte tal como los devuelve IncidenciaDao
      * @param quienValida nombre completo de quien pulsó el botón
      * @param decision    "Validado" o "Descartado"
      * @param evidencia   imagen a adjuntar, o null si no se subió ninguna
+     * @param comentario  la breve descripción que escribió el docente en el
+     *                    modal, o null si la dejó vacía
      * @return true si el correo salió
      */
     public static boolean avisarIncidenciaRevisada(Map<String, Object> reporte,
                                                    String quienValida,
                                                    String decision,
-                                                   File evidencia) {
+                                                   File evidencia,
+                                                   String comentario) {
         try {
             Session sesion = crearSesion();
 
@@ -66,14 +67,17 @@ public final class NotificadorIncidencias {
             Multipart contenido = new MimeMultipart();
 
             MimeBodyPart cuerpo = new MimeBodyPart();
-            cuerpo.setContent(construirHtml(reporte, quienValida, decision, evidencia != null),
+            cuerpo.setContent(
+                    construirHtml(reporte, quienValida, decision, comentario, evidencia != null),
                     "text/html; charset=UTF-8");
             contenido.addBodyPart(cuerpo);
 
             if (evidencia != null && evidencia.isFile() && evidencia.canRead()) {
                 MimeBodyPart adjunto = new MimeBodyPart();
-                adjunto.setDataHandler(new DataHandler(new FileDataSource(evidencia)));
-                adjunto.setFileName("evidencia_" + texto(reporte.get("idReporte")) + extension(evidencia));
+                // attachFile evita depender del artefacto jakarta.activation.
+                adjunto.attachFile(evidencia);
+                adjunto.setFileName("evidencia_" + texto(reporte.get("idReporte"))
+                        + extension(evidencia));
                 contenido.addBodyPart(adjunto);
             }
 
@@ -84,11 +88,19 @@ public final class NotificadorIncidencias {
             return true;
 
         } catch (Exception e) {
-            // Se registra y se sigue: el reporte ya está revisado en la base de datos.
+            // Se registra y se sigue: el reporte ya está revisado en la base.
             System.err.println(">>> [Notificador] No se pudo enviar el correo: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
+    }
+
+    /** Versión sin comentario, por si alguna pantalla vieja la sigue llamando. */
+    public static boolean avisarIncidenciaRevisada(Map<String, Object> reporte,
+                                                   String quienValida,
+                                                   String decision,
+                                                   File evidencia) {
+        return avisarIncidenciaRevisada(reporte, quienValida, decision, evidencia, null);
     }
 
     private static Session crearSesion() {
@@ -107,9 +119,11 @@ public final class NotificadorIncidencias {
     }
 
     private static String construirHtml(Map<String, Object> r, String quienValida,
-                                        String decision, boolean llevaFoto) {
+                                        String decision, String comentario, boolean llevaFoto) {
 
         String colorEstado = "Validado".equalsIgnoreCase(decision) ? "#1e7e4a" : "#8a6100";
+
+        boolean hayComentario = comentario != null && !comentario.trim().isEmpty();
 
         return "<div style=\"font-family:Arial,Helvetica,sans-serif;max-width:560px;"
                 + "margin:0 auto;color:#333;\">"
@@ -146,16 +160,31 @@ public final class NotificadorIncidencias {
                 + "</table>"
 
                 + "<p style=\"font-size:13px;font-weight:bold;margin:20px 0 6px;\">"
-                + "Descripción de la falla</p>"
+                + "Falla reportada por el alumno</p>"
                 + "<div style=\"background:#f7f8fa;border-left:3px solid #1c3862;"
                 + "padding:12px 14px;font-size:14px;line-height:1.5;\">"
                 + escapar(texto(r.get("incidencia")))
                 + "</div>"
 
+                /*
+                 * La breve descripción que escribe el docente en el modal.
+                 * Va en bloque aparte para que no se confunda con lo que
+                 * reportó el alumno: son dos voces distintas.
+                 */
+                + (hayComentario
+                ? "<p style=\"font-size:13px;font-weight:bold;margin:20px 0 6px;\">"
+                + "Comentario de " + escapar(quienValida) + "</p>"
+                + "<div style=\"background:#f2fbf8;border-left:3px solid #0d8a72;"
+                + "padding:12px 14px;font-size:14px;line-height:1.5;\">"
+                + escapar(comentario.trim())
+                + "</div>"
+                : "<p style=\"font-size:13px;color:#8a8a8a;margin:18px 0 0;\">"
+                + "No se agregó ningún comentario a la revisión.</p>")
+
                 + (llevaFoto
                 ? "<p style=\"font-size:13px;color:#5a6b85;margin:18px 0 0;\">"
                 + "Se adjunta la fotografía de evidencia a este correo.</p>"
-                : "<p style=\"font-size:13px;color:#8a8a8a;margin:18px 0 0;\">"
+                : "<p style=\"font-size:13px;color:#8a8a8a;margin:12px 0 0;\">"
                 + "No se adjuntó fotografía de evidencia.</p>")
 
                 + "<hr style=\"border:none;border-top:1px solid #e2e6ee;margin:22px 0 12px;\">"
@@ -178,13 +207,19 @@ public final class NotificadorIncidencias {
         return valor == null ? "No especificado" : String.valueOf(valor);
     }
 
-    /** Escapa el HTML: la descripción la escribe el alumno y no debe romper el correo. */
+    /**
+     * Escapa el HTML. Tanto la descripción del alumno como el comentario del
+     * docente son texto libre: sin esto, alguien podría inyectar etiquetas
+     * en el correo que recibe el administrador.
+     */
     private static String escapar(String s) {
         if (s == null) return "";
         return s.replace("&", "&amp;")
                 .replace("<", "&lt;")
                 .replace(">", "&gt;")
-                .replace("\"", "&quot;");
+                .replace("\"", "&quot;")
+                // Los saltos de línea del textarea se respetan en el correo.
+                .replace("\n", "<br>");
     }
 
     private static String extension(File archivo) {

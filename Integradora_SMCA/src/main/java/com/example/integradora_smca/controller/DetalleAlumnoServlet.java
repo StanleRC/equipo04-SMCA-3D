@@ -2,6 +2,7 @@ package com.example.integradora_smca.controller;
 
 import com.example.integradora_smca.model.Alumno;
 import com.example.integradora_smca.model.HistorialAlumnoDto;
+import com.example.integradora_smca.model.UsuarioPersonal;
 import com.example.integradora_smca.model.dao.AlumnoDao;
 
 import jakarta.servlet.ServletException;
@@ -15,11 +16,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Detalle de un alumno visto desde el buscador (botón "Ver historial").
+ * Detalle de un alumno visto desde el buscador.
  *
  * El buscador original enlazaba a /views/admin/perfil_alumno.jsp?id=..., pero
- * ese archivo no existe en views/admin y la tabla alumno tampoco tiene columna
- * "id": su llave primaria es la matrícula. Por eso el botón no llevaba a ningún lado.
+ * ese archivo no existe y la tabla alumno tampoco tiene columna "id": su llave
+ * primaria es la matrícula.
  */
 @WebServlet("/DetalleAlumnoServlet")
 public class DetalleAlumnoServlet extends HttpServlet {
@@ -55,7 +56,12 @@ public class DetalleAlumnoServlet extends HttpServlet {
         Alumno alumno = alumnoDao.getPerfilCompletoByMatricula(matricula);
 
         if (alumno == null) {
-            // Matrícula manipulada en la URL o alumno dado de baja.
+            /*
+             * Ojo al depurar: este null también aparece cuando la consulta
+             * falla por SQL, no solo cuando el alumno no existe. Si ves este
+             * aviso con una matrícula que sí está en la base, revisa la consola
+             * de Tomcat buscando un ORA- en getPerfilCompletoByMatricula.
+             */
             response.sendRedirect(request.getContextPath()
                     + "/BuscarAlumnosServlet?aviso=noexiste");
             return;
@@ -66,7 +72,27 @@ public class DetalleAlumnoServlet extends HttpServlet {
         request.setAttribute("alumnoDetalle", alumno);
         request.setAttribute("listaHistorial", historial);
 
+        // La vista los necesita para decidir qué botones dibuja.
+        request.setAttribute("esAdmin", esAdministrador(session));
+        request.setAttribute("alumnoActivo", alumnoDao.estaActivo(matricula));
+
         request.getRequestDispatcher("/views/admin/detalle_alumno.jsp")
                 .forward(request, response);
+    }
+
+    /** Mismo criterio que el sidebar: un solo lugar decide qué es ser admin. */
+    private boolean esAdministrador(HttpSession session) {
+
+        Object marca = session.getAttribute("esAdmin");
+        if (marca instanceof Boolean) {
+            return (Boolean) marca;
+        }
+
+        Object usuario = session.getAttribute("usuarioLogueado");
+        if (usuario == null) usuario = session.getAttribute("docente");
+        if (usuario == null) usuario = session.getAttribute("administrador");
+
+        return (usuario instanceof UsuarioPersonal)
+                && ((UsuarioPersonal) usuario).isAdministrador();
     }
 }

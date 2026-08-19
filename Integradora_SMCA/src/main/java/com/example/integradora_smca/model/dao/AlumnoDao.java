@@ -235,11 +235,14 @@ public class AlumnoDao {
     }
 
     public Alumno getPerfilCompletoByMatricula(String matricula) {
-        String sql = "SELECT a.matricula, a.nombre, a.apellido_paterno, a.apellido_materno, a.correo, a.foto_perfil, " +
-                "g.id_grupo, g.grado, g.numero_grupo, c.nombre_carrera " +
+        String sql = "SELECT a.matricula, a.nombre, a.apellido_paterno, a.apellido_materno, " +
+                "a.correo, a.foto_perfil, " +
+                "g.id_grupo, g.grado, g.letra_grupo, c.nombre_carrera " +
                 "FROM alumno a " +
-                "INNER JOIN grupo g ON a.grupo_id_grupo = g.id_grupo " +
-                "INNER JOIN carrera c ON g.carrera_id_carrera = c.id_carrera " +
+                // TO_CHAR en ambos lados: sin esto Oracle intenta convertir
+                // 'DSM3D' a número y lanza ORA-01722.
+                "INNER JOIN grupo g   ON TO_CHAR(g.id_grupo) = TO_CHAR(a.grupo_id_grupo) " +
+                "INNER JOIN carrera c ON c.id_carrera = g.carrera_id_carrera " +
                 "WHERE UPPER(TRIM(a.matricula)) = UPPER(TRIM(?))";
 
         try (Connection con = obtenerConexionValida();
@@ -260,6 +263,9 @@ public class AlumnoDao {
                 }
             }
         } catch (SQLException e) {
+            // Sin este mensaje el fallo era invisible: el servlet solo veía null
+            // y concluía que el alumno no existía.
+            System.err.println("--> ERROR EN PERFIL COMPLETO: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -268,21 +274,23 @@ public class AlumnoDao {
     public List<HistorialAlumnoDto> getHistorialByMatricula(String matricula) {
         List<HistorialAlumnoDto> lista = new ArrayList<>();
 
-        String sql = "SELECT g.grado, g.numero_grupo, a.matricula, " +
+        String sql = "SELECT g.grado, g.letra_grupo AS grupo, a.matricula, " +
                 "(a.nombre || ' ' || a.apellido_paterno || ' ' || a.apellido_materno) AS nombre_completo, " +
                 "l.aula, b.numero_pc, " +
-                "TO_CHAR(b.fecha, 'DD/MM/YYYY')    AS fecha, " +
-                "TO_CHAR(b.hora_inicio, 'HH24:MI') AS hora_inicio, " +
-                "TO_CHAR(b.hora_final, 'HH24:MI')  AS hora_final, " +
+                "TO_CHAR(b.fecha, 'DD/MM/YYYY') AS fecha, " +
+                // hora_inicio y hora_final son VARCHAR2 y ya guardan 'HH:MM'.
+                // Aplicarles TO_CHAR hace que Oracle los trate como número (ORA-01722).
+                "b.hora_inicio, b.hora_final, " +
                 "NVL(DBMS_LOB.SUBSTR(r.descripcion_falla, 500, 1), 'Ninguna') AS incidencia, " +
-                "NVL(r.estado_reporte, 'Sin reporte') AS estado " +
+                "NVL(r.estado, 'Sin reporte') AS estado " +
                 "FROM bitacora b " +
                 "INNER JOIN alumno a      ON UPPER(TRIM(a.matricula)) = UPPER(TRIM(b.alumno_matricula)) " +
-                "INNER JOIN grupo g       ON g.id_grupo = a.grupo_id_grupo " +
+                // TO_CHAR en ambos lados: id_grupo y grupo_id_grupo no comparten tipo.
+                "INNER JOIN grupo g       ON TO_CHAR(g.id_grupo) = TO_CHAR(a.grupo_id_grupo) " +
                 "INNER JOIN laboratorio l ON l.id_laboratorio = b.id_laboratorio " +
                 "LEFT  JOIN reporte_falla r ON r.id_bitacora = b.id_bitacora " +
                 "WHERE UPPER(TRIM(a.matricula)) = UPPER(TRIM(?)) " +
-                "ORDER BY b.fecha DESC, b.hora_inicio DESC";
+                "ORDER BY b.fecha DESC, b.id_bitacora DESC";
 
         try (Connection con = obtenerConexionValida();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -292,7 +300,7 @@ public class AlumnoDao {
                 while (rs.next()) {
                     HistorialAlumnoDto h = new HistorialAlumnoDto();
                     h.setGrado(rs.getString("grado"));
-                    h.setGrupo(rs.getString("numero_grupo"));
+                    h.setGrupo(rs.getString("grupo"));
                     h.setSalon(rs.getString("aula"));
                     h.setNumeroPc(rs.getString("numero_pc"));
                     h.setMatricula(rs.getString("matricula"));
@@ -306,6 +314,7 @@ public class AlumnoDao {
                 }
             }
         } catch (SQLException e) {
+            System.err.println("--> ERROR EN HISTORIAL: " + e.getMessage());
             e.printStackTrace();
         }
         return lista;
@@ -445,26 +454,25 @@ public class AlumnoDao {
     public List<Map<String, Object>> buscarAlumnos(String termino) {
         List<Map<String, Object>> lista = new ArrayList<>();
 
-        String sql = "SELECT a.matricula, a.correo, a.foto_perfil, " +
+        String sql = "SELECT a.matricula, a.correo, a.foto_perfil, NVL(a.activo, 'S') AS activo, " +
                 "(a.nombre || ' ' || a.apellido_paterno || ' ' || a.apellido_materno) AS nombre_completo, " +
-                "g.id_grupo, g.grado, g.numero_grupo, c.nombre_carrera " +
+                "g.id_grupo, g.grado, g.letra_grupo AS grupo, c.nombre_carrera " +
                 "FROM alumno a " +
-                "INNER JOIN grupo g   ON g.id_grupo = a.grupo_id_grupo " +
+                // TO_CHAR en ambos lados: id_grupo y grupo_id_grupo no comparten tipo.
+                "INNER JOIN grupo g   ON TO_CHAR(g.id_grupo) = TO_CHAR(a.grupo_id_grupo) " +
                 "INNER JOIN carrera c ON c.id_carrera = g.carrera_id_carrera " +
                 "WHERE UPPER(a.nombre || ' ' || a.apellido_paterno || ' ' || a.apellido_materno) LIKE UPPER(?) " +
                 "   OR UPPER(a.matricula) LIKE UPPER(?) " +
                 "   OR UPPER(a.correo)    LIKE UPPER(?) " +
-                "   OR UPPER(g.id_grupo)  LIKE UPPER(?) " +
+                "   OR UPPER(TO_CHAR(g.id_grupo)) LIKE UPPER(?) " +
                 "ORDER BY a.apellido_paterno, a.apellido_materno, a.nombre";
 
         String patron = "%" + (termino == null ? "" : termino.trim()) + "%";
 
-        try (Connection con = obtenerConexionValida();
+        try (Connection con = SQLConnector.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            for (int i = 1; i <= 4; i++) {
-                ps.setString(i, patron);
-            }
+            for (int i = 1; i <= 4; i++) ps.setString(i, patron);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -472,19 +480,62 @@ public class AlumnoDao {
                     fila.put("matricula", rs.getString("matricula"));
                     fila.put("nombreCompleto", rs.getString("nombre_completo"));
                     fila.put("grado", rs.getString("grado"));
-                    fila.put("grupo", rs.getString("numero_grupo"));
+                    fila.put("grupo", rs.getString("grupo"));
                     fila.put("idGrupo", rs.getString("id_grupo"));
                     fila.put("carrera", rs.getString("nombre_carrera"));
                     fila.put("correo", rs.getString("correo"));
-                    fila.put("fotoPerfil", rs.getString("foto_perfil"));
+                    fila.put("activo", rs.getString("activo"));
                     lista.add(fila);
                 }
             }
         } catch (SQLException e) {
+            System.err.println("--> ERROR EN BUSCAR ALUMNOS: " + e.getMessage());
             e.printStackTrace();
         }
         return lista;
     }
+
+    /** Deshabilita o reactiva sin borrar nada. */
+    public boolean cambiarEstadoAlumno(String matricula, boolean activo) {
+        if (matricula == null || matricula.trim().isEmpty()) return false;
+
+        String sql = "UPDATE alumno SET activo = ? WHERE UPPER(TRIM(matricula)) = UPPER(TRIM(?))";
+
+        try (Connection con = SQLConnector.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, activo ? "S" : "N");
+            ps.setString(2, matricula.trim());
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("--> ERROR AL CAMBIAR ESTADO: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /** true si el alumno está activo. También devuelve true si no existe la columna. */
+    public boolean estaActivo(String matricula) {
+        if (matricula == null || matricula.trim().isEmpty()) return true;
+
+        String sql = "SELECT NVL(activo, 'S') FROM alumno " +
+                "WHERE UPPER(TRIM(matricula)) = UPPER(TRIM(?))";
+
+        try (Connection con = obtenerConexionValida();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, matricula.trim());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return !"N".equalsIgnoreCase(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
 
 
 }
