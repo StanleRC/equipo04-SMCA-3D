@@ -13,8 +13,6 @@
 <body>
 
 <div class="main-container">
-
-    <jsp:include page="/views/layout/sidebar_alumno.jsp" />
     <c:set var="alu" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
 
     <div class="main-container">
@@ -66,14 +64,8 @@
                 </div>
             </form>
         </div>
-
-        <a href="${pageContext.request.contextPath}/views/sobrenosotros.jsp" class="sobre-nosotros-link">
-            <i class="bi bi-info-circle"></i>
-            <span><u>Sobre Nosotros</u></span>
-        </a>
-
     </div>
-
+        <jsp:include page="/views/layout/sidebar_alumno.jsp" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
