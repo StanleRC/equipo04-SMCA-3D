@@ -316,7 +316,7 @@
 
             <div class="text-center mb-3">
                 <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
-                     alt="Logo UTEZ" style="max-height: 130px;">
+                     alt="Logo UTEZ" style="max-height: 200px;">
             </div>
 
             <div class="encabezado-tabla">
@@ -345,7 +345,7 @@
                         <th style="width: 20%;">Nombre</th>
                         <th style="width: 11%;">Fecha</th>
                         <th style="width: 18%;">Incidencia</th>
-                        <th style="width: 15%;">
+                        <th style="width: 20%;">
                             <c:choose>
                                 <c:when test="${esAdmin}">Estado</c:when>
                                 <c:otherwise>Validar</c:otherwise>

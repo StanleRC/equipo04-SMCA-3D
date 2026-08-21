@@ -48,17 +48,9 @@
 
             <div class="salones-header-row">
                 <div>
-                    <a href="javascript:history.back()" class="btn-back">
-                        &larr; Pestaña anterior
-                    </a>
-                </div>
-
-                <div>
                     <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
                          alt="Logo UTEZ" class="utez-logo">
                 </div>
-
-                <div></div>
             </div>
 
             <p class="contador-labs">
