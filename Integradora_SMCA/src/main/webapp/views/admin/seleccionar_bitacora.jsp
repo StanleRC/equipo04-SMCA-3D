@@ -4,11 +4,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/cssbitacora_insidencias_Aulas.css?v=12">
 
 <jsp:include page="/views/layout/header.jsp">
-    <jsp:param name="pageTitle" value="Validar Incidencias - UTEZ" />
+    <jsp:param name="pageTitle" value="Seleccionar Laboratorio - UTEZ" />
 </jsp:include>
 
 <style>
-    /* Estilos acotados a esta pantalla, por si el CSS compartido no los trae */
     .aviso-vacio {
         background: #fdf0d5;
         color: #8a6100;
@@ -51,10 +50,12 @@
                     <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
                          alt="Logo UTEZ" class="utez-logo">
                 </div>
+
+                <div></div>
             </div>
 
             <p class="contador-labs">
-                Selecciona un laboratorio para revisar sus incidencias
+                Selecciona un laboratorio para ver su bitácora de accesos
                 <c:if test="${totalLaboratorios gt 0}">
                     &middot; ${totalLaboratorios} disponible<c:if test="${totalLaboratorios ne 1}">s</c:if>
                 </c:if>
@@ -66,21 +67,21 @@
                     <c:when test="${not empty laboratoriosPorEdificio}">
 
                         <%--
-                            Los botones ya no están escritos a mano. Se generan a partir
-                            de la tabla LABORATORIO, agrupados por edificio.
+                            Idéntico a incidencias.jsp. La única diferencia es a dónde
+                            apunta el botón: allá va a ValidarIncidenciasServlet y aquí
+                            a BitacoraServlet.
 
-                            Así desaparece el problema de CA 5, CA 6 y CA 11: existían
-                            como botón pero no como registro, y siempre llevaban a una
-                            tabla vacía sin explicar por qué.
+                            Los laboratorios salen de la tabla LABORATORIO, no escritos
+                            a mano, así que agregar un aula en la base la hace aparecer
+                            sola en esta pantalla.
                         --%>
                         <c:forEach var="grupo" items="${laboratoriosPorEdificio}">
-
                             <div class="building-section">
                                 <h3 class="building-title">${grupo.key}</h3>
 
                                 <div class="buttons-grid">
                                     <c:forEach var="lab" items="${grupo.value}">
-                                        <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=${lab.aula}"
+                                        <a href="${pageContext.request.contextPath}/BitacoraServlet?lab=${lab.aula}"
                                            class="btn-salon"
                                            title="${lab.nombreLab}">
                                                 ${lab.aula}
@@ -88,19 +89,23 @@
                                     </c:forEach>
                                 </div>
                             </div>
-
                         </c:forEach>
 
                         <div class="text-center">
-                            <a href="${pageContext.request.contextPath}/ValidarIncidenciasServlet?lab=Todos"
+                            <a href="${pageContext.request.contextPath}/BitacoraServlet?lab=Todos"
                                class="btn-todos">
-                                Ver incidencias de todos los laboratorios
+                                Ver la bitácora de todos los laboratorios
                             </a>
                         </div>
 
                     </c:when>
 
                     <c:otherwise>
+                        <%--
+                            Si ves esto teniendo laboratorios en la base, casi seguro
+                            abriste el .jsp directo en vez de pasar por
+                            SeleccionarBitacoraServlet: nadie llenó el atributo.
+                        --%>
                         <div class="aviso-vacio">
                             No hay laboratorios registrados en el sistema.
                             Agrégalos en la tabla <strong>laboratorio</strong> y aparecerán aquí

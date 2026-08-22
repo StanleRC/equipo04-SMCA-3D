@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -60,33 +60,32 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:choose>
-                        <c:when test="${not empty listaHistorial}">
-                            <c:forEach var="item" items="${listaHistorial}">
-                                <tr class="${item.estado eq 'Pendiente' ? 'row-pending' : ''}">
-                                    <td><strong>${item.grado}</strong></td>
-                                    <td><strong>${item.grupo}</strong></td>
-                                    <td><strong>${item.numeroPc}</strong></td>
-                                    <td><strong>${item.matricula}</strong></td>
-                                    <td class="text-start ps-3 fw-bold">${item.nombreCompleto}</td>
-                                    <td><strong>${item.fecha}</strong></td>
-                                    <td class="text-start ps-3 fw-bold">${item.incidencia}</td>
-                                    <td>
-                                        <span class="status-text ${item.estado eq 'Pendiente' ? 'text-muted' : 'fw-bold'}">
-                                                ${item.estado}
-                                        </span>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <tr>
-                                <td colspan="8" class="text-center py-4 text-muted">
-                                    No cuentas con registros de asistencia en la bitácora.
-                                </td>
-                            </tr>
-                        </c:otherwise>
-                    </c:choose>
+                    <c:set var="itemsTabla" value="${listaHistorial}" />
+
+                    <c:forEach var="item" items="${itemsTabla}">
+                        <tr class="${item.estado eq 'Pendiente' ? 'row-pending' : ''}">
+                            <td><strong>${not empty item.grado ? item.grado : 'N/A'}</strong></td>
+                            <td><strong>${not empty item.grupo ? item.grupo : 'N/A'}</strong></td>
+                            <td><strong>${not empty item.numero_pc ? item.numero_pc : 'N/A'}</strong></td>
+                            <td><strong>${not empty item.matricula ? item.matricula : 'N/A'}</strong></td>
+                            <td class="text-start ps-3 fw-bold">${not empty item.nombre_alumno ? item.nombre_alumno : item.nombre}</td>
+                            <td><strong>${not empty item.fecha_reporte ? item.fecha_reporte : item.fecha}</strong></td>
+                            <td class="text-start ps-3 fw-bold">${not empty item.descripcion_falla ? item.descripcion_falla : item.incidencia}</td>
+                            <td>
+                                <span class="status-text ${item.estado eq 'Pendiente' ? 'text-muted' : 'fw-bold'}">
+                                        ${item.estado}
+                                </span>
+                            </td>
+                        </tr>
+                    </c:forEach>
+
+                    <c:if test="${empty itemsTabla}">
+                        <tr>
+                            <td colspan="8" class="text-center py-4 text-muted">
+                                No cuentas con registros de incidencias en la bitácora.
+                            </td>
+                        </tr>
+                    </c:if>
                     </tbody>
                 </table>
             </div>
@@ -98,15 +97,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Definición de variables JSP antes de cargar el archivo JS -->
-<script>
-    window.APP_CONFIG = {
-        usuarioNombre: "${sessionScope.usuarioLogueado.nombre}",
-        contextPath: "${pageContext.request.contextPath}"
-    };
-</script>
-
-<!-- Importar el archivo JS (con ?v=2 para obligar al navegador a recargar el JS actualizado) -->
 <script src="${pageContext.request.contextPath}/assets/js/modal_bienvenida_alumno.js?v=2"></script>
 </body>
 </html>

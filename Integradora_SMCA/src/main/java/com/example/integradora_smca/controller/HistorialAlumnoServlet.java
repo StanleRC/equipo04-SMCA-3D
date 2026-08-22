@@ -40,6 +40,6 @@ public class HistorialAlumnoServlet extends HttpServlet {
         List<HistorialAlumnoDto> historial = alumnoDao.getHistorialByMatricula(usuarioLogueado.getMatricula());
 
         request.setAttribute("listaHistorial", historial);
-        request.getRequestDispatcher("/views/alumno/historial_alumno.jsp").forward(request, response);
+        request.getRequestDispatcher("../webapp/views/alumno/historial_alumno.jsp").forward(request, response);
     }
 }

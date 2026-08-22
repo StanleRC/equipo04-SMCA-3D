@@ -3,7 +3,7 @@
 
 <!-- CSS del Sidebar -->
 <link rel="stylesheet"
-      href="${pageContext.request.contextPath}/assets/css/sidebar_exact.css?v=3">
+      href="${pageContext.request.contextPath}/assets/css/sidebar_exact.css?v=5">
 
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -14,6 +14,8 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/alertas.js"
         defer></script>
+<c:set var="perfil" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
+<c:set var="fotoSidebar" value="${not empty perfil.fotoPerfil ? perfil.fotoPerfil : 'default.png'}" />
 
 <aside class="figma-sidebar">
 
@@ -24,20 +26,15 @@
 
             <div class="sidebar-avatar-wrapper">
 
-                <!-- Foto del alumno -->
+                <%--
+                    La imagen por defecto apuntaba a /assets/img/default.png, pero el
+                    archivo vive en /assets/img/perfiles/. Por eso salía rota cuando
+                    el alumno todavía no había subido foto.
+                --%>
                 <div class="sidebar-avatar-img">
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.usuarioLogueado.fotoPerfil}">
-                            <img src="${pageContext.request.contextPath}/assets/img/perfiles/${sessionScope.usuarioLogueado.fotoPerfil}"
-                                 alt="Foto de perfil"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="${pageContext.request.contextPath}/assets/img/default_profile.png"
-                                 alt="Foto de perfil predeterminada"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                        </c:otherwise>
-                    </c:choose>
+                    <img src="${pageContext.request.contextPath}/assets/img/perfiles/${fotoSidebar}"
+                         alt="Foto de perfil"
+                         onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/img/perfiles/default.png';">
                 </div>
 
                 <!-- Editar perfil -->
@@ -54,44 +51,38 @@
                 ¡Bienvenido(a)!
             </p>
 
-            <!-- Nombre completo del alumno (Corregido para evitar el error 500) -->
+            <!-- Nombre completo -->
             <p class="sidebar-user-name">
-                ${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellidoPaterno} ${sessionScope.usuarioLogueado.apellidoMaterno}
+                ${perfil.nombre} ${perfil.apellidoPaterno} ${perfil.apellidoMaterno}
             </p>
+
+            <!-- Rol -->
+            <span class="sidebar-user-role">Estudiante</span>
 
         </div>
 
         <!-- MENÚ DEL ALUMNO -->
         <nav class="sidebar-menu-nav">
-
-            <a href="${pageContext.request.contextPath}/PerfilAlumnoServlet"
-               class="sidebar-item-link">
-                <span>Tu perfil</span>
-            </a>
-
             <a href="${pageContext.request.contextPath}/views/alumno/historial_alumno.jsp"
                class="sidebar-item-link">
                 <span>Historial</span>
             </a>
-
         </nav>
 
     </div>
 
     <!-- WIDGET DE HORA E INCIDENCIA -->
-    <div style="padding: 0 15px; margin-bottom: 15px; text-align: center;">
+    <div class="sidebar-widget-zona">
 
-        <div style="background-color: rgba(255, 255, 255, 0.12); color: #ffffff; padding: 8px 10px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <div class="sidebar-reloj">
             <i class="bi bi-clock"></i>
             <span id="relojSidebarTexto">Cargando hora...</span>
         </div>
 
         <a href="${pageContext.request.contextPath}/views/alumno/crear_incidencia_alumno.jsp"
-           style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background-color: #dc3545; color: #ffffff; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.85rem; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: background 0.3s;"
-           onmouseover="this.style.backgroundColor='#b02a37'"
-           onmouseout="this.style.backgroundColor='#dc3545'">
+           class="sidebar-btn-incidencia">
             <i class="bi bi-exclamation-triangle-fill"></i>
-            Registrar incidencia.
+            Registrar incidencia
         </a>
 
     </div>
@@ -117,17 +108,16 @@
 
 <script>
     function actualizarRelojSidebar() {
-        const ahora = new Date();
-        const opciones = { weekday: 'short', day: 'numeric', month: 'short' };
-        const fecha = ahora.toLocaleDateString('es-ES', opciones);
-        const hora = ahora.toLocaleTimeString('es-ES');
-
         const elemento = document.getElementById('relojSidebarTexto');
-        if (elemento) {
-            elemento.textContent = fecha + ' | ' + hora;
-        }
+        if (!elemento) return;
+
+        const ahora = new Date();
+        const fecha = ahora.toLocaleDateString('es-MX', { weekday: 'short', day: 'numeric', month: 'short' });
+        const hora = ahora.toLocaleTimeString('es-MX');
+
+        elemento.textContent = fecha + ' | ' + hora;
     }
 
-    setInterval(actualizarRelojSidebar, 1000);
     actualizarRelojSidebar();
+    setInterval(actualizarRelojSidebar, 1000);
 </script>

@@ -172,3 +172,57 @@ body {
 .sobre-nosotros-link:hover {
     color: #111111;
 }
+
+/* Botón principal (verde estilo Guardar cambios) */
+.btn-principal {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0d8a72;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+.btn-principal:hover {
+    background-color: #0a7560;
+}
+
+.btn-secundario {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0d3b66;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-secundario:hover {
+    background-color: #092a4d;
+    text-decoration: none;
+}
+
+.btn-secundario:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Banner Azul Superior */
+.top-header {
+    background-color: var(--header-blue);
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}

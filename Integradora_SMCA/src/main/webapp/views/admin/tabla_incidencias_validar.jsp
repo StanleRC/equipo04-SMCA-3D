@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/views/layout/header.jsp">
-    <jsp:param name="pageTitle" value="Incidencias - UTEZ" />
-</jsp:include>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/incidencias_utez.css?v=1">
 
 <div class="main-wrapper">
@@ -17,17 +13,17 @@
         </div>
 
         <div class="panel-body">
-            <div class="panel-header-row">
-                <div class="panel-back">
-                    <a href="javascript:history.back()" class="btn-back">← Pestaña anterior</a>
+                <div class="mb-2">
+                    <a href="javascript:history.back()" class="btn-back">
+                        &larr; <u>pestaña anterior</u>
+                    </a>
                 </div>
-
-                <div class="panel-logo">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
+                <div class="text-center mb-3">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
+                         alt="Logo UTEZ" style="max-height: 200px;">
                 </div>
 
                 <div class="panel-user"></div>
-            </div>
 
             <div class="panel-card">
                 <!-- ENCABEZADO ALINEADO CON LA TABLA -->
@@ -59,10 +55,13 @@
                     <table class="custom-incidencias-table">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Bitácora</th>
+                            <th>Alumno</th>
+                            <th>Matricula</th>
                             <th>PC</th>
                             <th>Laboratorio</th>
                             <th>Prioridad</th>
+                            <th>Hora Salida</th>
                             <th>Descripción</th>
                             <th>Fecha</th>
                             <th>Acción</th>
@@ -71,13 +70,15 @@
                         <tbody>
                         <c:if test="${empty incidencias}">
                             <tr class="empty-row">
-                                <td colspan="7">No hay incidencias registradas.</td>
+                                <td colspan="10">No hay incidencias registradas.</td>
                             </tr>
                         </c:if>
 
                         <c:forEach var="inc" items="${incidencias}">
                             <tr>
-                                <td>${inc.id_reporte}</td>
+                                <td>${inc.id_bitacora}</td>
+                                <td>${inc.nombre_alumno} ${inc.apellido_paterno} ${inc.apellido_materno}</td>
+                                <td>${inc.alumno_matricula}</td>
                                 <td>${inc.numero_pc}</td>
                                 <td>${inc.nombre_lab}</td>
                                 <td>
@@ -87,6 +88,7 @@
                                             ${inc.prioridad}
                                     </span>
                                 </td>
+                                <td>${inc.hora_salida}</td>
                                 <td>${inc.descripcion_falla}</td>
                                 <td>
                                     <fmt:formatDate value="${inc.fecha_reporte}" pattern="dd/MM/yyyy HH:mm" />
