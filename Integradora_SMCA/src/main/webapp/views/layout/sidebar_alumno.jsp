@@ -1,3 +1,15 @@
+<%--
+    FRAGMENTO: Menú lateral del alumno.
+    LO INCLUYEN: todas las pantallas de views/alumno/.
+
+    El reloj que se ve arriba es JavaScript y se actualiza cada segundo con la
+    hora de la computadora del alumno. Es solo informativo: la hora que se
+    guarda en la bitácora la genera Oracle con SYSTIMESTAMP, para que nadie
+    pueda alterarla cambiando la hora de su equipo.
+
+    El botón de cerrar sesión llama a confirmarCierreSesion, que pide
+    confirmación antes de ir a logoutServlet. Ahí se graba la hora de salida.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

@@ -1,3 +1,19 @@
+<%--
+    PANTALLA: Edición de los datos personales del alumno.
+    LA USA: el alumno, con sesión iniciada.
+    ENVÍA A: EditarPerfilServlet.
+
+    Grupo, cuatrimestre y carrera son de solo lectura: el alumno no puede
+    cambiarlos por su cuenta, eso le toca al administrador.
+
+    La foto se guarda fuera de la carpeta del proyecto, en {tomcat}/uploads/perfiles,
+    porque target/ se borra en cada compilación. La sirve FotoPerfilServlet.
+
+    El mensaje de resultado llega del servidor en ?guardado=1 o ?guardado=0,
+    no se muestra antes de guardar.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>

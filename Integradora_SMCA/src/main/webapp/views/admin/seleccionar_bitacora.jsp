@@ -1,3 +1,18 @@
+
+<%--
+    PANTALLA: Selección de laboratorio para ver la bitácora de accesos.
+    LA USA: administrador y docente.
+    DATOS: SeleccionarBitacoraServlet, que consulta BitacoraDao.listarLaboratorios().
+    LLEVA A: BitacoraServlet?lab=CC10.
+
+    Los botones se generan desde la tabla LABORATORIO. Antes estaban escritos a
+    mano e incluían CA5, CA6 y CA11, que no existían en la base: esos tres
+    siempre llevaban a una tabla vacía sin explicar por qué.
+
+    Es el gemelo de incidencias.jsp: mismo patrón, distinto destino.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

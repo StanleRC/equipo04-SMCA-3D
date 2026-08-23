@@ -1,3 +1,21 @@
+<%--
+    PANTALLA: Auto-registro de alumno.
+    LA USA: un alumno que todavía no tiene cuenta. Es pública, se abre sin sesión
+            desde el enlace "¿No tienes cuenta?" de index.jsp.
+    DATOS: carreras y grupos vienen de CatalogosServlet en JSON.
+    ENVÍA A: RegistroAlumnoServlet, en dos pasos.
+
+    Paso 1: valida los datos y manda un código de 6 dígitos al correo.
+    Paso 2: el alumno escribe el código en el modal y hasta entonces se guarda.
+
+    El código vive 10 minutos y admite 5 intentos. Se genera con SecureRandom,
+    no con Random, porque Random es predecible si se conoce la semilla.
+
+    La matrícula debe coincidir con la parte del correo antes de la @, y el
+    correo tiene que ser @utez.edu.mx: es lo que evita que cualquiera se
+    registre desde fuera de la universidad.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

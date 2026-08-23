@@ -20,7 +20,8 @@ public class RegistroDocenteServlet extends HttpServlet {
 
     private DocenteDao docenteDao;
 
-    private static final String REGEX_DOCENTE = "(?i)^[a-z]+(\\.[a-z]+)?@utez\\.edu\\.mx$";
+    // Acepta cualquier dominio. Antes solo permitía @utez.edu.mx.
+    private static final String REGEX_DOCENTE = "^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$";
 
     @Override
     public void init() throws ServletException {

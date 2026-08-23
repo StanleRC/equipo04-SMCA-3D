@@ -1,3 +1,19 @@
+
+
+<%--
+    PANTALLA: Alta de alumno hecha por el administrador.
+    LA USA: solo el administrador. FiltroSoloAdmin bloquea esta ruta.
+    DATOS: carreras y grupos vienen de CatalogosServlet en JSON.
+    ENVÍA A: RegistrarAlumnoAdminServlet.
+
+    Aquí NO se pide código de verificación por correo: quien llena el formulario
+    es el administrador, no el alumno, así que mandarle un código a un tercero
+    y pedírselo de vuelta no tendría sentido. El alta es directa.
+
+    Los selectores están encadenados: al elegir carrera se filtran sus grupos.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Header -->
 <jsp:include page="/views/layout/header.jsp">

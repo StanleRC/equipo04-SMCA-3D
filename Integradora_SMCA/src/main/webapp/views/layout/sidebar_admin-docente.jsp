@@ -1,3 +1,20 @@
+<%--
+    FRAGMENTO: Menú lateral del personal (administrador y docente).
+    LO INCLUYEN: todas las pantallas de views/admin/.
+
+    El usuario puede estar en tres atributos de sesión distintos según por dónde
+    entró, así que se resuelve una sola vez con <c:set var="perfil"> en lugar de
+    repetir el mismo c:choose en cada campo.
+
+    "Nuevo registro" solo se dibuja para el administrador. Eso es comodidad
+    visual: quien impide el acceso de verdad es FiltroSoloAdmin, porque un
+    docente podría escribir la URL a mano.
+
+    El rol que se muestra bajo el nombre sale de rol_id_rol: 1 es Administrador,
+    2 es Docente. Es el mismo número que usa FiltroSoloAdmin.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

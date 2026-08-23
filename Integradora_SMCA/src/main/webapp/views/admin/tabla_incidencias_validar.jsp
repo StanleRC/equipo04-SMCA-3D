@@ -1,3 +1,16 @@
+
+<%--
+    PANTALLA: Listado de incidencias de un laboratorio, en formato tabla ancha.
+    LA USA: administrador y docente.
+    DATOS: espera los atributos laboratorioSeleccionado, edificioSeleccionado
+           y aulaSeleccionada.
+
+    OJO: esta vista está duplicada con validar_incidencia.jsp, que es la que sí
+    usa ValidarIncidenciasServlet y la que trae los botones de validar. Conviene
+    quedarse con una sola para no mantener dos pantallas que hacen lo mismo.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

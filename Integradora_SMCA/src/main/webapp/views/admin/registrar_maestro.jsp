@@ -1,3 +1,13 @@
+
+<%--
+    PANTALLA: Alta de docente hecha por el administrador.
+    LA USA: solo el administrador. FiltroSoloAdmin bloquea esta ruta.
+    ENVÍA A: RegistroDocenteServlet.
+
+    No confundir con registro_directo_maestro.jsp, que es el auto-registro
+    público al que llega un docente sin cuenta desde el login.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

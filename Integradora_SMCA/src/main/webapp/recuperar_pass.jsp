@@ -1,3 +1,22 @@
+<%--
+    PANTALLA: Primer paso de la recuperación de contraseña.
+    LA USA: cualquiera, es pública.
+    ENVÍA A: RecuperarPassServlet, en dos acciones.
+
+    Paso 1 (enviarCodigo): verifica que el correo exista en ALUMNO o en DOCENTE
+    y manda un código de 6 dígitos.
+    Paso 2 (validarCodigo): si el código es correcto, marca en la sesión el
+    permiso para cambiar la contraseña y redirige a cambiar_password.jsp.
+
+    El código vive 10 minutos y admite 5 intentos. Se compara con
+    MessageDigest.isEqual y no con equals: equals corta en el primer carácter
+    distinto, y midiendo el tiempo de respuesta se podría deducir dígito a dígito.
+
+    Hay una espera de 60 segundos entre envíos. Sin ella, un script podría
+    disparar cientos de correos.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

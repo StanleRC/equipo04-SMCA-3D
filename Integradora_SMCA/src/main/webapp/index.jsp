@@ -1,3 +1,21 @@
+<%--
+    PANTALLA: Inicio de sesión del alumno. Es la página de entrada del sistema.
+    LA USA: cualquiera, es pública.
+    ENVÍA A: loginServlet.
+
+    Además de la matrícula y la contraseña, el alumno indica el aula y el número
+    de PC que va a usar. Con esos datos se crea la fila en BITACORA al entrar,
+    con la hora de inicio.
+
+    La hora de salida NO se pide aquí: se graba sola al cerrar sesión, con la
+    hora real. Antes se le preguntaba al alumno al entrar y quedaban registros
+    imposibles, con sesiones que terminaban antes de empezar.
+
+    LLEVA A: registro_directo_alumno.jsp si no tiene cuenta, recuperar_pass.jsp
+    si olvidó su contraseña, o admin-docente_login.jsp si es personal.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
