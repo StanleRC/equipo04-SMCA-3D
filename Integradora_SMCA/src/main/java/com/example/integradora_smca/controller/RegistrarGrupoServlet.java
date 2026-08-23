@@ -16,12 +16,14 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Da de alta un grupo. Este servlet no existía: registro_grupo.jsp apuntaba a
- * "RegistrarGrupoServlet" y el formulario terminaba en un 404.
- *
- * Solo el administrador puede crear grupos. FiltroSoloAdmin ya cubre esta ruta,
- * pero la comprobación se repite aquí: si mañana alguien cambia el filtro, el
- * candado no debería depender de eso.
+ * RegistrarGrupoServlet
+ * Autor: Judith Desiree Aguilar Hernandez
+ * Fecha: 23/08/2026
+ * Funcionalidad: Gestiona el alta de nuevos grupos en el sistema. Valida de manera independiente
+ * que el usuario en sesión tenga permisos de administrador. Verifica que los datos ingresados sean
+ * correctos (ej. que el cuatrimestre sea un número entre 1 y 11, y que el grupo sea una sola letra)
+ * antes de registrar el grupo en la base de datos. Utiliza una redirección en lugar de un "forward"
+ * al finalizar para evitar la creación de registros duplicados si el usuario recarga la página.
  */
 @WebServlet("/RegistrarGrupoServlet")
 public class RegistrarGrupoServlet extends HttpServlet {

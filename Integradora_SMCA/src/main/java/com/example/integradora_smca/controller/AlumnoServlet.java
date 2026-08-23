@@ -14,6 +14,15 @@ import com.example.integradora_smca.model.dao.AlumnoDao;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * AlumnoServlet
+ * Autor: María Fernanda Colima Ocampo
+ * Fecha: 23/08/2026
+ * Funcionalidad: Maneja la actualización del perfil del alumno, permitiendo
+ * modificar sus datos personales (nombre, apellidos, correo) y subir una
+ * nueva foto de perfil. Guarda los cambios en la base de datos, actualiza
+ * la sesión actual y redirige a la vista del perfil.
+ */
 @WebServlet(name = "alumnoServlet", value = "/actualizar_perfil_servlet")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,      // 1 MB

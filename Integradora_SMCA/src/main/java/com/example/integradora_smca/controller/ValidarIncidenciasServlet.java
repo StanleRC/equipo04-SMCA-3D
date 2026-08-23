@@ -24,6 +24,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * ValidarIncidenciasServlet
+ * Autor: Judith Desiree Aguilar Hernandez
+ * Fecha: 23/08/2026
+ * Funcionalidad: Administra la revisión y resolución de incidencias reportadas en los laboratorios.
+ * En doGet, obtiene y filtra el listado de incidencias pendientes por laboratorio. En doPost, aplica
+ * controles de seguridad estrictos (impidiendo que perfiles de solo lectura como Administrador validen),
+ * procesa la subida segura de fotos de evidencia (almacenándolas fuera del directorio de despliegue para
+ * evitar su pérdida en redeploys), actualiza el estado de la incidencia (Validado/Descartado) y detona el
+ * envío de notificaciones por correo electrónico al usuario involucrado.
+ */
 @WebServlet(name = "ValidarIncidenciasServlet", value = "/ValidarIncidenciasServlet")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,
@@ -79,7 +90,7 @@ public class ValidarIncidenciasServlet extends HttpServlet {
         String redirectLab = (labParam != null && !labParam.trim().isEmpty())
                 ? "&lab=" + labParam.trim() : "";
 
-        /*
+        /**
          * Validar es tarea del docente. El administrador solo observa.
          *
          * Esta comprobación es la que de verdad protege: el JSP oculta los
@@ -115,7 +126,7 @@ public class ValidarIncidenciasServlet extends HttpServlet {
             return;
         }
 
-        /*
+        /**
          * Los datos del reporte se leen ANTES de actualizarlo: se necesitan para
          * armar el correo, y después de marcarlo como revisado ya no aparece
          * en el listado de pendientes.
@@ -141,7 +152,7 @@ public class ValidarIncidenciasServlet extends HttpServlet {
 
         String decision = "validar".equalsIgnoreCase(accion.trim()) ? "Validado" : "Descartado";
 
-        /*
+        /**
          * El correo se manda DESPUÉS del commit y su resultado no cambia el flujo:
          * si el SMTP está caído, la incidencia ya quedó revisada de todos modos.
          */

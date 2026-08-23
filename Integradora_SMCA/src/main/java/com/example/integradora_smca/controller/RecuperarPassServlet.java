@@ -18,6 +18,18 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.regex.Pattern;
 
+/**
+ * RecuperarPassServlet
+ * Autor: María Fernanda Colima Ocampo
+ * Fecha: 23/08/2026
+ * Funcionalidad: Gestiona de forma segura el flujo de recuperación de contraseña en tres pasos:
+ * 1) Envío de un código de verificación de 6 dígitos al correo electrónico registrado, con
+ * protecciones antiabuso (límite de envíos y tiempos de espera). 2) Validación del código
+ * mediante comparaciones seguras (para evitar ataques de tiempo) y con límite de intentos.
+ * 3) Actualización de la contraseña validando su fortaleza y aplicándola en la tabla
+ * correspondiente (Alumno o Docente). Además, regenera el ID de sesión para prevenir
+ * ataques de fijación de sesión.
+ */
 @WebServlet("/recuperarPassServlet")
 public class RecuperarPassServlet extends HttpServlet {
 
@@ -96,9 +108,7 @@ public class RecuperarPassServlet extends HttpServlet {
         }
     }
 
-    // ------------------------------------------------------------------
     // PASO 1: enviar el código al correo
-    // ------------------------------------------------------------------
     private void enviarCodigo(HttpServletRequest request, HttpSession session, PrintWriter out) {
 
         String correo = request.getParameter("correo");
@@ -174,9 +184,7 @@ public class RecuperarPassServlet extends HttpServlet {
         out.print(json("ok", "Te enviamos un código de 6 dígitos. Vence en 10 minutos."));
     }
 
-    // ------------------------------------------------------------------
     // PASO 2: validar el código de 6 dígitos
-    // ------------------------------------------------------------------
     private void validarCodigo(HttpServletRequest request, HttpSession session, PrintWriter out) {
 
         String codigoIngresado = request.getParameter("txtCodigo");
@@ -231,9 +239,7 @@ public class RecuperarPassServlet extends HttpServlet {
         out.print(json("ok", "Código verificado."));
     }
 
-    // ------------------------------------------------------------------
     // PASO 3: guardar la nueva contraseña
-    // ------------------------------------------------------------------
     private void actualizarPassword(HttpServletRequest request, HttpSession session, PrintWriter out) {
 
         Boolean autorizado = (Boolean) session.getAttribute(S_AUTORIZADO);

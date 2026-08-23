@@ -14,6 +14,14 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * HistorialAlumnoServlet
+ * Autor: Erick Manuel Guerrero Guevara
+ * Fecha: 23/08/2026
+ * Funcionalidad: Muestra el historial de accesos o actividades del alumno que ha iniciado sesión.
+ * Valida que exista una sesión activa, consulta los registros vinculados a la matrícula
+ * del usuario logueado y los envía a la vista correspondiente para su visualización.
+ */
 @WebServlet("/HistorialAlumnoServlet")
 public class HistorialAlumnoServlet extends HttpServlet {
 

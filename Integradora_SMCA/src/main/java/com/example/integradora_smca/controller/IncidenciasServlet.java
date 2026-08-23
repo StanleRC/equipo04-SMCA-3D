@@ -15,12 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Pantalla de selección de laboratorio para revisar incidencias.
- *
+ * IncidenciasServlet
+ * Autor: Erick Manuel Guerrero Guevara
+ * Fecha: 23/08/2026
+ * Funcionalidad: Pantalla de selección de laboratorio para revisar incidencias.
  * Antes incidencias.jsp traía los botones escritos a mano, incluidos CA 5, CA 6
  * y CA 11, que nunca se insertaron en la tabla LABORATORIO. Esos tres siempre
  * mostraban una tabla vacía sin explicar por qué.
- *
  * Ahora la lista sale de la base: si agregas un aula, aparece sola.
  */
 @WebServlet("/IncidenciasServlet")
@@ -45,7 +46,7 @@ public class IncidenciasServlet extends HttpServlet {
 
         List<Map<String, Object>> laboratorios = incidenciaDao.listarLaboratorios();
 
-        /*
+        /**
          * LinkedHashMap y no HashMap: conserva el orden en que vienen de la
          * consulta (ORDER BY edificio, aula), así los grupos salen siempre igual
          * y no bailan de posición entre una recarga y otra.

@@ -16,10 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Pantalla de selección de laboratorio para la bitácora.
- *
- * Es el gemelo de IncidenciasServlet: mismo patrón, distinto destino.
- * El enlace "Bitácora" del sidebar debe apuntar aquí, no al .jsp directo.
+ * SeleccionarBitacoraServlet
+ * Autor: María Fernanda Colima Ocampo
+ * Fecha: 23/08/2026
+ * Funcionalidad: Actúa como controlador previo a la vista de selección de bitácora.
+ * Verifica la existencia de una sesión activa, obtiene la lista de laboratorios a
+ * través de BitacoraDao y los agrupa por edificio utilizando un LinkedHashMap. Esta
+ * estructura de datos es clave porque garantiza que el agrupamiento preserve el
+ * orden original (ORDER BY) de la base de datos (por edificio y aula), enviando
+ * la información estructurada a la vista JSP para evitar que la interfaz cambie
+ * visualmente entre recargas.
  */
 @WebServlet("/SeleccionarBitacoraServlet")
 public class SeleccionarBitacoraServlet extends HttpServlet {

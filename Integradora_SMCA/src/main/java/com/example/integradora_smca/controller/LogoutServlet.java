@@ -13,11 +13,14 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Cierra la sesión del usuario.
- *
- * Si quien sale es un alumno, primero se graba su hora de salida en la bitácora.
- * Esa es la hora real en que dejó el equipo, a diferencia de la que antes elegía
- * a mano al entrar.
+ * LogoutServlet
+ * Autor: Judith Desiree Aguilar Hernandez
+ * Fecha: 23/08/2026
+ * Funcionalidad: Cierra la sesión del usuario. Si quien sale es un alumno,
+ * primero graba su hora real de salida en la bitácora (la hora en que dejó el equipo),
+ * a diferencia del sistema anterior donde se elegía a mano al entrar.
+ * Posteriormente, invalida la sesión y limpia la caché del navegador por seguridad
+ * para que no se puedan visualizar las pantallas privadas usando el botón de "Atrás".
  */
 @WebServlet("/logoutServlet")
 public class LogoutServlet extends HttpServlet {

@@ -16,12 +16,15 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Login del personal: docentes y administradores.
- *
- * Los dos viven en tablas distintas, así que se intenta primero en DOCENTE y,
- * si no hay coincidencia, en ADMINISTRADOR. Lo que se guarda en sesión es el
- * objeto concreto, pero todo lo demás del sistema lo lee a través de
- * UsuarioPersonal, así que no le importa de cuál tabla salió.
+ * LoginDocenteServlet
+ * Autor: Naomy Sayuri Carranza Priego
+ * Fecha: 23/08/2026
+ * Funcionalidad: Maneja el inicio de sesión del personal (docentes y administradores).
+ * Dado que viven en tablas distintas, verifica las credenciales buscando primero en DOCENTE
+ * y luego en ADMINISTRADOR. Invalida la sesión anterior para evitar fijación de sesión,
+ * guarda el objeto concreto en sesión y unifica la lectura de datos en el sistema
+ * a través de UsuarioPersonal. Además, establece atributos clave (como "esAdmin")
+ * para estandarizar los permisos y mantener la compatibilidad con las vistas históricas.
  */
 @WebServlet("/loginDocenteServlet")
 public class LoginDocenteServlet extends HttpServlet {
