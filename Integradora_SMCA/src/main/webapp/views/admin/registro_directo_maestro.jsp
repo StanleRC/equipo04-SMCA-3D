@@ -29,6 +29,11 @@
 
     <!-- CSS Externo del registro de maestro -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/registrar_directo_maestro.css?v=1.2">
+
+    <!-- SweetAlert2 y Alertas Personalizadas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/alertas.css">
+    <script src="${pageContext.request.contextPath}/assets/js/alertas.js" defer></script>
 </head>
 
 <body>
@@ -105,9 +110,7 @@
 
 </div>
 
-<!-- ========================================================= -->
 <!-- MODAL DE VERIFICACIÓN DE CÓDIGO -->
-<!-- ========================================================= -->
 <div class="modal fade" id="modalCodigo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalCodigoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

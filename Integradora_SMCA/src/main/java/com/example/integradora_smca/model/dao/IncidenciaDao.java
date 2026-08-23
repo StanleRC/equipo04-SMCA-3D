@@ -70,83 +70,83 @@ public class IncidenciaDao {
      * @param aula    nombre del aula ("CC10"), no el id.
      * @param horaFin se ignora: la hora de salida se graba al cerrar sesión.
      */
-    public boolean guardarIncidenciaAlumno(String descripcionFalla, String prioridad,
-                                           String numeroPc, String aula,
-                                           String matriculaAlumno, String horaFin) {
+    public boolean guardarIncidenciaAlumno(String descripcionFalla, String prioridad, String numeroPc,
+                                           String aula, String matriculaAlumno, String horaFin) {
 
-        if (seguro(matriculaAlumno) == null || seguro(aula) == null) {
-            System.err.println(">>> [IncidenciaDao] Falta matrícula o aula.");
-            return false;
-        }
+        String sqlBitacora = "INSERT INTO bitacora (numero_pc, id_laboratorio, fecha, hora_inicio, hora_final, alumno_matricula) " +
+                "VALUES (?, ?, SYSDATE, TO_CHAR(CURRENT_TIMESTAMP AT TIME ZONE 'America/Mexico_City', 'HH24:MI'), ?, ?)";
 
-        /*
-         * hora_inicio es TIMESTAMP y antes se le insertaba el texto '22:15'
-         * con TO_CHAR. Oracle lo convertía implícitamente y por eso quedaban
-         * horas incoherentes. Ahora se usa SYSTIMESTAMP, y hora_final se deja
-         * en NULL hasta que el alumno cierra sesión.
-         */
-        String sqlBitacora = "INSERT INTO bitacora "
-                + "(fecha, hora_inicio, hora_final, numero_pc, alumno_matricula, id_laboratorio) "
-                + "VALUES (SYSDATE, SYSTIMESTAMP, NULL, ?, ?, ?)";
+        String sqlReporte = "INSERT INTO reporte_falla " +
+                "(id_bitacora, descripcion_falla, fecha_reporte, prioridad, estado) " +
+                "VALUES (?, ?, CURRENT_TIMESTAMP, ?, 'Pendiente')";
 
-        String sqlReporte = "INSERT INTO reporte_falla "
-                + "(id_bitacora, descripcion_falla, fecha_reporte, prioridad, estado) "
-                + "VALUES (?, ?, CURRENT_TIMESTAMP, ?, '" + ESTADO_PENDIENTE + "')";
 
         Connection con = null;
         try {
             con = SQLConnector.getConnection();
             con.setAutoCommit(false);
 
-            Integer idLab = resolverLaboratorio(con, aula.trim());
-            if (idLab == null) {
-                con.rollback();
-                System.err.println(">>> [IncidenciaDao] El aula '" + aula + "' no existe.");
-                return false;
+            // Resolver id_laboratorio desde aula
+            int idLabNum = -1;
+            try (PreparedStatement psLab = con.prepareStatement("SELECT id_laboratorio FROM laboratorio WHERE aula = ?")) {
+                psLab.setString(1, aula);
+                try (ResultSet rsLab = psLab.executeQuery()) {
+                    if (rsLab.next()) {
+                        idLabNum = rsLab.getInt("id_laboratorio");
+                    }
+                }
+            }
+            if (idLabNum == -1) {
+                throw new SQLException("No se encontró laboratorio para aula: " + aula);
             }
 
-            long idBitacora = -1;
+            long idBitacoraGenerado = -1;
 
-            try (PreparedStatement ps = con.prepareStatement(sqlBitacora, new String[]{"ID_BITACORA"})) {
-                ps.setString(1, seguro(numeroPc));
-                ps.setString(2, matriculaAlumno.trim());
-                ps.setInt(3, idLab);
-                ps.executeUpdate();
+            // 1. Insertar en BITACORA
+            try (PreparedStatement psBitacora = con.prepareStatement(sqlBitacora, new String[]{"ID_BITACORA"})) {
+                psBitacora.setString(1, seguro(numeroPc));
+                psBitacora.setInt(2, idLabNum);
+                psBitacora.setString(3, seguro(horaFin));
+                psBitacora.setString(4, seguro(matriculaAlumno));
 
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) idBitacora = rs.getLong(1);
+                psBitacora.executeUpdate();
+
+                try (ResultSet rs = psBitacora.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        idBitacoraGenerado = rs.getLong(1);
+                    }
                 }
             }
 
-            if (idBitacora <= 0) {
-                con.rollback();
-                System.err.println(">>> [IncidenciaDao] No se obtuvo el ID_BITACORA.");
-                return false;
+            if (idBitacoraGenerado == -1) {
+                throw new SQLException("No se pudo obtener el ID_BITACORA.");
             }
 
-            // El reporte es opcional: se puede usar el equipo sin que falle nada.
-            String falla = seguro(descripcionFalla);
-            if (falla != null) {
-                try (PreparedStatement ps = con.prepareStatement(sqlReporte)) {
-                    ps.setLong(1, idBitacora);
-                    ps.setString(2, falla);
-                    ps.setString(3, seguro(prioridad) != null ? seguro(prioridad) : "Media");
-                    ps.executeUpdate();
+            // 2. Insertar en REPORTE_FALLA si existe descripción
+            String fallaLimpia = seguro(descripcionFalla);
+            if (fallaLimpia != null) {
+                try (PreparedStatement psReporte = con.prepareStatement(sqlReporte)) {
+                    psReporte.setLong(1, idBitacoraGenerado);
+                    psReporte.setString(2, fallaLimpia);
+                    psReporte.setString(3, seguro(prioridad) != null ? seguro(prioridad) : "Media");
+                    psReporte.executeUpdate();
                 }
             }
 
             con.commit();
             return true;
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            System.err.println("=== ERROR EN REGISTRO DE BITACORA / REPORTE ===");
             if (con != null) {
-                try { con.rollback(); } catch (SQLException ignored) { }
+                try { con.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             }
-            System.err.println(">>> [IncidenciaDao] Error al registrar la incidencia: " + e.getMessage());
             e.printStackTrace();
             return false;
         } finally {
-            cerrar(con);
+            if (con != null) {
+                try { con.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
         }
     }
 
