@@ -73,6 +73,8 @@
             <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- JUnit 5 para ejecutar los Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -86,7 +88,11 @@
             <scope>test</scope>
         </dependency>
 
+<<<<<<< HEAD
         <!-- Dependencias para Pruebas Unitarias con Mockito -->
+=======
+        <!-- Mockito para simular HttpServletRequest y Session -->
+>>>>>>> origin/rm_sayuri
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
