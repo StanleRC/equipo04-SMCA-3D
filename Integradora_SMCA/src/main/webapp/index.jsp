@@ -132,7 +132,7 @@
 
             <div class="card-footer-links" style="display: flex; justify-content: space-between; margin-top: 15px;">
                 <a href="${pageContext.request.contextPath}/views/alumno/registro_directo_alumno.jsp" class="card-link">¿No tienes cuenta?</a>
-                <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="card-link">¿Eres administrador?</a>
+                <a href="${pageContext.request.contextPath}/admin-docente_login.jsp" class="card-link">¿Eres docente?</a>
             </div>
         </form>
     </main>

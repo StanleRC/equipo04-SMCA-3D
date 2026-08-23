@@ -79,12 +79,12 @@
                class="sidebar-item-link">
                 Buscar
             </a>
-                <a href="${pageContext.request.contextPath}/views/admin/seleccionar_bitacora.jsp"
-                    class="sidebar-item-link">
-                   Bitácora
+                <a href="${pageContext.request.contextPath}/SeleccionarBitacoraServlet"
+                   class="sidebar-item-link">
+                    Bitácora
                 </a>
 
-            <a href="${pageContext.request.contextPath}/views/admin/incidencias.jsp"
+                <a href="${pageContext.request.contextPath}/IncidenciasServlet"
                class="sidebar-item-link">
                 Incidencias
             </a>

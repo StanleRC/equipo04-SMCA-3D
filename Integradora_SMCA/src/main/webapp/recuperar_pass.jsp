@@ -131,6 +131,28 @@
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; }
         }
+
+        .btn-verde {
+            background-color: #0D8A72; /* verde */
+            color: #fff;
+            font-weight: bold;
+            border: none;
+        }
+
+        .btn-verde:hover {
+            background-color: #218838; /* verde más oscuro */
+        }
+
+        .bg-verde {
+            background-color: #0D8A72; /*verde */
+            color: #fff;
+        }
+
+        .bg-verde .modal-title {
+            font-weight: bold;
+        }
+
+
     </style>
 </head>
 
@@ -191,12 +213,14 @@
      tabindex="-1" aria-labelledby="tituloModalCodigo" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header bg-verde text-white">
                 <h5 class="modal-title" id="tituloModalCodigo">
-                    <i class="bi bi-shield-lock me-2"></i>Paso 2 de 3: verificar código
+                    <i class="bi bi-shield-lock me-2"></i>
+                    Paso 2 de 3: verificar código
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
+
 
             <div class="modal-body">
                 <p class="text-center text-muted small mb-3">
@@ -219,7 +243,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" id="btnValidarCodigo" class="btn btn-primary fw-bold">
+                <button type="button" id="btnValidarCodigo" class="btn btn-verde fw-bold">
                     <span id="spinnerModal" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                     Verificar
                 </button>

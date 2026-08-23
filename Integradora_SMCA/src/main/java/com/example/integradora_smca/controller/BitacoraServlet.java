@@ -1,18 +1,23 @@
 package com.example.integradora_smca.controller;
 
 import com.example.integradora_smca.model.dao.BitacoraDao;
-// IMPORTANTE: Asegúrate de importar la clase (DTO/Modelo) que usas para la Bitácora
-// import com.example.integradora_smca.model.BitacoraDTO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Muestra la bitácora de accesos de un aula.
+ *
+ * El parámetro ?lab= corresponde a laboratorio.aula ("CC10", "CA1"), no a un id.
+ */
 @WebServlet("/BitacoraServlet")
 public class BitacoraServlet extends HttpServlet {
 
@@ -27,24 +32,32 @@ public class BitacoraServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 1. Obtener el parámetro del aula seleccionada (Ej: "CC10", "CA1", etc.)
-        String aulaSeleccionada = request.getParameter("lab");
+        request.setCharacterEncoding("UTF-8");
 
-        // 2. Consultar la lista de bitácoras filtrada por el aula (o todas si viene nulo)
-        // Nota: Asegúrate de que tu DAO devuelva una lista de tu objeto Bitacora (List<BitacoraDTO> o similar)
-        List<?> listaBitacora = bitacoraDao.obtenerBitacoraPorAula(aulaSeleccionada);
-
-        // 3. Enviar la lista de datos y el nombre del aula a la vista
-        request.setAttribute("listaBitacora", listaBitacora);
-
-        if (aulaSeleccionada == null || aulaSeleccionada.trim().isEmpty()) {
-            request.setAttribute("labActual", "Todos");
-        } else {
-            request.setAttribute("labActual", aulaSeleccionada);
+        // Sin sesión no hay nada que mostrar: son datos de alumnos.
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            return;
         }
 
-        // 4. Redirigir a tu tabla bitacora.jsp
-        // (Ajusta la ruta si tu bitacora.jsp está en otra carpeta, por ejemplo: "/views/admin/bitacora.jsp")
-        request.getRequestDispatcher("/views/admin/bitacora.jsp").forward(request, response);
+        String aulaSeleccionada = request.getParameter("lab");
+
+        /*
+         * El tipo era List<?>, que obliga al JSP a trabajar a ciegas.
+         * Con List<Map<String,Object>> queda claro qué llaves trae cada fila
+         * y coincide con lo que devuelve el DAO.
+         */
+        List<Map<String, Object>> listaBitacora =
+                bitacoraDao.obtenerBitacoraPorAula(aulaSeleccionada);
+
+        request.setAttribute("listaBitacora", listaBitacora);
+        request.setAttribute("labActual",
+                (aulaSeleccionada == null || aulaSeleccionada.trim().isEmpty())
+                        ? "Todos"
+                        : aulaSeleccionada.trim());
+
+        request.getRequestDispatcher("/views/admin/tabla_de_bitacora.jsp")
+                .forward(request, response);
     }
 }

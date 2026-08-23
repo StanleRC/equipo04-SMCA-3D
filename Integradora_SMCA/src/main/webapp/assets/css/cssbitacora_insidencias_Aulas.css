@@ -38,7 +38,7 @@
 /* Cabecera alineada a 3 columnas para centrar el logo perfectamente sin avatar */
 .salones-header-row {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: auto;
     align-items: center;
     margin-bottom: 25px;
     width: 100%;
@@ -46,6 +46,7 @@
 
 .classroom-logo,
 .utez-logo {
+    text-align: center;
     width: 200px;
     height: auto;
     display: block;

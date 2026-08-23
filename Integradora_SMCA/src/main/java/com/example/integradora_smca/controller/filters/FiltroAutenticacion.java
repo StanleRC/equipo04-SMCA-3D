@@ -14,19 +14,28 @@ import java.util.Set;
 /**
  * Filtro de autenticación.
  *
- * Cambios respecto a la versión anterior:
- *  1. Se normaliza la ruta (se quita el context path y se pasa a minúsculas) antes de compararla.
- *     Así desaparece el problema de "/RecuperarPassServlet" vs "/recuperarPassServlet" sin
- *     necesidad de listar la ruta dos veces.
- *  2. Se comparan rutas EXACTAS en lugar de usar contains(). Con contains(), una URL como
- *     /views/admin/panel.jsp;jsessionid=/index.jsp podía colarse. Con equals no.
- *  3. Si la petición es AJAX (fetch), se responde 401 + JSON en lugar de redirigir.
+ * Tres decisiones que vale la pena recordar:
+ *
+ *  1. Se normaliza la ruta (se quita el context path y se pasa a minúsculas)
+ *     antes de compararla. Así desaparece el problema de "/RecuperarPassServlet"
+ *     vs "/recuperarPassServlet" sin tener que listar la ruta dos veces.
+ *
+ *  2. Se comparan rutas EXACTAS, no con contains(). Con contains(), una URL como
+ *     /views/admin/panel.jsp;jsessionid=/index.jsp podía colarse.
+ *
+ *  3. Si la petición es AJAX, se responde 401 + JSON en lugar de redirigir.
  *     Antes el fetch recibía el HTML de index.jsp y reventaba en res.json().
  */
 @WebFilter("/*")
 public class FiltroAutenticacion extends HttpFilter {
 
-    /** Rutas accesibles sin sesión. Siempre en minúsculas y sin context path. */
+    /**
+     * Rutas accesibles sin sesión.
+     *
+     * SIEMPRE en minúsculas y sin context path: normalizarRuta() convierte la
+     * ruta antes de comparar, así que "/CatalogosServlet" con mayúsculas nunca
+     * coincidiría.
+     */
     private static final Set<String> RUTAS_PUBLICAS = Set.of(
             "/",
             "/index.jsp",
@@ -41,7 +50,11 @@ public class FiltroAutenticacion extends HttpFilter {
             "/registroalumnoservlet",
             "/registrodocenteservlet",
             "/registrarmaestroservlet",
-            "/recuperarpassservlet"
+            "/recuperarpassservlet",
+
+            // El registro de alumno es una pantalla pública y necesita la lista
+            // de carreras y grupos antes de que exista una sesión.
+            "/catalogosservlet"
     );
 
     /** Extensiones de recursos estáticos que nunca deben bloquearse. */
@@ -57,33 +70,43 @@ public class FiltroAutenticacion extends HttpFilter {
         String ruta = normalizarRuta(request);
         HttpSession session = request.getSession(false);
 
+        /*
+         * Esta variable responde una sola pregunta: ¿hay un usuario dentro?
+         * No debe mezclarse con rutas ni con permisos; para eso están
+         * rutaPublica y los filtros de rol.
+         */
         boolean sesionActiva = session != null && (
                 session.getAttribute("usuarioLogueado") != null
                         || session.getAttribute("docenteLogueado") != null
                         || session.getAttribute("usuario") != null
                         || session.getAttribute("alumno") != null
                         || session.getAttribute("docente") != null
+                        || session.getAttribute("administrador") != null
         );
 
         boolean rutaPublica = RUTAS_PUBLICAS.contains(ruta);
         boolean recursoEstatico = esRecursoEstatico(ruta);
 
         if (sesionActiva || rutaPublica || recursoEstatico) {
-            // Las vistas con datos del usuario no deben quedar en caché del navegador:
-            // evita que el botón "Atrás" muestre información después del logout.
+
+            // Las vistas con datos del usuario no deben quedar en caché del
+            // navegador: evita que el botón "Atrás" muestre información
+            // después de cerrar sesión.
             if (sesionActiva && ruta.startsWith("/views/")) {
                 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, private");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);
             }
+
             chain.doFilter(request, response);
             return;
         }
 
-        // Acceso denegado
+        // ---------- acceso denegado ----------
+
         if (esPeticionAjax(request)) {
             // Un fetch espera JSON. Si le devolvemos una redirección a index.jsp,
-            // res.json() lanza excepción y el usuario ve "Error al procesar la solicitud".
+            // res.json() lanza excepción y el usuario ve un error sin sentido.
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -118,6 +141,7 @@ public class FiltroAutenticacion extends HttpFilter {
 
     private boolean esRecursoEstatico(String ruta) {
         if (ruta.startsWith("/assets/")) return true;
+
         for (String ext : EXTENSIONES_ESTATICAS) {
             if (ruta.endsWith(ext)) return true;
         }
@@ -127,6 +151,7 @@ public class FiltroAutenticacion extends HttpFilter {
     private boolean esPeticionAjax(HttpServletRequest request) {
         String accept = request.getHeader("Accept");
         String requestedWith = request.getHeader("X-Requested-With");
+
         return "XMLHttpRequest".equalsIgnoreCase(requestedWith)
                 || (accept != null && accept.contains("application/json"));
     }

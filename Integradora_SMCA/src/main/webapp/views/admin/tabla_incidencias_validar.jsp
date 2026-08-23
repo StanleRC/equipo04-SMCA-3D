@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/views/layout/header.jsp">
-    <jsp:param name="pageTitle" value="Incidencias - UTEZ" />
-</jsp:include>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/incidencias_utez.css?v=1">
 
 <div class="main-wrapper">
@@ -17,17 +13,17 @@
         </div>
 
         <div class="panel-body">
-            <div class="panel-header-row">
-                <div class="panel-back">
-                    <a href="javascript:history.back()" class="btn-back">← Pestaña anterior</a>
+                <div class="mb-2">
+                    <a href="javascript:history.back()" class="btn-back">
+                        &larr; <u>pestaña anterior</u>
+                    </a>
                 </div>
-
-                <div class="panel-logo">
-                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png" alt="Logo UTEZ" class="utez-logo">
+                <div class="text-center mb-3">
+                    <img src="${pageContext.request.contextPath}/assets/img/logoutez.png"
+                         alt="Logo UTEZ" style="max-height: 200px;">
                 </div>
 
                 <div class="panel-user"></div>
-            </div>
 
             <div class="panel-card">
                 <!-- ENCABEZADO ALINEADO CON LA TABLA -->

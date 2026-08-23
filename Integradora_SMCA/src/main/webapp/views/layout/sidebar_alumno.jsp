@@ -14,12 +14,6 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/alertas.js"
         defer></script>
-
-<%--
-    Antes el sidebar solo leía sessionScope.usuarioLogueado. Si el login guardaba
-    al alumno en sessionScope.alumno, no salía ni la foto ni el nombre.
-    Con este c:set se cubren los dos casos en un solo lugar.
---%>
 <c:set var="perfil" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
 <c:set var="fotoSidebar" value="${not empty perfil.fotoPerfil ? perfil.fotoPerfil : 'default.png'}" />
 

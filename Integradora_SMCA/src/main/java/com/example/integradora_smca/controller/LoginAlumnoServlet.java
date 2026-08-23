@@ -3,6 +3,7 @@ package com.example.integradora_smca.controller;
 import com.example.integradora_smca.model.Alumno;
 import com.example.integradora_smca.model.dao.AlumnoDao;
 import com.example.integradora_smca.model.dao.BitacoraDao;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,16 +41,19 @@ public class LoginAlumnoServlet extends HttpServlet {
         String password = request.getParameter("password");
         String numeroPc = request.getParameter("numeroPc");
         String aula = request.getParameter("aula");
-        String horaEntrada = request.getParameter("horaEntrada"); // Obtenido del campo hidden
-        String horaSalida = request.getParameter("hora");         // El campo de hora que ven en pantalla
 
-        if (matricula == null || matricula.trim().isEmpty()
-                || password == null || password.trim().isEmpty()
-                || numeroPc == null || numeroPc.trim().isEmpty()
-                || aula == null || aula.trim().isEmpty()
-                || horaSalida == null || horaSalida.trim().isEmpty()
-                || horaEntrada == null || horaEntrada.trim().isEmpty()) {
+        /*
+         * Ya NO se lee la hora de salida del formulario.
+         *
+         * El alumno la elegía al ENTRAR, antes de usar el equipo, y por eso la
+         * base quedó con registros como 22:15 -> 13:15 o 22:18 -> 00:18: sesiones
+         * que terminan antes de empezar. La hora real de salida es cuando cierra
+         * sesión, así que hora_final se llena en LogoutServlet.
+         *
+         * Puedes borrar el campo de hora y el hidden "horaEntrada" de index.jsp.
+         */
 
+        if (vacio(matricula) || vacio(password) || vacio(numeroPc) || vacio(aula)) {
             request.setAttribute("errorMessage", "Por favor, completa todos los campos del formulario.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
             return;
@@ -57,42 +61,43 @@ public class LoginAlumnoServlet extends HttpServlet {
 
         Alumno alumno = alumnoDao.login(matricula.trim(), password);
 
-        if (alumno != null) {
-            // Mandamos tanto hora_inicio (horaEntrada) como hora_final (horaSalida)
-            boolean entradaGuardada = bitacoraDao.registrarEntrada(
-                    alumno.getMatricula(),
-                    numeroPc.trim(),
-                    aula.trim(),
-                    horaEntrada.trim(),
-                    horaSalida.trim()
-            );
-
-            if (!entradaGuardada) {
-                request.setAttribute("errorMessage", "Error: No se pudo registrar tu acceso. Verifica el aula seleccionada.");
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-                return;
-            }
-
-            HttpSession oldSession = request.getSession(false);
-            if (oldSession != null) {
-                oldSession.invalidate();
-            }
-
-            HttpSession session = request.getSession(true);
-            session.setAttribute("usuarioLogueado", alumno);
-            session.setAttribute("usuario", alumno);
-            session.setAttribute("rol", "Alumno");
-
-            session.setAttribute("alumno_matricula", alumno.getMatricula());
-            session.setAttribute("numeroPc", numeroPc.trim());
-            session.setAttribute("aula", aula.trim());
-            session.setAttribute("horaInicio", horaEntrada.trim());
-            session.setAttribute("horaFinal", horaSalida.trim()); // Se guarda en sesión si lo ocupas después
-
-            response.sendRedirect(request.getContextPath() + "/views/alumno/historial_alumno.jsp");
-        } else {
+        if (alumno == null) {
             request.setAttribute("errorMessage", "Matrícula o contraseña incorrectas.");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
+            return;
         }
+
+        // Se abre la sesión de uso: hora_inicio = ahora, hora_final queda en NULL.
+        boolean entradaGuardada = bitacoraDao.registrarEntrada(
+                alumno.getMatricula(), numeroPc.trim(), aula.trim());
+
+        if (!entradaGuardada) {
+            request.setAttribute("errorMessage",
+                    "No se pudo registrar tu acceso. Verifica el aula seleccionada.");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            return;
+        }
+
+        // Sesión nueva tras autenticar: evita la fijación de sesión.
+        HttpSession vieja = request.getSession(false);
+        if (vieja != null) {
+            vieja.invalidate();
+        }
+
+        HttpSession session = request.getSession(true);
+        session.setAttribute("usuarioLogueado", alumno);
+        session.setAttribute("alumno", alumno);
+        session.setAttribute("usuario", alumno);
+        session.setAttribute("rol", "Alumno");
+
+        session.setAttribute("alumno_matricula", alumno.getMatricula());
+        session.setAttribute("numeroPc", numeroPc.trim());
+        session.setAttribute("aula", aula.trim());
+
+        response.sendRedirect(request.getContextPath() + "/views/alumno/historial_alumno.jsp");
+    }
+
+    private boolean vacio(String valor) {
+        return valor == null || valor.trim().isEmpty();
     }
 }
