@@ -14,11 +14,6 @@
 <body>
 
 <jsp:include page="/views/layout/sidebar_alumno.jsp" />
-
-<%--
-    Un solo lugar donde se decide de dónde salen los datos.
-    Antes esta comparación estaba repetida en cada campo y en cada c:choose.
---%>
 <c:set var="alu" value="${not empty sessionScope.usuarioLogueado ? sessionScope.usuarioLogueado : sessionScope.alumno}" />
 
 <div class="main-content">
