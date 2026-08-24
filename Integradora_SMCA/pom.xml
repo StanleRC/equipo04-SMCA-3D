@@ -88,11 +88,7 @@
             <scope>test</scope>
         </dependency>
 
-<<<<<<< HEAD
         <!-- Dependencias para Pruebas Unitarias con Mockito -->
-=======
-        <!-- Mockito para simular HttpServletRequest y Session -->
->>>>>>> origin/rm_sayuri
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>

@@ -11,25 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3518f42c-c0a0-449c-9af1-f2b349f17b0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/AlumnoServletTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/HistorialAlumnoServletTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/LoginServletTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/PerfilAlumnoServletTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/RecuperarPassServletTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/AdministradorDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/AlumnoServletTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/HistorialAlumnoServletTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/LoginServletTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/PerfilAlumnoServletTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/RecuperarPassServletTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/Integradora_POO_2026.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Integradora_SMCA/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/LoginServletTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/controller/PerfilAlumnoServletTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/RecuperarPassServletTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/controller/RecuperarPassServletTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +73,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.AdministradorDaoTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -94,7 +82,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Tomcat Server.Tomcat 10.1.55.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Merging rm__judith",
+    "git-widget-placeholder": "rm__judith",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/marif/OneDrive/Documentos/Desktop/Integradora/Integradora/equipo04-SMCA-3D",
@@ -104,9 +92,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "service.view.auto.scroll.to.source": "true",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
@@ -134,7 +122,22 @@
       </map>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.AdministradorDaoTest">
+    <configuration name="AdministradorDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Integradora_POO_2026" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.integradora_smca.model.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.integradora_smca.model.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.example.integradora_smca.model.dao.AdministradorDaoTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 10.1.55" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.55" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -243,6 +246,11 @@
         </option>
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AdministradorDaoTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -263,7 +271,7 @@
       <workItem from="1786658280597" duration="52721000" />
       <workItem from="1786818641233" duration="30635000" />
       <workItem from="1786946999548" duration="4988000" />
-      <workItem from="1787525253125" duration="3050000" />
+      <workItem from="1787525253125" duration="6059000" />
     </task>
     <servers />
   </component>
