@@ -11,11 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3518f42c-c0a0-449c-9af1-f2b349f17b0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/BitacoraDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/DocenteDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/GrupoDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/IncidenciaDaoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/AlumnoDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/src/test/java/com/example/integradora_smca/model/dao/AlumnoDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/model/dao/AlumnoDaoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/Integradora_SMCA/target/test-classes/com/example/integradora_smca/model/dao/AlumnoDaoTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +74,8 @@
     "JUnit.BitacoraDaoTest.executor": "Run",
     "JUnit.DocenteDaoTest.executor": "Run",
     "JUnit.GrupoDaoTest.executor": "Run",
+    "JUnit.IncidenciaDaoTest.executor": "Run",
+    "JUnit.com.example.integradora_smca.model.dao in Integradora_POO_2026.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -124,22 +124,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.IncidenciaDaoTest">
-    <configuration name="AdministradorDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Integradora_POO_2026" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.integradora_smca.model.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.integradora_smca.model.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.example.integradora_smca.model.dao.AdministradorDaoTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.com.example.integradora_smca.model.dao in Integradora_POO_2026">
     <configuration name="BitacoraDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Integradora_POO_2026" />
       <extension name="coverage">
@@ -196,6 +181,20 @@
       <option name="PACKAGE_NAME" value="com.example.integradora_smca.model.dao" />
       <option name="MAIN_CLASS_NAME" value="com.example.integradora_smca.model.dao.IncidenciaDaoTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.example.integradora_smca.model.dao in Integradora_POO_2026" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Integradora_POO_2026" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.integradora_smca.model.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.integradora_smca.model.dao" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -310,11 +309,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.com.example.integradora_smca.model.dao in Integradora_POO_2026" />
         <item itemvalue="JUnit.IncidenciaDaoTest" />
         <item itemvalue="JUnit.GrupoDaoTest" />
         <item itemvalue="JUnit.DocenteDaoTest" />
         <item itemvalue="JUnit.BitacoraDaoTest" />
-        <item itemvalue="JUnit.AdministradorDaoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -337,7 +336,7 @@
       <workItem from="1786658280597" duration="52721000" />
       <workItem from="1786818641233" duration="30635000" />
       <workItem from="1786946999548" duration="4988000" />
-      <workItem from="1787525253125" duration="6710000" />
+      <workItem from="1787525253125" duration="8806000" />
     </task>
     <servers />
   </component>
