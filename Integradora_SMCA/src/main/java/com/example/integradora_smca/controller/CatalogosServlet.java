@@ -15,9 +15,9 @@ import java.util.Map;
 
 /**
  * CatalogosServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Entrega carreras y grupos en JSON para llenar los <select> de los formularios.
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Entrega carreras y grupos en JSON para llenar los <select> de los formularios.
  * Antes esas opciones estaban escritas a mano en el HTML, con un solo grupo
  * ('DSM3D'). Al dar de alta un grupo nuevo no aparecía en ningún formulario y
  * había que editar cada JSP.

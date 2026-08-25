@@ -20,9 +20,9 @@ import java.util.regex.Pattern;
 
 /**
  * RecuperarPassServlet
- * Autor: María Fernanda Colima Ocampo
- * Fecha: 23/08/2026
- * Funcionalidad: Gestiona de forma segura el flujo de recuperación de contraseña en tres pasos:
+ * @Autor: María Fernanda Colima Ocampo
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Gestiona de forma segura el flujo de recuperación de contraseña en tres pasos:
  * 1) Envío de un código de verificación de 6 dígitos al correo electrónico registrado, con
  * protecciones antiabuso (límite de envíos y tiempos de espera). 2) Validación del código
  * mediante comparaciones seguras (para evitar ataques de tiempo) y con límite de intentos.

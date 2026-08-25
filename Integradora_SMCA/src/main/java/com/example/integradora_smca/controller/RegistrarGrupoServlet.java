@@ -17,9 +17,9 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * RegistrarGrupoServlet
- * Autor: Judith Desiree Aguilar Hernandez
- * Fecha: 23/08/2026
- * Funcionalidad: Gestiona el alta de nuevos grupos en el sistema. Valida de manera independiente
+ * @Autor: Judith Desiree Aguilar Hernandez
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Gestiona el alta de nuevos grupos en el sistema. Valida de manera independiente
  * que el usuario en sesión tenga permisos de administrador. Verifica que los datos ingresados sean
  * correctos (ej. que el cuatrimestre sea un número entre 1 y 11, y que el grupo sea una sola letra)
  * antes de registrar el grupo en la base de datos. Utiliza una redirección en lugar de un "forward"

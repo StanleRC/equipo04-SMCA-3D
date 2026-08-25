@@ -15,9 +15,9 @@ import java.io.IOException;
 
 /**
  * LoginAlumnoServlet
- * Autor: María Fernanda Colima Ocampo
- * Fecha: 23/08/2026
- * Funcionalidad: Maneja el inicio de sesión de los alumnos. Verifica las credenciales,
+ * @Autor: María Fernanda Colima Ocampo
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Maneja el inicio de sesión de los alumnos. Verifica las credenciales,
  * registra la hora de entrada y los datos del equipo (número de PC y aula) en la bitácora.
  * Ya NO se lee la hora de salida del formulario; esta se registrará automáticamente
  * al cerrar la sesión (en el LogoutServlet). Tras la autenticación, crea una nueva

@@ -17,9 +17,9 @@ import java.util.Random;
 
 /**
  * RegistroDocenteServlet
- * Autor: Judith Desiree Aguilar Hernandez
- * Fecha: 23/08/2026
- * Funcionalidad: Gestiona el proceso de registro para nuevos docentes mediante un flujo de dos pasos vía AJAX.
+ * @Autor: Judith Desiree Aguilar Hernandez
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Gestiona el proceso de registro para nuevos docentes mediante un flujo de dos pasos vía AJAX.
  * En el primer paso, valida la información del formulario (formato de correo institucional, disponibilidad en la base
  * de datos y longitud de la contraseña), genera un código de verificación de 6 dígitos y lo envía por correo,
  * guardando los datos temporalmente en la sesión. En el segundo paso, compara el código ingresado con el de la sesión

@@ -1,0 +1,50 @@
+/* Estilos del modal base (Figma) */
+.figma-modal {
+    border-radius: 20px !important;
+    background-color: #f7f7f7 !important;
+    padding: 25px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.figma-title {
+    color: #555555 !important;
+    font-weight: 700 !important;
+    font-size: 24px !important;
+    margin-bottom: 8px !important;
+}
+
+.figma-text {
+    color: #555555 !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+}
+
+/* Botón Cancelar (Azul marino) */
+.figma-btn-cancel {
+    background-color: #1e3250 !important;
+    color: #ffffff !important;
+    border-radius: 25px !important;
+    padding: 10px 30px !important;
+    font-weight: bold !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Botón Aceptar (Verde) */
+.figma-btn-confirm {
+    background-color: #0d8065 !important;
+    color: #ffffff !important;
+    border-radius: 25px !important;
+    padding: 10px 30px !important;
+    font-weight: bold !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ícono de Advertencia / Cierre de Sesión (Amarillo) */
+.figma-icon-warning {
+    border-color: #f1c40f !important;
+    color: #f1c40f !important;
+}

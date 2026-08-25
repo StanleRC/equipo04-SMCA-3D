@@ -12,16 +12,17 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+@WebServlet("/AlumnoAccionesServlet")
+
 /**
  * AlumnoAccionesServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Acciones del administrador sobre un alumno: deshabilitar, reactivar y eliminar.
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Acciones del administrador sobre un alumno: deshabilitar, reactivar y eliminar.
  * Responde siempre JSON porque la tabla del buscador se actualiza sin recargar.
  * La comprobación de rol está aquí, no solo en el JSP. Esconder los botones es
  * comodidad visual; un docente podría llamar a esta URL directamente.
  */
-@WebServlet("/AlumnoAccionesServlet")
 public class AlumnoAccionesServlet extends HttpServlet {
 
     private AlumnoDao alumnoDao;

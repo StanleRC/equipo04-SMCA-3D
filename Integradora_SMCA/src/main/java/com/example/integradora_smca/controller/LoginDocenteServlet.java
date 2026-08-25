@@ -17,9 +17,9 @@ import java.io.IOException;
 
 /**
  * LoginDocenteServlet
- * Autor: Naomy Sayuri Carranza Priego
- * Fecha: 23/08/2026
- * Funcionalidad: Maneja el inicio de sesión del personal (docentes y administradores).
+ * @Autor: Naomy Sayuri Carranza Priego
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Maneja el inicio de sesión del personal (docentes y administradores).
  * Dado que viven en tablas distintas, verifica las credenciales buscando primero en DOCENTE
  * y luego en ADMINISTRADOR. Invalida la sesión anterior para evitar fijación de sesión,
  * guarda el objeto concreto en sesión y unifica la lectura de datos en el sistema

@@ -27,9 +27,9 @@ import java.util.Locale;
 
 /**
  * EditarPerfilServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Maneja la actualización del perfil de los usuarios (Administrador, Docente o Alumno).
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Maneja la actualización del perfil de los usuarios (Administrador, Docente o Alumno).
  * Procesa la modificación de datos personales y la subida de una nueva foto de perfil,
  * guardando la imagen en un directorio externo seguro para evitar que se pierda al redesplegar
  * la aplicación. Actualiza la base de datos, refresca la sesión y redirige a la vista correspondiente.

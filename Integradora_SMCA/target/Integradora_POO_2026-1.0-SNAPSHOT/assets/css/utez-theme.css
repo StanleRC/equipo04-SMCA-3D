@@ -1,0 +1,293 @@
+:root {
+    --utez-verde-principal: #008b73;  /* Verde UTEZ Institucional */
+    --utez-verde-oscuro:    #005f4e;  /* Verde oscuro para hover y encabezados */
+    --utez-verde-claro:     #00a88f;  /* Verde de acento */
+    --utez-azul-marino:     #002b49;  /* Azul oscuro UTEZ */
+    --utez-azul-hover:      #001a2e;  /* Azul oscuro para hover */
+    --utez-rojo-incidencia: #dc2626;  /* Rojo para alertas e incidencias */
+    --utez-gris-fondo:      #f4f6f8;  /* Gris claro de fondo general */
+    --utez-gris-tarjeta:    #ffffff;  /* Fondo blanco para tarjetas */
+    --utez-gris-borde:      #e5e7eb;  /* Borde suave */
+    --utez-texto-oscuro:    #1f2937;  /* Texto principal */
+    --utez-texto-mutado:    #6b7280;  /* Texto secundario/placeholders */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: var(--utez-gris-fondo);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- ESTRUCTURA GENERAL Y ALINEACIÓN CON SIDEBAR --- */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--utez-gris-fondo);
+}
+
+.main-content {
+    flex: 1; /* Se adapta dinámicamente pegándose al sidebar verde */
+    width: 0; /* Evita que los hijos desborden el contenedor flexible */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important; /* Quita el espacio superior para pegar la barra azul */
+    margin-left: 0 !important; /* Eliminamos el espacio fijo de 280px */
+}
+
+/* --- BARRA AZUL SUPERIOR (PEGADA DE BORDE A BORDE) --- */
+.top-welcome-bar {
+    background-color: var(--utez-azul-marino) !important;
+    color: #ffffff !important;
+    padding: 16px 24px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* --- CUERPO PRINCIPAL --- */
+.registro-grupo-body {
+    padding: 30px 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- ENCABEZADO, LOGO Y SUBTÍTULO --- */
+.header-section {
+    width: 100%;
+    max-width: 550px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.back-link-wrapper {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.btn-back {
+    color: var(--utez-azul-marino);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.btn-back:hover {
+    color: var(--utez-verde-principal);
+    text-decoration: underline;
+}
+
+.utez-logo {
+    max-height: 80px;
+    width: auto;
+    object-fit: contain;
+
+    outline: none !important;
+    border: none !important;
+    user-select: none; /* Evita que la imagen se marque en azul como texto */
+}
+.logo-container img {
+    max-height: 120px !important; /* Ajusta el alto a tu gusto (100px, 120px o 140px) */
+    width: auto !important;
+    margin: 0 auto 20px auto;
+}
+.page-subtitle {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--utez-verde-oscuro);
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+/* --- TARJETA PRINCIPAL DE FORMULARIO O CONTENIDO --- */
+.registro-card {
+    background-color: var(--utez-gris-tarjeta) !important;
+    border-radius: 20px !important;
+    border: 1px solid var(--utez-gris-borde) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    width: 100%;
+    max-width: 550px;
+    padding: 35px 45px;
+    margin-top: 15px;
+}
+
+.registro-card-title {
+    color: var(--utez-azul-marino);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid var(--utez-verde-principal);
+    padding-bottom: 10px;
+}
+
+/* --- CAMPOS DE ENTRADA (INPUTS Y SELECTS) --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--utez-texto-oscuro);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.custom-input {
+    border-radius: 12px !important;
+    border: 1.5px solid var(--utez-gris-borde) !important;
+    padding: 11px 18px !important;
+    font-size: 14px !important;
+    color: var(--utez-texto-oscuro) !important;
+    background-color: #ffffff !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100%;
+}
+
+.custom-input::placeholder {
+    color: var(--utez-texto-mutado) !important;
+    font-weight: 400;
+}
+
+.custom-input:focus {
+    border-color: var(--utez-verde-principal) !important;
+    box-shadow: 0 0 0 4px rgba(0, 139, 115, 0.15) !important;
+    outline: none !important;
+}
+
+.custom-select {
+    color: var(--utez-texto-mutado) !important;
+    cursor: pointer;
+}
+
+.custom-select option:not(:first-child) {
+    color: var(--utez-texto-oscuro) !important;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-action {
+    border-radius: 12px !important;
+    padding: 11px 28px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    min-width: 130px;
+}
+
+/* Botón Secundario / Cancelar (Azul Marino UTEZ) */
+.btn-cancelar {
+    background-color: var(--utez-azul-marino) !important;
+    color: #ffffff !important;
+}
+
+.btn-cancelar:hover {
+    background-color: var(--utez-azul-hover) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 43, 73, 0.2);
+}
+
+/* Botón Primario / Guardar / Registrar (Verde UTEZ) */
+.btn-registrar {
+    background-color: var(--utez-verde-principal) !important;
+    color: #ffffff !important;
+}
+
+.btn-registrar:hover {
+    background-color: var(--utez-verde-oscuro) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 139, 115, 0.25);
+}
+
+/* --- WIDGET FLOTANTE INFERIOR DERECHO --- */
+.widget-bienvenida {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 340px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid var(--utez-gris-borde);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    z-index: 1050;
+    overflow: hidden;
+}
+
+.widget-header {
+    background-color: var(--utez-verde-principal);
+    color: #ffffff;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.widget-body {
+    padding: 18px;
+    text-align: center;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .registro-grupo-body {
+        padding: 20px 15px;
+    }
+
+    .registro-card {
+        padding: 25px 20px;
+    }
+
+    .widget-bienvenida {
+        bottom: 15px;
+        right: 15px;
+        width: calc(100% - 30px);
+        max-width: 340px;
+    }
+}

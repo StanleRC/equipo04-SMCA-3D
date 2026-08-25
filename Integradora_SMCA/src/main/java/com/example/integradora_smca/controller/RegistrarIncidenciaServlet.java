@@ -12,9 +12,9 @@ import java.io.IOException;
 
 /**
  * RegistrarIncidenciaServlet
- * Autor: María Fernanda Colima Ocampo
- * Fecha: 23/08/2026
- * Funcionalidad: Maneja la creación de reportes de incidencias o fallas por parte del alumno.
+ * @Autor: María Fernanda Colima Ocampo
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Maneja la creación de reportes de incidencias o fallas por parte del alumno.
  * Captura la descripción y prioridad desde el formulario, pero extrae los datos de contexto
  * (matrícula, número de PC, aula y horas) directamente de la sesión activa para evitar alteraciones.
  * Llama al DAO para guardar el registro en la bitácora y, si se incluyó una descripción de falla,

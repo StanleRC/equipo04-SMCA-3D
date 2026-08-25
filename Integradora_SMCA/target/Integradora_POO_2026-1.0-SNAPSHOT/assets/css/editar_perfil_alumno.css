@@ -1,0 +1,223 @@
+:root {
+    --header-blue: #1c406e;
+    --card-bg: #f4f4f4;
+    --btn-cancel: #1c355e;
+    --btn-cancel-hover: #142847;
+    --btn-save: #0d8a72;
+    --btn-save-hover: #0a7560;
+    --text-dark: #333333;
+    --text-muted: #888888;
+    --sidebar-width: 240px;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- ESTRUCTURA PRINCIPAL --- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Banner Azul Superior */
+.top-header {
+    background-color: var(--header-blue);
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Cuerpo */
+.content-body {
+    padding: 20px 40px;
+    flex-grow: 1;
+}
+
+.back-link {
+    color: #222222;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.back-link:hover {
+    color: var(--btn-save);
+}
+
+.subtitle-text {
+    color: #444444;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* --- TARJETA PRINCIPAL --- */
+.edit-card {
+    background-color: var(--card-bg);
+    border-radius: 18px;
+    max-width: 850px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+/* Regla Flexbox principal del formulario */
+.edit-form {
+    display: flex;
+    width: 100%;
+}
+
+/* Columna Izquierda (Avatar y Botón Subir Foto) */
+.edit-card-left {
+    width: 32%;
+    background-color: #ededed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    border-right: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.large-avatar {
+    width: 140px;
+    height: 140px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.large-avatar i {
+    font-size: 110px;
+    color: #ffffff;
+    margin-top: 15px;
+}
+
+.btn-subir-foto {
+    color: var(--btn-save);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.btn-subir-foto:hover {
+    color: var(--btn-save-hover);
+}
+
+.upload-info {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Columna Derecha (Campos de Entrada) */
+.edit-card-right {
+    width: 68%;
+    padding: 30px 40px;
+}
+
+.academic-section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-label-custom {
+    font-size: 12px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.edit-input {
+    border-radius: 12px;
+    border: 1px solid #d0d0d0;
+    padding: 10px 14px;
+    font-size: 14px;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.edit-input::placeholder {
+    color: #aaaaaa;
+}
+
+.edit-input:focus {
+    border-color: var(--btn-save);
+    box-shadow: 0 0 0 0.2rem rgba(13, 138, 114, 0.2);
+}
+
+/* Botones Cancelar y Guardar */
+.btn-cancelar {
+    background-color: var(--btn-cancel);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 10px 35px;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-cancelar:hover {
+    background-color: var(--btn-cancel-hover);
+    color: #ffffff;
+}
+
+.btn-guardar {
+    background-color: var(--btn-save);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 10px 35px;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-guardar:hover {
+    background-color: var(--btn-save-hover);
+    color: #ffffff;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+    .edit-form {
+        flex-direction: column !important;
+    }
+    .edit-card-left, .edit-card-right {
+        width: 100%;
+        border-right: none;
+    }
+}

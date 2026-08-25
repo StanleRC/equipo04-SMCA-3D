@@ -26,9 +26,9 @@ import java.util.Map;
 
 /**
  * ValidarIncidenciasServlet
- * Autor: Judith Desiree Aguilar Hernandez
- * Fecha: 23/08/2026
- * Funcionalidad: Administra la revisión y resolución de incidencias reportadas en los laboratorios.
+ * @Autor: Judith Desiree Aguilar Hernandez
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Administra la revisión y resolución de incidencias reportadas en los laboratorios.
  * En doGet, obtiene y filtra el listado de incidencias pendientes por laboratorio. En doPost, aplica
  * controles de seguridad estrictos (impidiendo que perfiles de solo lectura como Administrador validen),
  * procesa la subida segura de fotos de evidencia (almacenándolas fuera del directorio de despliegue para

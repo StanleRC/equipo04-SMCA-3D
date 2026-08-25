@@ -17,9 +17,9 @@ import java.util.Map;
 
 /**
  * BuscarAlumnosServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Alimenta /views/admin/buscador.jsp.
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Alimenta /views/admin/buscador.jsp.
  * Responde de dos formas según el parámetro "formato":
  *   sin formato   -> forward normal al JSP (primera carga de la página)
  *   formato=json  -> devuelve la lista en JSON, para la búsqueda en vivo

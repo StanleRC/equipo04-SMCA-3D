@@ -18,9 +18,9 @@ import java.security.SecureRandom;
 
 /**
  * RegistroAlumnoServlet
- * Autor: Naomy Sayuri Carranza Priego
- * Fecha: 23/08/2026
- * Funcionalidad: Gestiona el autorregistro de alumnos en el sistema mediante un proceso de dos pasos vía AJAX.
+ * @Autor: Naomy Sayuri Carranza Priego
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Gestiona el autorregistro de alumnos en el sistema mediante un proceso de dos pasos vía AJAX.
  * Primero, valida rigurosamente los datos ingresados (formato de matrícula, correo institucional, coincidencia
  * de ambos, requisitos de contraseña segura y existencia del grupo) y envía un código de verificación de 6 dígitos
  * generado de forma segura al correo del alumno. Segundo, valida dicho código implementando medidas de seguridad

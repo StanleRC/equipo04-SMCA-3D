@@ -16,9 +16,9 @@ import java.util.Map;
 
 /**
  * IncidenciasServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Pantalla de selección de laboratorio para revisar incidencias.
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Pantalla de selección de laboratorio para revisar incidencias.
  * Antes incidencias.jsp traía los botones escritos a mano, incluidos CA 5, CA 6
  * y CA 11, que nunca se insertaron en la tabla LABORATORIO. Esos tres siempre
  * mostraban una tabla vacía sin explicar por qué.

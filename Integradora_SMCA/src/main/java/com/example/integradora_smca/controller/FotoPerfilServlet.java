@@ -14,9 +14,9 @@ import java.nio.file.Path;
 
 /**
  * FotoPerfilServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Entrega las fotos de perfil que ahora viven fuera de target/.
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Entrega las fotos de perfil que ahora viven fuera de target/.
  * Está mapeado en la MISMA ruta que ya usan tus JSP
  * (/assets/img/perfiles/loquesea.png), así que no tienes que cambiar ningún src="".
  * Busca en este orden:

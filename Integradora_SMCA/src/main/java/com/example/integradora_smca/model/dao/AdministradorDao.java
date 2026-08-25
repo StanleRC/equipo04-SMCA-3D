@@ -10,10 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Acceso a la tabla ADMINISTRADOR.
- *
- * Espeja a DocenteDao a propósito: mismos nombres de método, para que los servlets
- * puedan intentar con uno y luego con el otro sin escribir dos flujos distintos.
+ * Clase AdministradorDao
+ * @Autor: Luis Uriel
+ * @Fecha: 25/08/2026
+ * @Funcionalidad: Proporciona acceso a la tabla ADMINISTRADOR en la base de datos.
+ * Implementa operaciones de consulta y modificación relacionadas con el perfil
+ * de administradores, incluyendo login, búsqueda por correo o ID, actualización
+ * de perfil y recuperación de contraseña. Su diseño espeja a DocenteDao para
+ * mantener consistencia en los flujos de autenticación y gestión de usuarios.
  */
 public class AdministradorDao {
 

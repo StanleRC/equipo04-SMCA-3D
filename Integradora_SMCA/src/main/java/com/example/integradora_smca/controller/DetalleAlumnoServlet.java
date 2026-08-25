@@ -17,9 +17,9 @@ import java.util.List;
 
 /**
  * DetalleAlumnoServlet
- * Autor: Erick Manuel Guerrero Guevara
- * Fecha: 23/08/2026
- * Funcionalidad: Detalle de un alumno visto desde el buscador.
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Detalle de un alumno visto desde el buscador.
  * El buscador original enlazaba a /views/admin/perfil_alumno.jsp?id=..., pero
  * ese archivo no existe y la tabla alumno tampoco tiene columna "id": su llave
  * primaria es la matrícula.

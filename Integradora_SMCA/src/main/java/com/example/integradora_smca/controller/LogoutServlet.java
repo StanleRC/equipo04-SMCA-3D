@@ -14,9 +14,9 @@ import java.io.IOException;
 
 /**
  * LogoutServlet
- * Autor: Judith Desiree Aguilar Hernandez
- * Fecha: 23/08/2026
- * Funcionalidad: Cierra la sesión del usuario. Si quien sale es un alumno,
+ * @Autor: Judith Desiree Aguilar Hernandez
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Cierra la sesión del usuario. Si quien sale es un alumno,
  * primero graba su hora real de salida en la bitácora (la hora en que dejó el equipo),
  * a diferencia del sistema anterior donde se elegía a mano al entrar.
  * Posteriormente, invalida la sesión y limpia la caché del navegador por seguridad

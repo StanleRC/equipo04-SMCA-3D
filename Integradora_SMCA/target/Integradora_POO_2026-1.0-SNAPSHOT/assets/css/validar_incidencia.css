@@ -1,0 +1,171 @@
+:root {
+    --navy-blue: #1d3b6a;      /* Azul marino unificado */
+    --card-bg: #f8f9fa;        /* Fondo gris claro suave */
+    --card-border: #e2e8f0;    /* Borde gris elegante */
+    --text-dark: #1e293b;      /* Texto principal */
+    --text-muted: #64748b;     /* Subetiquetas */
+    --primary-green: #00875a;  /* Verde institucional UTEZ */
+    --primary-green-hover: #006c48;
+    --primary-blue: #23a6d5;   /* Azul de modal */
+}
+
+/* --- ESTRUCTURA PRINCIPAL Y SIDEBAR --- */
+.main-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.main-content {
+    margin-left: 240px; /* Desplaza para no tapar el sidebar */
+    width: calc(100% - 240px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BANNER SUPERIOR AZUL --- */
+.validar-top-blue-bar {
+    background-color: var(--navy-blue) !important;
+    padding: 18px 20px;
+    text-align: center;
+    width: 100%;
+    color: #ffffff !important;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* --- CONTENEDOR Y CENTRADO VERTICAL --- */
+.validar-page-body {
+    padding: 40px 50px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+}
+
+.back-link {
+    color: #000000 !important;
+    text-decoration: underline !important;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.utez-logo {
+    width: 220px;
+    height: auto;
+    display: block;
+}
+
+/* --- ESTILOS DE LA TABLA --- */
+.table-container {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 25px;
+}
+
+.custom-table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.custom-table thead th {
+    background-color: var(--navy-blue) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 10px;
+    text-align: center;
+    border: none;
+}
+
+.custom-table tbody td {
+    padding: 14px 10px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.btn-validar-tabla {
+    background-color: var(--primary-green) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 18px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-validar-tabla:hover {
+    background-color: var(--primary-green-hover) !important;
+}
+
+/* --- ESTILOS DE LOS MODALES --- */
+.modal-content {
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.icon-circle-question {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    width: 75px;
+    height: 75px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.upload-box {
+    border: 2px dashed var(--card-border);
+    border-radius: 12px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--primary-green);
+}
+
+.btn-modal-save {
+    background-color: var(--primary-green) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 9px 24px;
+    border: none;
+}
+
+.btn-modal-save:hover {
+    background-color: var(--primary-green-hover) !important;
+}
+
+.btn-modal-cancel {
+    background-color: var(--navy-blue) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 9px 24px;
+    border: none;
+}
+
+.btn-modal-cancel:hover {
+    background-color: #122543 !important;
+}

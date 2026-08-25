@@ -15,9 +15,9 @@ import java.io.PrintWriter;
 
 /**
  * RegistrarAlumnoDocenteServlet
- * Autor: Naomy Sayuri Carranza Priego
- * Fecha: 23/08/2026
- * Funcionalidad: Permite a un docente o administrador registrar a un nuevo alumno en el sistema
+ * @Autor: Naomy Sayuri Carranza Priego
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Permite a un docente o administrador registrar a un nuevo alumno en el sistema
  * mediante un proceso de dos pasos vía AJAX. Primero, valida rigurosamente los datos ingresados
  * (formato de matrícula, correo institucional de la UTEZ, coincidencia entre ambos, fortaleza de la
  * contraseña y disponibilidad en la base de datos) guardándolos temporalmente en la sesión.
