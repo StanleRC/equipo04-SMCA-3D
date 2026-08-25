@@ -1,3 +1,11 @@
+
+<%--
+    PANTALLA: Menú de selección "¿A quién deseas registrar?".
+    LA USA: solo el administrador. FiltroSoloAdmin bloquea esta ruta.
+    DATOS: ninguno, es solo navegación.
+    LLEVA A: registrar_maestro.jsp, registro_grupo.jsp o registrar_alumno.jsp.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Header -->
 <jsp:include page="/views/layout/header.jsp">

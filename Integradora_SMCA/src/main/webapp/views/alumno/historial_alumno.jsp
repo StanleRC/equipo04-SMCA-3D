@@ -1,3 +1,17 @@
+<%--
+    PANTALLA: Historial propio del alumno.
+    LA USA: el alumno, con sesión iniciada.
+    DATOS: HistorialAlumnoServlet, que consulta AlumnoDao.getHistorialByMatricula().
+
+    Cruza BITACORA con REPORTE_FALLA por LEFT JOIN. Es LEFT y no INNER a propósito:
+    así aparecen también las sesiones donde no se reportó ninguna falla, y en esas
+    la columna Incidencia dice "Ninguna".
+
+    El estado que se ve (Pendiente, Validado, Descartado) es el del reporte, no
+    de la bitácora: lo cambia el docente desde la pantalla de incidencias.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>

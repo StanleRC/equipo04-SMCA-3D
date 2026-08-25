@@ -1,3 +1,18 @@
+
+<%--
+    PANTALLA: Auto-registro de docente.
+    LA USA: un docente que todavía no tiene cuenta. Es pública, se abre sin sesión
+            desde el modal de admin-docente_login.jsp.
+    ENVÍA A: RegistroDocenteServlet, en dos pasos.
+
+    Paso 1: valida los datos y manda un código de 6 dígitos al correo.
+    Paso 2: el docente escribe el código en el modal y hasta entonces se guarda.
+
+    El código vive 10 minutos y admite 5 intentos. Se genera con SecureRandom,
+    no con Random, porque Random es predecible si se conoce la semilla.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

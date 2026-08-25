@@ -1,3 +1,15 @@
+
+
+<%--
+    PANTALLA: Selección de laboratorio para revisar incidencias.
+    LA USA: administrador y docente.
+    DATOS: IncidenciasServlet, que consulta IncidenciaDao.
+    LLEVA A: ValidarIncidenciasServlet?lab=CC10.
+
+    Los botones se generan desde la tabla LABORATORIO, igual que en bitacora.jsp.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

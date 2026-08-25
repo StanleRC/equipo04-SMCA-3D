@@ -1,3 +1,18 @@
+
+<%--
+    PANTALLA: Ficha de un alumno con su historial completo.
+    LA USA: administrador y docente. Se llega desde el buscador.
+    DATOS: DetalleAlumnoServlet, que consulta AlumnoDao.
+
+    El historial cruza BITACORA con REPORTE_FALLA por LEFT JOIN. Es LEFT y no
+    INNER a propósito: así también salen las sesiones sin incidencia reportada.
+
+    Los botones de deshabilitar y eliminar solo aparecen para el administrador.
+    Eliminar pide escribir la matrícula porque las llaves foráneas son
+    ON DELETE CASCADE: borra también toda la bitácora del alumno.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

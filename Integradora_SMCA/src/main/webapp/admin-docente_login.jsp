@@ -1,3 +1,20 @@
+<%--
+    PANTALLA: Inicio de sesión del personal (administrador y docente).
+    LA USA: cualquiera, es pública.
+    ENVÍA A: loginDocenteServlet.
+
+    Los dos roles entran por aquí. El servlet busca primero en la tabla DOCENTE
+    y luego en ADMINISTRADOR, y guarda en sesión el atributo esAdmin según el
+    rol_id_rol que encuentre. De ahí depende lo que cada quien puede hacer.
+
+    Si las credenciales fallan, el mensaje es el mismo sin importar si el error
+    fue el correo o la contraseña. Decir "ese correo no existe" permitiría
+    averiguar qué cuentas están registradas probándolas una por una.
+
+    El modal de "¿No tienes una cuenta?" lleva a registro_directo_maestro.jsp,
+    que es el auto-registro público de docentes.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -119,9 +136,6 @@
     </div>
 </div>
 
-<!-- ========================================================= -->
-<!-- MODAL EMERGENTE DE REGISTRO PARA DOCENTES -->
-<!-- ========================================================= -->
 <div class="modal fade" id="modalRegistroInfo" tabindex="-1" aria-labelledby="modalRegistroInfoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content info-modal-content">

@@ -28,12 +28,12 @@ import java.io.IOException;
         "/views/admin/crear_registro.jsp",
         "/views/admin/registrar_alumno.jsp",
         "/views/admin/registrar_maestro.jsp",
-        "/views/admin/registro_directo_maestro.jsp",
         "/views/admin/registro_grupo.jsp",
         "/views/admin/agregar_salon.jsp",
         "/RegistrarAlumnoDocenteServlet",
         "/registrarMaestroServlet",
-        "/RegistrarGrupoServlet"
+        "/RegistrarGrupoServlet",
+        "/RegistrarAlumnoAdminServlet"
 })
 public class FiltroSoloAdmin extends HttpFilter {
 

@@ -1,3 +1,16 @@
+<%--
+    FRAGMENTO: Pie de página común. Cierra lo que abrió header.jsp.
+
+    Cierra tres cosas: el <div class="main-wrapper">, el <body> y el <html>.
+    Por eso las páginas que lo incluyen NO deben cerrar esos tags por su cuenta:
+    quedarían duplicados y el HTML saldría mal formado.
+
+    El margen izquierdo de 240px compensa el ancho del sidebar, que es
+    position:fixed y no ocupa lugar en el flujo del documento.
+
+    Carga el JavaScript de Bootstrap al final, cuando el HTML ya está listo.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Estilos del Footer con alineación milimétrica -->

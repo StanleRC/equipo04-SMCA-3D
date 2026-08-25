@@ -1,3 +1,19 @@
+
+<%--
+    FRAGMENTO: Encabezado común de todas las pantallas con sidebar.
+    QUÉ ABRE: <html>, <head> y <body>. Lo cierra footer.jsp.
+
+    El título se recibe como parámetro desde cada página:
+        <jsp:include page="/views/layout/header.jsp">
+            <jsp:param name="pageTitle" value="Bitácora - UTEZ" />
+        </jsp:include>
+
+    Si no se manda, usa "Bitácora Digital" por defecto.
+
+    Aquí se cargan Bootstrap, los iconos y el CSS general. Cada pantalla añade
+    después su propia hoja de estilos.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

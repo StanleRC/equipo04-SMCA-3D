@@ -1,3 +1,18 @@
+
+<%--
+    PANTALLA: Buscador de alumnos.
+    LA USA: administrador y docente.
+    DATOS: BuscarAlumnosServlet. En la primera carga los manda como atributo;
+           al escribir los pide otra vez en JSON con ?formato=json.
+
+    La búsqueda es en vivo: filtra mientras se escribe, con una espera de 300 ms
+    para no lanzar una consulta por cada tecla.
+
+    La columna "Acciones" solo se dibuja para el administrador. Quien impide de
+    verdad que un docente borre o deshabilite es AlumnoAccionesServlet.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
@@ -21,15 +36,6 @@
             background: #f4f6fa;
         }
 
-        /*
-            El sidebar es position:fixed y mide 240px, así que no ocupa lugar en
-            el flujo del documento. Sin el margen, el contenido arranca en x=0,
-            queda debajo de él y la primera columna sale cortada.
-
-            El wrapper NO es flex a propósito: siéndolo, .main-content recibía el
-            100% del ancho y el margen lo empujaba 240px fuera de la pantalla.
-            Como bloque normal, el ancho automático ya descuenta el margen.
-        */
         .main-wrapper { min-height: 100vh; }
 
         .main-content {
@@ -107,8 +113,6 @@
             color: #7a8598;
         }
 
-        /* ---------- BUSCADOR ---------- */
-
         .search-form {
             position: relative;
             width: 330px;
@@ -164,7 +168,7 @@
         .clear-btn.visible { display: flex; }
         .clear-btn:hover { background: #dfe4ec; color: #1c3862; }
 
-        /* Indicador de que la búsqueda está en curso */
+
         .spinner-busqueda {
             position: absolute;
             right: 46px;
@@ -183,7 +187,8 @@
 
         @keyframes girar { to { transform: translateY(-50%) rotate(360deg); } }
 
-        /* ---------- TABLA ---------- */
+
+
 
         .tabla-scroll { width: 100%; overflow-x: auto; }
 
@@ -218,7 +223,7 @@
         .tabla-alumnos tbody tr:hover { background: #f7f9fc; }
         .tabla-alumnos tbody tr:last-child td { border-bottom: none; }
 
-        /* Fila de alumno deshabilitado: se distingue sin desaparecer */
+
         .tabla-alumnos tbody tr.inactivo td { opacity: .55; }
 
         .celda-matricula { font-weight: 700; color: #1c3862; white-space: nowrap; }
@@ -252,7 +257,8 @@
         .badge-activo   { background: #dcf3e6; color: #1e7e4a; }
         .badge-inactivo { background: #f1f1f1; color: #6b6b6b; }
 
-        /* ---------- ACCIONES ---------- */
+
+
 
         .acciones { display: flex; gap: 7px; justify-content: center; }
 
@@ -303,7 +309,10 @@
             margin-bottom: 14px;
         }
 
-        /* Mensaje flotante de resultado de una acción */
+
+
+
+
         .toast-aviso {
             position: fixed;
             right: 24px;
@@ -540,7 +549,7 @@
         var temporizador = null;
         var peticionActual = 0;
 
-        // ---------- utilidades ----------
+
 
         function escaparHtml(texto) {
             var div = document.createElement('div');
@@ -559,7 +568,7 @@
                 + '<i class="bi bi-inbox"></i>' + escaparHtml(mensaje) + '</td></tr>';
         }
 
-        // ---------- pintado de la tabla ----------
+
 
         function botonesAccion(a) {
             if (!esAdmin) return '';
@@ -616,7 +625,6 @@
             contador.textContent = lista.length + (lista.length === 1 ? ' resultado' : ' resultados');
         }
 
-        // ---------- búsqueda en vivo ----------
 
         function buscar(termino) {
             /*
@@ -741,7 +749,6 @@
             ejecutarAccion(matricula, accion);
         });
 
-        // ---------- arranque ----------
 
         campo.focus();
         campo.setSelectionRange(campo.value.length, campo.value.length);

@@ -1,3 +1,14 @@
+<%--
+    PANTALLA: Aviso de que el registro en la bitácora se completó.
+    LA USA: el alumno, después de enviar el formulario de incidencia.
+    LLEGA DESDE: RegistrarIncidenciaServlet, con un redirect y no un forward,
+                 para que al recargar no se duplique el registro.
+
+    Es una pantalla estática: solo confirma, no consulta la base.
+--%>
+
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

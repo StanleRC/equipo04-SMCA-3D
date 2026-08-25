@@ -1,3 +1,18 @@
+
+<%--
+    PANTALLA: Alta de un grupo escolar.
+    LA USA: solo el administrador. FiltroSoloAdmin bloquea esta ruta.
+    DATOS: las carreras vienen de CatalogosServlet en JSON.
+    ENVÍA A: RegistrarGrupoServlet.
+
+    id_grupo no es autonumérico: se arma con carrera + cuatrimestre + letra,
+    por ejemplo DSM + 3 + D = DSM3D. La pantalla muestra el identificador que se
+    va a crear antes de guardar, para no generarlo a ciegas.
+
+    El grupo que se registre aquí aparece automáticamente en los formularios de
+    registro de alumno, porque leen la tabla GRUPO en vez de tenerlos quemados.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

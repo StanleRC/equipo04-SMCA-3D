@@ -1,3 +1,13 @@
+<%--
+    PANTALLA: Alta de un laboratorio nuevo.
+    LA USA: solo el administrador. FiltroSoloAdmin bloquea esta ruta.
+    ENVÍA A: AgregarSalonServlet, que inserta en la tabla LABORATORIO.
+
+    El aula que se registre aquí aparece automáticamente en las pantallas de
+    bitácora, incidencias y en el formulario de incidencia del alumno, porque
+    todas leen esa tabla en vez de tener los salones escritos a mano.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Header -->
 <jsp:include page="/views/layout/header.jsp">

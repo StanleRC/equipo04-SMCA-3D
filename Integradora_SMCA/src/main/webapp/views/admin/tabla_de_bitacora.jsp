@@ -1,3 +1,17 @@
+
+<%--
+    PANTALLA: Bitácora de accesos de un laboratorio.
+    LA USA: administrador y docente.
+    DATOS: BitacoraServlet, que consulta BitacoraDao.obtenerBitacoraPorAula().
+
+    La columna "Estado" no sale de BITACORA: esa tabla no tiene columna de estado.
+    Viene del reporte de falla ligado a cada fila, por LEFT JOIN con REPORTE_FALLA.
+    Si el alumno no reportó nada, se muestra "Sin reporte".
+
+    "Hora final" puede venir vacía y entonces dice "En curso": esa hora se graba
+    cuando el alumno cierra sesión, no cuando entra.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!-- MARCA_TABLA_BITACORA_V2 -->

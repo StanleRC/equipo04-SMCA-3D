@@ -1,3 +1,16 @@
+<%--
+    PANTALLA: Registro de uso del equipo y reporte de falla.
+    LA USA: el alumno, con sesión iniciada.
+    ENVÍA A: RegistrarIncidenciaServlet.
+
+    Se guardan dos cosas: la fila en BITACORA siempre, y la de REPORTE_FALLA
+    solo si el alumno escribió una descripción. Reportar una falla es opcional.
+
+    El <select> de aulas manda el nombre ("CC10"), no el id numérico. Antes
+    mandaba ids escritos a mano que no coincidían con los de la tabla
+    LABORATORIO: "CA 5" enviaba el 9, que en realidad era CC1.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">

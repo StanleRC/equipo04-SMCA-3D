@@ -1,3 +1,22 @@
+
+<%--
+    PANTALLA: Establecer una contraseña nueva.
+    LA USA: cualquiera que haya validado su código de recuperación.
+    LLEGA DESDE: recuperar_pass.jsp, después de escribir bien el código.
+    ENVÍA A: RecuperarPassServlet con accion=actualizarPassword.
+
+    PROTECCIÓN: el scriptlet del inicio revisa que exista el atributo de sesión
+    "autorizadoCambioPass". Sin él regresa al inicio del proceso. Es lo que evita
+    que alguien llegue aquí escribiendo la URL y cambie una contraseña ajena.
+    El servlet lo vuelve a revisar antes de guardar.
+
+    La contraseña NO se recupera, se reemplaza: al estar hasheada con SHA-256 es
+    imposible saber cuál era la anterior.
+
+    Los requisitos que se marcan en vivo son los mismos que valida el servidor.
+    El navegador solo da comodidad; quien decide es el servlet.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     // Sin código validado no se puede llegar aquí.

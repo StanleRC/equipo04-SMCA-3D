@@ -1,3 +1,14 @@
+
+<%--
+    PANTALLA: Selección de laboratorio para la bitácora.
+    LA USA: administrador y docente.
+    DATOS: los recibe de SeleccionarBitacoraServlet, que consulta BitacoraDao.
+    LLEVA A: BitacoraServlet?lab=CC10, que muestra la tabla de accesos.
+
+    Los botones se generan desde la tabla LABORATORIO. No están escritos a mano:
+    si se agrega un aula nueva a la base, aparece aquí sola.
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 

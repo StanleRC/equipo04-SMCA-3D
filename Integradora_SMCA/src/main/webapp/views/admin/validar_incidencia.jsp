@@ -1,3 +1,20 @@
+
+<%--
+    PANTALLA: Revisión de incidencias de un laboratorio.
+    LA USA: administrador y docente, pero con permisos distintos.
+    DATOS: ValidarIncidenciasServlet, que consulta IncidenciaDao.
+
+    Validar es tarea del DOCENTE. El administrador solo ve el estado y el aviso
+    de que espere su correo; a él ni siquiera se le genera el modal.
+    Quien lo impide de verdad es el doPost del servlet, porque un formulario se
+    puede enviar a mano aunque el botón no aparezca.
+
+    Al confirmar se guarda el estado, se sube la evidencia opcional y se manda
+    un correo al administrador con los datos y la foto adjunta. El correo se
+    envía DESPUÉS del commit: si el SMTP falla, la revisión ya quedó guardada.
+--%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
