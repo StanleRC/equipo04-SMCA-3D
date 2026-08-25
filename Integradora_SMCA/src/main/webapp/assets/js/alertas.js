@@ -1,4 +1,10 @@
- // 1. Alerta para Cerrar Sesión
+/*
+ * Función: confirmarCierreSesion
+ * Objetivo: Mostrar alerta de confirmación antes de cerrar sesión
+ * Parámetros:
+ *   - event: evento del botón/enlace
+ *   - urlRedireccion: URL opcional para redirigir al cerrar sesión
+ */
 function confirmarCierreSesion(event, urlRedireccion) {
     if (event) event.preventDefault();
 
@@ -9,7 +15,6 @@ function confirmarCierreSesion(event, urlRedireccion) {
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar',
-        reverseButtons: false,
         customClass: {
             popup: 'figma-modal',
             title: 'figma-title',
@@ -25,7 +30,13 @@ function confirmarCierreSesion(event, urlRedireccion) {
     });
 }
 
-// 2. Alerta para Validar Incidencia
+/*
+ * Función: confirmarValidacionIncidencia
+ * Objetivo: Validar si una incidencia es verídica antes de enviarla
+ * Parámetros:
+ *   - event: evento del botón
+ *   - formElement: formulario que se enviará si se confirma
+ */
 function confirmarValidacionIncidencia(event, formElement) {
     if (event) event.preventDefault();
 
@@ -35,7 +46,6 @@ function confirmarValidacionIncidencia(event, formElement) {
         showCancelButton: true,
         confirmButtonText: 'Si, validar',
         cancelButtonText: 'No',
-        reverseButtons: false,
         customClass: {
             popup: 'figma-modal',
             title: 'figma-title',
@@ -43,18 +53,22 @@ function confirmarValidacionIncidencia(event, formElement) {
             cancelButton: 'figma-btn-cancel'
         }
     }).then((result) => {
-        if (result.isConfirmed) {
-            if (formElement) {
-                formElement.submit();
-            }
+        if (result.isConfirmed && formElement) {
+            formElement.submit();
         }
     });
 }
-// Resgistro exitoso
+
+/*
+ * Función: confirmarRegistroMaestro
+ * Objetivo: Mostrar alerta de éxito al registrar un maestro
+ * Parámetros:
+ *   - event: evento del botón
+ *   - formElement: formulario que se enviará si es válido
+ */
 function confirmarRegistroMaestro(event, formElement) {
     if (event) event.preventDefault();
 
-    // Validar que los campos HTML5 (required) estén llenos
     if (formElement && !formElement.checkValidity()) {
         formElement.reportValidity();
         return;
@@ -70,27 +84,30 @@ function confirmarRegistroMaestro(event, formElement) {
             confirmButton: 'figma-btn-confirm'
         }
     }).then((result) => {
-        if (result.isConfirmed) {
-            if (formElement) {
-                formElement.submit();
-            }
+        if (result.isConfirmed && formElement) {
+            formElement.submit();
         }
     });
 }
 
-// 1. Alerta de ÉXITO
+/*
+ * Función: mostrarAlertaExito
+ * Objetivo: Mostrar alerta de confirmación exitosa
+ * Parámetros:
+ *   - mensaje: texto personalizado
+ *   - callback: función opcional a ejecutar tras confirmar
+ */
 function mostrarAlertaExito(mensaje, callback) {
     Swal.fire({
         title: mensaje || '¡Cambios realizados de manera exitosa!',
         icon: 'success',
-        iconColor: '#28a745',          // Verde del check
+        iconColor: '#28a745',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0b8a72',  // Verde UTEZ
+        confirmButtonColor: '#0b8a72',
         customClass: {
             popup: 'modal-alerta-custom',
             confirmButton: 'btn-confirmar-custom'
         },
-        buttonsStyling: true,
         allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed && typeof callback === 'function') {
@@ -99,23 +116,34 @@ function mostrarAlertaExito(mensaje, callback) {
     });
 }
 
-// 2. Alerta de ERROR (Por si algo falla)
+/*
+ * Función: mostrarAlertaError
+ * Objetivo: Mostrar alerta de error en caso de fallo
+ * Parámetros:
+ *   - mensaje: texto personalizado del error
+ */
 function mostrarAlertaError(mensaje) {
     Swal.fire({
         title: '¡Ocurrió un error!',
         text: mensaje || 'No se pudieron guardar los cambios. Inténtalo de nuevo.',
         icon: 'error',
-        iconColor: '#dc3545',          // Rojo de error
+        iconColor: '#dc3545',
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#0b8a72',  // Mantener el botón institucional
+        confirmButtonColor: '#0b8a72',
         customClass: {
             popup: 'modal-alerta-custom',
             confirmButton: 'btn-confirmar-custom'
-        },
-        buttonsStyling: true
+        }
     });
 }
 
+/*
+ * Función: mostrarAlertaBienvenida
+ * Objetivo: Mostrar alerta de bienvenida con reloj en tiempo real
+ * Parámetros:
+ *   - nombreUsuario: nombre del usuario autenticado
+ *   - contextPath: ruta base de la aplicación
+ */
 function mostrarAlertaBienvenida(nombreUsuario, contextPath) {
     Swal.fire({
         title: '<i class="bi bi-clock-history me-1"></i> Bienvenida UTEZ',
@@ -123,8 +151,6 @@ function mostrarAlertaBienvenida(nombreUsuario, contextPath) {
             <div class="text-start">
                 <h6 class="fw-bold text-dark mb-1">¡Hola, ${nombreUsuario}!</h6>
                 <p class="text-muted small mb-2" style="font-size: 12px;">Acceso rápido a tus opciones principales:</p>
-
-                <!-- Reloj y Fecha -->
                 <div class="alert alert-light border py-2 px-2 my-2 text-success fw-semibold shadow-sm text-center" style="font-size: 13px;">
                     <i class="bi bi-clock me-1"></i>
                     <span id="relojServidor">Cargando hora...</span>
@@ -135,7 +161,6 @@ function mostrarAlertaBienvenida(nombreUsuario, contextPath) {
         confirmButtonText: '<i class="bi bi-exclamation-triangle-fill me-1"></i> Registrar incidencia',
         confirmButtonColor: '#dc2626',
         showCloseButton: true,
-        focusConfirm: false,
         customClass: {
             popup: 'rounded-4 shadow-lg',
             title: 'fs-6 text-white bg-dark p-3 m-0 rounded-top-4 text-start',
@@ -151,7 +176,10 @@ function mostrarAlertaBienvenida(nombreUsuario, contextPath) {
     });
 }
 
-// Función auxiliar para el reloj en tiempo real
+/*
+ * Función auxiliar: iniciarReloj
+ * Objetivo: Actualizar cada segundo la hora y fecha en la alerta de bienvenida
+ */
 function iniciarReloj() {
     function actualizarHora() {
         const spanReloj = document.getElementById('relojServidor');
@@ -167,6 +195,3 @@ function iniciarReloj() {
     actualizarHora();
     setInterval(actualizarHora, 1000);
 }
-
-
-

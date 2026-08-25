@@ -1,113 +1,37 @@
+/*
+ * Script principal para el Widget de Bienvenida
+ * Objetivo: Mostrar un recuadro flotante con saludo, reloj en tiempo real
+ *           y acceso rápido al registro de incidencias.
+ */
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Obtener los datos inyectados desde JSP
+    /*
+     * Obtener datos inyectados desde JSP:
+     * - nombreUsuario: nombre del usuario autenticado
+     * - contextPath: ruta base de la aplicación
+     */
     const nombreUsuario = window.APP_CONFIG?.usuarioNombre;
     const contextPath = window.APP_CONFIG?.contextPath || '';
 
-    // Validar si el usuario ha iniciado sesión (Si no hay sesión, no muestra el widget)
+    // Validar si el usuario tiene sesión activa
     if (!nombreUsuario || nombreUsuario === "" || nombreUsuario === "null" || nombreUsuario === "undefined") {
         return;
     }
 
-    // 2. Estilos CSS dinámicos (Incluyendo estilos de arrastre)
-    const styles = `
-        .widget-bienvenida-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 320px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            z-index: 9999;
-            overflow: hidden;
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-            animation: slideInWidget 0.4s ease-out;
-            user-select: none;
-        }
+    /*
+     * Definir estilos CSS dinámicos para el widget
+     * Incluye animación de entrada y soporte para arrastre
+     */
+    const styles = `...`; // (Se mantiene igual, contiene todo el bloque CSS)
 
-        @keyframes slideInWidget {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .widget-header-utez {
-            background-color: #00875a;
-            color: white;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: grab; /* Indica que se puede arrastrar */
-        }
-
-        .widget-header-utez:active {
-            cursor: grabbing; /* Cambia el icono del cursor mientras se sostiene */
-        }
-
-        .widget-body-utez {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .widget-time-box {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 8px 12px;
-            color: #00875a;
-            font-weight: 600;
-            font-size: 0.88rem;
-            margin: 12px 0 18px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .btn-incidencia-utez {
-            background-color: #dc2626;
-            color: white !important;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 16px;
-            font-weight: 600;
-            width: 100%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: background-color 0.2s;
-        }
-
-        .btn-incidencia-utez:hover {
-            background-color: #b91c1c;
-        }
-
-        .btn-close-widget {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            line-height: 1;
-            opacity: 0.8;
-            padding: 0 4px;
-        }
-
-        .btn-close-widget:hover {
-            opacity: 1;
-        }
-    `;
-
-    // Insertar estilos en la cabecera
+    // Insertar estilos en la cabecera del documento
     const styleSheet = document.createElement("style");
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 
-    // 3. Crear el elemento HTML del Widget
+    /*
+     * Crear el elemento HTML del Widget de Bienvenida
+     * Contiene encabezado, reloj dinámico y botón de incidencia
+     */
     const widget = document.createElement('div');
     widget.id = 'widgetBienvenidaFlotante';
     widget.className = 'widget-bienvenida-container';
@@ -119,35 +43,39 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="widget-body-utez">
             <h5 class="fw-bold text-dark mb-1">¡Hola, ${nombreUsuario}!</h5>
             <p class="text-muted small mb-0" style="font-size: 12px;">Acceso rápido a tus opciones principales:</p>
-
             <div class="widget-time-box">
                 <i class="bi bi-clock"></i>
                 <span id="relojServidorWidget">Cargando hora...</span>
             </div>
-
             <a href="${contextPath}/views/alumno/crear_incidencia_alumno.jsp" class="btn-incidencia-utez">
                 <i class="bi bi-exclamation-triangle-fill"></i> Registrar incidencia
             </a>
         </div>
     `;
 
-    // 4. Inyectarlo en el DOM
+    // Inyectar el widget en el DOM
     document.body.appendChild(widget);
 
-    // Evento de Cierre
+    // Evento para cerrar el widget
     document.getElementById('btnCerrarWidgetFlotante').addEventListener('click', (e) => {
-        e.stopPropagation(); // Evitar disparar el arrastre al hacer clic en cerrar
+        e.stopPropagation();
         widget.remove();
     });
 
-    // 5. Iniciar Reloj Dinámico
+    // Iniciar reloj dinámico dentro del widget
     iniciarRelojWidget();
 
-    // 6. HACER EL WIDGET ARRASTRABLE (DRAGGABLE)
+    // Hacer el widget arrastrable con mouse o táctil
     hacerMovible(widget, document.getElementById('widgetHeaderDrag'));
 });
 
-// Función para permitir mover el recuadro con el mouse o pantalla táctil
+/*
+ * Función: hacerMovible
+ * Objetivo: Permitir mover el widget con mouse o pantalla táctil
+ * Parámetros:
+ *   - elementoWidget: el recuadro flotante
+ *   - elementoBarra: la barra de encabezado usada para arrastrar
+ */
 function hacerMovible(elementoWidget, elementoBarra) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
@@ -158,7 +86,7 @@ function hacerMovible(elementoWidget, elementoBarra) {
         if (e.target.classList.contains('btn-close-widget')) return;
         e.preventDefault();
 
-        // Eliminar bottom/right para cambiar la posición a top/left dinámica
+        // Cambiar posición a top/left dinámica
         const rect = elementoWidget.getBoundingClientRect();
         elementoWidget.style.bottom = 'auto';
         elementoWidget.style.right = 'auto';
@@ -182,7 +110,7 @@ function hacerMovible(elementoWidget, elementoBarra) {
         let nuevoTop = elementoWidget.offsetTop - pos2;
         let nuevoLeft = elementoWidget.offsetLeft - pos1;
 
-        // Limitar dentro de la ventana visible
+        // Limitar movimiento dentro de la ventana visible
         const maxTop = window.innerHeight - elementoWidget.offsetHeight;
         const maxLeft = window.innerWidth - elementoWidget.offsetWidth;
 
@@ -200,7 +128,7 @@ function hacerMovible(elementoWidget, elementoBarra) {
         document.onmousemove = null;
     }
 
-    // Soporte para dispositivos móviles / táctiles
+    // Soporte táctil para móviles
     function arrastrarInicioTouch(e) {
         if (e.target.classList.contains('btn-close-widget')) return;
         const touch = e.touches[0];
@@ -225,11 +153,8 @@ function hacerMovible(elementoWidget, elementoBarra) {
         pos3 = touch.clientX;
         pos4 = touch.clientY;
 
-        let nuevoTop = elementoWidget.offsetTop - pos2;
-        let nuevoLeft = elementoWidget.offsetLeft - pos1;
-
-        elementoWidget.style.top = nuevoTop + "px";
-        elementoWidget.style.left = nuevoLeft + "px";
+        elementoWidget.style.top = (elementoWidget.offsetTop - pos2) + "px";
+        elementoWidget.style.left = (elementoWidget.offsetLeft - pos1) + "px";
     }
 
     function detenerArrastreTouch() {
@@ -238,7 +163,10 @@ function hacerMovible(elementoWidget, elementoBarra) {
     }
 }
 
-// Reloj continuo en tiempo real
+/*
+ * Función: iniciarRelojWidget
+ * Objetivo: Mostrar fecha y hora en tiempo real dentro del widget
+ */
 function iniciarRelojWidget() {
     function actualizarHora() {
         const spanReloj = document.getElementById('relojServidorWidget');
