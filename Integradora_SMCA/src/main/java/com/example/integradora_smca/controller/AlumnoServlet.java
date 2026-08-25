@@ -20,6 +20,16 @@ import java.io.IOException;
         maxFileSize = 1024 * 1024 * 5,        // 5 MB
         maxRequestSize = 1024 * 1024 * 10     // 10 MB
 )
+
+/**
+ * AlumnoServlet
+ * @Autor: María Fernanda Colima Ocampo
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Maneja la actualización del perfil del alumno, permitiendo
+ * modificar sus datos personales (nombre, apellidos, correo) y subir una
+ * nueva foto de perfil. Guarda los cambios en la base de datos, actualiza
+ * la sesión actual y redirige a la vista del perfil.
+ */
 public class AlumnoServlet extends HttpServlet {
 
     private final AlumnoDao alumnoDao = new AlumnoDao();

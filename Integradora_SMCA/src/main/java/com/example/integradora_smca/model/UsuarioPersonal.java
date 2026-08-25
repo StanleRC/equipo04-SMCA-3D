@@ -1,63 +1,77 @@
 package com.example.integradora_smca.model;
 
 /**
- * Contrato común del personal que inicia sesión en el panel administrativo.
- *
- * ¿Por qué existe?
- * DOCENTE y ADMINISTRADOR son dos tablas separadas, pero para el sistema son
- * el mismo tipo de usuario: tienen nombre, correo, foto y rol. Sin esta interfaz,
- * cada servlet y cada filtro tendría que preguntar "¿eres Docente o Administrador?"
- * con instanceof, y bastaría olvidar un caso para provocar un ClassCastException.
- *
- * Con la interfaz, el código pide lo que necesita (getNombre, isAdministrador)
- * sin importarle de qué tabla salió el objeto.
- *
- * En los JSP funciona igual: ${perfil.nombre} o ${perfil.administrador} leen
- * estos getters sin saber la clase concreta.
+ * Interfaz UsuarioPersonal
+ * @Autor: Stanle Reyes
+ * @Fecha: 25/08/2026
+ * @Funcionalidad: Define el contrato común para el personal que inicia sesión
+ * en el panel administrativo. Permite unificar el acceso a atributos y métodos
+ * de Docente y Administrador, evitando duplicación de lógica en servlets y JSP.
+ * Proporciona métodos para obtener datos personales, rol y utilidades como
+ * nombre completo y verificación de administrador.
  */
 public interface UsuarioPersonal {
 
-    /** Valores de la tabla ROL, en el orden en que fueron insertados. */
+    // Constantes de roles según la tabla ROL
     int ROL_ADMINISTRADOR = 1;
     int ROL_DOCENTE = 2;
     int ROL_ALUMNO = 3;
 
     /**
-     * Llave primaria como texto.
-     * En la base ambas son VARCHAR2(30): id_docente e id_administrador.
+     * @return llave primaria como texto (id_docente o id_administrador)
      */
     String getIdentificador();
 
+    /**
+     * @return nombre del usuario
+     */
     String getNombre();
 
+    /**
+     * @return apellido paterno del usuario
+     */
     String getApellidoPaterno();
 
+    /**
+     * @return apellido materno del usuario
+     */
     String getApellidoMaterno();
 
+    /**
+     * @return correo electrónico del usuario
+     */
     String getCorreo();
 
+    /**
+     * @return foto de perfil del usuario
+     */
     String getFotoPerfil();
 
+    /**
+     * @return identificador del rol asignado
+     */
     int getRolIdRol();
 
     /**
-     * Único lugar del proyecto donde se decide qué significa "ser administrador".
-     * Si algún día cambia el número de rol, se cambia aquí y nada más.
-     *
-     * En JSP se usa como ${perfil.administrador}.
+     * Determina si el usuario es administrador.
+     * @return true si el rol corresponde a administrador
      */
     default boolean isAdministrador() {
         return getRolIdRol() == ROL_ADMINISTRADOR;
     }
 
-    /** Nombre completo, para saludos y encabezados. */
+    /**
+     * @return nombre completo del usuario (nombre + apellidos)
+     */
     default String getNombreCompleto() {
         return ((getNombre() == null ? "" : getNombre()) + " "
                 + (getApellidoPaterno() == null ? "" : getApellidoPaterno()) + " "
                 + (getApellidoMaterno() == null ? "" : getApellidoMaterno())).trim();
     }
 
-    /** Etiqueta legible del rol, para el sidebar. */
+    /**
+     * @return etiqueta legible del rol (Administrador o Docente)
+     */
     default String getRolTexto() {
         return isAdministrador() ? "Administrador" : "Docente";
     }

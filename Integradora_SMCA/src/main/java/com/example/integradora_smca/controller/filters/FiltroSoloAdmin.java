@@ -13,15 +13,14 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Deja pasar SOLO a los administradores.
- *
- * Es un filtro aparte, mapeado únicamente a las pantallas de registro, para no
- * chocar con FiltroAutenticacion: ese resuelve "¿hay sesión?" y este "¿esa sesión
- * es de un admin?".
- *
- * Esconder los enlaces en el sidebar NO basta: cualquiera puede escribir la URL.
- * Este filtro es el candado; el sidebar solo es comodidad visual.
- *
+ * FiltroSoloAdmin
+ * Autor: Erick Manuel Guerrero Guevara
+ * Fecha: 23/08/2026
+ * Funcionalidad: Deja pasar SOLO a los administradores. Es un filtro aparte,
+ * mapeado únicamente a las pantallas de registro, para no chocar con
+ * FiltroAutenticacion: ese resuelve "¿hay sesión?" y este "¿esa sesión
+ * es de un admin?". Esconder los enlaces en el sidebar NO basta: cualquiera
+ * puede escribir la URL. Este filtro es el candado; el sidebar solo es comodidad visual.
  * Ahora pregunta por UsuarioPersonal, no por instanceof Docente. Así funciona
  * igual para un admin de la tabla ADMINISTRADOR que para uno de DOCENTE.
  */
@@ -29,12 +28,12 @@ import java.io.IOException;
         "/views/admin/crear_registro.jsp",
         "/views/admin/registrar_alumno.jsp",
         "/views/admin/registrar_maestro.jsp",
-        "/views/admin/registro_directo_maestro.jsp",
         "/views/admin/registro_grupo.jsp",
         "/views/admin/agregar_salon.jsp",
         "/RegistrarAlumnoDocenteServlet",
         "/registrarMaestroServlet",
-        "/RegistrarGrupoServlet"
+        "/RegistrarGrupoServlet",
+        "/RegistrarAlumnoAdminServlet"
 })
 public class FiltroSoloAdmin extends HttpFilter {
 

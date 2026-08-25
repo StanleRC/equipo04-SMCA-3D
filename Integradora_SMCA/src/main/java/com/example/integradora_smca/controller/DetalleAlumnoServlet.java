@@ -16,8 +16,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Detalle de un alumno visto desde el buscador.
- *
+ * DetalleAlumnoServlet
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Detalle de un alumno visto desde el buscador.
  * El buscador original enlazaba a /views/admin/perfil_alumno.jsp?id=..., pero
  * ese archivo no existe y la tabla alumno tampoco tiene columna "id": su llave
  * primaria es la matrícula.
@@ -56,7 +58,7 @@ public class DetalleAlumnoServlet extends HttpServlet {
         Alumno alumno = alumnoDao.getPerfilCompletoByMatricula(matricula);
 
         if (alumno == null) {
-            /*
+            /**
              * Ojo al depurar: este null también aparece cuando la consulta
              * falla por SQL, no solo cuando el alumno no existe. Si ves este
              * aviso con una matrícula que sí está en la base, revisa la consola

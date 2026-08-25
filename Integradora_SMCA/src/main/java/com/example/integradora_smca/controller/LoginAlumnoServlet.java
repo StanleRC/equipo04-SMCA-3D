@@ -13,6 +13,16 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * LoginAlumnoServlet
+ * @Autor: María Fernanda Colima Ocampo
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Maneja el inicio de sesión de los alumnos. Verifica las credenciales,
+ * registra la hora de entrada y los datos del equipo (número de PC y aula) en la bitácora.
+ * Ya NO se lee la hora de salida del formulario; esta se registrará automáticamente
+ * al cerrar la sesión (en el LogoutServlet). Tras la autenticación, crea una nueva
+ * sesión de usuario y redirige a la vista del historial.
+ */
 @WebServlet("/loginServlet")
 public class LoginAlumnoServlet extends HttpServlet {
 
@@ -42,7 +52,7 @@ public class LoginAlumnoServlet extends HttpServlet {
         String numeroPc = request.getParameter("numeroPc");
         String aula = request.getParameter("aula");
 
-        /*
+        /**
          * Ya NO se lee la hora de salida del formulario.
          *
          * El alumno la elegía al ENTRAR, antes de usar el equipo, y por eso la

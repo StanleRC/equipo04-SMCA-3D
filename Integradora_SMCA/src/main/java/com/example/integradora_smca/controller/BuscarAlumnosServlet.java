@@ -16,15 +16,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Alimenta /views/admin/buscador.jsp.
- *
+ * BuscarAlumnosServlet
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Alimenta /views/admin/buscador.jsp.
  * Responde de dos formas según el parámetro "formato":
  *   sin formato   -> forward normal al JSP (primera carga de la página)
  *   formato=json  -> devuelve la lista en JSON, para la búsqueda en vivo
- *
  * Así el cuadro de búsqueda filtra mientras se escribe, sin recargar la página
  * y sin duplicar la consulta en otro servlet.
- *
  * IMPORTANTE: en el sidebar, el enlace de "Buscar" debe apuntar a
  *   ${pageContext.request.contextPath}/BuscarAlumnosServlet
  * y NO a /views/admin/buscador.jsp.

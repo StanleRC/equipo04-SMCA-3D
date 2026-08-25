@@ -13,11 +13,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Entrega las fotos de perfil que ahora viven fuera de target/.
- *
+ * FotoPerfilServlet
+ * @Autor: Erick Manuel Guerrero Guevara
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Entrega las fotos de perfil que ahora viven fuera de target/.
  * Está mapeado en la MISMA ruta que ya usan tus JSP
  * (/assets/img/perfiles/loquesea.png), así que no tienes que cambiar ningún src="".
- *
  * Busca en este orden:
  *   1. la carpeta externa donde EditarPerfilServlet guarda las fotos nuevas
  *   2. assets/img/perfiles del proyecto, para default.png y fotos viejas

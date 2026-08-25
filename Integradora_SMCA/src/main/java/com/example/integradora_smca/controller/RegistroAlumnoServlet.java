@@ -16,6 +16,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
 
+/**
+ * RegistroAlumnoServlet
+ * @Autor: Naomy Sayuri Carranza Priego
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Gestiona el autorregistro de alumnos en el sistema mediante un proceso de dos pasos vía AJAX.
+ * Primero, valida rigurosamente los datos ingresados (formato de matrícula, correo institucional, coincidencia
+ * de ambos, requisitos de contraseña segura y existencia del grupo) y envía un código de verificación de 6 dígitos
+ * generado de forma segura al correo del alumno. Segundo, valida dicho código implementando medidas de seguridad
+ * estrictas como caducidad (10 minutos) y límite máximo de intentos (5) para evitar ataques de fuerza bruta,
+ * concretando finalmente el registro en la base de datos.
+ */
 @WebServlet("/RegistroAlumnoServlet")
 public class RegistroAlumnoServlet extends HttpServlet {
 
@@ -75,9 +86,7 @@ public class RegistroAlumnoServlet extends HttpServlet {
         }
     }
 
-    // ------------------------------------------------------------------
-    // PASO 1: validar los datos y mandar el código
-    // ------------------------------------------------------------------
+
     private void enviarCodigo(HttpServletRequest request, PrintWriter out) {
 
         String nombre = limpiar(request.getParameter("txtNombre"));
@@ -109,7 +118,7 @@ public class RegistroAlumnoServlet extends HttpServlet {
             return;
         }
 
-        /*
+        /**
          * El grupo se valida AQUÍ, antes de mandar el código.
          *
          * Antes solo se leía el parámetro y se guardaba tal cual. Si venía vacío
@@ -182,9 +191,7 @@ public class RegistroAlumnoServlet extends HttpServlet {
         out.print(json("ok", "Código enviado a tu correo. Vence en 10 minutos."));
     }
 
-    // ------------------------------------------------------------------
-    // PASO 2: validar el código y guardar
-    // ------------------------------------------------------------------
+
     private void validarCodigo(HttpServletRequest request, PrintWriter out) {
 
         HttpSession session = request.getSession();
@@ -230,7 +237,7 @@ public class RegistroAlumnoServlet extends HttpServlet {
             return;
         }
 
-        /*
+        /**
          * Se vuelve a comprobar el grupo: pudieron pasar hasta 10 minutos entre
          * el formulario y este momento, y un administrador pudo eliminarlo.
          */
@@ -251,9 +258,6 @@ public class RegistroAlumnoServlet extends HttpServlet {
         }
     }
 
-    // ------------------------------------------------------------------
-    // Validaciones
-    // ------------------------------------------------------------------
 
     private boolean validarCorreoAlumno(String correo) {
         return correo != null && correo.matches(REGEX_ALUMNO);
@@ -294,9 +298,6 @@ public class RegistroAlumnoServlet extends HttpServlet {
         return null;
     }
 
-    // ------------------------------------------------------------------
-    // Apoyo
-    // ------------------------------------------------------------------
 
     /** Borra todo rastro del registro a medias. */
     private void limpiarRegistro(HttpSession session) {

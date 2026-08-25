@@ -15,12 +15,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 
+/**
+ * RegistroDocenteServlet
+ * @Autor: Judith Desiree Aguilar Hernandez
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Gestiona el proceso de registro para nuevos docentes mediante un flujo de dos pasos vía AJAX.
+ * En el primer paso, valida la información del formulario (formato de correo institucional, disponibilidad en la base
+ * de datos y longitud de la contraseña), genera un código de verificación de 6 dígitos y lo envía por correo,
+ * guardando los datos temporalmente en la sesión. En el segundo paso, compara el código ingresado con el de la sesión
+ * y, si coinciden, procesa el guardado definitivo del docente en la base de datos.
+ */
 @WebServlet("/RegistroDocenteServlet")
 public class RegistroDocenteServlet extends HttpServlet {
 
     private DocenteDao docenteDao;
 
-    private static final String REGEX_DOCENTE = "(?i)^[a-z]+(\\.[a-z]+)?@utez\\.edu\\.mx$";
+    // Acepta cualquier dominio. Antes solo permitía @utez.edu.mx.
+    private static final String REGEX_DOCENTE = "^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$";
 
     @Override
     public void init() throws ServletException {

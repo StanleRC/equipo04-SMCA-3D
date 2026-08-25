@@ -12,30 +12,23 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
- * Filtro de autenticación.
+ * FiltroAutenticacion
+ * Autor: Erick Manuel Guerrero Guevara
+ * Fecha: 23/08/2026
+ * Funcionalidad: Filtro de autenticación.
  *
  * Tres decisiones que vale la pena recordar:
- *
  *  1. Se normaliza la ruta (se quita el context path y se pasa a minúsculas)
  *     antes de compararla. Así desaparece el problema de "/RecuperarPassServlet"
  *     vs "/recuperarPassServlet" sin tener que listar la ruta dos veces.
- *
  *  2. Se comparan rutas EXACTAS, no con contains(). Con contains(), una URL como
  *     /views/admin/panel.jsp;jsessionid=/index.jsp podía colarse.
- *
  *  3. Si la petición es AJAX, se responde 401 + JSON en lugar de redirigir.
  *     Antes el fetch recibía el HTML de index.jsp y reventaba en res.json().
  */
 @WebFilter("/*")
 public class FiltroAutenticacion extends HttpFilter {
 
-    /**
-     * Rutas accesibles sin sesión.
-     *
-     * SIEMPRE en minúsculas y sin context path: normalizarRuta() convierte la
-     * ruta antes de comparar, así que "/CatalogosServlet" con mayúsculas nunca
-     * coincidiría.
-     */
     private static final Set<String> RUTAS_PUBLICAS = Set.of(
             "/",
             "/index.jsp",

@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Muestra la bitácora de accesos de un aula.
- *
- * El parámetro ?lab= corresponde a laboratorio.aula ("CC10", "CA1"), no a un id.
+ * BitacoraServlet
+ * @Autor: Judith Desiree Aguilar Hernandez
+ * @Fecha: 23/08/2026
+ * @Funcionalidad: Muestra la bitácora de accesos de un aula. El parámetro
+ * ?lab= corresponde a laboratorio.aula ("CC10", "CA1"), no a un id.
  */
 @WebServlet("/BitacoraServlet")
 public class BitacoraServlet extends HttpServlet {
