@@ -1,19 +1,4 @@
-
-
-<%--
-    PANTALLA: Configuración de la cuenta del docente o administrador.
-    LA USA: cualquiera con sesión de personal.
-    DATOS: los lee de la sesión. Envía a EditarPerfilServlet.
-
-    La foto se guarda fuera de la carpeta del proyecto, en {tomcat}/uploads/perfiles,
-    porque target/ se borra en cada compilación. La sirve FotoPerfilServlet.
-
-    El mensaje de éxito llega del servidor en ?guardado=1, no se muestra antes de
-    guardar: si la base rechaza el cambio, aparece el error correspondiente.
---%>
-
-
-%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!-- Header -->
